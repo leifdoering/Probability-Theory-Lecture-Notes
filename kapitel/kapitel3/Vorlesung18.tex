@@ -1,0 +1,131 @@
+\marginpar{\textcolor{red}{Vorlesung 18}}
+
+\section{Produktmaße und Fubini}
+Jetzt wird es noch einmal so richtig dreckig, bevor wir die wunderbare Welt der Stochastik erobern k\"onnen. Wir legen jetzt die Grundlage daf\"ur, dass wir \"uber unabh\"angige Zufallsvariablen sprechen k\"onnen. Sobald wir uns durch die Konstruktion des Produktma\ss es und des Satzes von Fubini gequ\"alt haben, f\"allt uns alles andere aber sofort vor die F\"u\ss e.\smallskip
+
+Im Folgenden seien $(\Omega_1, \cA_1, \mu_1)$ und $(\Omega_2, \cA_2, \mu_2)$ Maßräume und $\Omega = \Omega_1 \times \Omega_2 = \{ (\omega_1, \omega_2)\colon \omega_1 \in \Omega_1, \: \omega_2 \in \Omega_2 \}$. Wir wollen auf $\Omega$ eine $\sigma$-Algebra definieren und darauf ein Ma\ss{} mit einer sch\"onen Produkteigenschaft (deshalb wird das Ma\ss{} Produktma\ss{} hei\ss en).
+\begin{deff}
+	\begin{enumerate}[label=(\roman*)]\abs
+		\item Die $\sigma$-Algebra $$\cA_1 \otimes \cA_2 = \sigma(\{ A_1\times A_2 \colon A_1 \in \cA_1, \: A_2 \in \cA_2 \})$$ heißt \textbf{Produkt-$\sigma$-Algebra} auf $ \Omega_1 \times \Omega_2 $ 
+		\item Ein Maß auf $ \cA_1 \otimes \cA_2 $ heißt \textbf{Produktmaß}, falls $$ \mu(A_1\times A_2) = \mu_1(A_1) \cdot \mu_1(A_2)$$
+		f\"ur alle Mengen $A_1\in \mathcal A_1, A_2\in \mathcal A_2$.
+	\end{enumerate}
+\end{deff}
+Nat\"urlich w\"are es sch\"on, wenn die Produkt-$\sigma$-Algebra einfach nur aus allen Mengen $A_1\times A_2$ bestehen w\"urde. Leider gibt das keine $\sigma$-Algebra (die Komplementbildung geht schief), die Mengen geben nur einen $\cap$-stabilen Erzeuger von $\mathcal A_1\otimes \mathcal A_2$. Die Eigenschaft des Produktma\ss es legt das Produktma\ss{} also nur auf einem $\cap$-stabilen Erzeuger fest. Mit unseren Kenntnissen der Ma\ss theorie, k\"onnten wir also reflexhaft sagen: Kein Problem, mit Carath\'eodory k\"onnen wir ein Produktma\ss{} aus den Werten auf dem Erzeuger konstruieren und wegen Dynkin-Systemen kann es nur ein Ma\ss{} mit der Produktma\ss eigenschaft bekommen. Genau richtig - das funktioniert! Wir qu\"alen uns im n\"achsten Satz aber gewaltig mehr. Wir konstruieren das Produktma\ss{} nicht mit Carath\'eodory, sondern schreiben eine Formel hin. Das ist in der Tat viel komplizierter, der Vorteil ist aber, dass wir damit den folgenden Satz von Fubini schon fast bewiesen haben. W\"urden wir das Produktma\ss{} mit Carath\'eodory konstruieren, w\"urde der ganze Aufwand in den Beweis von Fubini verschoben.
+
+
+
+
+%\begin{beispiel1}
+%	$\Omega_1 = \Omega_2 = \R$, $\cA_1 = \cA_2 = \cB(\R)$, $\mu_1 = \mu_2 = \lambda$. Produktmaß: $\mu = \mu_1 \otimes \mu_2$ ist das $2$-dimensionale Lebesguemaß. Weil Quader $Q = (a_1,b_1] \times (a_2,b_2] \in \cA_1 \times \cA_2$ muss für $\mu$ gelten $\mu(Q) = \lambda((a_1,b_1]) \cdot \lambda((a_2,b_2]) = (b_1 - a_1)(b_1 - a_1) = \text{ \enquote{Fläche von Q}}$. 
+%\end{beispiel1}
+
+\begin{satz}[Konstruktion Produktmaß]\ref{Produktmass}
+	Sind $\mu_1,\mu_2$ $\sigma$-endliche Ma\ss e, so existiert ein eindeutiges Maß $\mu_1 \otimes \mu_2$ auf $\cA_1 \otimes \cA_2$ mit $$ \mu_1\otimes \mu_2(A_1\times A_2) = \mu_1(A_1) \cdot \mu_1(A_2)$$
+		f\"ur alle Mengen $A_1\in \mathcal A_1, A_2\in \mathcal A_2$.
+\end{satz}
+\begin{proof}
+\textbf{Eindeutigkeit}: F\"ur die Eindeutigkeit nutzen wir wieder den Eindeutigkeitssatz \ref{folg}, der auf Dynkin-Systemen beruht. Sei
+$$ \cS = \{ A_1 \times A_2\colon A_1 \in \cA_1, \: A_2 \in \cA_2 \},$$ dann ist $\cS$ ein $\cap$-stabiler Erzeuger von $ \cA_1 \otimes \cA_2 $. Um den Eindeutigkeitssatz anzuwenden, m\"ussen wir noch zeigen, dass Produktma\ss e $\sigma$-endlich sein m\"ussen, wir brauchen also eine wachsende Folge in $\mathcal A_1\otimes \mathcal A_2$, die endliches Ma\ss{} hat und $\Omega$ ausf\"ullt. Weil $\mu_1, \mu_2$ $\sigma$-endliche Ma\ss e sind, existieren Folgen $(E_n^1)_{n \in \N} \subseteq \cA_1$, $(E_n^2)_{n \in \N} \subseteq \cA_2$ mit $E_n^1 \uparrow \Omega_1$, $E_n^2 \uparrow \Omega_2$ und $\mu_1(E_n^1) < \infty$, $\mu_2(E_n^2) < \infty$ f\"ur alle $n \in \N$. Sei nun $E_n := E_n^1 \times E_n^2$, dann gelten
+	\begin{itemize}
+		\item $E_n \uparrow \Omega$, $n\to\infty$,
+		\item $\mu_1(E_n^1) \cdot \mu_2(E_n^2) < \infty$.
+	\end{itemize} 
+	Aus dem Eindeutigkeitssatz folgt also, dass zwei Ma\ss e $\mu$ und $\bar\mu$, die die Definition des Produktma\ss es erf\"ullen (damit gilt die vorherige Eigenschaft), gleich sind. Es kann also nur ein Produktma\ss{} auf $\mathcal A_1\otimes \mathcal A_2$ geben. Ob es so ein Ma\ss{} gibt, ist nat\"urlich noch nicht klar. \smallskip
+	
+			
+	\textbf{Existenz}: Anstatt das Produktma\ss{} mit Carath\'eodor zu konstruieren, schreiben wir es einfach hin. Hier ist es:	
+	\[ \mu(A) := \int_{\Omega_1} \mu_2(A_{\omega_1}) \dint \mu_1,\quad A\in \mathcal A_1\otimes \mathcal A_2, \]
+		wobei $A_{\omega_1} = \{ \omega_2 \in \Omega_2 \colon (\omega_1,\omega_2) \in \cA \}$.
+	 Wir machen sogar noch mehr, wir schreiben noch ein zweites Produktma\ss{} hin:
+	  \[ \overline{\mu}(A) := \int_{\Omega_2} \mu_1(A_{\omega_2}) \dint \mu_2,\quad A\in \mathcal A_1\otimes \mathcal A_2, \]
+	wobei jetzt $A_{\omega_2} = \{ \omega_1 \in \Omega_1 \colon (\omega_1,\omega_2) \in \cA \}$. Wir zeigen nun, dass $\mu$ ein Produktmaß auf $\cA_1 \otimes \cA_2$ ist. Mit exakt demselben Beweis zeigt man auch, dass $\overline{\mu}$ ein Produktma\ss{} ist, weshalb dann wegen der Eindeutigkeit auch $\mu=\overline{\mu}$ gilt. Zeigen wir also die Eigenschaften eines Ma\ss es sowie die definierende Eigenschaft des Produktma\ss es:
+			\begin{enumerate}[label=(\roman*)]
+		\item $\mu\colon \cA_1\otimes \mathcal A_2 \to [0, \infty]$ gilt, weil $\mu_2$ ein Maß ist (deshalb nichtnegativ) und Integrale über nichtnegative Funktionen nichtnegativ sind.
+		\item $\mu(\emptyset) = 0$ gilt, weil $\emptyset_{\omega_1}$ auch die leere Menge ist.
+		\item Nun zur $\sigma$-Additivität. Seien dazu $A^1,A^2,...\in \cA_1\otimes \cA_2$ paarweise disjunkt und sei
+		\[ A:= \bigcupdot_{n=1}^{\infty} A_n.\]
+		Dann gilt $A_{\omega_1} = \bigcupdot_{n=1}^{\infty} A_{\omega_1}^n$ und mit den Ma\ss eigenschaften sowie monotoner Konvergenz
+		\begin{align*}
+		\mu(A)&\overset{\text{Def.}}{=} \int_{\Omega_1} \mu_2\Big(\Big(\bigcupdot_{n=1}^{\infty} A^n\Big)_{\omega_1}\Big) \dint \mu\\
+		& = \int_{\Omega_1} \mu_2\Big(\bigcupdot_{n=1}^{\infty} A_{\omega_1}^n\Big) \dint \mu\\
+		&\overset{\mu_2 \text{ $\sigma$-add.}}{=} 
+		\int_{\Omega_1} \sum\limits_{n=1}^{\infty}\mu_2(A_{\omega_1}^n) \dint \mu\\ 
+		&\overset{\text{\ref{allgMonKonv}}}{=} \sum\limits_{n=1}^{\infty} \int_{\Omega_1} \mu_2(A_{\omega_1}^n) \dint \mu \overset{\text{Def.}}{=} \sum\limits_{n=1}^{\infty} \mu(A^n).
+		\end{align*}
+	\item	$\mu$ ist also ein Ma\ss{} auf $\mathcal A_1\otimes \mathcal A_2$. Wir m\"ussen noch die definierende Eigenschaft auf dem Erzeuger zeigen. Sei dazu $A = A_1 \times A_2$. Weil aufgrund der Definitionen	
+	\[ (A_1\times A_2)_{\omega_1} = \begin{cases}
+	\emptyset &:\omega_1 \notin A_1\\
+	A_2 &:\omega_1 \in A_1
+	\end{cases} \]
+	gilt, folgt
+	\begin{align*}
+	\mu(A_1\times A_2) &= \int_{\Omega_1} \mu_2((A_1\times A_2)_{\omega_1}) \dint\mu_1\\
+	& = \int_{\Omega_1} \mu_2(A_2) \mathbf{1}_{A_1}(\omega_1) \dint\mu_1(\omega_1) \\
+	&\overset{\text{Linear}}{=} \mu_2(A_2) \int_{\Omega_1} \mathbf{1}_{A_1}(\omega_1) \dint\mu(\omega_1) =  \mu_2(A_2) \cdot \mu_1(A_1).
+	\end{align*}
+	Also ist $\mu$ ein Produktma\ss.
+	\end{enumerate}
+Eigentlich k\"onnte alles so sch\"on sein, und der Beweis ist hier zu Ende. Leider haben wir geschummelt. Warum ist $\mu$ \"uberhaupt sinnvoll definiert? Klingt bl\"od, ist aber gar nicht so klar. Warum ist der Integrand \"uberhaupt definiert, d. h. warum gilt $A_{\omega_1}\in \mathcal A_2$? Unklar. Warum ist $\mu_2(A_{\omega_1})$ \"uberhaupt $\mathcal A_1$ messbar, warum macht das Integral also \"uberhaupt Sinn? Unklar. Wir sollten also beides noch checken.\smallskip
+
+Wir zeigen jetzt nacheinander
+	\begin{itemize}
+		\item[(a)] \label{sinnvA} $A_{\omega_1} \in \cA_2$ f\"ur alle $A \in \cA_1\otimes \cA_2$
+		\item[(b)] \label{sinnvB} $\omega_1 \mapsto \mu_2(A_{\omega_1})$ ist $(\mathcal A_1,\mathcal B(\overline{\R}))$ messbar.
+	\end{itemize}
+	Zu (a): Sei $$\cF = \{ A \in \cA_1 \otimes \cA_2\colon A_{\omega_1} \in \cA_2 \}.$$ Wir zeigen: $\cF = \cA_1 \otimes \cA_2$. Dazu zeigen wir zun\"achst, dass $\mathcal F$ eine $\sigma$-Algebra ist:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\Omega \in \cF$ gilt, weil $\Omega_{\omega_1} = \Omega_2 \in \cF$.
+		\item Sei $A \in \cF$, dann ist $A^C \in \cF$, weil $(A^C)_{\omega_1} = (A_{\omega_1})^C \in \cA_2$ weil $\mathcal A_2$ als $\sigma$-Algebra abgeschlossen unter Komplementbildung ist.
+		\item Genauso mit abzählbaren Vereinigungen: Wegen der Abgeschlossenheit der $\sigma$-Algebra $\mathcal A_2$ unter Bildung von abz\"ahlbaren Vereinigungen, gilt f\"ur $A^1, A^2, ... \in \mathcal F$
+		\[ \Big(\bigcup_{n=1}^{\infty} A^n\Big)_{\omega_1} = \underbrace{\bigcup_{n=1}^{\infty} \underbrace{A_{\omega_1}^n}_{\in \cA_2}}_{\in \cA_2} \in \cA_2. \]
+		Damit ist $\bigcup_{n=1}^\infty A^n\in \mathcal F$.
+	\end{enumerate}
+	Folglich ist $\mathcal F$ eine $\sigma$-Algebra. Weil $\cS \subseteq \cF$ und $\sigma(\cS) \overset{\text{Def.}}{=} \cA_1 \otimes \cA_2$, gilt, bekommen wir zusammen:
+	\begin{align*}
+		\cA_1 \otimes \cA_2 = \sigma(\cS)  \subseteq \sigma(\cF) = \cF \subseteq \cA_1 \otimes \cA_2
+	\end{align*}
+	Weil links und rechts das gleiche steht, bekommen wir \"uberall Gleichheiten, es gilt also $\mathcal F=\mathcal A_1\otimes \mathcal A_2$ und die Behauptung folgt.\smallskip
+		
+	Nun zu (b): Wir checken erst den Fall $\mu_2(\Omega_2) < \infty$ und schieben die Aussage dann mit der $\sigma$-Endlichkeit auf den allgemeinen Fall. Sei also erstmal $\mu_2(\Omega_2) < \infty$. 
+	 Wir zeigen $$\cA_1 \otimes \cA_2 = \cF := \{ A \in \cA_1 \otimes \cA_2\colon \omega_1 \mapsto \mu_2(A_{\omega_1}) \text{ messbar} \}.$$ Weil \enquote{$\supseteq$} per Definition gilt, muss nur die andere Richtung gezeigt werden. Es gilt $\cS \subseteq \cF$, weil \[ \omega_1\mapsto \mu_2((A_1 \times A_2)_{\omega_1}) = \underbrace{\mu_2(A_2) \underbrace{\mathbf{1}_{A_1}(\omega_1)}_{\text{messbar}}}_{\text{messbar}}\] und Produkte messbarer Abbildungen messbar sind. Um genauso wie in (a) zu argumentieren, zeigen wir nun, dass $\cF$ ein Dynkin-System ist:
+		\begin{itemize}
+			\item $\Omega \in \cF$ klar, weil $\omega_1 \mapsto \mu_2(\Omega_{\omega_1}) = \mu_2(\Omega_2)<\infty$ konstant und damit messbar ist.
+			\item Sei $A \in \cF$, dann gilt 
+			\begin{gather*}
+			\omega_1 \mapsto \mu_2((A^C)_{\omega_1}) = \mu_2(A_{\omega_1}^C) \overset{\text{Maß}}{=} \underbrace{\underbrace{\mu_2(\Omega_2)}_{\text{messbar}}- \underbrace{\mu_2(A_{\omega_1})}_{\text{messbar}}}_{\text{messbar}}.
+			\end{gather*}
+	Also $A^C\in \mathcal F$ und damit ist $\mathcal F$ abgeschlossen bez\"uglich Komplementbildung.
+			\item Seien nun $A^1, A^2,... \in \mathcal F$ paarweise disjunkt, dann gilt
+			\begin{align*}
+			\omega_1 &\mapsto \mu_2 \Big(\Big(\bigcupdot_{n=1}^{\infty} A^n\Big)_{\omega_1}\Big)\\
+			& = \mu_2 \Big(\bigcupdot_{n=1}^{\infty} A^n_{\omega_1}\Big)\\ 
+			&\overset{\text{$\sigma$-add.}}{=} \sum_{n=1}^{\infty} \underbrace{\mu(A^n_{\omega_1})}_{\text{messbar}}\\
+			&= \underbrace{\lim\limits_{m \to \infty}\underbrace{\sum_{n=1}^{m} \mu(A^n_{\omega_1})}_{\text{messbar}}}_{\text{messbar}},
+		\end{align*}
+		weil Grenzwerte messbarer Abbildungen wieder messbar sin. 
+	\end{itemize}	
+	$\mathcal F$ ist also ein Dynkin-System. Nun folgt \"ahnlich zu (a):
+		\begin{align*}	
+			\cA_1 \otimes \cA_2 \overset{\text{Def.}}{=} \sigma(\cS) = d(\cS) \subseteq d(\cF) = \cF \subseteq \cA_1 \otimes \cA_2,
+		\end{align*}
+		wobei wir den Hauptsatz f\"ur Dynkin-Systeme (Satz \ref{Hauptsatz}) f\"ur $\cS$ genutzt haben. \smallskip
+		
+		Jetzt fehlt nur noch der Fall $\mu_2(\Omega_2)=\infty$. Sei dazu $(E_n)\subset \Omega_2$ mit $E_n\uparrow \Omega$ und $\mu_2(E_n)<\infty$ f\"ur alle $n\in\N$. Wir definieren 
+		\begin{align*}
+			\mu_2^n(A)=\mu_2(A\cap E_n), \quad n\in\N,
+		\end{align*}
+		wie wir schon mehrfach gemacht haben (siehe z. B. den Beweis von \ref{folg}). Dann sind die $\mu_2^n$ endliche Ma\ss e auf $(\Omega_2, \mathcal A_2)$. Aus dem ersten Schritt folgt, dass $\omega_1\mapsto \mu_2^n(A_{\omega_1})$ messbar ist. Weil wegen der Stetigkeit von Ma\ss en gilt $\lim_{n\to\infty} \mu_2^n(A_{\omega_1})= \lim_{n\to\infty} \mu_2(A_{\omega_1}\cap E_n)=\mu_2(A_{\omega_1})$. Also ist die Abbildung $\omega_1\mapsto \mu_2(A_{\omega_1})$ Grenzwert von messbaren Funktionen und damit messbar. Das war es schon!
+\end{proof}
+Nat\"urlich kann man wie immer per Induktion von $n=2$ auf $n\in\N$ schlie\ss en:
+\begin{korollar}\label{MassraeumeExMass}
+	Sind $(\Omega_i, \cA_i, \mu_i)_{i=1,...,n}$ $\sigma$-endliche Maßräume, so existiert genau ein Maß $\mu_1 \otimes ... \otimes \mu_n$ auf der Produkt-$\sigma$-Algebra $\cA_1 \otimes ... \otimes \cA_n:=\sigma(\{ A_1\times ... \times A_n: A_i\in \mathcal A_i\})$ auf $\Omega_1 \times ... \times\Omega_n $ mit $$\mu_1\otimes ... \otimes \mu_n(A_1\times ... \times A_n) = \mu_1 (A_1) \cdot ... \cdot \mu_n(A_n).$$
+\end{korollar}
+
+\begin{proof}
+	Induktion.
+\end{proof}
+
+\begin{deff1}
+	Sind alle $(\Omega_i, \cA_i, \mu_i)$ identisch, so schreibt man $\mu^{\otimes n}$ statt $\mu \otimes ... \otimes \mu$. $\mu^{\otimes n}$ heißt \textbf{$n$-faches Produktmaß} von $\mu$.
+\end{deff1}

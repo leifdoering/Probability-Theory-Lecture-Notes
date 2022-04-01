@@ -1,0 +1,153 @@
+\marginpar{\textcolor{red}{Vorlesung 13}}
+
+\begin{proof}\abs
+	
+	\begin{enumerate}[label=(\roman*)]
+		\item Sei zun\"achst $g \geq 0$: \begin{enumerate}[label=(\alph*)]
+			\item Am einfachsten ist der Fall $N \in \N$, denn dann sprechen wir nur von endlichen Summen. Weil das Ma\ss{} $\mathbb{P}_F$ von der Form $\mathbb{P}_F = \sum_{k = 1}^{N} p_k \delta_{a_k} $ ist, gilt $g = g \mathbf{1}_{\{ a_1,...,a_N \}}$  $\mathbf P_F$-fast überall. Es folgt dann
+			\begin{align*}
+				\int_{\R} g \dint \mathbb{P}_F &\overset{\text{Satz }\ref{S7}}{=} \int_{\R} g\mathbf{1}_{\{ a_1,...,a_N \}} \dint \mathbb{P}_F\\
+				& = \int_{\R} g \sum_{k = 1}^{N} \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+				&= \int_{\R} \sum_{k = 1}^{N} g(k) \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+				& \overset{\text{Lin.}}{=} \sum_{k = 1}^{N} \int_{\R} \underbrace{g(k) \mathbf{1}_{ \{ a_k \}}}_{\text{einfach}} \dint \mathbb{P}_F\\
+				&\overset{\text{Def. Int.}}{=} \sum_{k = 1}^{N} g(a_k) \mathbb{P}_F(\{ a_k \}) \overset{\text{Def. Ma\ss}}{=} \sum_{k = 1}^{N} p_k g(a_k).
+			\end{align*}
+			\item $N = + \infty$ funktioniert im Prinzip genauso, wir m\"ussen nur einmal monotone Konvergenz f\"ur die wachsende Folge von messbaren Funktionen $f_n:=\sum_{k = 1}^{n} g(k) \mathbf{1}_{ \{ a_k \}}$ nutzen, um Integral und Summe zu vertauschen:
+			\begin{align*}
+				\int_{\R} g \dint \mathbb{P}_F &= \int_{\R} g\mathbf{1}_{\{ a_1,a_2,... \}} \dint \mathbb{P}_F\\
+				& = \int_{\R} g \sum_{k = 1}^{\infty} \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+			&\overset{\text{Def. Reihe}}{=} \int_{\R} \lim\limits_{n \to \infty} \sum_{k = 1}^{n} g(k) \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+			& \overset{\text{\ref{allgMonKonv}}}{=} \lim_{n\to\infty} \int_{\R}\sum_{k = 1}^{n} g(k) \mathbf{1}_{ \{ a_k \}}\dint \mathbb{P}_F\\
+			& \overset{\text{Lin.}}{=} \lim_{n\to\infty}\sum_{k = 1}^{n} \int_{\R} \underbrace{g(k) \mathbf{1}_{ \{ a_k \}}}_{\text{einfach}} \dint \mathbb{P}_F\\
+			&\overset{\text{Def. Int.}}{=} \sum_{k = 1}^{\infty} g(a_k) \mathbb{P}_F(\{ a_k \}) \overset{\text{Def. Ma\ss}}{=} \sum_{k = 1}^{\infty} p_k g(a_k).
+			\end{align*}
+		\end{enumerate}
+		\item Sei nun $g$ messbar, aber nicht mehr nichtnegativ. Wir zerlegen wie immer in Positiv- und Negativteil und erinnern daran, dass das Integral per Definition existiert, wenn die Integrale \"uber Positiv- und Negativteil endlich sind. Die beiden k\"onnen wir dann mit dem Fall $g\geq 0$ behandeln. Es gilt also wegen Teil (i)
+		\begin{align*}
+			\int_{\R} g \dint \mathbb P_F \text{ existiert} \quad& \Leftrightarrow \quad \int_{\R} g^+ \dint \mathbb{P}_F < \infty, \: \int_{\R} g^- \dint \mathbb{P}_F < \infty \\
+			&\underset{g^- \geq 0}{\overset{g^+ \geq 0}{\Leftrightarrow}} \quad \sum_{k=1}^{N} p_kg^+(a_k) < \infty, \: \sum_{k=1}^{N} p_kg^-(a_k)< \infty\\
+			& \Leftrightarrow\quad \sum_{k=1}^{N} |g(a_k)|p_k < \infty,
+		\end{align*}
+		weil $|g(a_k)| = g^+(a_k) + g^-(a_k)$.
+		Wenn das Integral existiert, gilt folglich
+		\begin{align*}
+			\int_{\R} g \dint \mathbb{P}_F &\overset{\text{Def.}}{=} \int_{\R} g^+ \dint \mathbb{P}_F - \int_{\R} g^- \dint \mathbb{P}_F \\
+			&\overset{\text{(i)}}{=} \sum_{k = 1}^{N} p_k g^+(a_k) - \sum_{k = 1}^{N} p_k g^-(a_k)\\
+			&= \sum_{k = 1}^{N} p_k \big(g^+(a_k) - g^-(a_k\big))\\
+			& = \sum_{k = 1}^{N} p_k g(a_k) .
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+
+Warum der abstrakte Erwartungswert \"uberhaupt Erwartungswert hei\ss t, wird aus Beispielen am klarsten ersichtlich. Jeder hat eine Vorstellung, was der \enquote{Erwartungswert} eines W\"urfelwurfs sein sollte, n\"amlich 3,5. Beim gleichverteilten Ziehen aus $[0,1]$ \enquote{erwarten} wir im Mittel $\frac 1 2$. Das kommt nat\"urlich bei unserer Modellierung aufgrund der vorherigen S\"atze auch raus:
+\begin{beispiel}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Erwartungswert des W\"urfelexperiments: Seien dazu wieder $a_1=1, ..., a_6=6$ und $p_1=...=p_6=\frac 1 6$. Dann gilt \[ \int_{\R} x \dint \mathbb{P}_F(x) = \sum\limits_{k = 1}^{6}k  \frac{1}{6} = 3,5. \]
+		\item Erwartungswert der uniformen Verteilung $\mathcal{U}([0,1])$ auf $[0,1]$ mit Dichte $f(x) = \mathbf{1}_{[0,1]}$. Also ist mit dem Satz
+		\[ \int_{\R} x \dint \mathbb{P}_F(x) = \int_{\R} x f(x) \dint x = \int_{\R} x \mathbf{1}_{[0,1]} \dint x = \int\limits_{0}	x \dint x = {\Big[ \frac{1}{2} x^2\Big]}_{0}^{1} = \frac{1}{2}. \]
+	\end{enumerate}
+\end{beispiel}
+
+\begin{warnung}
+	Es ist nicht immer der Fall, dass eine Verteilungsfunktion diskret ist oder eine Dichte hat. In diesen F\"allen gibt es keine einfach Formel für $\int_{\R} g \dint \mathbb{P}_F$! Woran erkennt man sofort, ob eine Verteilungsfunktion diskret ist, eine Dichte hat, oder keines von beiden ist? Es gibt nur drei F\"alle:
+	\begin{itemize}
+		\item Ist $F$ \"uberall stetig, so gibt es eine Dichte.
+		\item Hat $F$ ausschlie\ss lich konstante Abschnitte mit Spr\"ungen dazwischen, so ist $F$ diskret (die $a_k$ sind die Stellen der Spr\"unge, die $p_k$ sind die H\"ohen der Spr\"unge), siehe die Bildchen in \ref{Poi}.
+		\item Hat $F$ sowohl Spr\"unge, als auch Bereiche, in denen $F$ stetig w\"achst, so hat $F$ weder eine Dichte noch ist $F$ diskret. Ein Beispiel ist auf \"Ubungsblatt 7.
+	\end{itemize}
+\end{warnung}
+
+
+In vielen Beispielen m\"ussen wir gar nicht rechnen, sondern sehen das Ergebniss direkt. Kurze Erinnerung an die Schule: $f$ hei\ss t punktsymmetrisch, falls $f(x)=-f(-x)$ und achsensymmetrisch, falls $f(x)=f(-x)$ f\"ur alle $x\in \R$. F\"ur integrierbare punktsymmetrische Funktionen gilt $\int_\R f(x)\dint x=0$. Das k\"onnen wir direkt ausnutzen, um viele Erwartungswerte direkt als $0$ zu erkennen:
+\begin{lemma}\label{ky}
+	Hat $F$ Dichte $f$ und existiert der Erwartungswert von $\mathbb{P}_F$, so gilt
+	\[ f \text{ achsensymmetrisch} \quad \Rightarrow \quad \int_\R x \dint \mathbb P_F(x)= 0. \]
+\end{lemma}
+\begin{proof}
+	Ist $f$ achsensymmetrisch, so ist $h(x) := xf(x)$ punktsymmetrisch weil dann $h(-x) = -xf(-x) = -xf(x) = -h(x)$. Wegen \ref{IntDichten} ist also \[ \int_{\R} x \dint \mathbb{P}_F(x) = \int_{\R} x f(x) \dint x \overset{\text{punktsym.}}{=} 0. \]	
+\end{proof}
+
+\begin{warnung}\label{kkk}
+ Wir m\"ussen in Lemma \ref{ky} auf jeden Fall annehmen, dass der Erwartungswert existiert. Beispielsweise hat die Cauchy-Verteilung eine achsensymmetrische Dichte, der Erwartungswert ist aber gar nicht definiert, damit insbesondere nicht $0$! Dies ist einer der fiesen $\infty-\infty$ F\"alle. Rechnen wir das mal nach. Wir betrachten also die Cauchy-Dichte $f(x) = \frac{1}{\pi}\frac{1}{1+x^2}$ und berechnen zun\"achst den Positivteil:
+ 	\begin{align*}
+		\int_{\R} x^+ \dint \mathbb{P}_F(x) &= \int_{0}^{\infty} x \dint \mathbb{P}_F(x)\\
+		& \overset{\ref{IntDichten}}{=} \frac{1}{\pi} \int_{0}^{\infty} x \frac{1}{1+x^2}x\\
+		&= \frac{1}{\pi} \int_{0}^{\infty} x \frac{1}{1/x+x} \dint x\\ 
+		&\geq\frac{1}{\pi} \int_{1}^{\infty} \frac{1}{1/x+x} \dint x\\
+		& \geq\frac{1}{\pi} \int_{1}^{\infty}  \frac{1}{1+x} \dint x\\ 
+		&\overset{\ref{allgMonKonv}}{=} \frac{1}{\pi}\lim\limits_{N \to \infty} \int_{1}^{N}  \frac{1}{1+x} \dint x \\
+		&\overset{\text{Hauptsatz}}{=} \frac{1}{\pi}\lim\limits_{N \to \infty} \Big[\ln(1+x)\Big]_1^N=+\infty.
+	\end{align*}
+	Genauso ist 
+	\begin{gather*}
+	\int_{\R} x^- \dint \mathbb{P}_F(x) =\frac{1}{\pi} \int_{-\infty}^{0} -x \frac{1}{1+x^2} \dint x =\frac{1}{\pi} \int_0^\infty x \frac{1}{1+x^2}\dint x= +\infty.
+	\end{gather*}
+	Damit ist $\int_{\R} x \dint \mathbb{P}_F(x) = \int_{\R} x^+ \dint \mathbb{P}_F(x) - \int_{\R} x^- \dint \mathbb{P}_F(x) = +\infty - (+\infty)$ nicht wohldefiniert. F\"ur die Cauchyverteilung ist der Erwartungswert also nicht definiert.
+\end{warnung}
+Die Absch\"atzung f\"ur die Cauchyverteilung war nicht so einfach. Daher w\"are es n\"utzlich, den Integralen direkt anzusehen, ob sie existieren, oder nicht. Wenn man wei\ss , was zu tun ist, dann ist die formelle Rechnung viel leichter. Hier ist eine grobe Heuristik:
+\begin{bem}[Heuristik mit Dichten]
+	Wie \enquote{sieht} man, ob ein Integral existiert? Man vergleicht mit bekannten Integralen. Erinnern wir uns kurz an die Analysisvorlesung:
+	\begin{align*}
+		\int_{1}^{\infty} \frac{1}{x^p} \dint x &\overset{\ref{allgMonKonv}}{=} \lim\limits_{N \to \infty} \int_{1}^{N} \frac{1}{x^p} \dint x\\
+		&= \lim\limits_{N \to \infty} \begin{cases}
+		\Big[\ln(x)\Big]_1^N&:p = 1\\
+		\frac{1}{1-p}\Big[x^{1-p}\Big]_1^N&:p \neq 1
+		\end{cases}\\
+		&= \lim\limits_{N \to \infty} \begin{cases}
+		\ln(N)&:p = 1\\
+		\frac{1}{1-p}(N^{1-p} - 1)&: p \neq 1
+		\end{cases}\\
+		&= \begin{cases}
+		+\infty&:p \leq 1\\
+		\frac{1}{p - 1} < \infty&:p > 1
+		\end{cases}.
+	\end{align*}
+	Unsere Heuristik f\"ur die Integrierbarkeit bei unendlich ist es, grob mit der Funktion $\frac 1 x$ zu vergleichen. F\"allt unser Integrand deutlich schneller gegen $0$, ist vermutlich ist vermutlich $\int_{1}^{\infty} f(x) \dint x < \infty$. F\"allt der Integrand langsamer als $\frac 1 x$ gegen $0$ ist sicherlich $\int_{1}^{\infty} f(x) \dint x = + \infty$.\smallskip
+	
+	Hier sind ein paar Beispiele:
+	\begin{enumerate}[label=(\roman*)]
+		\item Nochmal die Cauchy-Verteilung: $\frac{1}{\pi} x \frac{1}{1+x^2}$ ist bei $\infty$ ungefähr wie $\frac{1}{x}$, das ist aber \textit{nicht} integrierbar. Die Heuristik sagt uns also auf einen Blick, dass etwas schief geht. Um daraus ein sauberes Argument zu machen, m\"ussen wir leider doch die Absch\"atzung aus \ref{kkk} durchgehen.	
+		\item Für welches $\beta$ hat $\operatorname{Exp}(\lambda)$ ein endliches exponentielle Moment, wann ist also 
+		\[\int_{\R} e^{\beta x} e^{-\lambda x} \mathbf{1}_{[0,\infty)}(x) \dint x = \int_{0}^{\infty} e^{x(\beta - \lambda)} \dint x \]
+		endlich? Weil $e^{ax}$ f\"ur $a>0$ schneller als jedes Polynom wächst, fällt $e^{-a x}$ $(\lambda > 0)$ viel schneller als jedes Polynom gegen $0$. Also sind alle exponentiellen Momente genau dann endlich, wenn $\beta < \lambda$. In dem Fall k\"onnen wir alles nat\"urlich sofort ausrechnen, weil der Integrand eine einfache Stammfunktion hat.
+		\item Für welches $\beta$ hat $\cN(\mu, \sigma^2)$ ein endliches exponentielles Moment, wann ist also
+		\[ \frac{1}{\sqrt{2 \pi \sigma^2}} \int_{\R} e^{\beta x} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \dint x \] definiert?
+		Nat\"urlich geht $e^{\beta x} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ viel schneller als $\frac{1}{x}$ gegen 0, weil $x^2$ schneller wächst als $x$, und die Exponentialfunktion alles polynomielle dominiert.
+	\end{enumerate}
+\end{bem}
+
+Um einen ersten Eindruck zu bekommen, warum Momente \"uberhaupt n\"utzlich sind, schauen wir uns eine Variante der Markov-Ungleichung an. Wir sehen hier, dass wir mit den Momenten etwas \"uber die Verteilung der Masse absch\"atzen k\"onnen. Die Ungleichung gibt uns eine Schranke, wieviel Masse der Verteilung mindestens in $[-a,a]$ liegt. Weil man auch sagt, \glqq wieviel Masse in $[-a,a]$ konzentriert ist\grqq{} nennt man solche Ungleichungen \textbf{Konzentrationsungleichungen}.
+
+\begin{prop}[Markov-Ungleichung für Polynome] \label{MarkovPoly}
+	Sei $\mathbb{P}_F$ ein Wahrscheinlichkeitsmaß auf $(\R, \cB(\R))$, sodass für eine gerade nat\"urliche Zahl $2k$ das $2k$-te Moment existiert ist. Dann gilt
+	\[ \mathbb{P}_F\big([-a,a]\big) \geq 1 - \frac{\int_{\R} x^{2k} \dint \mathbb{P}_F(x) }{a^{2k}}. \]
+	Gleichbedeutend (Gegenereigniss) gilt 
+	\[ \mathbb{P}_F\big([-a,a]^C\big) \leq  \frac{\int_{\R} x^{2k} \dint \mathbb{P}_F(x) }{a^{2k}}. \]
+\end{prop}
+
+\begin{proof} 
+	Der Beweis ist tats\"achlich sehr einfach und basiert auf dem kleinen Trick, den wir schon ein paar mal gesehen haben. Wir mogeln einen Indikator \"uber eine Menge in das Integral und sch\"atzen auf dem Indikator die Funktion ab. Das geht nat\"urlich nur, wenn der Indikator \"uber eine messbare Menge so gew\"ahlt wird, dass die Menge etwas mit dem Integranden zu tun hat. Wir nehmen dazu den Integranden $g(x)=x^k$ und die Menge $[-a,a]^C$. F\"ur $x\in [-a,a]^C$ gilt nat\"urlich $|x|>a$ und damit, $k$ ist per Annahme gerade, $x^k=|x|^k\geq a^k$. Dann m\"ussen wir nur noch die Monotonie vom Integral nutzen:
+	\begin{align*}
+		\int_{\R} x^k \dint \mathbb{P}_F(x)& \overset{\text{Mon.}}{\geq} \int_{\R} x^k \mathbf{1}_{[-a,a]^C}(x) \dint \mathbb{P}_F(x)\\
+		& \geq \int_{\R} \underbrace{a^k \mathbf{1}_{[-a,a]^C}(x)}_{\text{einfach}} \dint \mathbb{P}_F(x)\\
+		& \overset{\text{Def.}}{=} a^k \mathbb{P}_F([-a,a]^C).
+	\end{align*}
+	Aufl\"osen gibt 
+	$$\mathbb{P}_F([-a,a]^C) \leq \frac{\int_{\R} x^k \dint \mathbb{P}_F(x)}{a^k}.$$ Die zweite Ungleichung ist die Gegenwahrscheinlichkeit, weil f\"ur Wahrscheinlichkeitsma\ss e $\mathbb P_F(B)=1-\mathbb P_F(B^C)$ gilt.
+\end{proof}
+
+\begin{anwendung}[Vergleiche Übungsblatt 4, Aufgabe 2]
+	Aufgabe: für $\mu = 0$ finde $a > 0$ mit $\mathbb{P}_F([-a,a]) \geq 0.99$, wobei $F$ die Normalverteilung $\cN(0, \sigma^2)$ ist. Damit uns die Markov-Ungleichung explizite Zahlen gibt, brauchen wir Formel f\"ur gerade Momente, wir nehmen einfach mal das 2.te und das 8.te. F\"ur 2.te und 8.te Momente der Normalverteilungen gelten, das sehen wir sp\"ater, 
+	\[ \int_{\R} x^2 \frac{1}{\sqrt{2 \pi \sigma^2}}  e^{-\frac{(x-\mu)^2}{2\sigma^2}} \dint x = \sigma^2\quad \text{ und }\quad \int_{\R} x^8 \frac{1}{\sqrt{2 \pi \sigma^2}}  e^{-\frac{(x-\mu)^2}{2\sigma^2}} \dint x = 105 \sigma^8. \]
+	Um die Konzentration der Normalverteilung in $[-a,a]$ abzusch\"atzen, verwenden wir Proposition \ref{MarkovPoly} einmal mit $k=2$ und einmal mit $k=8$:
+	\[ \mathbb{P}_F([-a,a]) \geq 1 - \frac{\sigma^2}{a^2}\quad \text{ sowie }\quad \mathbb{P}_F([-a,a]) \geq 1 - \frac{105\sigma^8}{a^8}. \]
+	Wir probieren jetzt mal mit dem ganz konkreten Beispiel $\sigma=0.1$ aus, welche Absch\"atzung besser ist. Einsetzen und Umformen gibt beim zweiten Moment
+	\begin{align*}
+		1 - \frac{(0.1)^2}{a^2} \geq  0.99\quad \Leftrightarrow \quad a \geq 1
+	\end{align*}
+	und beim 8.ten Moment
+	\begin{align*}
+		1 - \frac{105(0.1)^8}{a^8} \geq 0.99\quad \Leftrightarrow\quad  a \geq \frac{105^{\frac{1}{8}} \cdot 0.1}{(0,01)^{\frac{1}{8}}} \approx 0.32.
+	\end{align*}
+	Zusammenfassend gibt uns die Markov-Ungleichung f\"ur $k=2$ die Information, dass mindestens $0.99$ der Masse von $\mathcal N(0,0.1)$ in $[-1,1]$ liegt. Viel besser ist aber die Aussage f\"ur $k=8$: Mindestens $0.99$ der Masse von $\mathcal N(0,0.1)$ liegt schon in $[-0.32,0.32]$! Das bedeutet einfach nur, dass in diesem Beispiel die Markov-Ungleichung f\"ur $k=8$ viel genauer an dem echten Wert liegt als f\"ur $k=2$. Diese kleine Absch\"atzung zum Spass best\"atigt quantitativ, was wir aus den Bildchen in \ref{c} qualitativ schon erraten konnten: F\"ur kleines $\sigma$ ist $\mathcal N(0,\sigma^2)$ sehr stark um den Ursprung herum konzentriert. Um etwas Gef\"uhl zu bekommen, ersetzt einfach mal $\sigma=0.1$ durch $\sigma=0.01$ und setzt die aufgel\"oste Formel in einen Taschenrechner ein. Die Konzentration um den Ursprung wird dann noch viel st\"arker.
+\end{anwendung}

@@ -1,0 +1,571 @@
+\marginpar{\textcolor{red}{Vorlesung 6}}
+
+\begin{proof}
+	Um den Fortsetzungssatz zu nutzen, m\"ussen wir zun\"achst einen Semiring w\"ahlen, der die Borel-$\sigma$-Algebra erzeugt. Wir wissen bereits, dass alle m\"oglichen Varianten von Intervallen $\mathcal B(\R)$ erzeugt, die meisten sind aber keine Semiringe. Wir nehmen $$\cE = \{ (a,b]: a,b \in \mathbb{R} \},$$ und stellen sofort fest (Eigenschaften checken), dass $\cE$ ein Semiring mit $\sigma(\cE) = \cB(\mathbb{R})$ ist. Desweiteren w\"ahlen wir $E_n := (-n,n]$ f\"ur $n\in\N$, so dass offenbar $E_n\uparrow \mathbb{R}$ gilt. Als Mengenfunktion auf $\cE$ definieren wir $$\mu((a,b]) = F(b) - F(a).$$ Weil $F$ nicht-fallend ist und $0\leq F\leq 1$ gilt, bildet $\mu$ nach $[0,1]$ ab. Checken wir als n\"achstes die Voraussetzungen vom Fortsetzungssatz:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mu(\emptyset) = \mu((a,a]) = F(a) -F(a) = 0$
+		\item $\mu(E_n) = \mu((-n,n]) = F(n)- F(-n) \leq 1$
+		\item F\"ur die $\sigma$-Additivität seien $(a_n,b_n] \in \cE$ mit $(a_n,b_n] \cap (a_k,b_k] = \emptyset$, $n \neq k$, und sei \[
+		\bigcupdot\limits_{n = 1}^{\infty} (a_n,b_n] \in \cE, \quad \text{ also } \bigcupdot \limits_{n = 1}^{\infty} (a_n,b_n] =: (a,b], \]
+		f\"ur geeignete $a,b\in\R$. Als Anschauungsbeispiel halte man $(0,1] = \bigcupdot \limits_{n=1}^{\infty} (\frac{1}{n+1}, \frac{1}{n}]$ im Kopf. Um den Beweis besser zu verstehen, schauen wir uns erstmal den endlichen Fall an, d. h. \[ (a,b] = \bigcupdot\limits_{n=1}^{N} (a_n,b_n], \] f\"ur ein $N\in\N$. Dann bekommen wir die $\sigma$-Additivit\"at sofort:
+		\begin{gather*}
+			\mu((a,b]) \overset{\text{Def.}}{=} F(b) - F(a) \overset{\text{Teleskop}}{=} \sum\limits_{n=1}^{N} (F(b_n) - F(a_n)) = \sum\limits_{n=1}^{N} \mu((a_n,b_n]),
+		\end{gather*}
+		wobei wir $F(a_n)=F(b_{n-1})$ genutzt haben.	Nun aber zurück zum allgemeinen Fall: Wir zeigen 
+		\begin{align}\label{dd}
+		 F(b) - F(a) = \sum\limits_{n=1}^{\infty} (F(b_n) - F(a_n),
+		 \end{align}
+		  denn das ist gerade  
+		\begin{align*}
+			\mu\Big(\bigcupdot_{n=1}^\infty (a_n,b_n]\Big)=\sum_{n=1}^\infty \mu((a_n,b_n])
+		\end{align*}		
+		f\"ur $(a,b] = \bigcupdot\limits_{n = 1}^{\infty} (a_n,b_n]$.
+		
+		F\"ur die Gleichheit \eqref{dd} zeigen wir beide Ungleichungen:
+		\begin{itemize}
+			\item [\enquote{$\geq$}:] Weil $F$ monoton ist, folgt \[ F(b) - F(a) \geq \sum\limits_{n=1}^{N} (F(b_n) - F(a_n))\] f\"ur alle $N\in\N$. 
+			Wegen der Monotonie von Folgengrenzwerten gilt \[ F(b) - F(a) \geq \lim\limits_{N \to \infty} \sum\limits_{n=1}^{N} (F(b) - F(a)) = \sum\limits_{n=1}^{\infty} (F(b) - F(a)). \]
+			\item [\enquote{$\leq$}:] Sei $\varepsilon > 0$ und seien $\tilde{b}_n > b_n$, so dass
+			\begin{align}\label{ee}
+			 	 0 \leq F(\tilde{b}_n) - F(b_n) < \frac{\varepsilon}{2^n}. 
+			\end{align}	
+				Die $\tilde{b}_n$ existieren, weil $F$ rechtsstetig ist. Weil \[ (a,b] = \bigcup\limits_{n = 1}^{\infty} (a_n,\tilde{b}_n) \] gilt \[ [a + \varepsilon, b] \subseteq \bigcup\limits_{n = 1}^{\infty} (a_n,b_n]. \] Nach Heine-Borel ist $[a + \varepsilon, b]$ kompakt; nach Definition der Kompaktheit reichen endlich viele $(a_n, \tilde{b}_n)$ aus, um $[a + \varepsilon, b]$ zu überdecken. Also gibt es ein $N\in\N$ mit \[ [a + \varepsilon, b] \subseteq \bigcup\limits_{n = 1}^{N} (a_n, \tilde{b}_n). \] Daraus folgt dann
+			\begin{align*}
+				F(b) - F(a + \varepsilon) & \overset{\text{F mon.}}{{\leq}}  \sum\limits_{n=1}^{N} (F(\tilde{b}_n) - F(a + \varepsilon))\\ 
+				&\leq \sum\limits_{n=1}^{\infty} (F(\tilde{b}_n) - F(a + \varepsilon))\\ 
+				&\overset{\eqref{ee}}{\leq} \sum\limits_{n=1}^{\infty} (F(b) - F(a) + \frac{\varepsilon}{2^n}) = \sum\limits_{n=1}^{\infty} (F(b) - F(a)) + \varepsilon,
+			\end{align*}
+			wobei wir im letzten Schritt die geometrische Reihe genutzt haben. Wegen der Rechtsstetigkeit von $F$ folgt damit
+			\begin{align*}			
+			  F(b) - F(a) &= \lim\limits_{\varepsilon \downarrow 0} (F(b) - F(a + \varepsilon))\\
+			  & \leq \lim\limits_{\varepsilon \downarrow 0} \sum\limits_{n=1}^{\infty} (F(b) - F(a)) + \varepsilon = \sum\limits_{n=1}^{\infty} (F(b) - F(a)).
+			\end{align*}			
+		\end{itemize}
+	Der Fortsetzungssatz impliziert nun die Existenz eines Maßes $\mathbb{P}_F$ auf $(\R,\cB(\mathbb{R}))$ mit \[\mathbb{P}_F((a,b]) = \mu((a,b]) = F(b) - F(a). \] Das Ma\ss{} ist nicht automatisch ein Wahrscheinlichkeitsma\ss, das folgt aber direkt aus der Stetigkeit von Ma\ss en und der Charakterisierung von $\mathbb P_F$ auf den Intervallen:
+		\begin{align*}
+			\mathbb{P}_F(\mathbb{R}) &= \mathbb{P}_F\Big(\bigcup\limits_{n = 1}^{\infty} (-n,n]\Big)\\
+			& \overset{\text{Stetigkeit}}{\underset{\text{von Maßen}}{=}} \lim\limits_{n \to \infty} \mathbb{P}_F((-n,n])\\
+			&\overset{\text{Def.}}{=} \lim\limits_{n \to \infty} (F(n) - F(-n))\\
+			& = \lim\limits_{n \to \infty} F(n) - \lim\limits_{n \to \infty} F(-n)=1.
+		\end{align*}
+		Achtung, das Argument werden wir jetzt immer wieder nutzen! Ganz \"ahnlich zeigen den Zusammenhang von $F$ und $\mathbb P_F$ auf unendlichen Intervallen, wie im Satz behauptet:
+		\begin{gather*}
+			\mathbb{P}_F((-\infty,t]) = \mathbb{P}_F\Big(\bigcup\limits_{n = \left \lceil{|t|}\right \rceil }^{\infty} (-n,t]\Big) = \lim\limits_{n \to \infty} \mathbb{P}_F((-n,t])=F(t)-\lim_{n\to\infty} F(-n)=F(t),
+		\end{gather*}
+		wobei $\lceil |t|\rceil$ die obere Gau\ss klammer von $|t|$ ist, also $|t|$ aufgerundet.
+	\end{enumerate}
+\end{proof}
+
+\begin{bem}
+	Es gibt ganz analog eine Definition für Verteilungsfunktionen auf $\mathbb{R}^d$, sogenannte \enquote{multivariate Verteilungsfunktionen} -- das machen wir später.
+\end{bem}
+Bevor wir Beispielen von Wahrscheinlichkeitsma\ss en auf $(\R,\mathcal B(\R))$ kommen, hier noch das wichtigste Beispiel eines Ma\ss es auf der Borel-$\sigma$-Algebra - das Lebesgue Ma\ss{} auf $(\R^d, \mathcal B(\R^d))$.
+\begin{satz}
+	Es gibt ein eindeutiges Maß $\lambda$ auf $(\mathbb{R}^d,\mathcal B(\R^d))$ mit $\lambda(Q) = \text{ Volumen(Q)}$, siehe Analysis 2, für alle Quader $Q \subseteq \mathbb{R}^d$. $\lambda$ heißt Lebesgue-Maß auf $\R^d$, $\lambda$ ist ein unendliches Ma\ss.
+\end{satz}
+
+\begin{proof}
+	Übung, ziemlich analog zum vorherigen Beweis. Betrachte $$\cS := \{ (a_1,b_1]\times \dots \times (a_n,b_n] : a_1,\dots,a_d, b_1,\dots, b_d\in \R\},$$ $\cS$ ist ein Semiring.
+		 $\mu(Q) := \text{ Volumen(Q)} = \prod\limits_{i=1}^{n}(b_i-a_i)$ ist eine $\sigma$-additive Mengenfunktion auf $\cS$ (die $\sigma$-Additivit\"at ist der einzige komplizierte Schritt). $E_n:=(-n,n]\times \dots (-n,N]$ ist die ben\"otigte Folge in $\cS$ mit endlichem Volumen, die gegen $\R^d$ w\"achst.
+		 $\lambda$ sei nun das eindeutige Ma\ss{} auf $(\mathbb R, \mathcal B(\mathbb R))$ das $\mu$ fortsetzt. Es fehlt noch, dass $\lambda$ ein unendliches Ma\ss{} ist. Aber auch das geht mit den Argumenten des vorherigen Beweises:
+		 \begin{align*}
+		 \lambda(\mathbb{R}^d) &\overset{\text{Stetigkeit}}{\underset{\text{von Maßen}}{=}} \lim\limits_{n \to \infty}\lambda ((n,-n]\times ... \times (n,-n])\\
+		 & = \lim\limits_{n \to \infty} 2n \cdot ... \cdot 2n\\
+		 & = \lim\limits_{n \to \infty} 2^d n^d = \infty.
+		 \end{align*}
+		 
+\end{proof}
+Jetzt kommen wir zu konkreten Beispielen von Verteilungsfunktionen, die uns erneut in der Stochastik begegnen werden.
+\begin{beispiel}\label{Gl}
+	F\"ur $a<b$ sei \[ F(t) = \frac{t-a}{b-a} \mathbf{1}_{[a,b]}(t) + \mathbf{1}_{(b, \infty)}(t),\quad t\in\R, \] 
+	oder anders geschrieben als
+	\begin{align*}
+		F(t)=
+		\begin{cases}
+		0&: t<a\\
+		\frac{t-a}{b-a}&: t\in [a,b]\\
+		1&: t>b\\
+		\end{cases}.
+	\end{align*}
+	Nat\"urlich erf\"ullt $F$ die Eigenschaften einer Verteilungsfunktion, das zugehörige Maß $\mathbb{P}_F$ nennt man \textbf{Gleichverteilung} auf $[a,b]$. 
+	\begin{center}	
+		\begin{tikzpicture}[]
+		\begin{axis}[
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-0.625,xmax=3,ymin=-0.625,ymax=1.5,
+		xtick={0,0.5,2.5},xticklabels={,$a$,$b$},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$F(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		\addplot [domain = -1:1] {0}; 
+				\addplot [dotted] coordinates{(-0.5,1) (2.5,1)};
+%		\addplot [domain = 2:3] {1};
+		%\addplot [only marks] coordinates{(1,0) (2,1)};
+		\addplot[smooth] coordinates{(3,1) (2.5,1)};
+		\addplot[smooth] coordinates{(0.5,0) (2.5,1)};
+%		\addplot [dotted] coordinates{(2,0.5) (2,1)};
+%		\addplot [dotted] coordinates{(3,0) (3,1)};
+		\end{axis}
+		\end{tikzpicture}
+\end{center}
+Man nennt das Ma\ss{} auch $\operatorname{U}([a,b])$, $U$ steht f\"ur uniform.
+\end{beispiel}
+\begin{beispiel}\label{Exp} F\"ur $\lambda>0$ sei
+	\[ F(t) = (1- e^{-\lambda t}) \mathbf{1}_{[0, \infty)}(t),\quad t\in\R,\]
+	oder anders geschrieben als
+	\begin{align*}
+		F(t)=
+		\begin{cases}
+		0&: t\leq 0\\
+		 1- e^{-\lambda t} &: t>0
+		 \end{cases}.
+	\end{align*}
+	Aufgrund der Eigenschaften der Exponentialfunktion erf\"ullt $F$ die Eigenschaften der Exponentialfunktion, das zugeh\"orige Ma\ss{} $\mathbb P_F$ nennt man \textbf{Exponentialverteilung} mit Parameter $\lambda > 0$. 
+		\begin{center}
+		\begin{tikzpicture}[]
+		\begin{axis}[
+		legend pos = outer north east,
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-0.625,xmax=3.5,ymin=-0.625,ymax=1.5,
+		xtick={0,1,2,3},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$F(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		\addplot [domain = 0:3] {1-e^(-x)}; \addlegendentry{$\lambda = 1$};
+		\addplot [domain = 0:3, color = red] {1-e^(-x*0.5)}; \addlegendentry{$\lambda = \frac{1}{2}$};
+		\addplot [domain = 0:3, color = blue] {1-e^(-x*2)}; \addlegendentry{$\lambda = 2$};
+		\addplot [dotted] coordinates{(0,1) (3,1)};
+		\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	Man nennt das Ma\ss{} auch \textbf{$\operatorname{Exp}(\lambda)$}. In der Graphik ist $\operatorname{Exp}(\lambda)$ f\"ur drei verschiedene $\lambda$ geplotted. 
+\end{beispiel}
+
+\begin{beispiel}\label{Poi}
+	Für $a_1,...,a_N \in \mathbb{R}$ mit $p_1,...,p_N \geq 0$ und $\sum\limits_{k= 1}^{N} p_k= 1$ ist \[F(t):= \sum\limits_{k= 1}^{N} p_k \mathbf{1}_{[a_k, \infty)}(t), \quad t\in\R, \] eine Verteilungsfunktion. Die zugeh\"origen Ma\ss e $\mathbb P_F$ werden \textbf{diskrete Ma\ss e} genannt weil die Menge $\{a_1,...,a_N\}$ eine diskrete Menge ist (ohne H\"aufungspunkte). 
+	\begin{center}	
+		\begin{tikzpicture}[]
+		\begin{axis}[
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-1.6,xmax=2.8,ymin=-0.625,ymax=1.5,
+		xtick={0},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$F(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		\addplot [domain = -1:-0.5] {0.3};
+		\addplot [domain = -0.5:0.2] {0.5};	 
+		\addplot [domain = 0.2:2] {0.7};
+		\addplot [domain = 2:3] {1};
+		\addplot [only marks] coordinates{(-0.5,0.5)(-1,0.3)(0.2,0.7) (2,1)};
+		\addplot [dotted] coordinates{(-1,0.3) (-1,0)};
+		\addplot [dotted] coordinates{(-0.5,0.5) (-0.5,0.3)};
+		\addplot [dotted] coordinates{(0.2,0.5) (0.2,0.7)};
+		\addplot [dotted] coordinates{(2,0.7) (2,1)};
+				\addplot [dotted] coordinates{(-1.6,1) (2,1)};
+		\end{axis}
+		\end{tikzpicture}
+\end{center}
+	Die diskrete Verteilungsfunktion funktioniert unver\"andert auch für $N = \infty$. Ganz konkret heißt $\mathbb{P}_F$ für $a_k=k$ und $p_k = e^{-\lambda} \frac{\lambda^k}{k!}$, $k \in \N$, \textbf{Poissonverteilung mit Parameter $\lambda>0$} auf $(\R,\cB(\mathbb{R}))$. Beachte: Weil wir die Poissonverteilung bereits auf $\N$ definiert haben gibt es eine gewisse Doppeldeutigkeit, mit der Diskussion der n\"achsten Vorlesung wird aber klar, dass beide Ma\ss e das gleiche beschreiben. Die Poissonverteilung mit Parameter $\lambda$ wird auch als \textbf{Poi$(\lambda)$} genannt.
+	\begin{center}	
+		\begin{tikzpicture}[]
+		\begin{axis}[
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-0.4,xmax=5,ymin=-0.525,ymax=1.5,
+		xtick={0,1,2,3,4},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$F(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		\addplot [domain = 0:1] {0.26};
+		\addplot [domain = 1:2] {0.5};	 
+		\addplot [domain = 2:3] {0.7};
+		\addplot [domain =3:4] {0.82};
+		\addplot [domain =4:5] {0.93};
+		\addplot [only marks] coordinates{(0,0.26)(1,0.5)(2,0.7) (3,0.82) (4,0.93)};
+		\addplot [dotted] coordinates{(1,0.26) (1,0.5)};
+		\addplot [dotted] coordinates{(2,0.5) (2,0.7)};
+		\addplot [dotted] coordinates{(3,0.7) (3,0.82)};
+		\addplot [dotted] coordinates{(4,0.82) (4,0.93)};
+		\addplot [dotted] coordinates{(-0.6,1) (6,1)};
+		\end{axis}
+		\end{tikzpicture}
+\end{center}
+	
+	
+	
+\end{beispiel}
+
+\begin{deff}
+	Ist $F \! : \mathbb{R} \rightarrow [0,\infty)$, $f \in L^1(\mathbb{R})$ und $ \int_{\mathbb{R}} f(x) \text{d}x = 1$,  dann heißt $f$ \textbf{Dichtefunktion} der Verteilungsfunktion 
+	\begin{align}\label{k}
+		F(t) = \int\limits_{-\infty}^{t} f(x) \text{d}x,\quad t\in\R.
+	\end{align}	
+	Ist umgekehrt $F$ von der Form \eqref{k}, so heißt $f$ \textbf{Dichte} von $F$. In der gro\ss en \"Ubung wurde diskutiert, warum solch ein $F$ die vier Eigenschaften einer Verteilungsfunktion erf\"ullt.
+\end{deff}
+
+\begin{beispiel}
+	Die sch\"onste Anwendung von Polarkoordinaten und Fubini ist die Berechnung des Integrals $\int_\R e^{-\frac{x^2}{x}}dx=\sqrt{2\pi}$. Damit ist $f(x)=\frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$ eine Dichtefunktion. Man nennt die zugeh\"orige Verteilungsfunktion
+
+	\[ F(t) = \int\limits_{-\infty}^{t} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} \text{d}x,\quad t\in\R.\]  Verteilungsfunktion der \textbf{(standard) Normalverteilung}. Das Ma\ss{} $\mathbb P_F$ nennt man dann auch (standard) normalverteilt und schreibt \textbf{ $\cN(0,1)$}. In der gro\ss en \"Ubung wird diskutiert, dass f\"ur $\mu\in\R$ und $\sigma^2\geq 0$ auch $f(x)=\frac{1}{\sqrt{2\pi\ \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ eine Dichtefunktion ist. Die zugeh\"orige Verteilung nennt man auch normalverteilt und schreibt $\mathcal N(\mu, \sigma^2)$. 
+\begin{center}
+		\begin{tikzpicture}[]
+		\begin{axis}[
+		legend pos = outer north east,
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-2,xmax=3,ymin=-0.625,ymax=1,
+		xtick={-2,-1,0,1,2,3},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xticklabel=\empty,
+		yticklabel=\empty,
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$f(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		%\addplot [domain = -0.5:3] {exp(-(x-1)^2 / (2*0.2)) / (sqrt(2*pi*0.2))};
+		\addplot [name path = A, domain = -2:3, color = blue, smooth] {gauss(1,0.45)};\addlegendentry{$\mu = 2, \sigma^2=\frac 1 2$};
+		\addplot [name path = A, domain = -2:3, color = red, smooth] {gauss(0,0.8)};\addlegendentry{$\mu = 0, \sigma^2=1$};
+		%\addlegendentry{$f$};
+%		\addlegendentry{\empty};
+%		\path [name path=B] (\pgfkeysvalueof{/pgfplots/xmin},0) -- (\pgfkeysvalueof{/pgfplots/xmax},0);
+	%	\addplot [blue, fill opacity=0.4] fill between [
+	%	of=A and B,
+	%	soft clip={domain=0.75:1.25},
+	%	]; 
+	%	\addplot [red, fill opacity=0.4] fill between [
+	%	of=A and B,
+	%	soft clip={domain=1.75:2.5},
+	%	]; 
+%		\legend{,viel Masse,wenig Masse};
+		\end{axis}
+		\end{tikzpicture}
+	\end{center}		
+	
+	
+	Die Bedeutung von $\mu$ und $\sigma^2$ diskutierten wir sp\"ater. Warnung: Warum schreiben wir nur eine Formel f\"ur die Dichte $f$, jedoch nicht f\"ur die Verteilungsfunktion $F$ hin? Es gibt einfach keine Formel f\"ur das Integral $\int_{-\infty}^t e^{-x^2/2}dx$!
+	
+	
+\end{beispiel}
+
+
+\marginpar{\textcolor{red}{Vorlesung 7}}
+
+Das Umschalten im Kopf von Verteilungsfunktionen auf Ma\ss e ist anfangs extrem schwierig. Wir wissen zwar abstrakt, dass es f\"ur jede Verteilungsfunktion genau ein Ma\ss{} auf $(\R, \mathcal B(\R))$ gibt und andersrum f\"ur jedes Ma\ss{} eine eindeutige Verteilungsfunktion, aber was bedeutet das konkret? Das versteht man am besten, wenn man Eigenschaften von $F$ in Eigenschaften von $\mathbb P_F$ \"ubersetzt:
+
+\begin{disc}
+Wir starten mit einer nicht sehr rigorosen aber dennoch hilfreichen Interpretation:
+\begin{center} \glqq$F$ beschreibt, wie eine Einheit Zufall auf $\mathbb{R}$ verteilt wird.\grqq \end{center}
+Dazu sei $F(b) - F(a)$  der Anteil des gesamten Zufalls, $F(b)-F(a)$ ist immer zwischen $0$ und $1$, der in $(a,b]$ gelandet ist. Man spricht auch statt \enquote{Anteil} von der \enquote{Masse} Zufall in $(a,b]$.\smallskip
+
+Wir schauen uns jetzt an, was drei Eigenschaften von $F$ (stetig, konstant, stark wachsend) f\"ur die Verteilung der Masse bedeuten.\smallskip
+
+\textbf{Stetigkeit:} Zun\"achst berechnen wir die Masse einer Einpunktmenge $\{t\}$ aus den bekannten Eigenschaften. Wie immer versuchen wir die gesuchte Menge durch Mengen der Form $(a,b]$ auszudr\"ucken, weil wir f\"ur diese Mengen eine Verbindung zwischen $F$ und $\mathbb P_F$ haben:
+	 \begin{align*}
+			\mathbb{P}_F(\{ t \}) &= 
+			\mathbb{P}_F \Big(\bigcap\limits_{n = 1}^{\infty} (t - \frac{1}{n}, t] \Big) \\
+			&\overset{\text{Stetigkeit}}{\underset{\text{von Maßen}}{=}} \lim\limits_{n \to \infty} \mathbb{P}_F\Big(\Big(t - \frac{1}{n}, t\Big]\Big) \\
+			&\overset{\text{Def. }\mathbb P_F}{=} \lim\limits_{n \to \infty} \Big(F(t) - F\Big(t - \frac{1}{n}\Big)\Big)\\
+			&= F(t) - \lim\limits_{n \to \infty} F\Big(t - \frac{1}{n}\Big) = F(t) - F(t-),
+		\end{align*}
+		wobei $F(t-):=\lim_{s\uparrow t} F(s)$ der Linksgrenzwert aus der Analysis ist. Konsequenz: Ist $F$ stetig in $t$, so hat die Einpunktmenge $\{t\}$ keine Masse. Insbesondere haben \underline{alle} einpunktigen Mengen keine Masse, wenn $F$ eine stetige Funktion ist (\mbox{z. B.} \textbf{$U[a,b]$, $\operatorname{Exp}(\lambda)$, $\cN(\mu, \sigma^2)$)}. Klingt komisch, oder? Ist es aber nicht. Hier sehen wir, warum Ma\ss e erst auf \"uberabz\"ahlbaren Mengen wirklich spannend werden: \[ \mathbb{P}_F((a,b]) = \mathbb{P}_F \Big( \bigcupdot\limits_{x \in (a,b]} \{x\} \Big) \neq \sum\limits_{x \in (a,b]} \mathbb{P}_F(\{x\}),\] weil $\sigma$-Additivität nur f\"ur Vereinigungen abz\"ahlbar vieler Mengen gilt. Was sollte die Summe auf der rechten Seite auch bedeuten?\smallskip
+		
+\textbf{$F$ konstant:} \"Uberlegen wir nun, was es f\"ur $\mathbb P_F$ bedeutet, wenn $F$ konstant ist. Schauen wir dazu zun\"achst ein Beispiel an. Betrachten wir folgende einfache Verteilungsfunktion
+\begin{center}	
+		\begin{tikzpicture}[]
+		\begin{axis}[
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-0.625,xmax=3,ymin=-0.625,ymax=1.5,
+		xtick={0,1,2},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$F(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		\addplot [domain = 1:2] {1/2}; 
+		\addplot [domain = 2:3] {1};
+				\addplot [dotted] coordinates{(-0.625,1) (2,1)};
+		\addplot [only marks] coordinates{(1,0.5) (2,1)};
+		\addplot [dotted] coordinates{(1,0.5) (1,0)};
+		\addplot [dotted] coordinates{(2,0.5) (2,1)};
+%		\addplot [dotted] coordinates{(3,0) (3,1)};
+		\end{axis}
+		\end{tikzpicture}
+\end{center}
+	aus der Klasse der diskreten Verteilungen. Nach der Diskussion zur Stetigkeit wissen wir, dass das zugeh\"orige Ma\ss{} $\mathbb P_F$ folgendes erf\"ullt:
+	\begin{align*}
+		\mathbb P_F(\{1\})=	\mathbb P_F(\{2\})=\frac{1}{2}.
+	\end{align*}
+	Wegen der $\sigma$-Additivit\"at folgt nat\"urlich (es gibt insgesamt nur eine Einheit Zufall zu verteilen), dass $\mathbb P_F(A)=0$ f\"ur alle Borelmengen $A$ mit $1,2\notin A$. Das Ma\ss{} $\mathbb P_F$ hat also keine Masse au\ss erhalb der Menge $\{1,2\}$. Schauen wir uns $F$ an, so sehen wir also, dass $\mathbb P_F$ keine Masse in den konstanten Bereichen hat. F\"ur Intervalle $(a,b]$ folgt das allgemein nat\"urlich aus $\mathbb P_F((a,b])=F(b)-F(a)$ was gerade $0$ ist, wenn $F$ zwischen $a$ und $b$ konstant ist.\\
+	Wenn wir die Beobachtung auf $\operatorname{Poi}(\lambda)$ aus Beispiel \ref{Poi} anwenden, so sehen wir, dass das zugeh\"ogige Ma\ss{} $\mathbb P_F$ nur Masse auf $\N$ hat. Damit kann man das $\operatorname{Poi}(\lambda)$-verteilte Ma\ss{} auf $(\R, \mathcal B(\R))$ mit der Definition aus Beispiel \ref{Poi1} identifizieren, wir verteilen eine Einheit Zufall jeweils auf $\N$ (einmal wird die Einheit Zufall direkt auf $\N$ verteilt, einmal auf $\N$ als Teilmenge von $\R$).
+	
+	\textbf{$F$ stark wachsend:} Wir wissen nun wieviel Masse an Sprungstellen liegt und auch, dass keine Masse in konstanten Bereichen liegt. Fragt sich also, wo die Masse sonst noch zu finden ist: 
+	\begin{center}
+		\glqq $\mathbb{P}_F$ hat dort viel Masse, wo $F$ am st\"arksten wächst.\grqq
+	\end{center}
+	Formell folgt das nat\"urlich aus $\mathbb P_F((a,b])=F(b)-F(a)$ weil dann auf ein kleines Intervall $(a,b]$ viel Masse verteilt wird, wenn $F(b)$ deutlich gr\"o\ss er als $F(a)$. Ist $a$ nah an $b$, so bedeutet das nat\"urlich, dass $F$ dort stark w\"achst. Schauen wir uns wieder ein passendes Beispiel an, die Exponentialverteilung $\operatorname{Exp}(\lambda)$ f\"ur verschiedene $\lambda>0$. Am Bildchen in Beispiel \ref{Exp} ist zu erkennen, dass viel Masse nah bei der $0$ liegt, wenn $\lambda$ gro\ss{} ist, die Verteilungsfunktion bei $0$ m\"oglichst steil ist. Nat\"urlich sehen wir das auch formell aus der Verteilungsfunktion weil f\"ur alle $\epsilon>0$
+\begin{align*}
+	\mathbb P_F((0,\epsilon])=F(\epsilon)-F(0)= (1-e^{-\lambda \epsilon})-(1-e^{-\lambda 0})=1-e^{-\lambda \epsilon},
+\end{align*}
+	was monoton wachsend in $\lambda$ ist.\smallskip
+	
+	\textbf{Der Fall mit Dichten:} Die obige Diskussion k\"onnen wir f\"ur Verteilungsfunktionen mit Dichten noch konkretisieren. Sei dazu $F$ eine Verteilungsfunktion mit Dichte $f$, also $F(t) = \int\limits_{-\infty}^{t}  f(x) \mathrm{d}x$. Weil $F$ stetig ist, haben alle einpunktigen Mengen keine Masse. Aber wie k\"onnen wir an $f$ direkt sehen, wo die Masse verteilt ist? Ist $f$ stetig, so folgt aus dem Hauptsatz der Analysis, dass $F'(t)=f(t)$ f\"ur alle $t\in \R$. Folglich impliziert ein an der Stelle $t$ gro\ss es $f$ ein in $t$ stark wachsendes $F$ und damit viel Masse um $t$. Andersrum impliziert ein an der Stelle $t$ kleines $f$ ein in $t$ wenig wachsendes $F$ und damit wenig Masse um $t$. Im Extremfall impliziert nat\"urlich $f=0$ in $(a,b]$ auch $F$ konstant in $(a,b]$ und damit wird keine Masse auf $(a,b]$ verteilt. Wir merken uns grob 
+	\begin{center}
+		\glqq Hat $F$ eine Dichte, so ist viel Masse dort, wo $f$ gro\ss{} ist.\grqq
+	\end{center}	
+	 Die n\"utzlichste Interpretation ist durch den Fl\"acheninhalt zwischen Graphen von $f$ und der $x$-Achse. Weil	
+		\begin{align*}
+			\mathbb{P}_F((a,b]) 
+			= F(b)-F(a)
+			= \int\limits_{-\infty}^{b} f(x) \mathrm{d}x - \int\limits_{-\infty}^{a} f(x) \mathrm{d}x 
+			=\int\limits_{a}^{b} f(x) \mathrm{d}x,
+		\end{align*}
+		ist die Masse in $(a,b]$ gerade die Fl\"ache unter $f$ zwischen $a$ und $b$. Dazu ist zu beachten, dass nach Annahme die Gesamtfl\"ache zwischen Graphen und $x$-Achse $1$ ist. 		
+		
+		In folgendem Beispiel ist die Dichte von $\mathcal N(2, 1)$ geplottet:
+	\begin{center}
+		\begin{tikzpicture}[]\label{c}
+		\begin{axis}[
+		legend pos = outer north east,
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-0.625,xmax=3.25,ymin=-0.625,ymax=1.5,
+		xtick={0,1,2,3},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xticklabel=\empty,
+		yticklabel=\empty,
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$f(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		%\addplot [domain = -0.5:3] {exp(-(x-1)^2 / (2*0.2)) / (sqrt(2*pi*0.2))};
+		\addplot [name path = A, domain = -0.75:3, smooth] {gauss(1,0.45)};
+		%\addlegendentry{$f$};
+		\addlegendentry{\empty};
+		\path [name path=B] (\pgfkeysvalueof{/pgfplots/xmin},0) -- (\pgfkeysvalueof{/pgfplots/xmax},0);
+		\addplot [green, fill opacity=0.4] fill between [
+		of=A and B,
+		soft clip={domain=0.75:1.25},
+		]; 
+		\addplot [red, fill opacity=0.4] fill between [
+		of=A and B,
+		soft clip={domain=1.75:2.5},
+		]; 
+		\legend{,viel Masse,wenig Masse};
+		\end{axis}
+		\end{tikzpicture}
+	\end{center}	
+	Wir sehen also, dass viel Masse des Ma\ss es $\mathcal N(2,1)$ um die $2$ herum verteilt ist und sehr wenig Masse weit weg von der $2$ verteilt ist. Der gr\"une Bereich ist gerade so gew\"ahlt, dass dieser Fl\"acheninhalt $\frac 1 3$ ist. Ein Drittel der Masse von $\mathcal N(2,1)$ liegt also im Schnittbereich des gr\"unen Bereichs mit der $x$-Achse, sehr nah an der $2$. Man sagt, die Verteilung ist um $2$ konzentriert. Wenn wir zwei verschiedene Normalverteilungen vergleichen, sieht es wie im folgenden Beispiel aus:
+		\begin{center}
+		\begin{tikzpicture}[]
+		\begin{axis}[
+		legend pos = outer north east,
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-2,xmax=3,ymin=-0.625,ymax=1,
+		xtick={-2,-1,0,1,2,3},
+		ytick={0,1},
+		extra x ticks={-0.5},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		xticklabel=\empty,
+		yticklabel=\empty,
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$f(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		%\addplot [domain = -0.5:3] {exp(-(x-1)^2 / (2*0.2)) / (sqrt(2*pi*0.2))};
+		\addplot [name path = B, domain = -2:3, color = blue, smooth] {gauss(1,0.45)};\addlegendentry{$\mu = 2, \sigma^2=\frac 1 2$};
+		\addplot [name path = A, domain = -2:3, color = red, smooth] {gauss(0,0.8)};\addlegendentry{$\mu = 0, \sigma^2=1$};
+		\path [name path=C] (\pgfkeysvalueof{/pgfplots/xmin},0) -- (\pgfkeysvalueof{/pgfplots/xmax},0);
+		%\addlegendentry{$f$};
+%		\addlegendentry{\empty};
+	
+		\addplot [green, fill opacity=0.4] fill between [
+		of=A and C,
+		soft clip={domain=-0.4:0.4},
+		]; 
+		
+		\addplot [green, fill opacity=0.4] fill between [
+		of=B and C,
+		soft clip={domain=0.75:1.25},
+		]; 
+		
+
+	%	\addplot [red, fill opacity=0.4] fill between [
+	%	of=A and B,
+	%	soft clip={domain=1.75:2.5},
+	%	]; 
+%		\legend{,viel Masse,wenig Masse};
+		\end{axis}
+		\end{tikzpicture}
+		\end{center}
+		Der Inhalt der gr\"unen Fl\"achen ist wieder $\frac 1 3$, die zugeh\"origen normalverteilten Ma\ss e auf $(\R, \mathcal B(\R))$ haben deshalb Masse $\frac 1 3$ im jeweiligen Schnittbereich mit der $x$-Achse. Wir sehen schon an dem Bild, dass niedrigeres $\sigma$ daf\"ur sorgt, dass die Verteilung mehr Masse nah an $\mu$ hat. Darauf gehen wir in ein paar Wochen noch viel ausf\"uhrlicher ein.
+\end{disc}
+
+Abschlie\ss end noch ein paar Worte zur stochastischen Modellierung von Zufall in \"uberabz\"ahlbaren Mengen. Warum haben wir so exzessiv Ma\ss e auf der Borel-$\sigma$-Algebra diskutiert?
+\begin{disc}[Stochastische Modellierung, Nr. 2]
+	Das Modellieren von endlich vielen Möglichkeiten ist leicht, siehe Diskussion \ref{N1}. Man kommt recht nat\"urlich auf die Eigenschaften der $\sigma$-Algebra und des Ma\ss es. Zur Erinnerung war das gleichverteilte Ziehen aus einer endlichen Menge modelliert durch den endlichen Zustandsraum $\Omega$ (=M\"oglichkeiten zum Ziehen), $\cA = \cP(\Omega)$ und der diskreten Gleicherverteilung $\mathbb{P}(A) = \frac{\# A}{\# \Omega}$.\\ Das Modellieren von Experimenten mit unendlich vielen Möglichkeiten ist dagegen schwieriger. Wie modelliert man dann das Ziehen aus dem Intervall $[0,1]$, sodass kein Bereich von $[0,1]$ bevorteilt wird? Wenn wir beobachten wollen, ob eine feste Zahl gezogen wurde oder nicht, m\"ussen die einelementigen Mengen $\{t\}$ in der $\sigma$-Algebra sein. Wenn kein Element bevorzugt werden soll, also $\mathbb P(\{t\})$ f\"ur alle $t$ gleich sein soll, f\"uhrt die \"Uberabz\"ahlbarkeit automatisch zu $\mathbb P(\{t\})=0$ f\"ur alle $t\in [0,1]$. Im Gegensatz zum endlichen Fall legen wir f\"ur gleichverteilten Zufall in $[0,1]$ jetzt fest, dass die Wahrscheinlichkeit von Teilintervallen von $[0,1]$ nur von der L\"ange abh\"angen soll. Das f\"uhrt zur Forderung $\mathbb P((a,b])=b-a=F(b)-F(a)$, wobei $F$ die Verteilungsfunktion aus Beispiel \ref{Gl} ist. Da wir als mathematisches Modell des zuf\"alligen Ziehens eine $\sigma$-Algebra und ein Ma\ss{} haben wollen, w\"ahlen wir nun die kleinste $\sigma$-Algebra die all diese Intervalle enth\"alt (die Borel-$\sigma$-Algebra) und darauf ein Ma\ss, dass den Intervallen die geforderten Wahrscheinlichkeiten gibt. Aufgrund des Fortsetzungssatzes gibt es so ein Ma\ss, das ist gerade $\operatorname U([0,1])$.\\	
+	Diese Motivation zur Modellierung mit der Borel-$\sigma$-Algebra und dem Fortsetzungssatz setzt nicht zwingend gleichverteilten Zufall voraus. Wenn wir also ein zuf\"alliges Experiment mit reellen Beobachtungen modellieren wollen, sollten wir die Wahrscheinlichkeiten von \glqq Ausgang des Experiments ist kleiner oder gleich $t$\grqq{} kennen. Damit definieren wir die Verteilungsfunktion $F(t)$ und wenn diese rechtsstetig ist, gibt uns die Ma\ss theorie das mathematische Modell $(\R, \mathcal B(\R), \mathbb P_F)$ f\"ur das zuf\"allige Experiment.	
+\end{disc}
+
+Hoffentlich ist jetzt einsichtig, warum die Modellierung von komplizierten reellen zuf\"alligen Experimenten mit der Borel-$\sigma$-Algebra Sinn macht. Eine Frage bleibt aber noch: Warum nehmen wir nicht einfach die ganze Potenzmenge auf $\R$ als Modell, so wie beim zuf\"alligen Ziehen in endlichen Mengen?
+\begin{bem}
+	\begin{enumerate}[label=(\roman*)]
+		\item $\cP(\mathbb{R})$ ist zu groß, \mbox{z. B.} das Lebesgue-Maß oder die Normalverteilung kann zwar auf $\cB(\mathbb{R})$, aber nicht auf $\cP(\mathbb{R})$ definiert werden ($\rightsquigarrow$ Vitali-Menge). Es gilt tats\"achlich $\cB(\mathbb{R}) \subsetneq \cP(\mathbb{R})$, elementare Beispiele f\"ur nicht Borel-messbare gibt es leider nicht.
+		\item $\cB(\mathbb{R})$ funktioniert wunderbar! Insbesondere weil wir sehr handliche Erzeuger haben (z. B. verschiedene Arten von Intervallen) und deshalb aufgrund der bewiesenen Theoreme nur mit Intervallen arbeiten m\"ussen.
+	\end{enumerate}
+\end{bem}
+
+Die n\"achste Runde der Modellierung zuf\"alliger Experimente findet erst in ein paar Wochen statt. Bis dahin k\"onnt ihr die Ideen sacken lassen und euch wieder an der abstrakten Theorie erfreuen!
+
+
+\chapter{Abbildungen zwischen messbaren Räumen}
+Bevor wir messbare Abbildungen definieren, erinnern wir kurz an bereits bekannte Konzepte in der Mathematik. Wir betrachten immer Objekte und Abbildungen zwischen Objekten, die auf eine gewisse Art \glqq nat\"urlich\grqq{} (strukturerhaltend) sind:
+\begin{center}
+\bgroup
+\def\arraystretch{1}
+ \begin{tabular}{c|c}
+	Objekte& Funktoren\\ %[0.05cm] 
+	\hline
+	Mengen& Abbildungen\\
+	Gruppen&Homomorphismen\\ 
+	Vektorräume&Lineare Abbildungen\\
+	Metrische Räume& stetige Abbildungen\\
+\end{tabular}
+\egroup
+\end{center}
+Passend dazu diskutieren wir jetzt die strukturerhaltenden Abbildungen zwischen messbaren R\"aumen, sogenannte messbare Abbildungen.
+\section{Messbare Abbildungen}
+
+\begin{deff}
+	Seien $(\Omega, \cA)$, $(\Omega', \cA')$ messbare Räume und $f \! : \Omega \rightarrow \Omega'$. $f$ heißt \mbox{\textbf{messbar}}, falls Urbilder messbarer Mengen messbar sind; in Formeln \[A' \in \cA' \Rightarrow f^{-1} (A') \in \cA.\]
+\end{deff}
+	Es gibt verschiedene Notationen f\"ur messbare Abbildungen, man nutzt synonym 
+	\begin{itemize}
+		\item $f:\Omega \to \Omega'$ ist $(\mathcal A, \mathcal A')$-messbar,
+		\item $f:\Omega\to \Omega'$ ist messbar bez\"uglich $\mathcal A$ und $\mathcal A'$,
+		\item $f: (\Omega, \mathcal A)\to (\Omega',\mathcal A')$ ist messbar.
+	\end{itemize}
+	Genau wie Stetigkeit zwischen metrischen R\"aumen von den gew\"ahlten Metriken abh\"angt, h\"angt auch die Messbarkeit von den gew\"ahlten $\sigma$-Algebren ab. Wenn klar ist, welche $\sigma$-Algebren gew\"ahlt sind, redet man trotzdem einfach nur von messbaren Abbildungen.
+\begin{bem}
+	Die Definition der Messbarkeit ist analog zur Stetigkeit zwischen metrischen Räumen, dabei werden messbare Mengen durch offene Mengen ersetzt.
+\end{bem}
+
+\begin{deff}
+	Ist $ (\Omega', \cA') = (\mathbb{R}, \cB(\mathbb{R})) $, dann nennt man eine messbare Abbildung auch \textbf{Zufallsvariable} und schreibt $X$ statt $f$.
+\end{deff}
+Wie bei der Konstruktion von Ma\ss en haben wir das Problem, dass wir alle messbaren Mengen testen m\"ussen. Das ist gerade bei der Borel-$\sigma$-Algebra unm\"oglich, wir kennen die Mengen nicht alle. Zum Gl\"uck ist es wie im Kapitel zuvor, es reicht einen Erzeuger zu betrachten:
+\begin{satz}\label{S2}
+	Ist $\cE'$ ein Erzeuger von $\cA'$ und $f \! : \Omega \rightarrow \Omega'$. Dann ist $f$ messbar bzgl. $\cA$ und $\cA'$ genau dann, wenn \[ A' \in \cE' \Rightarrow f^{-1} (A') \in \cA. \]
+\end{satz}
+
+\begin{proof}\label{messbErzeuger}\abs
+	\begin{itemize}
+		\item [\enquote{$\Rightarrow$}:] $\checkmark$ weil $\cE' \subseteq \cA'$
+		\item [\enquote{$\Leftarrow$}:] Sei \[ \cF': = \{ A' \in \cA' \! : f^{-1}(A') \in \cA \}, \] wir zeigen $\cF' = \cA'$. Nach Annahme gilt $\cE' \subseteq \cF'$. Wenn $\cF'$ eine $\sigma$-Algebra ist, dann sind wir fertig, weil dann
+		\[ \cA' = \sigma(\cE') \subseteq \sigma(\cF') = \cF' \subseteq \cA'\] 
+		und auch $\mathcal A'=\mathcal F'$ gilt. Wir überprüfen die definierenden Eigenschaften und k\"onnen auf elementare Eigenschaften des Urbildes von Abbildungen in Analysis 1 zur\"uckgreifen:
+		\begin{enumerate}[label=(\roman*)]
+			\item $\emptyset \in \cF'$, weil $f^{-1} (\emptyset) = \emptyset$
+			\item Ist $A'\in \mathcal A'$, so gilt  \[f^{-1}((A')^C) = (f^{-1}(A'))^C \in \cA.\]
+			\item Sind $A_1', A_2', ... \in \mathcal A'$, so gilt  \[ f^{-1} \Big(\bigcup\limits_{n = 1}^{\infty} A'_n \Big) = \bigcup\limits_{n = 1}^{\infty} f^{-1}(A'_n) \in \cA. \]
+		\end{enumerate}
+	\end{itemize}
+\end{proof}

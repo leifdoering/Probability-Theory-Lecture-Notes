@@ -1,0 +1,184 @@
+\marginpar{\textcolor{red}{Vorlesung 19}}
+
+\begin{satz}[Satz von Fubini f\"ur $f\geq0$]
+	Seien $(\Omega_1, \cA_1, \mu_1)$, $(\Omega_2, \cA_2, \mu_2)$ $\sigma$-endliche Maßräume und $f\colon \Omega_1 \times \Omega_2 \to [0,+\infty]$ sei $(\cA_1 \otimes \cA_2, \cB(\overline{\R}))$-messbar. Dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{FubOne} $\omega_2\mapsto f_{\omega_1}(\omega_2) := f(\omega_1, \omega_2)$ ist $(\cA_2, \cB(\overline{\R}))$-messbar f\"ur alle $\omega_1\in \Omega_1$ \newline $\omega_1\mapsto f_{\omega_2}(\omega_1) := f(\omega_1, \omega_2)$ ist $(\cA_1, \cB(\overline{\R}))$-messbar f\"ur alle $\omega_2\in \Omega_2$
+		\item Die Integralfunktionen sind messbar, d. h.
+		 \begin{align*}
+		 	\omega_1 \mapsto \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2) \text{ ist } (\cA_1, \cB(\overline{\R}))\text{-messbar}
+		\end{align*}
+		 und 
+		 \begin{align*}
+		 	\omega_2 \mapsto \int_{\Omega_1} f_{\omega_2}(\omega_1) \dint \mu_1(\omega_1) \text{ ist } (\cA_2, \cB(\overline{\R}))\text{-messbar}
+		\end{align*}
+		\item Es gilt Fubini und der Fubini-Flip:
+		\begin{align*}
+			\int_{\Omega_1 \times \Omega_2} f(\omega_1,\omega_2) \dint \mu_1 \otimes \mu_2(\omega_1,\omega_2)
+			&= \int_{\Omega_1}\Big( \int_{\Omega_2} f(\omega_1,\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1) \\
+			&\underset{\text{flip}}{\overset{\text{Fubini-}}{=}} \int_{\Omega_2}\Big( \int_{\Omega_1} f(\omega_1,\omega_2) \dint \mu_1(\omega_1) \Big) \dint \mu_2(\omega_2) 
+		\end{align*}
+	\end{enumerate}
+	Ganz wichtig: (i) und (ii) besagen lediglich, dass alle Integrale in der wesentlichen Aussage (iii) Sinn machen.
+\end{satz}
+
+\begin{proof}
+	Weil $f$ messbar ist, existiert eine Folge $(f^n)_{n\in\N}$ einfacher Funktionen, die punktweise gegen $f$ wachsen. Dann gilt  auch $f_{\omega_1}^n \uparrow f_{\omega_1}$, $f_{\omega_2}^n \uparrow f_{\omega_2}$, $n\to\infty$. Weil $(f_{\omega_1}^n)_{n\in\N}$, $(f_{\omega_2}^n)_{n\in\N}$ Folgen einfacher Funktionen sind, sind $f_{\omega_1}$, $f_{\omega_2}$ als punkteweise Grenzwerte messbarer Funktionen auch messbar. Also gilt \ref{FubOne}. Weil mit monotoner Konvergenz \[ \int_{\Omega_2} f_{\omega_1}^n(\omega_2) \dint \mu_2(\omega_2) \overset{\text{\ref{allgMonKonv}}}{\uparrow} \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2), \quad n\to\infty,\]
+	ist \[ \omega_1 \mapsto \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2)  \] messbar. Das stimmt, weil 
+	\[ \omega_1\mapsto \int_{\Omega_2} f_{\omega_1}^n(\omega_2) \dint \mu_2(\omega_2) \] eine endliche Linearkombination von $\omega_1 \to \mu_2(A_{\omega_1})$ ist. Diese Abbildungen sind, wie im Beweis von \ref{MassraeumeExMass} gezeigt, messbar. Damit gilt also auch (ii).\smallskip
+	
+	Nun zur eigentlichen Aussage, (iii). Nicht \"uberraschend, erst f\"ur Indikatoren, dann die Gebetsm\"uhle. Sei also zun\"achst $f = \mathbf{1}_A$ f\"ur ein $A \in \cA_1 \otimes \cA_2$. Dann gilt aufgrund der expliziten Konstruktion des Produktma\ss es:
+		\begin{align*}
+			\int_{\Omega_1 \times \Omega_2} f \dint \mu_1\otimes \mu_2 &
+			 \overset{\text{Def.}}{\underset{\text{Int.}}{=}} \mu_1\otimes \mu_2(A)\\
+			 & \underset{\substack{\text{Produkt-}\\
+			 \text{maß}}}{\overset{\text{Konstr.}}{=}} \int_{\Omega_1} \mu_2(A_{\omega_1}) \dint \mu_1(\omega_1)\\
+			&\overset{\text{Bew.}}{\underset{\ref{MassraeumeExMass}}{=}} \int_{\Omega_1} \Big( \int_{\Omega_1} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1)\\
+			& = 	\int_{\Omega_1} \Big( \int_{\Omega_1} f(\omega_1,\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1).
+		\end{align*}
+		Genau analog ergibt sich
+		\begin{align*}
+			\int_{\Omega_1 \times \Omega_2} f \dint \mu_1\otimes \mu_2
+			& = 	\int_{\Omega_2} \Big( \int_{\Omega_1} f(\omega_1,\omega_2) \dint \mu_1(\omega_1) \Big) \dint \mu_2(\omega_2)
+		\end{align*}
+	weil wir in der Konstruktion des Produktma\ss es auch schon die Identit\"at gesehen haben:
+	\begin{align*}
+		\mu_1\otimes \mu_2(A)=  \int_{\Omega_2} \mu_1(A_{\omega_2}) \dint \mu_2(\omega_2).
+	\end{align*}
+	Damit haben wir beide Gleichheiten in (iii) f\"ur Indikatorfunktionen $f = \mathbf{1}_A$ bewiesen. Nun noch durch die Gebetsm\"uhle der Integrationstheorie: F\"ur einfache Funktionen folgt (iii) durch Linearit\"at des Integrals und monotone Konvergenz folgt die Aussage auch f\"ur alle messbaren $f\geq 0$.
+\end{proof}
+	\begin{warnung}
+		Meistens wird nur der Fubini-flip genutzt, also die zweite Gleichheit. Die $(\cA_1 \otimes \cA_2, \cB(\R))$-Messbarkeit muss f\"ur $f$ immer gecheckt werden. Sorry.
+	\end{warnung}
+
+\begin{beispiel}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item
+			Als \"Ubungsaufgabe zeigt ihr, dass wir bei Doppelreihen die Reihenfolge immer \"andern d\"urfen, wenn alle Koeffizienten nicht-negativ sind:
+		 \[ \sum\limits_{k = 0}^{\infty} \sum\limits_{n = 0}^{\infty} a_{k,n} = \sum\limits_{n = 0}^{\infty} \sum\limits_{k = 0}^{\infty} a_{k,n}. \] 
+		 %wenn $a_{k,n} \geq 0 \: \forall n,k \in \N$.
+%		$ \mu_1 = \mu_2 = \sum_{k=0}^{\infty} \delta_k =$ Zählmaß, $ \Omega_1 = \N$, $ \cP(\Omega) = \cA_1 = \cA_2$. $ \Omega_1 \times \Omega_2 = \N \times \N$, $ \cA_1 \otimes \cA_2 = \cP(\N \times \N)$, $f(n,k) = a_{n,k}$. $f$ messbar, weil jede Abbildung messbar ist, sind wir fertig. 
+		\item Eine n\"utzliche stochastische Anwendung ist Folgende: Ist $X$ eine nichtnegative Zufallsvariable auf $(\Omega, \mathcal A, \mathbb P)$ mit $X\sim F$, so gilt
+		\[ \E[X] = \int_{0}^{\infty} (1- F(t)) \dint t. \]
+		Rechnen wir zun\"achst mit Fubini die Aussage nach, danach checken wir die Messbarkeit. Wir arbeiten mit $(\Omega_1, \mathcal A_1, \mu_1)=(\Omega,\mathcal A, \mathbb P)$ und $(\Omega_1, \mathcal A_1, \mu_1)=(\R_+, \mathcal B(\R_+), \lambda)$ und $f(\omega, t)=\mathbf 1_{(t,\infty)}(X(w))$.
+		\begin{align*}
+			\int_{0}^{\infty} (1- F(t)) \dint t &= \int_{0}^{\infty} \mathbb{P}(X > t) \dint t\\
+			& \overset{\ref{rechenregeln}}{=} \int_{0}^{\infty} \E[\mathbf{1}_{(t,\infty)}(X)] \dint t \\
+			&\overset{\text{Def.}}{\underset{\text{EW}}{=}} \int_{0}^{\infty} \Big( \int_{\Omega} \mathbf{1}_{(t,\infty)}(X(\omega)) \dint \mathbb{P}(\omega) \Big) \dint t\\
+			&=\int_{0}^{\infty} \Big( \int_{\Omega} \mathbf{1}_{(t,\infty)}(X(\omega)) \dint t\Big) \dint \mathbb{P}(\omega) \\
+			& \underset{\text{flip}}{\overset{\text{Fubini-}}{=}} \int_{\Omega} \Big( \int_{0}^{\infty} \mathbf{1}_{[0,X(\omega))}(t) \dint t \Big) \dint \mathbb{P}(\omega)\\
+			&=\int_{\Omega} \Big( \int_{0}^{X(\omega)} 1 \dint t \Big) \dint \mathbb{P}(\omega)\\
+			& = \int_{\Omega} X(\omega) \dint \mathbb{P}(\omega) \overset{\text{Def.}}{=} \E[X].
+		\end{align*}
+		Nun noch zur Messbarkeit von $f(\omega,t) = \mathbf{1}_A(t,\omega)$, mit $A = \{ ( \omega,t) \colon t < X(\omega) \}$. Da Indikatorfunktionen messbar sind genau dann, wenn die dazugeh\"orige Indikatormenge messbar ist, m\"ussen wir $A\in \cA_1 \otimes \cA_2$ zeigen. Das zeigen wir genau wie im Beweis der Messbarkeit der Summe von messbaren Abbildungen:
+		\begin{gather*}
+			A = \{ (\omega,t) \colon t < X(\omega) \} =  \bigcup_{s \in \Q} \{ (\omega,t)\colon t < s \} \cap \{ (\omega,t) \colon t < X(\omega) \} \in \cA_1 \otimes \cA_2.
+		\end{gather*}
+	\end{enumerate}
+\end{beispiel}
+
+\begin{satz}[Fubini für reellwertige Funktionen]\label{fubini}
+\end{satz}
+
+\chapter{Stochastik}
+
+
+
+\section{Zufallsvektoren}
+Nach dem vorgezogenen Kapitel \"uber Zufallsvariablen, geht nun die Stochastik weiter. Das ultimative Ziel ist es, \"uber von Zufallsvariablen $X_1, X_2, ...$ und ihrer Grenzwerte zu sprechen. Dazu diskutieren wir zun\"achst endlich viele Zufallsvariablen $X_1, ..., X_d$ oder, was \"aquivalent ist, Zufallsvektoren $X=(X_1,...,X_d)$. Das Vorgehen ist genau wie f\"ur reelle (eindimensionale) Zufallsvariablen: 
+\begin{itemize}
+	\item Lege $\sigma$-Algebra auf $\R^d$ fest und zeige wichtige Eigenschaften f\"ur sp\"ater.
+	\item Charakterisiere Maße auf $\R^d$ durch Verteilungsfunktionen.
+	\item Definiere Zufallsvektoren als messbare Abbildungen und verbinde diese zu Ma\ss en und Verteilungsfunktionen. 
+	\item Definiere Erwartungswert und zeige Rechnenregeln f\"ur diskrete und absolutstetige Zufallsvektoren.
+	\item Rechnen, rechnen, rechnen.
+\end{itemize}
+
+\subsection*{$\sigma$-Algebra auf $\R^d$}
+
+\begin{deff}
+	Wir w\"ahlen die Produkt-$\sigma$-Algebra auf dem $\R^d$, die aus $d$ Kopien der Borel-$\sigma$-Algebra besteht:
+	\[ \cB(\R^d) := \underbrace{\cB(\R) \otimes ... \otimes \cB(\R)}_{d\text{-viele}} \overset{\text{Def.}}{=} \sigma(\{ B_1 \times ... \times B_d \colon B_i \in \cB(\R) \}) \]
+\end{deff}
+Wir hatten im ersten Kapitel schon erw\"ahnt, dass die Definition der Borel-$\sigma$-Algebra als kleinste $\sigma$-Algebra erzeugt durch offene Mengen auch im $\R^d$ funktioniert. Das ist in der Tat das selbe wie die gerade definierte Produkt-$\sigma$-Algebra $\mathcal B(\R^d)$. 
+\begin{lemma}
+	Es gilt 
+	\begin{align*}
+		\cB(\R^d) &= \sigma(\{ O \subseteq \R^d\colon O \text{ offen} \})\\
+		& = \sigma(\{ (-\infty,t_1] \times ... \times (-\infty,t_1] \colon t_i \in \R \})\\
+		& = \sigma(\{ (a_1,b_1]\times ... \times (a_d,b_d] \colon a_i,b_i \in \R \})\\
+		& = \sigma(\{ (a_1,b_1) \times ... \times (a_d,b_d) \colon a_i,b_i \in \R \})\\
+		&=...,
+	\end{align*}
+	wobei ... bedeutet, dass ihr wie f\"ur $d=1$ alle vorstellbaren Kombinationen von Intervallen nutzen k\"onnt.	
+\end{lemma}
+
+\begin{proof}
+	Übungsaufgabe.
+\end{proof}
+Eine direkte Anwendung ist, wie f\"ur $d=1$ die Messbarkeit stetiger Abbildungen. Das ist gerade f\"ur Fubini n\"utzlich, wie folgendes Beispiel zeigt:
+\begin{anwendung}
+	Jede stetige Abbildung $f\colon \R^d \to \R$ ist $(\cB(\R^d), \cB(\R))$-messbar, weil nach Satz \ref{S2} Messbarkeit nur auf dem Erzeuger getestet werden muss und Urbilder offener Mengen offen sind. Rechnen wir mit Fubini mal ein zwei-dimensionales Integral aus. Wie schon vorher bemerkt, muss daf\"ur zum einen Rechnen, zum anderen aber die Messbarkeit bez\"ublich der Produkt-$\sigma$-Algebra des Integranden zeigen. Rechnen wir zun\"achst und begr\"unden die Messbarkeit danach:
+	\begin{align*}
+		\int_{[0,1] \times [0,1]} x_1 x_2 \dint (x_1,x_2) &= \int_{\R \times \R} \mathbf{1}_{[0,1] \times [0,1]}(x_1,x_2) x_1x_2 \dint (x_1,x_2)\\ 
+		&\overset{\text{\ref{fubini}}}{=} \int_{\R}\Big( \int_{\R} \mathbf{1}_{[0,1]}(x_1) \mathbf{1}_{[0,1]}(x_2) x_1 x_2 \dint x_1\Big) \dint x_2\\
+		& = \int_{\R} x_2 \mathbf{1}_{[0,1]}(x_2) \Big(\int_{\R} \mathbf{1}_{[0,1]}(x_1) x_1 \dint x_1\Big) \dint x_2\\
+		& \overset{\text{Lin.}}{=} \int_0^1 x_1 \dint x_1\int_0^1 x_2  \dint x_2 = \frac{1}{4}.
+	\end{align*}
+	Warum ist $f(x_1,x_2)=\mathbf{1}_{[0,1] \times [0,1]}(x_1,x_2) x_1x_2$ als Abbildung von $\R^2$ nach $\R$ $(\cB(\R^d), \cB(\R))$-messbar? Zum einen ist $(x_1,x_2)\mapsto x_1x_2$ stetig und damit messbar. Zum anderen ist $(x_1,x_2)\mapsto \mathbf{1}_{[0,1] \times [0,1]}(x_1,x_2)$ messbar weil das Quadrat in $\mathcal B(\R^d)$ ist. Da Produkte messbarer Abbildungen wieder messbar sind, ist auch $f$ messbar. Also durfte Satz \ref{fubini} auch benutzt werden! Hier zeigt sich wieder die ganze Macht des Integrationsansatzes in der Stochastik 1 im Vergleich zur Analysis 2: Alle \"ublichen Kombinationen (Summen, Produkte, Max, Min, etc.) von messbaren Abbildungen sind wieder messbar, wir k\"onnen also ohne weiteres die Messbarkeit des Integranden pr\"ufen.
+\end{anwendung}
+
+\subsection*{Maße und Verteilungsfunktionen auf $(\R^d, \mathcal B(\R^d))$}
+Wie f\"ur $d=1$ definieren wir f\"ur Ma\ss e auf $(\R^d, \mathcal B(\R^d))$ Verteilungsfunktionen, der Unterschied ist nur die Anzahl der Variablen, $d$ statt einer:
+\begin{deff}
+	Ist $\mathbb{P}$ ein Wahrscheinlichkeitsmaß auf $ (\R^d,\cB(\R^d)) $, so heißt $$F_{\mathbb{P}}(t_1,...,t_d) = \mathbb{P}((-\infty, t_1] \times \dots \times (-\infty, t_d]),\quad t_1,...,t_d\in\R,$$ \textbf{(multivariate) Verteilungsfunktion} von $\mathbb{P}$.
+\end{deff}
+F\"ur die Vorstellung nehmen wir immer den Fall $d=2$. Dann ist $F(t_1,t_2)$ gerade das Ma\ss{} des \enquote{unendlichen Rechtecks unten links} unter dem Punkt $(t_1,t_2)$, also das Ma\ss{} von $(\infty, t_1]\times (-\infty,t_2].$\smallskip
+
+Wie f\"ur $d=1$ (nichtfallend, rechtsstetig, Grenzwerte $1$ und $0$ bei unendlich) k\"onnen wir aus den Eigenschaften des Ma\ss es Eigenschaften der Verteilungsfunktion ableiten:
+\begin{prop}\label{p9}
+	Ist $F$ Verteilungsfunktion eines Wahrscheinlichkeitsmaßes auf $\cB(\R)$, so gelten
+	\begin{enumerate}[label=(\roman*)]
+	\item $F:\R^d\to [0,1]$
+	\item $F$ konvergiert gegen $0$, wenn eine Koordinate nach $-\infty$ l\"auft:
+	\[ \lim\limits_{t_1 \to -\infty} F(t_1,...,t_d) = ... = \lim\limits_{t_d \to -\infty} F(t_1,...,t_d) = 0. \]
+	\item $F$ konvergiert gegen $1$, wenn alle Koordinaten gemeinsam nach $+\infty$ laufen: 
+	 \[ \lim\limits_{t_i \to -\infty, i=1,...,d} F(t) = 1. \]
+	\item $F$ ist \textbf{rechtsstetig} in jeder Koordinate.
+	\item $F$ ist \textbf{rechtecksmonoton}, \mbox{d. h.} für alle $a^1, a^2\in \R^d$ mit $a^1 \leq a^2$ (\mbox{d. h.} $a_1^1 \leq a_1^2,..., a_1^d \leq a_1^d$) gilt \[ \Delta_{a_1}^{a_2}F := \sum\limits_{i_1,...,i_d \in \{ 1,2 \}} (-1)^{i_1+...+i_d} F(a_1^{i_1},...,a_d^{i_d}) \geq 0. \]
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	Sei $\mathbb P$ ein Wahrscheinlichkeitsma\ss{} auf $(\R^d, \mathcal B(\R^d))$ und $F=F_{\mathbb P}$ die zugeh\"orige Verteilungsfunktion. Die erste Eigenschaften von $F$ ist klar, die weiteren drei Eigenschaften folgen aus der Stetigkeit von Maßen, genau wie f\"ur $d=1$. Interessanter ist die Rechtecksmonotonie, die wir uns nur f\"ur $d=1$ und $d=2$ veranschaulichen. \smallskip
+	
+	$d = 1$: Einsetzen gibt hier $F(a^2) - F(a^1) \geq 0$ f\"ur $a^2\geq a^1$, und das ist gerade die Monotonie, die wir f\"ur schon kennen aus der Diskussion von Verteilungsfunktionen in einer Variablen.\smallskip
+	
+	$d = 2$: Einsetzen in die Formel (es gibt $2^d=4$ Summanden) ergibt $$F(a_1^2,a_2^2) - F(a_1^2,a_2^1) - F(a_1^1,a_2^2) +  F(a_1^1,a_2^1) \geq 0.$$ Doch was soll das bedeuten? Dazu ist zu beachten, dass die zwei Punkte $a_1\leq a_2$ ein Rechteck $R$ \enquote{aufspannen}. Die Eckpunkte von $R$ sind gerade (siehe Bildchen)
+	\begin{itemize}
+	\item $(a_1^1,a_2^1)$, unten links
+	\item $(a_1^2,a_2^1)$, unten rechts
+	\item $(a_1^2,a_2^2)$, oben rechts
+	\item $(a^1_1,a_2^2)$, oben links
+\end{itemize}	
+	 Weil $\mathbb P$ ein Ma\ss{} ist, gilt $\mathbb P(R)\geq 0$. Jetzt schreiben wir durch Zerlegung von $R$ in \enquote{unendliche Rechtecke unten links}, unter Ber\"ucksichtigung der $\sigma$-Additivit\"at von $\mathbb P$, $\mathbb P(R)$ als 
+	\begin{align*}
+		\mathbb P(R)&=\mathbb P((-\infty,a_1^2]\times (-\infty, a_2^2])-\mathbb P((-\infty,a_1^1]\times (-\infty, a_2^2])\\
+		&\quad-\mathbb P((-\infty,a_1^2]\times (-\infty, a_2^1])+\mathbb P((-\infty,a_1^1]\times (-\infty, a_2^1])\\
+		&\overset{\text{Def. }F}{=}F(a_1^2,a_2^2) - F(a_1^2,a_2^1) - F(a_1^1,a_2^2) +  F(a_1^1,a_2^1).
+	\end{align*}
+	Die Bedingung $\Delta_{a_1}^{a_2}F\geq 0$ gilt also weil $\Delta_{a_1}^{a_2}F$ nur ein komplizierter Ausdruck f\"ur die Wahrscheinlichkeit des von $a^1$ und $a^2$ aufgespannten Rechtecks ist!	
+	%\begin{center}	
+	%	\begin{tikzpicture}[]
+	%	\begin{axis}[
+	%	y = 2cm,
+	%	axis lines=middle,
+	%	axis line style={-Stealth,thick},
+	%	xmin=-1.25,xmax=1.25,ymin=-1.25,ymax=1.25,
+	%	xtick={},
+	%	ytick={},
+	%	\addplot [only marks] coordinates{(1,1) (-1,-1), (-1,1) (1,-1)};
+	%	\end{axis}
+	%	\end{tikzpicture}
+	%\end{center}
+\end{proof}

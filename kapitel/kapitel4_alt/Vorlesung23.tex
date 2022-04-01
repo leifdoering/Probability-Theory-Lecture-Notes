@@ -1,0 +1,139 @@
+\marginpar{\textcolor{red}{Vorlesung 23}}
+
+\section{Bedingte Wahrscheinlichkeiten und Unabhängigkeit}\label{Sunab}
+Wir kommen nun zu bedingten Wahrscheinlichkeiten, die aus der Schule vielleicht bekannt sind. In dieser Vorlesung spielen bedingte Wahrscheinlichkeiten noch keine zentrale Rolle, das \"andert sich in sp\"ateren Vorlesungen sehr, wenn zum Beispiel Markovketten angeschaut werden.
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb P)$ ein Wahrscheinlichkeitsraum und $B \in \cA$ mit $ \mathbb P(A)> 0$. Dann heißt \[ \mathbb{P}(A|B) := \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}, \quad A \in \cA, \]
+	\enquote{\textbf{bedingte Wahrscheinlichkeit von $A$ gegeben $B$}}.	
+\end{deff}
+
+\begin{lemma}
+	Für $ B \in \cA$ mit $ \mathbb{P}(B)> 0$ ist $ A \mapsto \mathbb{P}(A|B) =: \mathbb{P}_B(A)$ ein Maß auf $(\Omega, \cA)$.
+\end{lemma}
+
+\begin{proof}
+	Wir rechnen die definierenden Eigenschaften eines Ma\ss es nach:
+	\begin{itemize}
+		\item $\mathbb P_B(A) \geq 0$ f\"ur alle $A\in \mathcal A$ ist klar, weil $\mathbb P$ ein Ma\ss{} ist.
+		\item Weil $\mathbb P$ ein Ma\ss{} ist, gilt auch 
+		\[ \mathbb{P}_B(\emptyset) = \mathbb{P}(\emptyset|B) = \frac{\mathbb{P}(\emptyset \cap B)}{\mathbb{P}(P)} = 0. \]
+		\item $\sigma$-Additivität: Seien $A_1,A_2,... \in \cA$ disjunkt, so gilt wegen der $\sigma$-Additivit\"at von $\mathbb P$
+		\begin{align*}
+			\mathbb{P}_B\Big(\bigcupdot_{k=1}^{\infty} A_k \Big)& \overset{\text{Def.}}{=} \frac{\mathbb{P}\Big(\bigcupdot_{k=1}^{\infty} A_k \cap B\Big)}{\mathbb{P}(B)}\\
+			&= \frac{\mathbb{P}\Big(\bigcupdot_{k=1}^{\infty} (A_k \cap B) \Big)}{\mathbb{P}(B)} \\
+			&\overset{\sigma\text{-Add. }\mathbb{P}}{=} \frac{\sum\limits_{k=1}^{\infty} \mathbb{P}(A_k \cap B)}{\mathbb{P}(B)}\\
+			& = \sum\limits_{k=1}^{\infty} \mathbb{P}_B(A_k).
+		\end{align*}
+	\end{itemize}
+\end{proof}
+Wir kommen nun zu extrem wichtigen Rechenregeln, obwohl diese ganz einfach aus der Definition folgen:
+\begin{satz}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{multipl} \textbf{Multiplikationsregel}: Für $A_1,...,A_n\in \mathcal A$ mit $\mathbb{P}(\bigcap_{k=1}^{n} A_k) > 0$ gilt
+		\[ \mathbb{P}\Big(\bigcap_{k=1}^{n} A_k\Big) = \mathbb{P}(A_1)\cdot \mathbb{P}(A_2|A_1)\cdot ... \cdot \mathbb{P}\Big(A_n\Big|\bigcap_{k=1}^{n-1} A_k\Big). \]
+		\item \label{totWk} \textbf{Formel der totalen Wahrscheinlichkeit}: Ist $B_1,...,B_n$ eine disjunkte Zerlegung von $\Omega$, \mbox{d. h.}  $\bigcupdot_{k=1}^{n} B_k = \Omega$, mit $\mathbb P(B_k)>0$ f\"ur alle $k=1,...,n$, so gilt 
+		\[ \mathbb{P}(A) = \sum\limits_{k=1}^{n} \mathbb{P}(B_k)\mathbb{P}(A|B_k), \quad \forall A \in \cA. \]
+		\item \label{bayes} \textbf{Bayes-Formel}: Mit $B_1,...,B_n$ aus \ref{totWk} gilt für $A \in \cA$ mit $\mathbb{P}(A) > 0$ \[ \mathbb{P}(B|A) = \frac{\mathbb{P}(A|B) \cdot \mathbb{P}(B)}{\mathbb{P}(A)} \] oder \[ \mathbb{P}(B|A) = \frac{\mathbb{P}(A|B) \cdot \mathbb{P}(B)}{\sum\limits_{k=1}^{n} \mathbb{P}(B_k) \mathbb{P}(A | B_k)}. \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	\begin{enumerate}[label=(\roman*)]
+		\item Induktion über $n$:
+		\begin{itemize}
+			\item[IA:] $n=2$ folgt direkt aus der Definition.
+			\item[IV:] \label{IVmult} Die Behauptung gelte für ein \textit{beliebiges}, aber festes $n \in \N$.
+			\item[IS:] Wenn wir nun die Induktionsvoraussetzung und den Fall $n=2$ nutzen, bekommen wir 
+			\begin{align*}
+				\mathbb{P}\Big(\bigcap_{k=1}^{n+1} A_k\Big) &= \mathbb{P}\Big( A_{n+1} \cap \bigcap_{k=1}^{n} A_k\Big)\\
+				& = \mathbb{P}\Big(\bigcap_{k=1}^{n} A_k\Big) \mathbb{P}\Big(A_{n+1}\Big |\bigcap_{k=1}^{n} A_k\Big)\\
+				& \overset{\text{IV}}{=} \mathbb{P}(A_1)\cdot \mathbb{P}(A_2|A_1)\cdot ... \cdot \mathbb{P}\Big(A_{n+1}\Big|\bigcap_{k=1}^{n} A_k\Big)
+			\end{align*}
+			und das ist gerade die Aussage.
+		\end{itemize}
+		\item 
+		Zun\"achst folgt direkt aus der Definition
+		\begin{align*}
+			\mathbb{P}(B_i)\mathbb{P}(A|B_i) = \mathbb{P}(B_i) \frac{\mathbb{P}(A \cap B_i)}{\mathbb{P}(B_i)} = \mathbb{P}(A \cap B_i).
+		\end{align*}
+		Setzen wir dies in die Definition ein, bekommen wir 
+		\begin{align*}
+			\mathbb{P}(A) = \mathbb{P}(A \cap \Omega) = \mathbb{P}\Big(A \cap \bigcupdot_{k=1}^{n} B_k\Big) = \mathbb{P}\Big(\bigcupdot_{k=1}^{n} (A \cap B_k)\Big)
+			\overset{\sigma\text{-Add.}}{=} \sum\limits_{k=1}^{n} \mathbb{P}(A \cap B_k).
+		\end{align*}
+		Einsetzen des ersten Schritts gibt die Aussage.
+		\item Die einfache Bayes Formel folgt direkt durch Einsetzen der Definition:		
+		\[ \mathbb{P}(B|A) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)} = \frac{\mathbb{P}(A \cap B) \mathbb{P}(B)}{\mathbb{P}(B) \cdot \mathbb{P}(A)} =\frac{\mathbb{P}(A|B) \cdot \mathbb{P}(B)}{\mathbb{P}(A)} \]
+		Die zweite Formel folgt aus der ersten Formel durch Ersetzen des Nenners durch die Formel der totalen Wahrscheinlichkeit. 
+	\end{enumerate}
+\end{proof}
+Kommen wir nun zu zwei klassischen Anwendungen. Hier ist allerdings Vorsichtig angesagt, das ist alles etwas wild (funktioniert aber). Gem\"a\ss{} Definition brauchen wir f\"ur bedingte Wahrscheinlichkeiten einen Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$. In vielen Anwendungen au\ss erhalb der Mathematik werden die Formeln auch genutzt, allerdings ohne einen Wahrscheinlichkeitsraum hinzuschreiben. Nennen wir das vielleicht \enquote{heuristischen Gebrauch von Wahrscheinlichkeiten}. Das ist nat\"urlich nicht sehr sch\"on, allerdings solche Aussagen extrem wichtig. 
+
+\begin{beispiel}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Wir ziehen aus vier blauen und drei weißen Kugeln zweimal ohne Zurücklegen. Was ist die Wahrscheinlichkeit, zwei blaue zu ziehen? Machen wir das ganze zun\"achst \enquote{heuristisch}. Das ist ein zweistufiges Experiment. Im ersten Versuch ziehen wir blau mit Wahrscheinlichkeit $\frac{4}{7}$. Mit dem Wissen im ersten Zug blau gezogen zu haben, ist das \enquote{bedingte Ziehen} im zweiten Schritt ein Ziehen aus drei blauen und drei wei\ss en Kugeln. Die bedingte Wahrscheinlichkeit im zweiten Schritt blau zu ziehen, gegeben das erste Ziehen gab eine blaue Kugel, ist also $\frac{3}{6}$. Mit der Multiplikationsregel folgt
+		\begin{align*} 
+		&\quad \mathbb{P}(\text{zweite Kugel blau}) \\
+		&= \mathbb{P}(\text{erste Kugel blau}) \cdot \mathbb{P}(\text{zweite Kugel blau} \: | \: \text{erste Kugel blau})\\
+		& = \frac{4}{7}\cdot \frac{3}{6} = \frac{2}{7}.
+		\end{align*}
+		Das funktioniert ganz entspannt, ist aber schon etwas kritisch. Wir nutzen hier ganz intuitiv den Begriff der bedingten Wahrscheinlichkeit in einem interpretierten Sinn (\"Anderung des Modells, eine Kugel weniger). Dann haben die Multiplikationsregel genutzt, die aufgrund unseres Beweises und damit aufgrund der mathematischen Definition der bedingten Wahrscheinlichkeit stimmt. Nun ist allerdings nicht so ganz klar, warum der intuitive Begriff der bedingten Wahrscheinlichkeit (ge\"andertes Experiment) mit der mathematischen Definition $\mathbb P(A\,|\,B):=\frac{\mathbb P(A\cap B)}{\mathbb P(B)}$ \"uberhaupt etwas zu tun hat. Machen wir das ganze zur Beruhigung also nochmal mathematisch penibel genau. Schreiben wir zun\"achst ein Modell hin, das wir als Modell f\"ur das zweifache W\"urfeln plausibel finden. Dazu sei
+		$$\Omega = \{ (\omega_1,\omega_2)\colon \omega_1, \omega_2 \in \{ \text{blau, weiß} \} \}$$
+		und $\cA = \cP(\Omega)$. Als Wahrscheinlichkeiten definieren wir
+		\[ \mathbb{P}(\{ \omega_1, \omega_2 \}) = \begin{cases}
+		\frac{4}{7} \cdot \frac{3}{6}&: \omega_1 = \omega_2 = \text{blau}\\
+		\frac{3}{7} \cdot \frac{2}{6}&: \omega_1 = \omega_2 = \text{weiß}\\
+		\frac{4}{7} \cdot \frac{3}{6}&: \omega_1 = \text{blau}, \: \omega_2 = \text{weiß}\\		
+		\frac{4}{7} \cdot \frac{4}{6}&: \omega_1 = \text{weiß}, \: \omega_2 = \text{blau}\\
+		\end{cases}. \]
+		Mit den Ereignissen 		
+		$A = \{ (\omega_1, \omega_2)\colon \omega_1 = \text{blau} \}$, $B = \{ (\omega_1, \omega_2)\colon \omega_2 = \text{blau} \}$
+		wollen wir die Wahrscheinlichkeit von $A\cap B$ bestimmen. Mit der Multiplikationsregel folgt
+		\begin{align*}
+			\mathbb{P}(\text{ziehe zweimal blau}) = \mathbb{P}(A \cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B|A) =  \frac{4}{7} \cdot \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)} = \frac{2}{7}.
+		\end{align*}
+		Das macht nat\"urlich auch wieder nicht so richtig viel Sinn, wir h\"atten die Wahrscheinlichkeit von $A\cap B$ auch ohne die Multiplikationsregel \enquote{ausz\"ahlen} k\"onnen. Dennoch ist das vielleicht eine gute Beruhigung: Wenn wir wollen, k\"onnen wir ein rigoroses Modell hinschreiben, in dem die Multiplikationsformel rigoros gemacht werden kann. F\"ur die Schulanwendungen ist das nat\"urlich viel zu kompliziert.		
+		\item Nun ein Beispiel f\"ur die Bayes Formel, ein medizinischer Test, \mbox{z. B.} ein Aidstest. Wir machen das jetzt wieder in der \enquote{heuristischen} Art, wer will, kann sich wieder ein sauberes Modell definieren. Wir nehmen an, dass die Wahrscheinlichkeiten folgender Ereignisse bekannt sind:
+		\begin{itemize}
+			\item Test ist mit $98\%$ positiv, wenn eine Person krank ist, das nennt man false-negative.
+			\item Test ist mit $5\%$ positiv, wenn eine Person nicht krank ist.
+			\item $1\%$ der Bevölkerung ist krank.
+		\end{itemize}
+		Gesucht ist die Wahrscheinlichkeit gesund zu sein, obwohl der Test positiv ist, das nennt man false-positive. Mit \ref{bayes} gilt. Die Wahrscheinlichkeit von false-negative kann mit der Bayes Formel aus false-positive und dem restlichen Wissen berechnet werden:
+		\begin{align*}
+			&\quad \mathbb{P}(\text{krank} \: | \: \text{Test positiv})\\
+			 &= \mathbb{P}(\text{Test positiv} \: | \: \text{krank}) \cdot \frac{\mathbb{P}(\text{krank})}{\mathbb{P}(\text{Test positiv})}\\
+			&=	\frac{\mathbb{P}(\text{Test positiv} \: | \: \text{krank}) \mathbb{P}(\text{krank})}{\mathbb{P}(\text{Test positiv} \: | \: \text{krank})\mathbb{P}(\text{krank}) + \mathbb{P}(\text{Test positiv} \: | \: \text{gesund})\mathbb{P}(\text{gesund})}\\
+			&= \frac{0,98 \cdot 0,01}{0,98 \cdot 0,01 + 0,05 \cdot 0,99} \\
+			&= 0,165.
+		\end{align*}
+		Das ergibt dann
+		\begin{align*}
+			\mathbb{P}(\text{gesund} \: | \: \text{Test positiv}) = 1 - 0,165 = 0,835,
+		\end{align*}
+		was erschreckend hoch ist! Die wichtige take-home message ist also: Wird etwas sehr unwahrscheinliches getestet, dominiert der false-negative und man muss bei positiven Tests umbedingt weitere Tests machen. Ein weiteres sehr wichtiges Beispiel sind pr\"anatale Tests bei ungeborenen Kindern, z. B. Tests auf Trisomie 21.
+	\end{enumerate}
+\end{beispiel}
+
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A,B \in \cA$. Die Ereignisse $A$ und $B$ heißen \textbf{unabhängig}, falls $\mathbb{P}(A \cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$.
+\end{deff}
+Aufgrund der Definition der bedingten Wahrscheinlichkeit sind, sofern $\mathbb P(B)>0$ gilt, $A$ und $B$ unabh\"angig genau dann, wenn $\mathbb P(A|B)=P(A)$. Das passt also zur Begriffsbildung: Zwei Ereignisse sind genau dann unabh\"angig, falls die Wahrscheinlichkeit des einen sich nicht \"andert, wenn das Eintreten des anderen gegeben ist. Beispielsweise w\"aren die Ereignisse \enquote{Meine Kaffeemaschiene geht morgen kaputt} und \enquote{Es regnet morgen in Thailand} vermutlich unabh\"angig. 
+
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum, $A_i \in \cA$, $i \in I$, und $I$ eine beliebige Indexmenge.
+	\begin{enumerate}[label=(\roman*)]
+		\item Die Ereignisse ${(A_i)}_{i\in I}$ heißen \textbf{unabhängig}, falls 
+		\[ \mathbb{P}\Big(\bigcap_{i \in J} A_i \Big) = \prod\limits_{i \in J} \mathbb{P}(A_i),\quad \forall J \subseteq I \text{ mit }  \# J<\infty. \]
+		\item Die Ereignisse ${(A_i)}_{i\in I}$ heißen \textbf{paarweise unabhängig}, falls 
+		$$\mathbb{P}(A_i \cap A_j) = \mathbb{P}(A_i) \cdot \mathbb{P}(A_j), \quad \forall i,j \in I.$$
+	\end{enumerate}
+\end{deff}
+Selbstverst\"andlich impliziert Unabh\"angikgkeit die paarweise Unabh\"angigkeit, statt aller endlicher Teilmengen $J$ von $I$ werden schlie\ss lich nur alle Teilmengen mit $\# J=2$ gew\"ahlt. Die Umkehrung gilt nicht:
+\begin{warnung}
+	Paarweise Unabhängigkeit impliziert im Allgemeinen nicht Unabhängigkeit. Kleine Mengen reichen schon aus, um Gegenbeispiel anzugeben, siehe \"Ubungsblatt.
+\end{warnung}
+
+\begin{deff}\label{Ka}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und ${(\cE_i)}_{i \in I}$ ein System von Teilmengen $\cE_i \subseteq \cA$ der $\sigma$-Algebra f\"ur eine beliebige Indexmenge $I$. Dann heißen die $(\cE_i)_{i\in I}$ unabhängig, falls die Mengen ${(A_i)}_{i \in I}$ unabhängig sind, und zwar f\"ur alle Wahlen $A_i \in \cE_i$.
+\end{deff}

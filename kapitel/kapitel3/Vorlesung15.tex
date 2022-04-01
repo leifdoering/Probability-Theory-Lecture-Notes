@@ -1,0 +1,128 @@
+\marginpar{\textcolor{red}{Vorlesung 15}}
+
+\begin{bem1}
+	Die Notation $\mathbb{E}[g(X)]$ ist etwas unglücklich weil das Integral nicht nur $g$ und $X$ abh\"angt, sondern auch von $\mathbb P$. Daher sollte man eher  $\mathbb{E}_{\mathbb{P}}[g(X)]$ schreiben, man l\"asst aber meisten das $\mathbb{P}$ aus Faulheit weg.
+\end{bem1}
+
+\begin{lemma}\label{ewTrafo}
+	Ist die Zufallsvariable $X$ gem\"a\ss{} $F$ verteilt, d. h. $X\sim F$, so gilt unabhängig von dem Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ auf dem $X$ definiert ist,
+	\[ \mathbb{E}[g(X)] = \int_{\R} g(x) \dint \mathbb{P}_F(x) \]
+	für messbare numerische Abbildungen $g \colon \R \to \overline{\R}$. Wie immer gilt die Gleichheit, wenn eine Seite (und damit die die andere Seite) wohldefiniert ist.
+\end{lemma}
+
+\begin{proof}
+	Mit dem Transformationssatz \ref{trafo} gilt in einem Schaubild 
+\begin{center}		
+	\begin{tikzcd}
+		{}&{}&{}\\
+		(\Omega, \mathbb P) \arrow[r, "{X}"] \arrow[rd, "{g \circ X}"']
+		& (\R, \mathbb P_X) \arrow[d, "{g}"] \arrow[ur, phantom, "", near start] \\
+		& \overline{\R}\\
+	\end{tikzcd}
+\end{center}
+wobei $\mathbb P_X$ der push-forward von $X$ ist. Weil definitionsgem\"a\ss{} $\mathbb P_X=\mathbb P_F$ ist, gibt das sauber ausgeschrieben
+\begin{align*}
+	\E[g(X)] &\overset{\text{Def.}}{=} \int_{\Omega} g(X(\omega)) \dint \mathbb{P}(\omega)
+	 \overset{\text{\ref{trafo}}}{=} \int_{\R} g(x) \dint \mathbb{P}_X(x)
+	 \overset{\mathbb P_X=\mathbb P_F}{=} \int_{\R} g(x) \dint \mathbb{P}_F(x).
+\end{align*}
+\end{proof}
+Die Konsequenz ist nat\"urlich, dass f\"ur beliebiges $g$, $\E[g(X)]$ gar nicht von dem kompletten Modell $(\Omega, \mathcal A, \mathbb P,X)$ abh\"angt, $\E[g(X)]$ h\"angt einfach nur von der Verteilung von $X$ ab. Das ist der Grund, warum man sich \"ublicherweise nur f\"ur die Verteilung von $X$, jedoch nicht f\"ur $(\Omega, \mathcal A, \mathbb P)$ interessiert. Fassen wir die Beobachtung zusammen:
+\begin{bem1}
+	Sind $X, Y$ identisch verteilte Zufallsvariablen, die auf irgendwelchen Wahrscheinlichkeitsräumen definiert sind, so gilt
+		\[ \mathbb{E}[g(X)] = \mathbb{E}[g(Y)] \] für alle $g \colon \R \to \overline{\R}$ messbar.
+\end{bem1}
+Jetzt wissen wir auch schon, wie wir $\E[g(X)]$ berechnen k\"onnen, das haben wir n\"amlich schon gemacht:
+\begin{satz}[Berechnungsregeln]\label{regeln}
+	Sei $X$ eine Zufallsvariable auf einem Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$.
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{(i)} Ist $X$ absolutstetig mit Dichte $f$, so gilt \[ \mathbb{E}[g(X)] = \int_{\R} g(x) f(x) \dint x. \]
+		\item\label{ii} Ist $X$ diskret und nimmt die Werte $a_1, ..., a_N\in\R$ mit Wahrscheinlichkeiten $p_1, ..., p_N$ an, so gilt
+		 \[ \mathbb{E}[g(X)] = \sum\limits_{k=1}^{N} p_k\, g(a_k)=  \sum\limits_{k=1}^{N}  \mathbb{P}(X=a_k)g(a_k). \]
+	\end{enumerate}
+\end{satz}
+\begin{proof}
+	Dazu kombinieren wir nur die Formel aus Satz	\ref{ewTrafo} mit den Formeln aus Satz \ref{IntDichten} und Satz \ref{IntDiskr}.
+\end{proof}
+
+\begin{beispiel}\abs
+	\begin{itemize}
+		\item F\"ur $X \sim \cN(\mu, \sigma^2)$ gilt $ \mathbb{E}[X] = \int_{\R} x \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2 \sigma^2}}\dint x = \mu$.
+		\item F\"ur $X \sim \operatorname{Ber}(p)$ gilt $ \mathbb{E}[X] = 1 \cdot \mathbb{P}(X = 1) + 0 \cdot \mathbb{P}(X = 0) = p$.
+		\item F\"ur $X \sim \operatorname{Poi}(\lambda)$ gilt $ \mathbb{E}[X] = \sum_{k = 0}^{\infty} k \cdot \mathbb{P}(X = k) = \sum_{k = 0}^{\infty} k e^{-\lambda} \frac{\lambda^k}{k!} = \lambda$.
+	\end{itemize}
+	Wir sehen also: Ein gro\ss er Teil der Stochastik besteht aus dem Berechnen von Integralen und Summen bzw. Reihen.
+\end{beispiel}
+
+
+
+
+\begin{prop}[Rechenregeln f\"ur den Erwartungswert]\label{rechenregeln}
+	Seien $X,Y$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ mit $\mathbb{E}[|X|],\mathbb{E}[|Y|] < \infty$, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mathbb{E}[\alpha X + \beta Y] = \alpha \mathbb{E}[X] + \beta \mathbb{E}[Y]$
+		\item $X \geq 0$ $\mathbb P$-f.s. $\Rightarrow \mathbb{E}[X] \geq 0$ und  $X \geq Y$ $\mathbb P$-f.s. $\Rightarrow \mathbb{E}[X] \geq \mathbb{E}[Y]$
+		\item Ist $X = \alpha$  $\mathbb{P}$-f.s., d. h. $\mathbb P(X=\alpha)=1$, so ist $\mathbb{E}[X] = a$.
+		\item $\mathbb{P}(X \in A) = \mathbb{E}[\mathbf{1}_A(X)]$
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	Wir m\"ussen nur beachten, dass Erwartungswerte per Definition Integrale sind. Dann k\"onnen wir die Rechenregeln f\"ur Integrale direkt anwerden. Zu beachten ist, dass wegen Satz \ref{S7} \"Anderungen auf Nullmengen Integrale nicht \"andern.
+	\begin{enumerate}[label=(\roman*)]
+	\item Linearität von Integralen
+	\item Monotonie von Integralen (die Nullmengen spielen keine Rolle)
+	\item Nach Annahme gilt $X = \alpha \mathbf{1}_{\Omega}$ $\mathbb{P}$-f.s. Wegen Satz \ref{S7} k\"onnen wir sofort die Definition des Integrals einsetzen:
+	\[ \mathbb{E}[X] = \int_{\Omega} X(\omega) \dint \mathbb{P}(\omega) = \int_{\Omega} \underbrace{\alpha \mathbf{1}_{\Omega}}_{\text{einfach}} \dint \mathbb{P} \overset{\text{Def.}}{=} \alpha \mathbb{P}(\Omega) = \alpha  \]
+	\item Hier m\"ussen wir nur die Definitionen im Kopf klar bekommen:
+	\begin{gather*}
+		\mathbb{E}[\mathbf{1}_A(X)] = \int_{\Omega} \mathbf{1}_A(X(\omega)) \dint \mathbb{P}(\omega) \overset{\text{Trafo}}{=} \int_{\R} \underbrace{\mathbf{1}_A(x)}_{\text{einfach}} \dint \mathbb{P}_X(x) = \mathbb{P}_X(A) \overset{\text{Def.}}{=} \mathbb{P}(X \in A)
+	\end{gather*}
+\end{enumerate}
+\end{proof}
+Nat\"urlich ist eine Zufallsvariable, die fast sicher den selben Wert annimmt, gar keine interessante Zufallsvariable! Das modellierte Zufallsexperiment ist gar nicht zuf\"allig, es passiert immer das gleiche! Beispiel: Jeden Tag um 7 Uhr wird die Zeit (Stunde) angeschaut. Es kommt immer $7$ dabei raus, die beschreibende Zufallsvariable erf\"ullt also $\mathbb P(X=7)=1$. Viel interessanter w\"are zum Beispiel, jeden Tag um 7 Uhr die Temperatur zu messen. Die entsprechende Zufallsvariable w\"are nicht fast sicher konstant.
+\begin{korollar}[Rechenregeln f\"ur die Varianz]\label{vari}
+	Sei $X$ eine Zufallsvariable mit $ \mathbb{E}[X^2] < \infty$, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item Es gilt $ \mathbb{V}(X) < \infty$ und \[ \mathbb{V}(X) = \mathbb{E}[X^2] - \mathbb{E}[X]^2. \]
+		\item	Es gilt $ \mathbb{V}(X) = 0$ genau dann, wenn $X$ fast sicher den gleichen Wert annimmt, dieser ist dann $\E[X]$.
+		\item F\"ur $a\in \R$ gilt $\V(aX)=|a|^2 \V(X)$ und $\V(a+X)=\V(X)$.	
+\end{enumerate}
+\end{korollar}
+
+\begin{proof}
+	Übung. Beachte dazu: Ist $Y \geq 0$ $\mathbb{P}$-fast sicher und $ \mathbb{E}[Y] = 0$, so ist $ Y \equiv 0$ $\mathbb P$-fast sicher. Das gilt wegen Satz \ref{S7}, der Erwartungswert ist schlie\ss lich ein Integral!
+\end{proof}
+
+\begin{satz}[Konvergenzsätze für Zufallsvariablen]
+	Seien $X,X_1,X_2,...$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$.
+	\begin{enumerate}[label=(\roman*)]
+		\item MCT: Gilt $0 \leq X_1\leq X_2\leq ...\leq X$ und $ \lim\limits_{n \to \infty} X_n = X$ $\mathbb{P}$-fast sicher, so gilt 
+		\[ \lim\limits_{n \to \infty} \mathbb{E}[X_n] = \mathbb{E}[X]. \]
+		\item DCT: Gilt $|X_n| \leq C$ $\mathbb{P}$-fast sicher für alle $n \in \N$ und gilt $ \lim\limits_{n \to \infty} X_n = X$ $\mathbb{P}$-fast sicher, so gilt
+		\[ \lim\limits_{n \to \infty} \mathbb{E}[X_n] = \mathbb{E}[X]. \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	Weil $\mathbb{E}[X_n] \overset{\text{Def.}}{=} \int_{\Omega} X_n \dint \mathbb{P}$, ist das gerade Satz \ref{allgMonKonv} und Korollar \ref{K7}. 
+\end{proof}
+
+\begin{deff}
+	Sei $X$ eine Zufallsvariable, so heißt $\cM_X(t) := \mathbb{E}[e^{tX}]$ die \textbf{momenterzeugende Funktion}. $\cM(X)$ ist nur für die $t$ definiert, für die $\mathbb{E}[e^{tX}] < \infty$ gilt.
+\end{deff}
+
+Die momenterzeugenden Funktionen sind auf ihrem Definitionsbereich ganz normale Funktionen von $\R$ nach $\R$. Wir k\"onnen also \"uber Ableitungen sprechen, Monotonie, und so weiter. In vielen Beispielen ist $M_x$ eine ganz harmlose Funktion, manchmal ist $M_X$ aber auch gar nicht definiert.
+\begin{beispiel1}\abs
+\begin{itemize}
+	\item Sei $X \sim \cN(\mu, \sigma^2)$, so ist $\cM_X(t) = \exp\big(\mu t + \frac{\sigma^2 t^2}{2}\big)$ f\"ur $t\in\R$, siehe \"Ubungsaufgabe.
+	\item Sei $X\sim \operatorname{Poi}(\lambda)$, so ist $$\cM_X(t) = \mathbb{E}[e^{tk}] = \sum\limits_{k=0}^{\infty} e^{tX} \mathbb{P}(X = k) = \sum\limits_{k=0}^{\infty} e^{tk} e^{-\lambda} \frac{\lambda^k}{k!} \overset{\text{Übung}}{=} e^{\lambda(e^t - 1)}$$ f\"ur alle $t\in\R$.
+	\item Sei $ X \sim \operatorname{Cauchy}(s,t)$, so ist $\cM_X$ nirgends definiert!
+	\end{itemize}
+Noch viel mehr explizite Beispiele sind im Appendix gesammelt.
+\end{beispiel1}
+
+Das ganze ist ein so n\"utzliches Konzept, weil wir viele Beispiele explizit ausrechnen k\"onnen und mit dem n\"achsten Satz gleich noch alle Momente durch Ableiten ausrechnen k\"onnen:
+
+\begin{satz}
+	Sei $X$ eine Zufallsvariable, f\"ur die $\cM_X(t)$ f\"ur ein $\epsilon>0$ in $(-\varepsilon, \varepsilon)$ definiert ist. Dann ist $\cM_X$ an der Stelle $0$ unendlich oft differenzierbar und es gilt $$\mathbb{E}[X^n] = \cM_X^{(n)}(0),$$ wobei $\cM_X^{(n)}(0)$ die $n$-te Ableitung an der Stelle $0$ ist.
+\end{satz}

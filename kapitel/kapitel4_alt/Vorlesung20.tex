@@ -1,0 +1,158 @@
+\marginpar{\textcolor{red}{Vorlesung 20}}
+In Analogie zum eindimensionalen Fall fragen wir nun, ob die Umkehrung auch gilt. Gibt es also f\"ur jede multivariate Verteilungsfunktion $F$ ein Wahrscheinlichkeitsma\ss{} $\mathbb P_F$ auf $(\R^d, \mathcal B(\R^d))$, dessen Verteilungsfunktion $F$ ist. In anderen Worten, gibt es eine bijektive Abbildung zwischen den multivariaten Verteilungsfunktionen und den Wahrscheinlichkeitsma\ss en auf $(\R^d, \mathcal B(\R^d))$?
+\begin{satz}[Analogie zu \ref{EindVert}]
+	Für jede multivariate Verteilungsfunktion $F$ auf $\R^d$ gibt es genau ein Maß $\mathbb P_F$ auf $(\R^d,\cB(\R^d))$ mit 
+	\begin{equation}\label{schnittstabil}
+		\mathbb{P}_F((-\infty,t_1]) \times ... \times \mathbb{P}((-\infty\,t_d]) = F(t_1,...,t_d),\quad t_i\in\R.
+	\end{equation} Man sagt wieder \enquote{$\mathbb{P}$ ist gemäß $F$ verteilt.}
+\end{satz}
+
+\begin{proof}
+	Wir f\"uhren den Beweis nicht vollst\"andig aus, die Argumente gehen im Prinzip wie f\"ur $d=1$.\smallskip
+	
+	\textbf{Eindeutigkeit:} Wie immer nutzten wir f\"ur die Eindeutigkeit Dynkin-Systeme. Weil \eqref{schnittstabil} das Maß auf $\cap$-stabilem Erzeuger festlegt, kann es aufgrund von Korollar \ref{folg} nur ein Ma\ss{} mit der Eigenschaft \eqref{schnittstabil} geben.\smallskip
+	
+	\textbf{Existenz:} Zur Konstruktion haben wir den Fortsetzungssatz von Carath\'eodory, Satz \ref{KarlTheodor}. Hier nur eine Skizze, die f\"ur das Verst\"andniss der komischen Rechtecksmonotonie hilfreich ist, formuliert f\"ur $d=2$. Zun\"achst muss eine $\sigma$-additive Mengenfunktion auf einem Erzeuger definiert werden. Dazu nehmen wir die Rechtecke der Form $(a_1^1,a_1^2] \times (a_2^1, a_2^2]$ und definieren	
+	$$\mu((a_1^1,a_1^2] \times (a_2^1, a_2^2]) :=\Delta_{a^1}^{a^2} F \geq 0.$$ 
+	Die Definition ist motiviert durch den Beweis von Proposition \ref{p9}, $\Delta_{a^1}^{a^2} F$ war dort ja gerade die Wahrscheinlichkeit des Rechtecks $(a_1^1,a_1^2] \times (a_2^1, a_2^2]$. Nun muss man wie f\"ur $d=1$ zeigen, dass $\mu$ eine $\sigma$-additive Mengenfunktion auf den Rechtecken ist. Das ist wieder etwas h\"asslich, vergleiche den Beweis von Satz \ref{EindVert}. Hat man das geschafft, so existiert eine Fortsetzung von $\mu$ auf $\mathcal B(\R^d)$ und die tut es.
+	\end{proof}
+
+\begin{prop}[Spezialfall Produktmaß]\label{id}
+	Sind $F_1,...,F_d$ reelle Verteilungsfunktionen, so ist $$ F(t_1,...,t_d) := F_1(t_1)\cdot ... \cdot F_d(t_d),\quad t_i \in \R,$$ eine Verteilungsfunktion. Es gilt: $\mathbb{P}_F = \mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}$.
+\end{prop}
+
+\begin{proof}
+Variante 1: $F$ ist eine multivariate Verteilungsfunktion $\rightsquigarrow$ Große Übung. Dann nutze den Satz \ref{EindVert}.\smallskip
+
+Variante 2: Das Produktmaß $\mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}$ existiert auf $ \cB(\R^d)$ nach Korollar \ref{MassraeumeExMass}.
+		
+		Behauptung: $F$ ist multivariate Verteilungsfunktion von $\mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}$. Checken wir also, dass das Produktma\ss{} die richtige Verteilungsfunktion hat:
+		\begin{align*}
+			\mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}((-\infty,t_1] \times ... \times (-\infty,t_d]) &\overset{\text{Def.}}{=} \mathbb{P}_{F_1}((-\infty,t_1]) \cdot ... \cdot \mathbb{P}_{F_d}((-\infty,t_d]) \\
+			&= F_1(t_1) \cdot ... \cdot F_d(t_d) \\
+			&= F(t_1,...,t_d).
+		\end{align*}
+\end{proof}
+Genau wie f\"ur reellwertige Zufallsvariablen gibt es absolutstetige und diskrete Wahrscheinlichkeitsma\ss e auf $(\R^d, \mathcal B(\R^d))$:
+\begin{deff}
+	\begin{enumerate}[label=(\roman*)]
+		\item Ein Maß $\mathbb{P}$ auf $(\R^d,\cB(\R^d))$ heißt \textbf{absolutstetig} mit Dichte $f\colon \R^d \to [0, \infty]$, falls $f$ messbar ist mit \[ F(t_1,...,t_d) = \int_{(-\infty,t_1]\times ...\times (-\infty,t_d]}f(x)\dint x. \]
+		\item Ein Maß auf $(\R^d,\cB(\R^d))$ heißt \textbf{diskret}, falls f\"ur ein $N\in \N\cup \{+\infty\}$ Vektoren $a_1,...,a_N \in \R^d$ und Wahrscheinlichkeitsgewichte $p_1,...,p_N \geq 0$ existieren, sodass \[ \mathbb{P} = \sum\limits_{k=1}^{N} p_k \delta_{a_k}. \] $\mathbb{P}$ hat also nur Masse in $\{ a_1,...,a_N\}$ und es gilt $\mathbb{P}(\{ a_k \}) = p_k$.
+	\end{enumerate}
+\end{deff}
+Aufgrund von Fubini gilt f\"ur absolutstetige Ma\ss e immer auch
+ \[ F(t_1,...,t_d) = \int_{-\infty}^{t_1}...\int_{-\infty}^{t_d}f(x_1,...,x_d)\dint x_d... \dint x_1,\]
+und das werden wir zum Rechnen auch meistens benutzen. Das einfachste Beispiel solche iterierten Integrale zu berechnen tritt auf, wenn $f$ faktorisiert, d. h. die einzelnen Koordinaten sich nur durch Produkte bedingen. In dem Fall wird die Verteilungsfunktion auch faktorisiert:
+\begin{beispiel}\label{dichte}
+	Sind $f_1,...,f_d$ Dichten von reellen Verteilungsfunktionen $F_1,...,F_d$. Dann ist $f(x)= f(x_1,...,x_d) := f_1(x_1)\cdot ... \cdot f_d(x_d)$ eine Dichte von $F=F_1\cdot ... \cdot F_d$ aus Proposition \ref{id}. Das k\"onnen wir sofort mit Fubini zeigen:
+	\begin{align*}
+		F(t_1,...,t_d) &\overset{\text{Def.}}{=} F_1(t_1)\cdot ... \cdot F_d(t_d)\\
+		& = \int_{-\infty}^{t_1} f_1(x_1) \dint x_1 \cdot ... \cdot \int_{-\infty}^{t_d} f_d(x_d) \dint x_d \\
+		&\overset{\text{Lin.}}{=} \int_{-\infty}^{t_1} ... \Big(\int_{-\infty}^{t_d} f_1(x_1)\cdot ... \cdot f_d(x_d) \dint x_d\Big) ... \dint x_1 \\
+		&\overset{\text{\ref{fubini}}}{=} \int_{(-\infty,t_1] \times ... \times (-\infty,t_d]} f_1(x_1)\cdot ... \cdot f_d(x_d) \dint x\\
+		&= \int_{(-\infty,t_1]\times ...\times (-\infty,t_d]}f(x)\dint x.
+	\end{align*}
+\end{beispiel}
+
+\subsection*{Zufallsvariablen}
+Nachdem wir die Ma\ss e auf $(\R^d, \mathcal B(\R^d)$ verstanden haben, kommen wir jetzt analog zum reellen Fall zu den Zufallsvektoren.
+\begin{deff}
+	Ist $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum, so heißt $X \colon \Omega \to \R^d$ \textbf{Zufallsvektor}, wenn $X$ $(\cA, \cB(\R^d))$-messbar ist.
+\end{deff}
+
+\begin{prop}\label{zweiInterpr}
+	\[ X =\left(\begin{array}{c} X_1 \\ \vdots \\ X_d\end{array}\right)\colon \Omega \to \R^d \] ist ein Zufallsvektor genau dann, wenn $X_1,...,X_d \colon \Omega \to \R$ Zufallsvariablen sind.
+\end{prop}
+Die Proposition ist eine reine Messbarkeitseigenschaft. Sie besagt nur, dass eine vektorwertige Abbildung messbar ist, genau dann, wenn jede Koordinatenabbildung messbar ist. Das ist ein wenig wie in Analysis 2 als wir immer $f:\R^n\to \R^m$ auf die Koordinatenabbildungen $f_i:\R^n\to \R$ reduziert haben.
+\begin{proof}
+	\begin{itemize}
+		\item[\enquote{$\Rightarrow$}:] 	Für $B \in \cB(\R)$ gilt 
+\[ X_i^{-1} (B) = X^{-1}(\underbrace{\R \times ... \times \R \times B \times \R \times ... \times \R}_{i\text{-te Stelle}}) \in \mathcal A. \]
+		\item[\enquote{$\Leftarrow$}:] Messbarkeit muss nur auf einem Erzeuger gezeigt werden, wir wählen dazu $\cS = \{ B_1 \times ... \times B_d\colon B_i \in \cB(\R) \}$.
+		\begin{align*}
+			X^{-1}(B_1 \times ... \times B_d) &= \left\{ \omega\in \Omega\colon 
+			\left(\begin{array}{c} X_1(\omega)\\\vdots\\ X_d(\omega)\end{array}\right) \in B_1 \times ... \times B_d \right\} \\
+			&= \bigcap_{i=1}^{d} \{ \omega \colon X_i(\omega) \in B \} \in \cA 
+		\end{align*}
+	\end{itemize}
+\end{proof}
+
+\begin{disc}
+	Wegen Proposition \ref{zweiInterpr} gibt es jetzt zwei Interpretationen von Zufallsvektoren:
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{ersteInterpr} Ein Zufallsvektor beschreibt $d$-viele Eigenschaften in \textbf{einem} zuf\"alligen Experiment.
+		\item\label{zweiteInterpr} $X$ beschreibt ein eindimensionales Experiment, das \textbf{$d$-mal ausgeführt} wird.
+	\end{enumerate}
+	Wir verbalisieren \ref{ersteInterpr} und \ref{zweiteInterpr} unterschiedlich, mathematisch handelt es sich um das gleiche Objekt:
+	\begin{enumerate}[label=(\roman*)]
+		\item \enquote{Sei $X = \left(\begin{array}{c} X_1\\\vdots\\ X_d\end{array}\right)$ ein Zufallsvektor auf $(\Omega, \mathcal A, \mathbb P)$.}
+		\item \enquote{Seien $X_1,...,X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$.}
+	\end{enumerate}
+\end{disc}
+Weiter geht's mit der Verallgemeinerung von Verteilungsfunktionen von Zufallsvariablen auf Zufallsvektoren. Analog zum eindimensionalen Fall definieren wir die gleichen Begriffe:
+\begin{deff}
+	\begin{enumerate}[label=(\roman*)]
+		\item Für einen Zufallsvektor $X$ auf $(\Omega, \cA, \mathbb{P})$ heißt
+		\begin{align*}
+			F_X(t_1,...,t_d) = \mathbb{P}(X_1 \leq t_1,...,X_d \leq t_d)
+		\end{align*}	
+		  Verteilungsfunktion von $X$. Dabei steht das Komma f\"ur \enquote{und}, formell steht da also $\mathbb P(\cap_{i=1}^d \{X_i\leq t_i\})$. $F$ heißt auch \textbf{gemeinsame Verteilungsfunktion} der Zufallsvariablen $X_1,...,X_d$. Wir nutzen wieder die Schreibweise $X\sim F$, wenn $F$ die Verteilungsfunktion von $X$ ist.
+ 		\item Zwei Zufallsvektoren heißen \textbf{identisch verteilt}, falls $F_X = F_Y$.
+		\item Das Bildma\ss{} $\mathbb{P}_X(B) := \mathbb{P}(X \in B)$ heißt Verteilung von $X$ oder die  \textbf{gemeinsame Verteilung} der Zufallsvariablen $X_1,...,X_d$. $\mathbb{P}_X$ ist ein Maß auf $(\R^d, \cB(\R^d))$.
+		Für $X \sim F$ gilt wieder $\mathbb{P}_X = \mathbb{P}_F$
+		\item F\"ur $i=1,...,d$ hei\ss t $$\mathbb{P}_{X_i}(B) = \mathbb{P}(X_i \in B) = \mathbb{P}(\{ \omega \colon X_i \in B \})$$ die \textbf{Randverteilung} von $X_i$ und 	
+		  \[ F_{X_i}(t) = \mathbb P(X_i\leq t)  \]
+		die \textbf{eindimensionale Randverteilungsfunktion} von $X_i$.
+	\end{enumerate}
+\end{deff}
+Die Notationen werden hier etwas un\"ubersichtlich, diskutieren wir sie also ein wenig. Weil $\mathbb P(X_i\leq t)=\mathbb P(X_1\in \R, ..., X_i\leq t, ..., X_d\in \R)$ folgt aus der Stetigkeit von Ma\ss en
+\begin{align*}
+	F_{X_i}(t) =\lim\limits_{\substack{t_k \to \infty,\\ \forall k\neq i}} F(t)=: F_X(+\infty,..., t, ...,+\infty).
+\end{align*}
+Mit dieser Formel ist klar, wie aus der gemeinsamen Verteilung aller $X_i$ die Verteilung eines einzelnen $X_i$ berechnet werden kann: Man schickt einfach alle anderen $t_k$ nach $+\infty$ und nimmt den Grenzwert. \smallskip
+
+Analog zum eindimensionalen Fall jetzt auch noch die kanonische Konstruktion von Zufallsvektoren, die funktioniert fast w\"ortlich wie die Konstruktion im Beweis von Satz \ref{existenz}.
+\begin{satz}[Kanonische Konstruktion von Zufallsvektoren]\label{kan}
+	Für jede multivariate Verteilungsfunktion gibt es einen Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ und einen Zufallsvektor $X \colon \Omega \to \R^d$ mit $X \sim F$.
+\end{satz}
+\begin{proof}
+	Als Wahrscheinlichkeitsraum definieren wir $\Omega=\R^d$, $\cA = \cB(\R^d)$, $\mathbb{P} = \mathbb{P}_F$ und darauf den Zufallsvektor $X(\omega) = \omega$, also $X_i(\omega)=\omega_i$. Beachte: Die Identit\"atsabbildung $X(\omega)=\omega$ ist eine stetige Abbildung von $\R^d$ nach $\R^d$ und damit auch messbar. Berechnen wir die Verteilungsfunktion:
+	\begin{align*} 
+		\mathbb{P}(X_1\leq t_1, ..., X_d\leq t_d) 
+		&=	\mathbb{P}_F(\{\omega \in \R^d: X_1(\omega) \leq t_1, ..., X_d(\omega)\leq t_d\})\\
+		&=\mathbb{P}_F(\{\omega \in \R^d: \omega_1\leq t_1, ..., \omega_d\leq t_d\})\\
+		&=F(t_1,...,t_d).
+ \end{align*} 
+	Das war es schon! Zu beachten ist, dass die Konstruktion weit von trivial ist. Die Existenz von $\mathbb P_F$ ben\"otigt den Satz von Carath\'eodory und damit die komplette Ma\ss theorie. 
+\end{proof}
+Ab jetzt werden wir immer die Interpretation von $d$ Zufallsvariablen nutzen, damit wir uns langsam an Folgen von Zufallsvariablen gew\"ohnen. 
+\begin{deff}
+	Seien $X_1,...,X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$.
+	\begin{enumerate}[label=(\roman*)]
+		\item $X_1,...,X_d$ haben die \textbf{gemeinsame Dichte} $f$, falls die gemeinsame Verteilungsfunktion $F$ Dichte $f$ hat.
+		\item $X_1,...,X_d$ heißen \textbf{diskret}, falls $a_1,...,a_N \in \R^d$ existieren mit $$\mathbb{P}(X=a_k) = \mathbb{P}(X_1={a_k}_1,..., X_d = {a_k}_d) = p_k$$ und $ \sum_{k=1}^{N} p_k = 1$ f\"ur ein $N \in \N \cup \{ +\infty \}  $.
+	\end{enumerate}
+\end{deff}
+Aus der Definition folgt sofort, dass eine gemeinsame Dichte nicht-negativ und messbar ist, sowie $\int_{\R^d} f(x)\dint x=1$ erf\"ullt. Andersrum zeigt ihr in den \"Ubungsaufgaben, dass f\"ur solch eine Funktion $F(t_1,..,,t_d):=\int_{(-\infty, t_1]\times ... \times(-\infty, t_d]} f(x)\dint x$ die Eigenschaften einer multivariaten Verteilungsfunktion erf\"ullt.\smallskip
+
+Bisher ist in diesem Kapitel kaum neues passiert. Nur die Rechtecksmonotonie einer multivariaten Verteilungsfunktion ist als neue Idee hinzugekommen. Das \"andert sich jetzt allerdings mit dem Konzept der Unabh\"angigkeit. Hier verlassen wir die Ma\ss - und Integrationstheorie, das ist ein rein stochastisches Konzept. Wer m\"ochte, darf Wahrscheinlichkeitstheorie gerne als \enquote{Ma\ss - und Integrationstheorie plus Unabh\"angigkeit} definieren.
+\begin{deff}
+	Seien $X_1,...,X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$. 
+	\begin{enumerate}[label=(\roman*)]
+		\item $X_1,...,X_d$ hei\ss en \textbf{unabhängig}, falls die gemeinsame Verteilungsfunktion in die Randverteilungsfunktionen faktorisiert, \mbox{d. h.}
+		\begin{align*}
+			F_X(t_1,...,t_d) = F_{X_1}(t_1) \cdot ... \cdot F_{X_d}(t_d), \quad t_i \in \R 
+		\end{align*}
+		oder mit Wahrscheinlichkeiten geschrieben
+		\begin{align*}
+			 \mathbb{P}(X_1 \leq t_1,...,X_d \leq t_d) = \mathbb{P}(X_1 \leq t_1) \cdot ... \cdot \mathbb{P}(X_d \leq t_d), \quad t_i \in \R.
+		\end{align*}
+		\item $X_1,...,X_d$ hei\ss en \textbf{abhängig}, falls sie nicht unabhängig sind.
+		\item $X_1,...,X_d$ hei\ss en \textbf{identisch verteilt}, falls  $F_{X_1} = ... = F_{X_d}$. Die Zufallsvariablen $X_1, ..., X_d$ sollen also die gleiche Verteilung haben.
+		\item $X_1,...,X_d$ hei\ss en \textbf{unabh\"angig und identisch verteilt} (\textbf{u.i.v.}), falls sie unabh\"angig und identisch verteilt sind. Weil die gemeinsame Verteilungsfunktion $F$ bei u.i.v. Zufallsvariablen schon eindeutig durch jede Randverteilungsfunktion festgelegt ist, gibt man oft nur die Verteilung von $X_1$ an.
+	\end{enumerate}
+\end{deff}
+Vergleichen wir die Definition der Unabh\"angigkeit mit Proposition \ref{id}, so k\"onnen wir auch formulieren: $X_1,...,X_d$ hei\ss en unabh\"angig, falls die Verteilung $\mathbb P_X$ das Produktma\ss{} der Randverteilungen ist.
+\begin{bem1}
+	Was soll das abstrakte Konzept der Unabh\"angigkeit eigentlich bedeuten? Unabh\"angigkeit ist die mathematische Formulierung der Idee, dass der Wert von einer Zufallsvariablen keinen Einfluss auf den Wert der anderen Zufallsvariablen hat. Die Temperaturen in Heidelberg und Mannheim morgen um 12 Uhr sind vermutlich nicht unabh\"angig (ist es in Heidelberg kalt, so ist es vermutlich auch in Mannheim kalt). Andererseits hat die Temperatur morgen in Peking vermutlich keinen Einfluss darauf, wie gro\ss{} der Kaffeefleck auf meiner Hose \"ubermorgen ist.
+\end{bem1}

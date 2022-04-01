@@ -1,0 +1,202 @@
+\marginpar{\textcolor{red}{Vorlesung 17}}
+
+\begin{korollar}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Der Fall $p=q=2$ hei\ss{} tauch Cauchy-Schwarz:
+		\[ \left(\int_{\Omega} |fg| \dint\mu  \right)^2 \leq \int_{\Omega} |f|^2 \dint\mu \int_{\Omega} |f|^2 \dint\mu. \]
+		\item Ist $\mu$ ein Wahrscheinlichkeitsmaß, so gilt wegen $\mu(\Omega) = 1$
+		\begin{align*}
+		\int_{\Omega} |f| \dint\mu &= \int_{\Omega} |f \cdot 1| \dint\mu\\
+		& \leq \Bigg( \int_{\Omega} |f|^p \dint \mu \Bigg)^{\frac{1}{p}} \Bigg( \int_{\Omega} \underbrace{|1|^q}_{= 1 \cdot \mathbf{1}_{\Omega}} \dint \mu \Bigg)^{\frac{1}{q}}\\ 
+		&= \Bigg( \int_{\Omega} |f|^p \dint \mu \Bigg)^{\frac{1}{p}} \cdot 1,
+		\end{align*}
+		also
+		\[ \Bigg(\int_{\Omega} |f| \dint\mu\Bigg)^{p}  \leq  \int_{\Omega} |f|^p \dint \mu \]
+		für alle $p > 1$.
+	\end{enumerate}
+\end{korollar}
+
+\begin{satz}[Minkowski-Ungleichung]\label{minkowski}
+	Sei $p \geq 1$, so gilt
+	\[ \left( \int_{\Omega} |f+g|^p \dint \mu \right)^p \leq \left( \int_{\Omega} |f|^p \dint \mu \right)^p + \left( \int_{\Omega} |g|^p \dint \mu \right)^p. \]
+	Beide Seiten k\"onnen den Wert $+\infty$ annehmen.
+\end{satz}
+
+\begin{proof}
+	Wie in Analysis 2, folgt aus H\"older und der Young Ungleichung. Wir zeigen die st\"arkere Ungleichung
+	\begin{equation}\label{eqmink}
+	\left( \int_{\Omega} (|f|+|g|)^p \dint \mu \right)^p \leq \left( \int_{\Omega} |f|^p \dint \mu \right)^p + \left( \int_{\Omega} |g|^p \dint \mu \right)^p.
+	\end{equation}
+	Tats\"achlich impliziert \eqref{eqmink} Minkowski weil die linke Seite von Minkowski kleiner ist als die linke Seite von \eqref{eqmink}. Das folgt direkt aus der Monotonie des Integrals und weil $|f+g| \leq |f| + |g|$ gilt.
+	\begin{enumerate}[label=(\alph*)]
+		\item F\"ur $p=1$ gilt wegen der Linearit\"at des Integrals \eqref{eqmink} nat\"urlich mit Gleichheit.
+		\item Sei nun $p > 1$. Ist die rechte Seite $+\infty$, so gilt \eqref{eqmink}. Also nehmen wir an, dass beide Integrale der rechten Seite endlich sind. Dann ist aber auch die linke Seite wegen der elementaren Absch\"atzung 
+		\begin{align*}
+		\left(|f| + |g|\right)^p \leq \left(2 |f| \lor |g|\right)^p = 2^p( |f^p| \lor |g^p|)\leq 2^p (|f|^p+|g|^p)
+		\end{align*}
+		und der Monotonie des Integrals endlich. Damit nun zum Beweis von \eqref{eqmink}:
+		\begin{align*}	
+		\int_{\Omega} (|f|+|g|)^p \dint \mu &= 
+		\int_{\Omega} (|f|+|g|)^{p-1} (|f|+|g|) \dint \mu\\ 
+		&\overset{\text{ausm.}}{\underset{+\text{lin.}}{=}}
+		\int_{\Omega} (|f|+|g|)^{p-1} |f| \dint \mu + \int_{\Omega} (|f|+|g|)^{p-1} |g| \dint \mu \\
+		&\overset{2\times}{\underset{\text{H\"older}}{\leq}} 
+		\left( \int_{\Omega} |f|^{p} \dint \mu \right)^{\frac{1}{p}} \left( \int_{\Omega} (|f|+|g|)^{(p-1)q} \dint \mu \right)^{\frac{1}{q}} \\
+		&\qquad+\left( \int_{\Omega} |g|^{p} \dint \mu \right)^{\frac{1}{p}} \left( \int_{\Omega} (|f|+|g|)^{(p-1)q} \dint \mu \right)^{\frac{1}{q}}\\
+		&\overset{\text{auskl.}}{=}
+		\left(\left( \int_{\Omega} |f|^{p} \dint \mu \right)^{\frac{1}{p}} + \left( \int_{\Omega} |g|^{p} \dint \mu \right)^{\frac{1}{p}}\right) \left(\int_{\Omega} |f|+|g| \dint \mu \right)^{1 - \frac{1}{p}}.
+		\end{align*}
+		In der letzten Gleichung haben wir genutzt, dass $1-\frac{1}{p}=\frac{1}{q}$ und $(p-1)q=1$ aufgrund der Voraussetzung an $p$ und $q$ gelten. Rübermultiplizieren des zweiten Faktors gibt dann \eqref{eqmink}.
+	\end{enumerate}
+\end{proof}
+
+\begin{deff}\label{neueDef}
+	$f \colon \Omega \to \overline{\R}$ heißt \textbf{$p$-fach integrierbar}, falls $ \int_{\Omega} |f|^p \dint \mu < \infty$. Statt $2$-fach integrierbar sagt man auch \textbf{quadratintegrierbar}, statt $1$-fach integrierbar sagt man \textbf{integrierbar}. Nat\"urlich passt die Notation zu unserer urspr\"unglichen Definition der Integrierbarkeit:
+	\begin{gather*}
+	f \text{ int. } \quad\overset{\text{alte}}{\underset{\text{Def.}}{\Leftrightarrow}} \quad\int_{\Omega} f^+ \dint \mu < \infty, \: \int_{\Omega} f^- \dint \mu < \infty \quad\overset{\text{Übung}}{\Leftrightarrow} \quad\int_{\Omega} |f| \dint \mu < \infty \quad \overset{\text{neue}}{\underset{\text{Def.}}{\Leftrightarrow}} \quad f \text{ int. }
+	\end{gather*}
+\end{deff}
+Schauen wir uns ein ganz konkretes Beispiel f\"ur die neue Definition an. 
+\begin{beispiel}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Für $\Omega = [1, \infty)$, $\cA = \cB([1,\infty))$, $ \mu = \lambda_{|[1, \infty)}$ ist $ \int_{\Omega} f \dint \mu = \int_{1}^{\infty} f \dint \mu$. Für $f(x) = \frac{1}{x^a}$ ist $f$ $p$-fach integrierbar genau dann, wenn $p > \frac{1}{a}$.
+		\item Für $\Omega = [0, 1]$, $\cA = \cB([0, 1])$, $ \mu = \lambda_{|[0, 1]}$ ist $ \int_{\Omega} f \dint \mu = \int_{0}^{1} f \dint \mu$. Für 
+		\[ f(x) = \begin{cases}
+		\frac{1}{x^a}&:x \in (0,1]\\
+		+ \infty&:x = 0
+		\end{cases} \]
+		ist $f$ $p$-fach integrierbar genau dann wenn $p < \frac{1}{a}$. F\"ur das Integral ist der Funktionswert $+\infty$ unproblematisch da die Menge $\{0\}$ eine $\mu$-Nullmenge ist.
+	\end{enumerate}
+\end{beispiel}
+In der Mathematik wollen wir aus allen Objekten m\"oglichst n\"utzliche Strukturen schaffen, in diesem Fall einen Vektorraum.
+\begin{deff}
+	\[ \cL^p(\mu) := \Bigg\{ f \colon \Omega \to \R\, \Bigg|\, \int_{\Omega} |f|^p \dint \mu < \infty \Bigg\}. \]
+	Manachmal schreibt man auch $\cL^p(\Omega, \cA, \mu)$.
+\end{deff}
+
+\begin{lemma}
+	Mit punktweiser Addition und Skalarmultiplikation ist $\cL^p(\mu)$ ein reeller Vektorraum, sogar ein Untervektorraum der messbaren Funktionen, \mbox{d. h.} 
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{uvr1} $f,g \in \cL^p(\mu) \Rightarrow f+g \in \cL^p(\mu)$,
+		\item $\alpha \in \R$, $f \in \cL^p(\mu) \Rightarrow \alpha f \in \cL^p(\mu)$,
+		\item\label{uvr2} $0 \in \cL^p(\mu)$, wobei $0$ die konstante Nullfunktion ist.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Messbare Funktionen mit punktweiser Addition und skalarer Multiplikation geben einen Vektorraum. Die Eigenschaften \ref{uvr1}-\ref{uvr2} bedeuten, dass $\cL^p(\mu)$ ein Untervektorraum ist. Wir prüfen also nur die dafür benötigten Eigenschaften:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\int_{\Omega} |0|^p \dint \mu = 0<\infty$
+		\item $\alpha f$ ist messbar und $\int_{\Omega} |\alpha f|^p \dint \mu \overset{\text{Lin.}}{=} |\alpha|^p \int_{\Omega} |f|^p \dint \mu < \infty$ weil $f \in \cL^p(\mu)$ angenommen wurde. Also gilt auch $\alpha f \in \cL^p(\mu)$.
+		\item $f+g$ ist messbar und wegen Minkowski gilt
+		\[ \Bigg(\int_{\Omega} |f+g|^p \dint \mu\Bigg)^{\frac{1}{p}} \leq \Bigg( \Bigg( \underbrace{\int_{\Omega} |f|^p \dint \mu}_{< \infty} \Bigg)^{\frac{1}{p}} + \Bigg( \underbrace{\int_{\Omega} |g|^p \dint \mu}_{< \infty} \Bigg)^{\frac{1}{p}} \Bigg)^p < \infty. \]
+		Also ist $f+g \in \cL^p(\mu)$.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+	\[ ||f||_p = \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{\frac{1}{p}} \] ist eine \textbf{Halbnorm} auf $\mathcal L^p(\mu)$, \mbox{d. h.} es gelten f\"ur $f,g\in \mathcal L^p(\mu)$ und $\alpha\in \R$
+	\begin{enumerate}[label=(\roman*)]
+		\item $0 \leq ||f||_p < \infty\quad$ (Definitheit fehlt)
+		\item $ ||\alpha f ||_p = | \alpha | ||f||_p$
+		\item $|| f + g ||_p \leq ||f||_p + ||g||_p$ .
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Die ersten zwei Eigenschaften sind klar. Die Dreiecksungleichung in $\mathcal L^p(\mu)$ ist gerade die Minkowski Ungleichung!
+\end{proof}
+
+Warnung: $||\cdot ||_p$ ist \textit{keine} Norm! Jedes $f$ mit $\mu(\{f \neq 0\})=0$ erfüllt \[ || f ||_p = \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{\frac{1}{p}} = 0. \] 
+Wenn $f$ auf einer $\mu$-Nullmenge ungleich $0$ ist, so ist aber $f\neq 0$. Also ist die Definitheit nicht erf\"ullt.
+
+\begin{deff}
+	Seien $f, f_1,f_2,...\in \cL^p(\mu)$. Wir sagen $(f_n)_{n\in \N}$ konvergiert in $\cL^p(\mu)$ gegen $f$, falls $ ||f_n - v||_p \to 0$, $n \to \infty$. Man schreibt dann auch $f_n \overset{\cL^p(\mu)}{\longrightarrow} f$, $n \to \infty$.
+\end{deff}
+
+\begin{bem}
+	Grenzwerte von Folgen in $\cL^p(\mu)$ sind nicht eindeutig. Es ist also möglich, dass $f_n \overset{\cL^p(\mu)}{\longrightarrow} f$, $n \to \infty,$ und $f_n \overset{\cL^p(\mu)}{\longrightarrow} g$, $n \to \infty$, aber $ f \neq g$. $\rightsquigarrow$ Übungsaufgabe.
+\end{bem}
+
+\begin{deff}
+	$(f_n)_{n\in\N} \subseteq \cL^p(\mu)$ heißt Cauchyfolge in $\cL^p(\mu)$, falls
+	\[ \forall \varepsilon > 0\, \exists N \in \N \colon || f_n - f_m ||_p < \varepsilon\, \forall n,m \geq N. \]
+\end{deff}
+
+\begin{satz}\label{lpcauchy}
+	Jede Cauchyfolge in $\cL^p(\mu)$ hat einen Grenzwert in $\cL^p(\mu)$.
+\end{satz}
+$\cL^p(\mu)$ ist sozusagen vollständig, abgesehen davon, dass $\cL^p(\mu)$ kein normierter Vektorraum ist.
+\begin{proof}
+	Sei $(f_n)_{n\in\N}$ eine Cauchyfolge in $\mathcal L^p(\mu)$. Wir m\"ussen ein $f \in \cL^p(\mu)$ finden, so dass $f_n \overset{\cL^p(\mu)}{\longrightarrow} f$, $n \to \infty$. Wir basteln uns zun\"achst ein $f$ und zeigen dann, dass dieses $f$ die zwei Eigenschaften erf\"ullt. Weil $(f_n)_{n\in\N}$ eine Cauchyfolge ist, existiert eine Teilfolge $(f_{n_k})_{k\in \N}$ mit $|| f_{n_{k+1}} - f_{n_k} || \leq \frac{1}{2^k}$ f\"ur alle $k\in\N$. Damit definierten wir 
+	\begin{align*}
+	g_k = f_{n_{k+1}} - f_{n_k}\quad \text{ und }\quad g = \sum_{k=1}^{\infty} |g_k|.
+	\end{align*}	
+	Wie die $\triangle$-Ungleichung in $\R$ gilt auch die $\triangle$-Ungleichung in $\cL^p(\mu)$ für $\infty$ viele Summanden $\rightsquigarrow$ Übungsaufgabe. Daher gilt 
+	\begin{gather*}
+	||g||_p \overset{\text{Def.}}{=} \Big|\Big| \sum\limits_{k=1}^{\infty} |g_k| \Big|\Big|_p \leq \sum\limits_{k=1}^{\infty} ||g_k||_p=\sum\limits_{k=1}^{\infty} ||f_{n_{k+1}}-f_{n_k}||_p \leq \sum\limits_{k=1}^{\infty} \frac{1}{2^k} = 1.
+	\end{gather*}
+	Also ist $g\in \mathcal L^p(\mu)$ und damit ist $g$ $\mu$-fast überall endlich. Die Reihe $\sum_{k=1}^{\infty} g_k(\omega)$ ist also für $\mu$-fast alle $\omega \in \Omega$ absolut konvergent. Nach Analysis 1 ist also auch die Reihe $\sum_{k=1}^{\infty} g_k(\omega)$ f\"ur $\mu$-fast alle $\omega\in \Omega$ konvergent. Jetzt definieren wir uns ein $f$:
+	\[ f(\omega) := \begin{cases}
+	f_{n_1}(\omega) + \sum\limits_{k=1}^{\infty} g_k(\omega)&: \sum\limits_{k=1}^{\infty} g_k(\omega) \text{ konvergent}\\
+	0&:\text{ sonst}
+	\end{cases}. \]
+	Wir zeigen jetzt, dass $f \in \cL^p(\mu)$ und $f_n \overset{\cL^p(\mu)}{\longrightarrow} g$, $n \to \infty$.
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+		Weil $f_{n_1}, g\in \mathcal L^p(\mu)$ gilt, ist auch $f$ in $\mathcal L^p(\mu)$:
+		\[ |f| \overset{\triangle}{\leq} |f_{n_1}| + \Big| \sum\limits_{k=1}^{\infty} g_k \Big| \overset{\triangle}{\leq} \underbrace{\underbrace{|f_{n_1}|}_{\in \cL^p(\mu)} +  \underbrace{\sum\limits_{k=1}^{\infty} | g_k |}_{\in \cL^p(\mu)}}_{\in \cL^p(\mu)}.
+		\]
+		\item Nun zur Konvergenz. Weil die Summe \"uber die $g_k$ eine Teleskopsumme ist, gilt  
+		\begin{align*}
+			f_{n_k} \overset{\text{Teleskop}}{=} f_{n_1} + \sum\limits_{l=1}^{k-1} g_l \to f,\quad \: n \to \infty, \text{ $\mu$-f.ü.}
+		\end{align*}
+		Die punktweise Konvergenz von $|f_{n_k}-f|^p$ gegen $0$ gilt also, wir wollen aber viel mehr: Konvergenz in $\mathcal L^p(\mu)$, also Konvergenz der Integrale \"uber $|f_{n_k}-f|^p$. Wie immer kann man jetzt MCT oder DCT nutzen, um aus der punktweisen Konvergenz zur Konvergenz der Integrale zu kommen. Wir nutzen dieses Mal DCT. Also brauchen wir zun\"achst eine integrierbare Majorante:
+		\begin{align*}
+			|f_{n_k} - f |^p &\leq (| f_{n_k}| + |f|)^p \overset{\triangle}{=}\Big( |f_{n_1}| + \sum\limits_{l=1}^{k-1} |g_k| + |f| \Big)^p\\
+			&\leq (|f_{n_1}| + g + |f|)^p =: h^p \quad \text{(unabhängig von k)}.		
+		\end{align*}
+		Also konvergiert $|f_{n_k}-f|^p$ punktweise gegen $0$ und hat die integrierbare Majorante $h^p$. Mit Satz \ref{DCT} folgt dann
+		\begin{align*}
+		\lim\limits_{k \to \infty} || f_{n_k} - f ||_p \overset{\text{Def.}}{=} \lim\limits_{k \to \infty} \Big(\int_{\Omega} | f_{n_k} - f |^p\dint \mu\Big)^\frac{1}{p} \overset{\text{\ref{DCT}}}{=}
+		\Big(\int_{\Omega} \underbrace{\lim\limits_{k \to \infty} | f_{n_k} - f |^p}_{=0 \text{ $\mu$-f. ü.}} \dint \mu\Big)^\frac{1}{p} = 0.
+		\end{align*}
+		Also gilt $f_{n_k} \overset{\cL^p(\mu)}{\longrightarrow} f$, $k \to \infty$. Damit sind wir fast fertig, wir m\"ussen aber noch die Teilfolge loswerden, es sollte schlie\ss lich die ganze Folge $(f_n)_{n\in\N}$ gegen $f$ konvergieren. Dazu nutzen wir den \"ublichen Trick, mit der $\Delta$-Ungleichung eine Teilfolge in die eigentliche Folge reinzumogeln:
+		\[ ||f_n - f ||_p \overset{\triangle}{\leq} ||f_n - f_{n_k} ||_p - ||f_{n_k} - f ||_p.
+		\]
+		F\"ur $n,k\to\infty$ konvergiert die rechte Seite gegen $0$ wegen des oben gezeigten und der Annahme, dass $(f_n)$ eine Cauchyfolge ist.
+	\end{enumerate}
+\end{proof}
+Wenn $\mathcal L^p(\mu)$ ein normierter Vektorraum w\"are, k\"onnten wir jetzt wunschlos gl\"ucklich sein. Denn dann w\"are $\mathcal L^p(\mu)$ ein Banachraum. Wir m\"ussen aber noch den Defekt der Definitheit der Halbnorm reparieren. Dazu habt ihr in der Linearen Algebra das Konzept der Quotientenr\"aume kennengelernt. Das nutzen wir hier aus, indem wir einfach alle Abbildungen die $\mu$-fast \"uberall $0$ sind, als gleiches Objekt identifizieren. Dazu w\"ahlen wir die \"Aquivalenzrelation
+\begin{align*}
+f \sim g \quad :\Leftrightarrow\quad f = g \,\,\mu\text{-fast überall}
+\end{align*}
+und den Quotientenraum, der aus den \"Aquivalenzklassen 
+\begin{align*}
+[f]_\sim:=\{g\in \mathcal L^p(\mu)\,:\, f\sim g\}=\{g\in \mathcal L^p(\mu)\,:\, f=g\,\,\mu\text{-fast \"uberall} \}
+\end{align*}
+besteht. Wie in der linearen Algebra werden die Vektorraumoperationen auf dem Quotientenraum durch die Repr\"asentanten definiert:
+\begin{align*}
+[f]+[g]:=[f+g]\quad \text{ und }\quad \alpha [f]:=[\alpha f].
+\end{align*}
+Genauso verfahren wir mit der Norm: Wir definieren auch noch eine Norm: $$||[f]||_p:=||f||_p.$$ Der Quotientenraum wird als  $L^p(\mu)=\{[f]: f\in \mathcal L^p(\mu)\}$ bezeichnet. Gemeinsam mit den Operationen und der Norm auf den Elementen (\"Aquivalenzklassen) ist $L^p(\mu)$ ein Banachraum:
+\begin{satz}
+	$L^p(\mu)$ ist mit gerade definierten Operationen ein Banachraum.
+\end{satz}
+
+\begin{proof}
+	Wir zeigen, dass $L^p(\mu)$ mit den definierten Operationen ein normierter Vektorraum ist und dass dieser vollst\"andig ist.
+	\begin{enumerate}[label=(\alph*)]
+		\item Vektorraum aus Lineare Algebra 1.
+		\item Die Eigenschaften der Halbnorm folgen direkt aus der Definition weil $||\cdot||_p$ eine Halbnorm auf $\mathcal L^p(\mu)$ ist. Es fehlt also nur noch die Definitheit:
+		\begin{align*}
+		|| [f] ||_p = 0 \quad &\overset{\text{Def.}}{\Leftrightarrow} \quad ||f||_p = 0\\
+		& \overset{\text{Def.}}{\Leftrightarrow}\quad \int_{\Omega} |f|^p \dint \mu = 0\\
+		& \Leftrightarrow\quad |f|^p = 0 \text{ $\mu$-fast überall}\\
+		& \Leftrightarrow \quad f = 0 \text{ $\mu$-fast überall}\\
+		& \Leftrightarrow\quad [f] = [0]
+		\end{align*}
+		Damit ist $ ||\cdot ||_p $ eine Norm.
+		\item Die Vollständigkeit folgt direkt aus der Definition der Norm und Satz  \ref{lpcauchy} weil $$ || [f_n] - [f_m] ||_p=||[f_n-f_m]|| \overset{\text{Def.}}{=} || f_n - f_m ||_p$$ gilt.
+	\end{enumerate}
+\end{proof}

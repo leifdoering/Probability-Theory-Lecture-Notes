@@ -1,0 +1,197 @@
+\marginpar{\textcolor{red}{Vorlesung 22}}
+
+\begin{satz}[Bienaymé]\label{bien}
+ Sind $X_1,...,X_n$ Zufallsvariablen auf $(\Omega, \mathcal A, \mathbb P)$ mit $\E[X_1^2],...,\E[X_n^2] < \infty$, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item
+		\[ \V\Big(\sum\limits_{i=1}^{n} X_i\Big) = \sum\limits_{i=1}^{n} \V(X_i) + \sum\limits_{\substack{i,j=1\\i \neq j}}^{n} \Cov(X_i,X_j).  \]
+		\item \[ \V\Big(\sum\limits_{i=1}^{n} X_i\Big) = \sum\limits_{i=1}^{n} \V(X_i), \] falls $X_1,...,X_n$ paarweise unkorreliert sind, \mbox{d. h.} wenn $\Cov(X_i,X_j) = 0$ f\"ur alle $ i,j = 1,...,n$, $i\neq j$. 
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	Übung, das ist einfach nur Ausmultiplizieren und Definitionen einsetzen.
+\end{proof}
+
+\section{Summen von unabhängigen Zufallsvariablen}
+Ziel: Berechne Verteilungen von Summen unabhängiger Zufallsvariablen. Was ist zum Beispiel die Verteilung der Summe zweier exponentialverteilter unabh\"angiger Zufallsvariablen? Oder wie ist die Summe zweier unabh\"angiger Normalverteilungen verteilt?\smallskip
+
+Starten wir mit dem diskreten Fall, der ist einfacher:
+\begin{satz}[Diskrete Faltungsformel]\label{diskreteFaltung}
+	Sind $X,Y$ unabhängige diskrete Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$. Dann ist auch $X+Y$ diskret und die Wahrscheinlichkeiten k\"onnen mit der diskreten Faltungsformel berechnet werden:
+	\[ \mathbb{P}(X+Y = a) = \sum\limits_{b \in Y(\Omega)} \mathbb{P}(X = a-b) \mathbb{P}(Y=b),
+	\]
+	dabei sind $Y(\Omega) := \{ Y(\omega): \omega \in \Omega\}=\{b_1,...b_N\}$ die Werte, die $Y$ mit positiven Wahrscheinlichkeiten $p_k=\mathbb P(Y=b_k)$ annimmt.
+\end{satz}
+
+\begin{proof}
+	Der Trick ist es, einen Event in eine disjunkte Vereinigung von Teilevents zu zerlegen und darauf die $\sigma$-Additivit\"at anzuwenden.
+	\begin{align*}
+		\mathbb{P}(X+Y = a) &\overset{\text{Notation}}{=} \mathbb{P}(\{ \omega\colon X(\omega) + Y(\omega) = a \}) \\
+		&\overset{\text{Trick}}{=} \mathbb{P}\Big(\bigcupdot_{b \in Y(\Omega)} \{ \omega\colon X(\omega) + Y(\omega) = a, Y(\omega) = b \} \Big)\\
+		&\overset{\sigma\text{-add.}}{=} \sum\limits_{b \in Y(\Omega)} \mathbb{P}(\{ \omega\colon X(\omega) + Y(\omega) = a, Y(\omega) = b \})\\ 
+		&= \sum\limits_{b \in Y(\Omega)} \mathbb{P}(\{ \omega\colon X(\omega) = a - b, Y(\omega) = b \})\\
+		&\overset{\text{Notation}}{=} \sum\limits_{b \in Y(\Omega)} \mathbb{P}(X = a - b, Y = b )\\
+		& \overset{\text{unab.}}{=} \sum\limits_{b \in Y(\Omega)} \mathbb{P}(X=a-b) \mathbb{P}(Y=b).
+	\end{align*}
+\end{proof}
+Als Anmerkung zum Freuen auf die strahlende Zukunft: Genau wegen dieses kleinen Tricks, kann man so sch\"on mit Markovketten rumrechnen!\smallskip
+
+Die Formel sieht vielleicht abstrakt und unhandlich aus, wie k\"onnen aber wirklich ganz einfach in konkrete Beispielen damit rechnen:
+\begin{beispiel}
+	Seien $X \sim \operatorname{Poi}(\lambda), Y \sim \operatorname{Poi}(\beta)$ unabhängig. Dann ist auch $X+Y$ Poissonverteilt, und zwar mit Parameter $\lambda+\beta$. Dazu nutzen wir die diskrete Faltungsformel und rechnen ein wenig rum:
+	\begin{align*}
+		\mathbb{P}(X+Y=n) &= \sum\limits_{k \in \N_0} \mathbb{P}(X = n-k)\mathbb{P}(Y = k)\\
+		& = \sum\limits_{k=0}^{n} e^{-\lambda} \frac{\lambda^{n-k}}{(n-k)!} e^{-\beta} \frac{\beta^{k}}{k!}\\
+		&= e^{-(\lambda + \beta)} \frac{1}{n!} \sum\limits_{k=0}^{n} \frac{n!}{(n-k)!} \lambda^{n-k} \beta^{k}\\
+		& = e^{-(\lambda + \beta)} \frac{1}{n!} \sum\limits_{k=0}^{n} \Big(\begin{array}{c} n\\ k\end{array}\Big) \lambda^{n-k} \beta^{k}\\
+		& \overset{\text{bin.}}{\underset{\text{Formel}}{=}} e^{-(\lambda + \beta)} \frac{(\lambda + \beta)^n}{n!}.
+	\end{align*}
+	Damit ist $X+Y\sim \operatorname{Poi}(\lambda+\beta)$ gezeigt.
+\end{beispiel}
+
+
+
+\begin{beispiel}
+	Sind $X_1,...,X_n$ u.i.v mit $X_1 \sim \operatorname{Ber}(p)$ f\"ur ein $p\in (0,1)$, dann gilt $X_1+...+X_n \sim \operatorname{Bin}(n,p)$. Interpretation: Wenn $\operatorname{Ber}(p)$ die erfolgreiche Ausf\"uhrung eines Versuchs ($1$=Erfolg, $0$=Misserfolg) beschreibt, so beschreibt $\operatorname{Bin}(n,p)$ die Anzahl der erfolgreichen Ausf\"uhrungen von $n$ unabhängigen Versuchen.
+\end{beispiel}
+
+\begin{proof}
+	Induktion über $n$:
+	\begin{itemize}
+		\item[IA:] $n=1$: $\checkmark$ $\operatorname{Ber}(p) = \operatorname{Bin}(1,p)$ nach Definition beider Verteilungen.
+		\item[IV:] Die Behauptung gelte für ein \textit{beliebiges}, aber festes $n \in \N$
+		\item[IS:] Indem wir $X_1+...+X_{n+1}=(X_1+...+X_n)+X_{n+1}$ klammern, wenden wir die diskrete Faltungsformel an und nutzen dann die Induktionsvoraussetzung:
+		 \begin{align*}
+			\mathbb{P}(X_1+...+X_{n+1} = k)&
+			\overset{\text{\ref{diskreteFaltung}}}{=} \mathbb{P}(X_1+...+X_{n} = k-1) \mathbb{P}(X_{n+1} = 1)\\
+			&\quad + \mathbb{P}(X_1+...+X_{n} = k) \mathbb{P}(X_{n+1} = 0)\\
+			&= \left(  n\atop{k-1}\right) p^{k-1} (1-p)^{n-k+1}p + \left( n\atop k\right) p^{k} (1-p)^{n-k}(1-p) \\
+			&= \left(\left( n\atop {k-1} \right) + \left( n\atop  k\right)\right) p^k (1-p)^{n-k+1}\\
+			& = \left({n + 1}\atop  k \right) p^k (1-p)^{n-k+1}.
+		\end{align*}
+		Im letzten Schritt haben wir eine Rechnenregel f\"ur Binomialkoeffizienten benutzt, die kennen wir aus Analysis 1. Also ist $X_1+...+X_n \sim \operatorname{Bin}(n,p)$ gezeigt. 
+	\end{itemize} 
+\end{proof}
+
+\begin{deff}
+	Sind $\mu_1,...,\mu_n$ Wahrscheinlichkeitsmaße auf $(\R^d, \cB(\R^d))$, so heißt das Bildmaß vom Produktmaß $\mu_1 \otimes ... \otimes \mu_n$ unter der Abbildung $h_d(x_1,...,x_d) = x_1+...+x_d$ \textbf{Faltung} der Maße. Wir schreiben $\mu_1 *...* \mu_n$ für die Faltung.
+%	\begin{center}		
+%		\begin{tikzcd}
+%			(\cB(\R^d), \mu_1 \otimes ... \otimes \mu_n) \arrow[r, "{h_d}"] & (\cB(\R), \mu_1 \times ... \times \mu_n).
+%		\end{tikzcd}
+%	\end{center}
+	Sind $X_1,...,X_d$ unabhängige Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so heißt $\mathbb{P}_{X_1} *...*\mathbb{P}_{X_d}$ \textbf{Faltung} von $X_1, ..., X_d$.
+\end{deff}
+
+\begin{bem}
+	Nat\"urlich ist die Definition der Faltung abstrakt, andererseits ist sie auch konkret. Die Faltung ist nichts weiter als die Verteilung der Summe unabh\"angiger Zufallsvariablen, wir m\"ussen uns nur daran erinnern, dass die Verteilung unabh\"angiger Zufallsvariablen das Produktma\ss{} ist:
+	\begin{align*}
+		\mathbb{P}(X_1+...+X_d \in B) &= \mathbb{P}(h_d(X_1,...,X_d) \in B) \\
+		&\overset{\text{unab.}}{=} \mathbb{P}_{X_1} \otimes ... \otimes \mathbb{P}_{X_d}(h_d(X_1,...,X_d) \in B)\\
+		&\overset{\text{Def.}}{\underset{\text{push-f.}}{=}} \mathbb{P}_{X_1} *...*\mathbb{P}_{X_d}(B).
+	\end{align*}
+\end{bem}
+Mit der Definition der Faltung k\"onnen wir erstmal nicht viel anstellen, wir haben die Faltung schlie\ss lich einfach als das definiert, was wir berechnen wollen. Was wir gerne h\"atten, w\"are ein analog zu der diskreten Faltungsformel weil wir damit in konkreten Beispielen rechnen k\"onnen. Hier ist die allgemeine Formel, danach konkretisieren wir diese f\"ur den Fall mit Dichten.
+\begin{prop}\label{randomProp}
+	Seien $\mu_1,\mu_2$ Wahrscheinlichkeitsmaße auf $(\R,\cB(\R))$ mit Verteilungsfunktionen $F_1,F_2$, dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item Mit $B-y: = \{ x-y\colon x \in B \}$, d. h. die Verschiebung der Menge $B$ um $y$ nach links, gilt \[ \mu_1 * \mu_2(B) = \int_{\R} \mu_1(B-y) \dint \mu_2(y)\] f\"ur alle $B\in \mathcal B(\R)$.
+		\item F\"ur alle $t\in \R$ gilt \[ F_{\mu_1 * \mu_2}(t) = \int_{\R} F_1(t-y) \dint \mu_2(y).\]
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+		Wegen der Manipulation
+		 \[ \mathbf{1}_{B-y}(x) = \begin{cases}
+		1&:x \in B-y\\
+		0&:\text{sonst}
+		\end{cases} = \begin{cases}
+		1&: x+y \in B\\
+		0&: \text{sonst}
+		\end{cases} = \mathbf{1}_{h_2^{-1}(B)}(x,y) \]
+		folgt
+		\begin{align*}
+		\mu_1 * \mu_2(B)& \overset{\text{Def.}}{=} \mu_1 \otimes \mu_2(h_d^{-1}(B)) \\
+		&= \int_{\R^2} \mathbf{1}_{h_2^{-1}(B)}(x,y) \dint \mu_1\otimes \mu_2(x,y)\\
+		& = \int_{\R^2} \mathbf{1}_{B-y}(x) \dint \mu_1\otimes \mu_2(x,y) \\
+		&\overset{\text{Fubini}}{=} \int_{\R} \Big( \int_{\R} \mathbf{1}_{B-y}(x) \dint \mu_1(x) \Big) \mu_2(y)\\
+		& = \int_{\R} \mu_1(B-y) \dint \mu_2(y).
+		\end{align*}
+		Das ist die erste Aussage.
+		\item Setze $B = (-\infty,t]$ mit $B-y = (-\infty,t-y]$ ein.
+	\end{enumerate}
+\end{proof}
+Nun zur konkreten Rechenvorschrift, um die Verteilung der Summe unabh\"angiger Zufallsvariablen mit Dichten zu berechnen:
+\begin{prop}[Stetige Faltungsformel]
+	Sind $X,Y$ unabhängige absolutstetige Zufallsvariablen. Dann ist auch $X+Y$ absolutstetig und hat Dichte 
+	\[ f_{X+Y}(x) = \int_{\R} f_X(x-y)f_Y(y) \dint y, \quad x\in\R.\]
+\end{prop}
+\begin{proof}
+	Mit vorheriger Proposition kennen wir die Verteilungsfunktion der Summe. Wir rechnen diese mit der Formel aus und setzen dabei die bekannten Dichten ein:
+	\begin{align*}
+		\mathbb{P}_{X+Y}((-\infty,t])&\overset{\text{Def.}}{=}\mathbb{P}_X * \mathbb{P}_Y((-\infty,t])\\
+		& \overset{\text{\ref{randomProp}}}{=} \int_{\R} \mathbb{P}_X ((-\infty,t-y]) \dint \mathbb{P}_Y(y) \\
+		&\overset{\text{\ref{IntDichten}}}{=} \int_{\R} \int_{-\infty}^{t-y} f_X(x) \dint x f_Y(y) \dint y\\
+		& \overset{\text{Subst.}}{=} \int_{\R} \int_{-\infty}^{t} f_X(x-y) \dint x f_Y(y) \dint y\\
+		&= \int_{\R} \int_{\R} \mathbf{1}_{(-\infty,t]}(x) f_X(x-y) f_Y(y) \dint x \dint y\\
+		& \overset{\text{Fubini}}{=} \int_{-\infty}^{t} \int_{\R} f_X(x-y) f_Y(y) \dint y \dint x\\
+		&= \int_{\infty}^t f_{X+Y}(x)\dint x.	
+	\end{align*}
+	Also ist $X+Y$ absolutstetig mit behaupteter Dichte $f_{X+Y}$.
+\end{proof}
+
+	Das Konzept der Faltung kommt nicht aus der Stochastik, daher k\"onnen wir mit dem Begriff \enquote{Faltung} auch nichts anfangen. Die Faltung zweier integrierbarer Funktionen wir in der Fourieranalysis als 
+	\begin{align*}
+		g\ast h (x)=\int_\R g(x-y) h(y)\dint y
+	\end{align*}
+	definiert und zum Beispiel in der Signalverarbeitung studiert. Dass die Faltung bei uns f\"ur Summen unabh\"angiger Zufallsvariablen auftaucht, ist ein Zufall der Mathematik. Es gibt also keinen Grund sich Gedanken \"uber die Begrifflichkeit Faltung zu machen, f\"ur uns ist es einfach nur eine Berechnungsformel.
+
+\begin{beispiel}\label{B5}\abs
+	\begin{enumerate}[label=(\roman*)]\label{bspFaltung}
+		\item Sind $X_1 \sim \cN(\mu_1,\sigma_1^2)$ und $X_2 \sim \cN(\mu_2,\sigma_2^2)$ unabhängig, dann ist auch die Summe wieder normalverteilt, genauer, es gilt $X_1 + X_2 \sim \cN(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$. Das kann man mit der stetigen Faltungsformel ausrechnen:
+		\begin{align*}
+			f_{X_1 + X_2}(x) &= \int_{\R} \frac{1}{\sqrt{2 \pi \sigma_1^2}} e^{-\frac{(x-y-\mu_1)^2}{2\sigma_1^2}} \frac{1}{\sqrt{2 \pi \sigma_2^2}} e^{-\frac{(y-\mu_2)^2}{2\sigma_2^2}} \dint y\\
+			&=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}} e^{-\frac{(x-(\mu_1+\mu_2))^2}{2(\sigma_1^2+\sigma_2^2)}},\quad x\in\R.
+		\end{align*}
+		Auf den ersten Blick ist nicht so klar, ob die Berechnung einfach oder nicht so einfach ist. Im Prinzip muss man nur richtig quadratisch erg\"anzen und Substituieren. In der Tat ist die Rechnung ziemlich b\"ose, klappt aber. Weil wir gleich eine viel einfachere Methode kennenlernen, lassen wir die Rechnung weg.
+		\item Sind $X \sim \operatorname{Exp}(\lambda), Y \sim \operatorname{Exp}(\lambda)$ unabhängig, so ist $X + Y \sim \Gamma(2,\lambda)$. Das kann man direkt mit der stetigen Faltungsformel ausrechnen, siehe \"Ubungsaufgabe.
+	\end{enumerate}
+\end{beispiel}
+
+Jetzt noch eine ganz andere Methode zur Berechnung der Verteilung der Summe von unabh\"angigen Zufallsvariablen. Daf\"ur nutzen wir einen Satz der Wahrscheinlichkeitstheorie, den Eindeutigkeitssatz f\"ur momenterzeugende Funktionen. Der Satz besagt, dass Verteilungen eindeutig durch ihre momenterzeugenden Funktionen festgelegt sind, falls diese um $0$ existieren.
+\begin{satz}\label{WT}
+	Seien $X$ und $Y$ Zufallsvariablen, f\"ur die die momenterzeugenden Funktinoen $\cM_X(t),\cM_Y(t)$ in $(-\varepsilon,\varepsilon)$ existieren für ein $\varepsilon > 0$. Falls $\cM_X(t) = \cM_Y(t)$ für alle $t \in (-\varepsilon,\varepsilon)$ gilt, so gilt auch $F_X = F_Y$.
+\end{satz}
+\begin{proof}
+	Siehe Wahrscheinlichkeitstheorie 1 - hart!
+\end{proof}
+Gemeinsam mit folgender Proposition ist Satz \ref{WT} ein m\"achtiges Hilfsmittel.
+\begin{prop}\label{P7}
+	Sind $X$ und $Y$ unabhängige Zufallsvariablen mit $\cM_X(t),\cM_Y(t) < \infty$. Dann gilt $\cM_{X+Y}(t) = \cM_X(t)\cM_Y(t)$.
+\end{prop}
+
+\begin{proof} 
+Das folgt direkt daraus, dass Erwartungswerte von Produkten unabh\"angiger Zufallsvariablen faktorisieren, siehe Satz \ref{un}:
+	$$\cM_{X+Y}(t) = \E[e^{t(X+Y)}] = \E[e^{tX}\cdot e^{tY}] = \E[e^{tX}] \cdot \E[e^{tY}] = \cM_X(t)\cM_Y(t).$$
+\end{proof}
+
+Die Anwendung der momenterzeugenden Funktion zur Bestimmung der Verteilung von Summen unabh\"angiger Zufallsvariablen versteht man am besten mit folgendem einfachen Beispiel. Beachte: Das Beispiel ist einfach, die Aussage aber nicht. H\"atten wir nicht die Kanone aus der Wahrscheinlichkeitstheorie 1 ausgepackt, h\"atten wir das mit der stetigen Faltungsformel nachrechnen m\"ussen. 
+
+\begin{beispiel}
+	Kommen wir zur\"uck zu Beispiel \ref{B5} (i) und berechnen die momenterzeugende Funktion der Summe der zwei unabh\"angigen Normalverteilungen. Wegen Proposition \ref{P7} und der in den \"Ubungen berechneten Formel f\"ur die momenterzeugende Funktion einer Normalverteilung, gilt
+	\begin{gather*}
+		\cM_{X_1+X_2}(t) = \cM_{X_1}(t)\cM_{X_2}(t) = e^{\mu_1 t + \frac{\sigma_1^2}{2}t^2} e^{\mu_2 t + \frac{\sigma_2^2}{2}t^2}=e^{(\mu_1+\mu_2)t + \frac{\sigma_1^2 + \sigma_2^2}{2}t^2},\quad t\in\R.
+	\end{gather*}
+	Nun wissen wir aber auch, dass
+	\begin{align*}
+		\cM_Y(t)=e^{(\mu_1+\mu_2)t + \frac{\sigma_1^2 + \sigma_2^2}{2}t^2}, \quad t\in\R,
+	\end{align*}
+	 f\"ur $Y \sim \cN(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$. Also gilt $X_1+X_2\sim Y$ nach Satz \ref{WT} und damit gilt f\"ur die Summe $X_1+X_2\sim \mathcal N(\mu_1+\mu_2,\sigma_1^2 + \sigma_2^2)$.
+\end{beispiel}
+Warnung: Die Vorlesung ist hier etwas irref\"uhrend. Satz \ref{WT} ist kein Allheilmittel. In der (mathematischen) Realit\"at sind exponentielle Momente fast immer unendlich und wir k\"onnen nicht mit der momenterzeugenden Funktion arbeiten. 
+
+
+

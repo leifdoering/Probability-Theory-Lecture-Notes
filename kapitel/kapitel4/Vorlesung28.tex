@@ -1,0 +1,97 @@
+\marginpar{\textcolor{red}{Vorlesung 28}}
+
+\begin{bem1}
+	Die Konstruktion im Beweis heißt Skorochod-Kopplung, \mbox{d. h.} für jede Folge $X_n \overset{d}{\longrightarrow} X$ gibt es einen Wahrscheinlichkeitsraum mit $Y_1,Y_2,...$ ZV auf $(\Omega, \cA, \mathbb{P})$, sodass 
+	\begin{itemize}
+		\item $X_n \sim Y_n$, $X \sim Y$
+		\item $Y_n \overset{d}{\longrightarrow} Y$, $n \to \infty$.
+	\end{itemize}
+\end{bem1}
+
+\begin{satz}[Stetigkeitssatz von Lévy]
+	Seien $X,X_1,X_2,...$ ZV, so dass $ \cM_X(t) < \infty$, $\cM_{X_n}(t) < \infty$, $\forall t \in \R$, $n \in \N$. Dann gilt $\cM_{X_n}(t) \to \cM_X(t)$, $n \to \infty$, $\forall t \in \R \Leftrightarrow X_n \overset{d}{\longrightarrow} X$, $n \to \infty$.
+\end{satz}
+
+\begin{proof}
+	?!?!
+\end{proof}
+
+\begin{satz}[Poisson'scher Grenzwertsatz]
+	Ist $X_1,X_2,...$ eine Folge von ZV mit $X_n \sim \operatorname{Bin}(n,p)$, so dass 
+\end{satz}
+
+\begin{proof}
+	Berechne $\cM_{X_n}$, $\cM_X$ und zeige die Konvergenz.
+\end{proof}
+
+\begin{beispiel}
+	Um $X_n \overset{d}{\longrightarrow} X$ zu zeigen, können wir
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{KonvStet} Konvergenz der Verteilungsfunktion an Stetigkeitsstellen zeigen
+		\item \label{KonvMom} Konvergenz der momenterzeugenden Funktion zeigen.
+	\end{enumerate}
+	Es ist nicht immer klar, was besser ist! \ref{KonvMom} ist gut für unabhängige Summen, wie folgendes Beispiel zeigt: Sei $X_1,X_2,...$ Folge mit $X_n \sim \cN(\mu_n, \sigma_n^2)$ und $\mu_n \to \mu$, $\sigma_n \to \sigma$, $n \to \infty$. Dann gilt $X_n \overset{(d)}{\longrightarrow} X$, $n \to \infty$, $X \sim \cN(\mu, \sigma^2)$. \newline
+	Rechnen mit \ref{KonvStet} ist hier gruslig, \ref{KonvMom} dagegen ganz einfach: 
+	\[ \cM_{X_n}(t) = e^{\mu_n(t) + \frac{\sigma_n^2t^2}{2}} \to e^{\mu t + \frac{\sigma^2 t^2}{2}}, \: n \to \infty, \: t \in \R \]
+	 
+	Anders verhält es sich im nächsten Beispiel: Sei $X_1,X_2,...$ Folge mit $X_n \sim \operatorname{Exp}(\lambda_n)$ und $\lambda_n \to \lambda > 0$, $n \to \infty$. Dann gilt $X_n \to X$, $n \to \infty$ für $X \sim \operatorname{Exp}(\lambda)$.\newline
+	Hier scheitert \ref{KonvMom} direkt, weil $\cM_{X_n}, \cM_X$ nicht für alle $t \in \R$ definiert sind. Dafür klappt \ref{KonvStet} gut: 
+	\[ F_{X_n}(t) = (1-e^{-\lambda_n t}) \mathbf{1}_{(0, \infty)}(t) \to (1-e^{-\lambda t}) \mathbf{1}_{(0, \infty)}(t) = F_X(t), \: n \to \infty, \: t \in \R \]
+\end{beispiel}
+
+\begin{bem1}
+	Die Annahme $\cM_{X_n}, \cM_X < \infty$ ist extrem, aber lässt sich problemlos umschiffen. Ersetze dazu die momenterzeugende Funktion $\cM_X$ durch die \textbf{charakteristische Funktion} $\psi_X$, wobei $\psi_X = \E[e^{itX}]$, $t \in \R$. Die Message ist:
+	\begin{itemize}
+		\item Weil $|e^{itX}| = 1$ und somit $\E[|e^{itX}|] < \infty$, ist $\psi_X(t)$ \textit{immer} definiert.
+		\item Rechnen geht mit $\psi_X$ genauso wie mit $\cM_X$.
+	\end{itemize}
+\end{bem1}
+
+\begin{satz}[Zentraler Grenzwertsatz]\label{ZGS}
+	Sind $X_1,X_2,...$ u.i.v. ZV mit $\E[X_1] = \mu$ und endlicher Varianz $\V(X_1) = \sigma^2 > 0$. Dann gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{ZGSEins} \[ \frac{\sum_{k = 1}^{n} (X_k - \E[X_1])}{\sqrt{n \cdot \sigma^2}} \overset{(d)}{\longrightarrow} X, \: n \to \infty \]
+		mit $X \sim \cN(0,1)$
+		\item\label{ZGSZwei} \[ \mathbb{P}\Big( a \leq \frac{\sum_{k=1}^{n}(X_k - \E[X_1])}{\sqrt{n \cdot \sigma^2}} \leq b \Big) \to \frac{1}{\sqrt{2 \pi}} \int_{a}^{b} e^{-\frac{x^2}{2}} \dint x, \: n \to \infty \]
+		für $a,b \in \R$.
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Wir machen den Beweis nur unter der Extraannahme, dass die momenterzeugende Funktion definiert ist (allgemein funktioniert das mit der charakteristischen Funktion genauso). \OE \space gelte $\mu = 0$, $\sigma^2 = 1$, sonst betrachte $\frac{X_i - \E[X_i]}{\sigma}$.
+		\begin{gather*}
+			\cM_{\frac{\sum_{i=1}^{n} X_i}{\sqrt{n}}}(t) = \E[e^{\frac{t}{\sqrt{n}}\sum_{i=1}^{n} X_i}] = \E\Big[\prod_{i=1}^{n} e^{\frac{t}{\sqrt{n}}X_i}\Big]\\ 
+			\overset{\text{unabh.}}{=} \prod_{i=1}^{n} \E\Big[e^{\frac{t}{\sqrt{n}}X_i}\Big] = \E\Big[e^{\frac{t}{\sqrt{n}}X_1}\Big]^n \to \cM_{\cN(0,1)}(t), \: n \to \infty \: t \in \R
+		\end{gather*}
+		\item Es gilt \ref{ZGSZwei} $\Leftrightarrow$ \ref{ZGSEins}, weil $\mathbb{P}(a \leq ... \leq b) = F_{...}(b) - F_{...}(a)$ für $F_{...}$ stetig.
+	\end{enumerate}
+\end{proof}
+
+\begin{bem1}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Wegen \ref{ZGS} nennt man $\cN(0,1)$ die \textbf{universelle Verteilung}. Wir haben in \ref{ZGS} nur $\V(X_1) < \infty$ angenommen -- nichts weiter über die Verteilung.
+		\item In Stochastik 2 wird die u.i.v.-Annahme stark abgeschwächt!
+	\end{enumerate}
+\end{bem1}
+
+\begin{bem1}
+	Gelte \[ e_n := \Big| \frac{1}{n} \sum\limits_{i=1}^{n} \Big| \to 0, \: n \to \infty
+	\]
+	nach \ref{GGZ}. \enquote{Konvergenzrate}:
+	\[ \mathbb{P}\Big(\frac{\sqrt{n}}{\sigma^2} e_n \leq b\Big) = \mathbb{P}\Big( -b \leq \frac{\sqrt{n}}{\sigma^2} e_n \leq b \Big) \to \frac{1}{\sqrt{2 \pi}} \int_{-b}^{b} e^{-\frac{x^2}{2}} \dint x, \: n \to \infty \]
+	Definiere $L(t) = \ln (\cM_{X_1}(t))$. Es gelten
+	\begin{itemize}
+		\item $L(0) = 0$
+		\item \[ L'(0) = \frac{\cM_{X_1}'(0)}{\cM_{X_1}(0)} = \frac{\E[X_1]}{1} = 0 \]
+		\item \[ L''(0) = \frac{\cM_{X_1}''(0) \cM_{X_1}(0) - \cM_{X_1}'(0)}{\cM_{X_1}^2(0)} = \frac{\cM_{X_1}''(0) \cdot 1 - 0}{1} = \V(X_1). \]
+	\end{itemize}
+	Damit gilt wegen l’Hospital 
+	\begin{gather*}
+		\lim\limits_{n\to\infty} n \cdot L\Big(\frac{t}{\sqrt{n}}\Big) = \lim\limits_{n\to\infty} \frac{L\Big(\frac{t}{\sqrt{n}}\Big)}{\frac{1}{n}} = \lim\limits_{n\to\infty} \frac{L'\Big(\frac{t}{\sqrt{n}}\Big) \cdot t n^{-\frac{3}{2}} }{2n^{-2}}\\
+		= \lim\limits_{n\to\infty} \frac{L'\Big(\frac{t}{\sqrt{n}}\Big) \cdot t}{2n^{-0{,}5}} = \lim\limits_{n\to\infty} \frac{L''\Big(\frac{t}{\sqrt{n}}\Big) \cdot t^2 n^{-\frac{3}{2}}}{2n^{-\frac{3}{2}}}\\ 
+		= \lim\limits_{n\to\infty} \frac{L''\Big(\frac{t}{\sqrt{n}t^2}\Big)}{2} = -\frac{t^2}{2} = \ln(\cM_X(t)).\\
+	\end{gather*}
+	Somit konvergiert \[ \cM_{\frac{\sum_{i=1}^{n} X_i}{\sqrt{n}}}(t) \to \cM_{\cN(0,1)}(t), \: n \to \infty \: t \in \R \]
+	und mit Stetigkeitssatz konvergieren die Verteilungen.
+\end{bem1}

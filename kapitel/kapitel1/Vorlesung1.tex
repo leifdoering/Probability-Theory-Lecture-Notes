@@ -1,0 +1,176 @@
+%\renewcommand*\thechapter{\Alph{chapter}}
+
+	\part*{Teil 1: Maß- und Integrationstheorie}
+
+
+\chapter{Maßtheorie}
+
+Ma\ss - und Integrationstheorie bildet die formale Grundlage um zuf\"allige Experimente zu modellieren. In diesem ersten Teil der Vorlesungen beweisen wir alle notwendigen Theoreme. Nicht alles wird sp\"ater uneingeschr\"ankt wichtig sein, das Arbeiten mit den neuen Begriffen wird sich in zuk\"unftigen Vorlesungen aber auszahlen! \smallskip
+
+Im Prinzip sind die kommenden f\"unf Vorlesungen total elementar, wir brauchen eigentlich nur Kenntnisse \"uber Mengen, Folgen und Reihen. Die Vorlesung nutzt also nur Kenntnisse der Analysis 1. Dennoch wird euch der Inhalt schwer fallen weil wir Mengensysteme nicht visualisieren k\"onnen und daher viel abstrakt denken m\"ussen. Es wird sehr wichtig sein, die richtigen Beispiele im Kopf zu haben. Diese sollten nicht zu einfach sein, weil sonst der Gro\ss teil der Schwierigkeiten nicht erkannt werden kann. F\"ur $\sigma$-Algebren sollten wir m\"oglichst schnell die Borel-$\sigma$-Algebra als Standdardbeispiel im Kopf halten, f\"ur Ma\ss e das Lebesgue Ma\ss. Endliche Beispiele werden wir nur ganz kurz als Motivation der Ma\ss theorie f\"ur Stochastik betrachten (W\"urfeln, M\"unzwurf, etc.), solche Beispiele bringen leider nicht viel um die Konzepte der Wahrscheinlichkeitstheorie richtig zu verstehen.
+
+
+\section{$\sigma\text{-Algebren}$ und Maße}\label{sigmaalgebra}
+$\Omega \neq \emptyset $ sei immer eine beliebige Grundmenge. Für $A \subseteq \Omega$ bezeichnet $A^C$ immer das Komplement von A in $\Omega$, d. h. $A^C = \{ w \in \Omega \: | \: w \notin A \}$. $\mathcal{P}(\Omega)$ bezeichnet die Potenzmenge von $\Omega$ (inklusive $\emptyset$ und $\Omega$), eine Teilmenge von $\mathcal{P}(\Omega)$ ist also eine Menge von Mengen.
+
+\begin{deff} 
+	$\mathcal{A} \subseteq \mathcal{P}(\Omega)$ heißt $\sigma\text{-Algebra}$, falls
+	\begin{enumerate}[label=(\roman*)]
+		\item $\Omega \in \mathcal{A}$,
+		\item $A \in \mathcal{A} \Rightarrow A^C \in \mathcal{A}$, das nennt man auch stabil (oder abgeschlossen) unter Komplementbildung,
+		\item $A_{1},A_{2},... \in \mathcal{A} \Rightarrow \bigcup\limits_{k=1}^{\infty}A_k \in \mathcal{A}$, das nennt man auch stabil (oder abgeschlossen) unter abzählbarer Vereinigung.
+	\end{enumerate}
+	Elemente von $\mathcal{A}$ heißen \textbf{messbare Mengen}. Ist $\mathcal{A} \subseteq \mathcal{B}$ und $\mathcal{A}, \mathcal{B}$ sind $\sigma\text{-Algebren}$, so nennt man $\mathcal{A}$ $\text{Unter-}\sigma\text{-Algebra}$ von $\mathcal{B}$.
+\end{deff}
+
+\begin{example}\label{E1} \abs
+\begin{itemize}
+	\item $\mathcal{A} = \{ \emptyset, \Omega \}$
+	\item $\mathcal{A} = \{ \emptyset, \Omega, A, A^C \}$ für $A \subseteq \Omega$ beliebig
+	\item $\mathcal{A} = \{ A \subseteq \Omega \: | \: A$ \text{oder} $A^C $ ist abzählbar$\}$
+\end{itemize}
+In allen Beispielen muss man nur die drei definierenden Eigenschaften testen. Bei den ersten zwei Beispielen ist das direkt, indem man alle M\"oglichkeiten ausprobiert. Im dritten Beispiel m\"ussen wir nur bei der abz\"ahlbaren Vereinigung kurz nachdenken. Seien also $A_1, A_2, ...$ Mengen, die entweder abz\"ahlbar sind oder deren Komplemente abz\"ahlbar sind. Sind all diese Mengen abz\"ahlbar, so ist nach Analysis 1 auch die Vereinigung abz\"ahlbar, also ist die Vereinigung wieder in $\mathcal A$. Ist eine der Mengen nicht abz\"ahlbar, sagen wir $A_j$, so ist das Komplement $A_j^C$ abz\"ahlbar. Doch dann ist wegen
+\begin{align*}
+	\Big(\bigcup_{n=1}^\infty A_i\Big)^C=\bigcap_{n=1}^\infty A_i^C \subseteq A_j^C
+\end{align*}
+das Komplement der Vereinigung nach Analysis 1 abz\"ahlbar. 
+\end{example}
+\begin{lemma}
+Für jede $\sigma\text{-Algebra}$ $\mathcal{A}$ gilt:
+\begin{enumerate}[label=(\roman*)]
+	\item $\emptyset \in \mathcal{A}$
+	\item $A_{1}, A_{2},... \in \mathcal{A} \Rightarrow \bigcap\limits_{n=1}^{\infty} A_{n} \in \mathcal{A}$
+	\item Aus $A, B \in \mathcal{A}$ folgt A $\backslash B := A \cap B^C \in A$ sowie $A \Delta B := (A\cap B^C) \cup (B \cap A^C) \in  \mathcal A$.
+\end{enumerate}
+\begin{proof}
+	Übung
+\end{proof}
+\end{lemma}
+
+\begin{bem1}
+
+Im Folgenden nutzen wir die erweiterte Zahlengerade $\overline{\mathbb{R}} = [-\infty, +\infty] := \mathbb{R} \cup \{ -\infty, +\infty \}$. Wir definieren
+\begin{itemize}
+	\item $-\infty < a < +\infty$,
+	\item $+\infty + a = +\infty$ und $-\infty + a = -\infty$ f\"ur alle $ a \in \mathbb{R}$,
+	\item $x \cdot (+\infty)=+\infty$ und $x \cdot (-\infty)=-\infty$ f\"ur alle $x>0$,
+	\item $0\cdot (+\infty)=0$ und $0\cdot (-\infty)=0$,
+	\item $+\infty+(+\infty)=+\infty$ und $-\infty+(-\infty)=-\infty$,
+	\item $-\infty+(+\infty)$ wird \underline{nicht} definiert.
+\end{itemize}	
+	 Im Gegensatz zu $\R$ k\"onnen wir aus $\overline{\mathbb{R}}$ keine sinnvolle algebraische Struktur formen, das soll uns aber nicht weiter st\"oren. Sehr oft schreibt man $\infty$ statt $+\infty$.
+\end{bem1}
+
+
+\begin{deff}
+Für eine $\sigma\text{-Algebra } \mathcal{A}$ heißt $\mu \! : \mathcal{A} \longrightarrow [0, \infty]$ ein \textbf{Maß auf $\mathcal{A}$}, falls folgende Eigenschaften gelten:
+\begin{enumerate}[label=(\roman*)]
+	\item $\mu (\emptyset)$ = 0
+	\item Sind $A_{1}, A_{2},...\in \mathcal{A}$ paarweise disjunkte Mengen, so gilt $\mu(\bigcupdot\limits_{n=1}^{\infty}A_{n})=\sum\limits_{n=1}^{\infty}\mu (A_{n})$. Wir nenne diese Eigenschaft $\sigma$-Additivität, wobei sich das $\sigma$ auf die unendliche Anzahl von Mengen bezieht. 
+\end{enumerate}
+
+Ein Ma\ss{} $\mu$ heißt \textbf{endlich}, falls $\mu (\Omega) < \infty$. $\mu$ heißt \textbf{Wahrscheinlichkeitsmaß}, falls $\mu (\Omega) = 1$.
+\end{deff}
+Nat\"urlich impliziert die $\sigma$-Additivit\"at auch die endliche Additivit\"at $$\mu\Big(\bigcupdot\limits_{n=1}^{k}A_{n}\Big)=\sum\limits_{n=1}^{k}\mu (A_{n}).$$ Dazu wird einfach $A_{k+1}=A_{k+2}=...=\emptyset$ gew\"ahlt.
+
+
+\begin{bem}
+
+Oft werden Wahrscheinlichkeitsmaße mit $\mathbb P$ anstelle von $\mu$ geschrieben und \textbf{Verteilungen} genannt.
+
+\end{bem}
+
+\begin{deff} \abs
+	\begin{itemize}
+		\item $(\Omega, \mathcal{A})$ heißt \textbf{messbarer Raum}
+		\item $(\Omega, \mathcal{A}, \mu)$ heißt \textbf{Maßraum}
+		\item $(\Omega, \mathcal{A}, \mathbb P)$ heißt \textbf{Wahrscheinlichkeitsraum}
+		\item $\mu (A)$ nennt man \textbf{Maß} von $A$ 
+	\end{itemize}
+
+\end{deff}
+
+\begin{bem1}
+	Bei einem Wahrscheinlichkeitsraum spricht man von \textbf{Ereignissen} $A$ statt messbaren Mengen. $\mathbb P(A)$ heißt \textbf{Wahrscheinlichkeit} von $A$. Einelementige messbare Mengen $A = \{a\}$ heißen in Wahrscheinlichkeitsräumen \textbf{Elementarereignisse}.
+\end{bem1}
+
+Um langsam in die Denkweise der Stochastik einzusteigen, werden wir wieder und wieder diskutieren, warum unsere Modelle f\"ur die Modellierung zuf\"alliger Experimente gut geeignet sind. 
+
+\begin{disc}[Stochastische Modellierung, Nr. 1]\label{N1}
+	Warum machen die Definitionen von Wahrscheinlichkeitsräumen $(\Omega, \mathcal A, \mathbb P)$ für die Modellierung von zufälligen Experimenten Sinn? Wir interpretieren dazu
+	\begin{itemize}
+		\item Ereignisse $=$ \glqq Ereignisse, deren Eintreten (oder Nichteintreten) beobachtet werden kann.\grqq{} Die $\sigma$-Algebra besteht also aus den Ereignissen des Experiments, die wir beobachten k\"onnen.
+		\item $\mathbb P(A)$ = \glqq Wahrscheinlichkeit des Eintretens des Ereignisses A.\grqq
+		\item $A^C$ = \glqq Gegenereigniss\grqq
+		\item $A \in \cA \Rightarrow A^{C} \in \cA$ bedeutet \glqq Eintreten von Ereigniss bekannt, impliziert Eintreten von Gegenereigniss bekannt.\grqq
+		\item $\mathbb P(A^C) = 1-\mathbb P(A)$ bedeutet \glqq Gegenereigniss hat Gegenwahrscheinlichkeit.\grqq 
+	\end{itemize}
+	Zu dem letzten Punkt beachte man, dass $\mathbb P(A)+\mathbb P(A^C)=\mathbb P(\Omega)=1$ wegen $A\cup A^C=\Omega$ gilt. Also ist die Forderung der Addititivit\"at von Ma\ss en sinnvoll. Nat\"urlich sollte die Vereinigung zweier Ereignisse \glqq es passiert $A$ oder $B$\grqq{} auch wieder beobachtbar (also messbar) sein, wenn $A$ und $B$ beobachtbar sind. Mit vollst\"andiger Induktion sollten damit alle endlichen Vereinigungen messbarer Mengen wieder messbar sein. Damit haben wir den Sinn der Definitionen einer $\sigma$-Algebra und eines Ma\ss es gro\ss teils eingesehen. Nur die Erweiterung von endlichen auf unendliche Vereinigungen ist nicht so einfach zu motivieren. Hier bleibt f\"ur den Moment nur zu sagen: Es w\"urde nicht funktionieren.\smallskip
+
+	Als Beispiel modellieren wir den Wurf eines W\"urfels gem\"a\ss{} obiger Interpretation. Sei $\Omega = \{1,...,6\}$, $\cA=\mathcal P(\Omega)$ und $\mathbb P(\{1\})=...=\mathbb P(\{6\})= \frac{1}{6}$. Ein Ereigniss $A\in \mathcal A$ bedeutet also \glqq Eine der Zahlen in $A$ ist gew\"urfelt worden\grqq. Die Wahrscheinlichkeiten aller weiteren Ereignisse sind festgelegt, indem das Ereigniss in die disjunkten Elementarereignisse zerlegt wird, z. B. die Wahrscheinlichkeit eine gerade Zahl zu w\"urfeln:
+	\begin{align*}	
+		%\flushleft	
+		\mathbb P(\{2, 4,6\}) \overset{\text{disj.}}{=} \mathbb P(\{2\})+\mathbb P(\{4\})+\mathbb P(\{6\}) =\frac{3}{6}= \frac{1}{2}.
+	\end{align*}
+	Ganz analog ist nat\"urlich ein Ma\ss{} auf der Potenzmenge einer endlichen Menge schon eindeutig durch die Werte auf einelementigen Mengen festgelegt.
+\end{disc}
+
+
+Da wir das Ma\ss{} einer Menge in einer abstrakten Weise als die \glqq Gr\"o\ss e\grqq{} interpretieren, ist folgende kleine Rechnung wichtig:
+\begin{lemma}[Monotonie]
+	Seien $A, B \in \cA, B \subseteq A$ und $\mu $ ein Maß auf $A$. Dann ist $\mu(B) \leq \mu(A).$
+\end{lemma}
+
+\begin{proof}
+	$\mu(B) \leq \mu(B) + \mu(A\backslash B) = \mu(A)$, wobei wir beide definierenden Eigenschaften des Ma\ss es genutzt haben.
+	%\begin{align*}
+		%\mu(B) \leq \mu(B) + \mu(A\backslash B) = \mu(A)\\
+%	\end{align*}
+\end{proof}
+Kommen wir nun zu ein paar Beispielen:
+\begin{beispiel}[endliche Gleichverteilung]
+	Sei $\#\Omega < \infty$ und $\cA = \cP(\Omega)$. Dann hei\ss t $\mu(A) = \frac{\#A}{\#\Omega}$ Gleichverteilung auf $\Omega$. Weil $\mu (\Omega) = 1$, würde man $\mathbb P$ statt $\mu$ schreiben. Der Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$ ist ein Modell f\"ur das zuf\"allige Experiment, in dem aus $\#\Omega$ vielen Elementen jedes Element mit der selben Wahrscheinlichkeit gezogen wird, zum Beispiel Lotto.
+\end{beispiel}
+
+\begin{beispiel}[abzählbare Verteilungen, Z\"ahlma\ss]
+	Sei $\Omega$ abzählbar, also ohne Einschr\"ankung $\Omega = \N$. Wir w\"ahlen $\cA = \cP(\Omega)$ und eine Folge $(p_k)_{k \in \N}$ reeller Zahlen. Definieren wir $$\mu(A):= \sum\limits_{k \in A} p_k, \quad A \in \Omega,$$ so ist $\mu$ ein Ma\ss. Weil ein Ma\ss{} per Definition nicht-negativ ist, muss nat\"urlich $p_k\geq 0$ gelten f\"ur alle $k\in \N$ (w\"ahle dazu $A=\{k\})$. Zwei Spezialf\"alle:
+	\begin{itemize}
+		\item Damit $\mu$ ein Wahrscheinlichkeitsma\ss{} ist, muss $\sum_{k=0}^\infty p_k=\mu(\N)=1$ gelten. In dem Fall w\"urden wir wieder $\mathbb P$ statt $\mu$ schreiben.
+		\item Ist $p_k=1$ f\"ur alle $k\in\N$ hei\ss t $\mu$ \textbf{Z\"ahlma\ss} weil $\mu(A)=\# A$ die Anzahl der Elemente von $A$ z\"ahlt.
+	\end{itemize}
+\end{beispiel}
+
+\begin{beispiel}[Poissonverteilung]\label{Poi1}
+	Hier ist ein konkretes Beispiel zu der vorherigen Klasse von Beispielen, die Poissonverteilung. F\"ur ein $\lambda >0$ (der Parameter der Verteilung) sei
+	$p_k = e^{-\lambda} \frac{\lambda^k}{k!}$ f\"ur $k\in\N$. Es gelten dann
+	\begin{itemize}
+		\item $p_k \geq 0$ f\"ur alle $k\in\N$,
+		\item $\sum\limits_{k=0}^{\infty} p_k = \sum\limits_{k=0}^{\infty} e^{-\lambda} \frac{\lambda^k}{k!} = e^{-\lambda} \sum\limits_{k=0}^{\infty} \frac{\lambda^k}{k!} = e^{-\lambda} e^{\lambda} = e^{-\lambda + \lambda} = 1$.
+	\end{itemize}
+	Also definiert $\mathbb P(A)=e^{-\lambda} \sum_{k\in A} \frac{\lambda^k}{k!}$ ein Wahrscheinlichkeitsma\ss{} auf $(\N, \mathcal P(\N))$.
+\end{beispiel}
+\begin{beispiel}[Diracmaß]
+	Sei $\cA$ eine $\sigma$-Algebra auf $\Omega$ und $x \in \Omega$, so heißt $$\delta_x(A):=\begin{cases}
+	1,&x \in A\\
+	0,&x \notin A
+	\end{cases} \:$$ Diracmaß an der Stelle $x$. Die Eigenschaften eines Ma\ss es kann man ganz einfach checken:
+	\begin{enumerate}[label=(\roman*)]
+		\item Aufgrund der Definition gilt nat\"urlich $\delta_x(\emptyset) = 0$.
+		\item F\"ur disjunkte Mengen $A_1 ,A_2, ...$ gilt 
+		\begin{align*}
+		\delta_x\Big(\bigcupdot\limits_{n=1}^{\infty} A_n\Big) &= \begin{cases}
+		1,&x \in \bigcupdot\limits_{n=1}^{\infty} A_n\\
+		0,&x \notin \bigcupdot\limits_{n=1}^{\infty} A_n
+		\end{cases}\\& = \sum\limits_{n=1}^{\infty} \delta_x(A_n),
+		\end{align*}
+		 weil in der unendlichen Summe nur der Summand $1$ sein kann, in dem $x$ liegt.
+	\end{enumerate}
+\end{beispiel}
+Weitere wichtige Beispiele wie die geometrische Verteilung und die Binominalverteilung kommen auf dem \"Ubungsblatt zum ausprobieren. An dieser Stelle legen wir die Begrifflichkeiten der Stochastik wieder beiseite und besch\"aftigen uns f\"ur die n\"achsten Wochen nur mit allgemeinen Ma\ss en. Zum Gew\"ohnen f\"ur sp\"ater denkt immer daran, dass endliche Ma\ss e und Wahrscheinlichkeitsma\ss e sehr eng beieinander liegen: Durch $\mathbb P(A):=\frac{\mu(A)}{\mu(\Omega)}$ kann ein endliches Ma\ss{} immer zu einem Wahrscheinlichkeitsma\ss{} \glqq normiert\grqq{} werden.\smallskip
+
+Um uns mit den definierenden Eigenschaften weiter vertraut zu machen, beweisen wir eine wichtige Eigenschaft von Ma\ss en:
+
+
+
+
+

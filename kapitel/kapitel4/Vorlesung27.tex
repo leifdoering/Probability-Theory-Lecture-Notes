@@ -1,0 +1,133 @@
+\marginpar{\textcolor{red}{Vorlesung 27}}
+
+\begin{lemma}[\ref{BC} vs. fast sichere Konvergenz]
+	Sind $X_1,X_2,...$ ZV auf $(\Omega, \cA, \mathbb{P})$ und es gilt 
+	\[ \sum\limits_{n=1}^{\infty} \mathbb{P}(|X_n - X| > \varepsilon) < \infty \: \forall \varepsilon > 0, \] 
+	dann konvergiert $X_n \to X$, $n \to \infty$.
+\end{lemma}
+
+\begin{proof}
+	Definiere $\{ |X_n - X| > \varepsilon \} =: A_n$. Aus \ref{BC}: $\mathbb{P}(A_n \text{ unendlich oft}) = \mathbb{P}(\{ |X_n - X| > \varepsilon \} \text{ unendlich oft}) = 0$.
+	Also gilt mit $\varepsilon = 1/k$, $k \in \N$,
+	\[ 1 = \mathbb{P}(\forall k \in \N \colon \exists N \in \N \colon |X_n - X| < 1/n \: \forall n \geq N) = \mathbb{P}(X_n \to X, n \to \infty). \]
+	Für \ref{GGZ} zeige $\mathbb{P}(|X_n - X| > \varepsilon) \leq 1/n^p$, $p > 1$.
+\end{proof}
+
+\begin{korollar}[empirisches Gesetz der großen Zahlen]
+	\makeatletter\def\@currentlabel{EGGZ}\makeatother\label{EGGZ}
+	Seien $X_1,X_2,...$ u.i.v., so gilt \[ \frac{1}{n} \# \{ i \leq n \colon X_i \in A \} \overset{f. s.}{\longrightarrow} \mathbb{P}(X_1 \in A), \: n \to \infty \]
+	für $A \in \cB(\R)$. Insbesondere $A = (-\infty,t]$,
+	\[ \frac{1}{n} \# \{ i \leq n \colon X_i \leq t \} \overset{\text{f. s.}}{\longrightarrow} F(t), \: n \to \infty. \]
+	
+	Bedeutung: \enquote{Die relative Häufigkeit konvergiert gegen die Wahrscheinlichkeit.}
+\end{korollar}
+
+\begin{proof}
+	Definiere für alle $i=1,...,n$ \[ Y_i := \mathbf{1}_{A}(X_i) = \begin{cases}
+	1, \: X_i \in A\\
+	0, \: X_i \notin A\\
+	\end{cases}. \]
+	Die $Y_i$ sind u.i.v. und es gilt $\E[Y_1] = \E[\mathbf{1}_{A}(X_1)] = \mathbb{P}(X_1 \in A) \leq 1 < \infty$. Deshalb darf das \ref{GGZ} angewendet werden:
+	 \[ \frac{1}{n} \# \{ i \leq n \colon X_i \in A \} = \frac{1}{n} \sum\limits_{i=1}^{n} Y_i \overset{f. s.}{\longrightarrow} \E[Y_1] = \mathbb{P}(X_1 \in A), \: n \to \infty 
+	 \]
+\end{proof}
+
+\begin{bem1}
+	$X,Y$ unabhängig $\Rightarrow f(X), g(Y)$ unabhängig für alle $f,g$ messbar.
+\end{bem1}
+
+\begin{proof} 
+	Definiere $\tilde{f}(X) := \mathbf{1}_{(-\infty,t]}(f(X))$, $\tilde{g}(Y) := \mathbf{1}_{(-\infty,t]}(g(Y))$, dann folgt
+	\begin{gather*}
+		\mathbb{P}(f(X) \leq t, \: g(Y) \leq s) = \E[\mathbf{1}_{(-\infty,t]}(f(X)) \cdot \mathbf{1}_{(-\infty,t]}(g(Y))]\\ = \E[\tilde{f}(X) \cdot \tilde{g}(Y)]\\
+		\overset{\text{\ref{un}}}{=} \E[\tilde{f}(X)] \cdot \E[\tilde{g}(Y)] = \mathbb{P}(f(X) \leq t) \cdot \mathbb{P}(g(Y) \leq s).\\
+	\end{gather*}
+\end{proof}
+
+\begin{beispiel}[Monte-Carlo-Methode]
+	Numerische Methoden, die darauf basieren, eine \enquote{gesuchte Größe} als EW einer ZV zu schreiben und dann diese mit dem GGZ zu approximieren, heißt \textbf{Monte-Carlo-Methode}. Konkret: Berechne \[ \int\limits_{0}^{1} f(x) \dint x \]
+	für beliebiges integrierbares $f$. Sei $U \sim \cU([0,1])$, $X := f(U)$, dann ist \[ \E[X] = \E[f(U)] = \int_{\R} f(x) \cdot \mathbf{1}_{[0,1]}(x) \dint x = \int\limits_{0}^{1} f(x) \dint x. \]
+	
+	Numerisches Verfahren: Sind $U_1,U_2,...$ u.i.v. mit $U_1 \sim \cU([0,1])$, so gilt \[ \frac{1}{n} \sum\limits_{i=1}^{n} f(U_i) \overset{\text{f. s.}}{\longrightarrow} \int\limits_{0}^{1} f(x) \dint x, n \to \infty. \]
+\end{beispiel}
+
+\section{Zentraler Grenzwertsatz}
+
+Zunächst was zur Konvergenz in Verteilung.
+
+\begin{deff}
+	Ist $F$ eine VF, so heißt $F^{-1}(x) := \inf\{ s \in \R \colon F(s) \geq x \}$, $x \in [0,1]$ \textbf{Pseudoinverse} (oder \textbf{verallgemeinerte Inverse}) von $F$. Dabei gilt $\inf(\emptyset) := +\infty$, $\inf(\R) := -\infty$.
+\end{deff}
+
+\begin{bem1}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Ist $F$ stetig, so ist $F^{-1}$ die übliche Umkehrfunktion!
+		\item Ist $F$ nicht stetig, so ist die Umkehrfunktion nicht definiert, $F^{-1}$ als Pseudoinverse ist definiert.
+		\item Sprünge in $F$ werden konstante Stücke in $F^{-1}$, konstante Stücke in $F$ werden Sprünge in $F^{-1}$. (Bildchen...)
+	\end{enumerate}
+\end{bem1}
+
+\begin{lemma}\abs 
+	\begin{enumerate}[label=(\roman*)]
+		\item $F^{-1}$ ist wachsend
+		\item \label{invZwei} $F^{-1}(y) \leq t \Leftrightarrow y \leq F(t)$, $t \in \R$, $y \in (0,1)$
+		\item Ist $F$ integrierbar und stetig, so gilt \ref{invZwei} mit \enquote{$<$}.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}\abs 
+	\begin{enumerate}[label=(\roman*)]
+		\item Definition.
+		\item Nach Definition gilt $F^{-1} \leq t \Leftrightarrow \inf \{ s \colon F(s) \geq y \} \leq t \Leftrightarrow F(t) \geq t \: \forall t \in \R$.
+		\item Ist $F$ integrierbar und stetig, so gilt $F(t) = y$.
+	\end{enumerate}
+\end{proof}
+
+\begin{satz}[Eigentlich gibt es nur $\cU{([0,1])}$]\label{NurU}
+	Ist $U \sim \cU([0,1])$ und $F$ eine Verteilungsfunktion, so ist $X := F^{-^1}(U) \sim F$.
+\end{satz}
+
+\begin{proof}
+	$F_X(t) = \mathbb{P}(X \leq t) = \mathbb{P}(F^{-1}(U) \leq t) = \mathbb{P}(U \leq F(t)) = F(t)$
+\end{proof}
+
+\begin{beispiel}
+	Sei $U \sim \cU([0,1])$, so ist $X = - \ln(1-U) \sim \operatorname{Exp}(1)$ $\rightsquigarrow$ Übung. Beachte, dass $(1-U)$ auch $\cU([0,1])$ ist.
+\end{beispiel}
+
+\begin{anwendung}
+	Um $X \sim F$ zu \enquote{sampeln}, muss nur $U \sim \cU([0,1])$ gesampelt werden. Problem: Meist ist $F^{-1}$ nicht bekannt.
+\end{anwendung}
+
+\begin{lemma}\label{Stet}
+	Sei $(F_n)_{n \in \N}$ eine Folge von Verteilungsfunktionen. Wenn $\lim_{n\to\infty} F_n(t) = F(t)$ für alle Stetigkeitspunkte von $F$, dann gilt $\lim_{n\to\infty} F_n^{-1}(t) = F^{-1}(t)$ für alle Stetigkeitspunkte von $F^{-1}$.
+\end{lemma}
+
+\begin{proof}
+	War nicht in der VL...
+\end{proof}
+
+\begin{satz}
+	Sei $X_1,X_2,...$ eine Folge von ZV mit $X_n \sim F_n$, $\forall n \to \infty$, und $X$ eine ZV mit $X \sim F$. Dann gilt
+	\[ X_n \overset{(d)}{\longrightarrow} X, n \to \infty \Leftrightarrow F_n(t) \to F(t), n \to \infty \]
+	für alle Stetigkeitsstellen von $F$.
+\end{satz}
+
+\begin{proof}\abs
+	\begin{itemize}
+		\item[\enquote{$\Rightarrow$}:] Wir wissen $\E[f(X_n)] \to \E[f(X)] \: \forall f$ stetig und beschränkt. Idee: $F_n(t) = \E[\mathbf{1}_{(-\infty,t]}(X_n)] \to  \E[\mathbf{1}_{(-\infty,t]}(X)] = F(t)$, $n \to \infty$. Problem: $\mathbf{1}_{(-\infty,t]}$ ist nicht stetig.
+		Wähle deshalb $\delta > 0$, sodass $F(t + \delta) - F(t - \delta) < \varepsilon$ für festes $\varepsilon$. 
+		\begin{gather*}
+			F_n(t) = \E[\mathbf{1}_{(-\infty, t]}(X_n)] \overset{\text{Mon.}}{\leq} \E[f_{+}(X_n)] \overset{\text{$f$ stet.}}{\longrightarrow} \E[f_{+}(X)] \\ 
+			= \E[f_{+}(X)] + \E[f(X) \mathbf{1}_{X \in (t, t + \delta)}] \\
+			\leq \mathbb{P}(X \leq t) + \mathbb{P}(X \in (t, t + \delta)) = F(t) + \varepsilon
+		\end{gather*}
+		Analog mit $f^{-}$ gibt uns das $F_n(t) \to F(t)$, $n \to \infty$.
+		
+		\item[\enquote{$\Leftarrow$}:] Sei $U \sim \cU([0,1])$. Definiere $Y = F^{-1}(U)$, $Y_n = F_n^{-1}(U)$, $n \in \N$. Nach \ref{NurU} gilt $Y_n \sim F_n$, $Y \sim F$ und damit $Y_n \sim X_n$, $Y \sim X$, , $n \in \N$. Mit \ref{Stet} konvergiert $F_n^{-1}(t) \to F^{-1}(t)$, $n \to \infty$ für alle $t$, an denen $F^{-1}$ stetig ist. Die Unstetigkeitsstellen $U_F \subseteq [0,1]$ sind abzählbar, also eine Nullmenge unter $\lambda$. Jetzt sind wir fertig, denn sei $f$ stetig und beschränkt, so gilt
+		\begin{gather*}
+			\lim\limits_{n\to\infty} \E[f(X_n)] \overset{X_n \sim Y_n}{=} \lim\limits_{n\to\infty} \E[f(Y_n)] \overset{\text{\ref{DCT}}}{=} \E[\lim\limits_{n\to\infty} f(Y_n)]\\
+			\overset{Y_n \to Y}{\underset{\text{f. s.}}{=}} \E[f(Y)] \overset{X \sim Y}{=} \E[f(X)].\\
+		\end{gather*}
+	\end{itemize}
+\end{proof}

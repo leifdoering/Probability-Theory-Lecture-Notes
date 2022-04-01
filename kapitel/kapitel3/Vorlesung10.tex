@@ -1,0 +1,183 @@
+\marginpar{\textcolor{red}{Vorlesung 10}}
+
+\begin{lemma}[Montone Konvergenz Theorem (MCT) für einfache Funktionen]\label{monKonv}
+	Sei $(f_n) \subseteq \cE^+$ mit $f_n \uparrow f$, $n \to \infty$, für eine nichtnegative messbare numerische Funktion $f$. Dann gilt
+	\[ \lim_{n \to \infty} \int_{\Omega} f_n \, \mathrm{d}\mu = \int_{\Omega} f \, \mathrm{d}\mu, \]
+	wobei in der Gleichheit $ + \infty = + \infty$ m\"oglich ist. 
+\end{lemma}
+
+\begin{proof}
+	Die Folge $(\int_{\Omega} f_n \, \mathrm{d}\mu)_{n \in \N}$ wächst (Monotonie des Integrals) und konvergiert also in $[0, \infty]$.
+	\begin{itemize}
+		\item [\enquote{$\leq$}:] Folgt direkt aus der Definition \[ \int_{\Omega} f \,\mathrm{d}\mu = \sup \Bigg\{ \int_{\Omega} g\, \mathrm{d}\mu \! : g \leq f, \: g \in \cE^+ \Bigg\},\]
+		weil das Supremum einer Menge eine obere Schranke der Menge ist.
+		\item [\enquote{$\geq$}:] Wir behaupten: Ist $ g \in \cE^+$ mit $ g \leq f$, so ist 
+		\begin{align}\label{s}
+			\lim_{n \to \infty} \int_{\Omega} f_n \,\mathrm{d}\mu \geq \int_{\Omega} g \,\mathrm{d}\mu.
+		\end{align}
+		 Weil das Supremum einer Menge $M$ die \textit{kleinste} obere Schranke ist, sind wir dann fertig weil aufgrund von \eqref{s} auch $\lim_{n \to \infty} \int_{\Omega} f_n \,\mathrm{d}\mu$ eine obere Schranke ist.\smallskip
+		
+		Warum gilt die Behauptung? Sei $\varepsilon \in (0,1)$ beliebig und sei 
+		\begin{align*}
+		 g = \sum_{k = 1}^{r} \gamma_k \mathbf{1}_{C_k} \in \mathcal E^+ \quad \text{ mit }\quad g\leq f.
+		 \end{align*}
+		  Wegen $f_n \uparrow f$ gilt $A_n \uparrow \Omega$, $n \to \infty$, 	  
+		   für \[A_n := \big\{ f_n \geq (1 - \varepsilon)g \big\} = \big\{ \omega \! : f_n (\omega) \geq (1 - \varepsilon) g(\omega) \big\}.\]
+		Weil aufgrund der Definition der Mengen $$f_n(\omega)\geq f_n(\omega)\mathbf{1}_{A_n}(\omega)\geq  (1-\varepsilon)g(\omega)\mathbf{1}_{A_n}(\omega)$$ f\"ur alle $\omega \in \Omega$ gilt (man teste die zwei M\"oglichkeiten $\omega \in A_n$ und $\omega \notin A_n$), folgt
+		\begin{align*}
+			\int_{\Omega} f_n\, \mathrm{d}\mu &\overset{\text{Mon.}}{\geq} \int_{\Omega} f_n \mathbf{1}_{A_n}\, \mathrm{d}\mu\\
+			&\overset{\text{Mon.}}{\geq} \int_{\Omega} (1-\varepsilon) g \mathbf{1}_{A_n}\, \mathrm{d}\mu \\
+			&= (1 - \varepsilon) \int_{\Omega} \Big(\sum_{k = 1}^{r} \gamma_k \mathbf{1}_{C_k}\Big) \mathbf{1}_{A_n} \,\mathrm{d}\mu\\& = (1 - \varepsilon) \int_{\Omega} \sum_{k = 1}^{r} \gamma_k \mathbf{1}_{A_n \cap  C_k}\,\mathrm{d}\mu\\
+			&=(1-\varepsilon) \sum_{k=1}^r \gamma_k \mu(A_n\cap C_k).
+		\end{align*} 
+		Wegen Stetigkeit von Maßen und  gilt \[\lim_{n \to \infty} \mu(A_n \cap C_k) = \mu \Big(\bigcup_{n = 1}^{\infty} (A_n \cap  C_k) \Big) = \mu \Big(\underbrace{\Big(\bigcup_{n = 1}^{\infty} A_n \Big)}_{= \Omega} \cap \,C_k \Big)=\mu(C_k).\]
+		Damit gilt 
+		\[ \lim_{n\to\infty} \int_{\Omega} f_n \, \mathrm{d}\mu \geq (1-\varepsilon) \sum\limits_{k = 1}^{n}  \gamma_k \mu(C_k) = (1-\varepsilon) \int_{\Omega} g\, \mathrm{d}\mu. \]
+		Weil $\varepsilon$ beliebig gew\"ahlt war folgt die Hilfsbehauptung und damit ist der Beweis fertig.
+	\end{itemize}	
+\end{proof}
+Warum war das Lemma so wichtig? Die Definition des Integrals als Supremum ist sehr unhandlich. Es hat nat\"urlich den Vorteil, dass das Integral sofort wohldefiniert ist (wir brauchen keine Unabh\"angigkeit von der approximierenden Folge wie in Analysis 2), daf\"ur k\"onnen wir mit der Definition nichts anstellen. Schauen wir uns als Beispiel die Beweise der folgenden elementaren Rechenregeln an. Per Approximation durch einfache Funktionen sind die Argumente sehr einfach, per Definition als Supremum w\"aren die Argumente ziemlich fies.
+
+\begin{lemma}\label{RRnichtneg}
+	Für $f,g \! : \Omega \rightarrow [0, \infty]$ messbar und $ \alpha \geq 0$ gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \int_{\Omega} \alpha f \,\mathrm{d}\mu = \alpha \int_{\Omega} f \,\mathrm{d}\mu, \]
+		\item \[ \int_{\Omega} (f + g)\, \mathrm{d}\mu = \int_{\Omega} f \,\mathrm{d}\mu + \int_{\Omega} g \,\mathrm{d}\mu, \]
+		\item \[ f \leq g \Rightarrow \int_{\Omega} f\, \mathrm{d}\mu \leq \int_{\Omega} g\, \mathrm{d}\mu. \]
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Wir zeigen nur (ii), die anderen Aussagen gehen analog.\smallskip
+	
+		Seien $(f_n), (g_n) \subseteq \cE^+$ mit $f_n \uparrow f$, $g_n \uparrow g$, $n \to \infty$. Weil dann auch $f_n+g_n \in \cE^+$ und $f_n+g_n\uparrow f+g$ gelten, folgt mit Lemma \ref{monKonv} und der Linearit\"at des Integrals f\"ur einfache Funktionen
+		\begin{align*}
+			 \int_{\Omega} f \,\mathrm{d}\mu + \int_{\Omega} g\, \mathrm{d}\mu=\lim_{n\to\infty}\Bigg(\int_{\Omega} f_n\, \mathrm{d}\mu + \int_{\Omega} g_n \,\mathrm{d}\mu\Bigg)  &=\lim_{n\to\infty} \int_{\Omega} (f_n + g_n)\, \mathrm{d}\mu=\int_{\Omega} (f + g)\, \mathrm{d}\mu.
+		\end{align*}
+\end{proof}
+
+\subsection{Integral messbarer numerischer Funktionen}
+Im letzten Schritt wollen wir noch die Annahme der Nichtnegativit\"at weglassen. Sei dazu $f \! : \Omega \rightarrow \overline{\mathbb{R}}$ $(\cA, \cB(\mathbb{\overline R}))$-messbar. Um $f$ auf nichtnegative Funktionen zu reduzieren, erinnern wir an die Zerlegung von $f$ in Postiv- und Negativteil: $$f = f^+ - f^-\quad \text{ und }\quad |f| = f^+ + f^-.$$
+
+\begin{deff}
+	Sei $f$ messbar und \[ \int_{\Omega} f^+ \,\mathrm{d}\mu < \infty\quad \text{ oder }\quad\int_{\Omega} f^- \,\mathrm{d}\mu < \infty. \] Dann definieren wir
+	\[ \int_{\Omega} f \,\mathrm{d}\mu = \int_{\Omega} f^+ \,\mathrm{d}\mu - \int_{\Omega} f^-\, \mathrm{d}\mu\in [-\infty,+\infty] \]
+	und sagen, das Integral $\int f\dint \mu$ ist wohldefiniert. Ist $\int f \dint \mu \in \R$, d.h. die Integrale \"uber Positiv- und Negativteil sind beide endlich, so hei\ss t $f$ $\mu$-integrierbar und wir sagen, das Integral existiert. Existiert bedeutet also wohldefiniert und endlich. Zur Notation: Man schreibt statt \[ \int_{\Omega} f \,\mathrm{d}\mu \] auch
+	\[ \int_{\Omega} f(\omega) \,\mathrm{d}\mu(\omega) \quad \text{ oder }\quad
+	 \int_{\Omega} f(\omega)\, \mu(\mathrm{d}\omega). \]
+\end{deff}
+Ohne die Einschr\"ankung, dass eines der Integrale endlich ist, k\"onnten wir das Integral nicht sinnvoll definieren. Das liegt daran, dass $\infty-\infty$ nicht sinnvoll definierbar ist. 
+\begin{deff}
+	Ist $ f \! : \Omega \rightarrow \overline{\mathbb{R}}$ und $A \in \cA$, so definiert man 
+	\[ \int_{A} f\, \mathrm{d}\mu := \int_{\Omega} f \mathbf{1}_A\, \mathrm{d}\mu, \]
+	wenn die rechte Seite wohldefiniert ist. Alternativ schreibt man auch hier \[ \int_{A} f(\omega)\, \mathrm{d}\mu(\omega) \quad \text{ oder }\quad \int_{A} f(\omega) \,\mu(\mathrm{d}\omega). \]
+\end{deff}
+Weil das Integral nur f\"ur messbare Funktionen definiert ist, ist es ganz essentiell, dass auch $f \mathbf{1}_A$ eine messbare Funktion ist. Das liegt an der gro\ss en Flexibilit\"at von messbaren Funktionen: $\mathbf{1}_A$ ist messbar weil $A$ messbar ist und das Produkt messbarer Funktionen ist messbar.
+
+\begin{lemma}
+	Sind $ f, g \! : \Omega \rightarrow \overline{\mathbb{R}}$ $\mu$-integrierbar, $\alpha \in \mathbb{R}$, dann gilt 
+	\begin{enumerate}[label=(\roman*)]
+		\item $\alpha f$ ist $\mu$-integrierbar und \[ \int_{\Omega} \alpha f \,\mathrm{d}\mu = \alpha \int_{\Omega} f\, \mathrm{d}\mu \]
+		\item Wenn $f+g$ sinnvoll definiert ist (\mbox{d. h.} kein $+\infty + (-\infty)$), so ist $f + g$ $\mu$-integrierbar und \[ \int_{\Omega} (f + g) \,\mathrm{d}\mu = \int_{\Omega} f \,\mathrm{d}\mu + \int_{\Omega} g\, \mathrm{d}\mu \]
+		\item \[ f \leq g \quad \Rightarrow \quad \int_{\Omega} f \dint \mu \leq \int_{\Omega} g \dint \mu \]
+		\item $\triangle$-Ungleichung: 
+		\[ \Big|\int_{\Omega} f \,\mathrm{d}\mu\Big| \leq \int_{\Omega} |f| \,\mathrm{d}\mu. \]
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}\abs 
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			 F\"ur $\alpha \geq 0$ gelten $$(\alpha f)^+ = \alpha f^+\quad \text{ und }\quad 
+				(\alpha f)^- = \alpha f^-.$$
+			Damit ist $\alpha f$ $\mu$-integrierbar, weil 
+			\[ \int_{\Omega} \alpha f^+\, \mathrm{d}\mu = \alpha \int_{\Omega} f^+ \,\mathrm{d}\mu < \infty\quad \text{ und }\quad \int_{\Omega} \alpha f^- \mathrm{d}\mu = \alpha \int_{\Omega} f^-\, \mathrm{d}\mu < \infty. \]
+			Es gilt dann per Definition des Integrals als Differenz der Integrale \"uber Positiv- und Negativteil
+			\begin{gather*}
+				\int_{\Omega} \alpha f \,\mathrm{d}\mu \overset{\text{Def.}}{=} \int_{\Omega} \alpha f^+ \,\mathrm{d}\mu + \int_{\Omega} \alpha f^-\, \mathrm{d}\mu
+				\overset{\text{\ref{RRnichtneg}}}{=} \alpha \int_{\Omega} f^+\, \mathrm{d}\mu + \alpha \int_{\Omega} f^-\, \mathrm{d}\mu =\alpha \int_{\Omega} f \,\mathrm{d}\mu.\\
+			\end{gather*}
+			Der Fall $\alpha <0$ geht genauso, wir nutzen hierbei $(\alpha f)^+ = -\alpha f^-$ und $(\alpha f)^- = -\alpha f^+.$
+		\item Die Summe ist bei Integralen immer der delikate Teil. Es gelten zun\"achst punktweise (Fallunterscheidungen)
+		\begin{align*}
+			(f+g)^+ \leq f^+ + g^+\quad \text{ und }\quad (f+g)^- \leq f^- + g^-.
+		\end{align*}	
+		 Damit gelten 
+		\begin{align*}
+		\int_{\Omega} (f + g)^+ \,\mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{\leq} \int_{\Omega} (f^+ + g^+)\,\mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{=} \int_{\Omega} f^+\, \mathrm{d}\mu + \int_{\Omega} g^+ \,\mathrm{d}\mu < \infty
+		\end{align*}
+		und
+		\begin{align*}
+		\int_{\Omega} (f + g)^- \mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{\leq} \int_{\Omega} f^- + g^- \mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{=} \int_{\Omega} f^- \mathrm{d}\mu + \int_{\Omega} g^- \mathrm{d}\mu < \infty.
+		\end{align*}
+		Also ist gem\"a\ss{} Definition $f + g$ $\mu$-integrierbar. Die Berechnung des Integrals von $f+g$ ist clever. Wir kennen die Linearit\"at bisher nur f\"ur nichtnegative Funktionen, f\"uhren wir es also auf den Fall zur\"uck, indem wir wie folgt $f+g$ auf zwei Arten in Positiv- und Negativteil zerlegen:
+		\begin{align*}
+			\underset{\geq 0}{(f+g)^+} - \underset{\geq 0}{(f+g)^-} = f + g = (\underset{\geq 0}{f^+} - \underset{\geq 0}{f^-}) + (\underset{\geq 0}{g^+} - \underset{\geq 0}{g^-}).
+		\end{align*}
+		Umformen ergibt
+		\begin{align*}
+			 (f + g)^+ + f^- + g^- = (f + g)^- + f^+ + g^+.
+		\end{align*}
+		Weil jetzt nur noch Summen nichtnegativer Funktionen auftauchen, k\"onnen wir die bereits bekannte Linearit\"at des Integrals aus Lemma \ref{RRnichtneg} nutzen:
+		\begin{align*}
+			 \int_{\Omega} (f + g)^+\, \mathrm{d}\mu + \int_{\Omega} f^-\, \mathrm{d}\mu + \int_{\Omega} g^- \,\mathrm{d}\mu = \int_{\Omega} (f + g)^- \,\mathrm{d}\mu + \int_{\Omega} f^+ \,\mathrm{d}\mu + \int_{\Omega} g^+ \,\mathrm{d}\mu.
+		\end{align*}
+		Erneutes Auflösen ergibt 
+		\begin{align*}
+			\int_{\Omega} (f + g)^+ \,\mathrm{d}\mu - \int_{\Omega} (f + g)^- \,\mathrm{d}\mu &= \int_{\Omega} f^+ \,\mathrm{d}\mu - \int_{\Omega} f^- \,\mathrm{d}\mu + \int_{\Omega} g^+ \,\mathrm{d}\mu - \int_{\Omega} g^-\, \mathrm{d}\mu
+		\end{align*}
+		und Ausn\"utzen der Definition des Integrals als Differenz der Positiv- und Negativteile
+		\begin{align*}	
+			 \int_{\Omega} (f + g)\, \mathrm{d}\mu &= \int_{\Omega} f\, \mathrm{d}\mu + \int_{\Omega} g\, \mathrm{d}\mu.
+		\end{align*}
+		\item Nat\"urlich gilt $f \leq g \Leftrightarrow g - f \geq 0$. Weil die Nullfunktion sowie $g-f$ nichtnegativ sind, gilt wegen Lemma \ref{RRnichtneg} und der Definition des Integrals f\"ur einfache Funktionen (die Nullfunktion)
+		\[ 0 = \int_{\Omega} 0 \,\mathrm{d}\mu \leq \int_{\Omega} (g-f)\, \mathrm{d}\mu \overset{(ii)}{=} \int_{\Omega} g \mathrm{d}\mu - \int_{\Omega} f \mathrm{d}\mu. \]
+		Umformen gibt die Behauptung.
+		\item Die Dreicksungleichung f\"ur Integrale folgt aus der Dreiecksungleichung in $\R$:
+		\begin{align*}
+			\Big|\int_{\Omega} f\, \mathrm{d}\mu\Big|& \overset{\text{Def.}}{=} \Big|\int_{\Omega} f^+ \,\mathrm{d}\mu - \int_{\Omega} f^- \,\mathrm{d}\mu\Big| \\
+			&\overset{\triangle}{\leq} \Big|\int_{\Omega} f^+ \,\mathrm{d}\mu\Big| + \Big|\int_{\Omega} f^- \,\mathrm{d}\mu\Big|\\
+			&\overset{\geq 0}{=} \int_{\Omega} f^+\, \mathrm{d}\mu + \int_{\Omega} f^- \,\mathrm{d}\mu\\
+			& \overset{\ref{RRnichtneg}}{=} \int_{\Omega} (f^+ + f^- )\,\mathrm{d}\mu = \int_{\Omega} |f| \,\mathrm{d}\mu.
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+
+\begin{beispiel}\label{bsp2}
+	\begin{enumerate}[label=(\roman*)]
+		\item Ist $(\Omega, \cA, \mu) = (\mathbb{R}^d, \cB(\mathbb{R}^d), \lambda)$, so ist das neue Integral  gerade das Lebesgue-Integral aus Analysis 2. Insbesondere lassen sich alle Integrale mit den Rechenregeln aus Analysis 2 berechnen.
+		\item  $(\Omega, \cA, \mu) = (\N, \cP(\N), \mu)$, $\mu(A) = \#A$ (Zählmaß), dann ist 
+		\begin{gather*}
+			\int_{\N} f\, \mathrm{d}\mu = \sum\limits_{k=0}^{\infty} f(k).
+%			f = \sum\limits_{i=1}^{n} \mathbf{1}_{\{ i \}} a_i \Rightarrow \int\limits_{\N} f \mathrm{d}\mu = \sum\limits_{i=1}^{n} a_i.
+		\end{gather*}
+		Das wird in der gro\ss en \"Ubung besprochen und nach dem Satz \"uber monotone Konvergenz im Skript sauber aufgeschrieben. Allgemeine Lebesgue Integrale verallgemeinern also auch das Konzept der Reihen!
+		\item Ist $\mathbb{P}_F$ ein Wahrscheinlichkeitsmaß auf $(\mathbb{R}, \cB(\mathbb{R}))$ mit Verteilungsfunktion $F$, so heißt 
+		\[ \int_{\mathbb{R}} g \,\mathrm{d}F := \int_{\mathbb{R}} g\, \mathrm{d} \mathbb{P}_F \]
+		Lebesgue-Stieltjes-Integral.
+	\end{enumerate}
+\end{beispiel}
+Wie in Analysis 2 werden Nullmengen keine Rolle bei Integralen spielen. Starten wir mit der Definition, die (aufgrund der nun bekannten Ma\ss theorie) hier viel einfacher ist.
+\begin{deff}
+	$ N \in \cA$ heißt $ \mu $-\textbf{Nullmenge}, falls $ \mu (N) = 0$.
+\end{deff}
+Aufgrund der Subadditivit\"at von Ma\ss en (folgt aus der $\sigma$-Additivit\"at) folgt sofort, dass abz\"ahlbare Vereinigungen von Nullmengen wieder Nullmengen sind (kleine \"Ubung).
+
+
+\begin{deff}
+	\begin{enumerate}[label=(\roman*)]
+		\item Gilt ein Eigenschaft für alle $\omega \in \Omega$ außer einer $\mu$-Nullmenge, so gilt die Eigenschaft $\mu$-fast überall. Man schreibt auch $\mu$-f.\"u.
+		\item Ist $\mu$ ein Wahrscheinlichkeitsmaß, so sagt man anstelle von \enquote{$\mu$-fast überall} auch \enquote{$\mu$-fast sicher} oder $\mu$-f.s.
+	\end{enumerate}
+\end{deff}
+
+\begin{satz}\label{S7}
+	Seien $f,g \colon \Omega \rightarrow \overline{\mathbb{R}}$ $\mu$-integrierbar, dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $f$ ist $\mu$-fast überall endlich.
+		\item $f=g$ $\mu$-fast überall impliziert
+		\[ \int_{\Omega} f \,\mathrm{d}\mu = \int_{\Omega} g\, \mathrm{d}\mu. \]
+		\item $f \geq 0$ und $ \int_{\Omega} f\, \mathrm{d} \mu=0$ impliziert $f = 0$ $\mu$-fast überall.
+	\end{enumerate}
+\end{satz}
+

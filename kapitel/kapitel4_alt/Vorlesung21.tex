@@ -1,0 +1,202 @@
+\marginpar{\textcolor{red}{Vorlesung 21}}
+
+\begin{beispiel}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Nehmt eure Lieblingsverteilungsfunktion $F$, so gibt es $X_1,...,X_d$ u.i.v. mit $X_1 \sim F$. Die $X_1,...,X_d$ gibt es nach Satz \ref{kan} mit der gemeinsamen Verteilungsfunktion $F$ aus Proposition \ref{id}. Die gemeinsame Verteilung ist dann das Produktma\ss{}:
+		 \[ \mathbb{P}_X = \underbrace{\mathbb{P}_F \otimes ... \otimes \mathbb{P}_F}_{d\text{-viele}}. \]
+		\item Sei $X_1 \sim \cN(0,1)$ und $X_2 := -X_1$. Dann sind $X_1$, $X_2$ identisch verteilt, jedoch nicht unabh\"angig. Bestimmen wir dazu zun\"achst die Verteilungsfunktionen:
+		\begin{align*}
+			F_{X_1}(t) &= \int_{-\infty}^{t} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x,\\
+			F_{X_2}(t)& \overset{\text{Def.}}{=} \mathbb{P}(X_2 \leq t) = \mathbb{P}(-X_1 \leq t) = \int_{-t}^{+\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x 
+			 \overset{\text{subst.}}{=} \int_{-\infty}^{t} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x.
+		\end{align*}
+		Die letzte Gleichheit gilt nat\"urlich weil $\int_{-\infty}^t f(x)\dint x=\int_{-t}^{+\infty} f(x)\dint x$ f\"ur jede symmetrische integrierbare Funktion gilt.
+		Also gilt $X_1 \sim \cN(0,1)$, $X_2 \sim \cN(0,1)$ und damit sind $X_1, X_2$ identisch verteilt. Um zu zeigen, dass sie nicht unabh\"angig sind, berechnen wir die gemeinsame Verteilungsfunktion an einer Stelle und zeigen, dass diese nicht faktorisiert. Es gelten
+		\[ F_X(0,0) = \mathbb{P}(X_1 \leq 0, X_2 \leq 0) = \mathbb{P}(X_1 \leq 0, X_1 \geq 0) = \mathbb{P}(X_1 = 0) \overset{\text{abs. st.}}{=} 0 \] und
+		\[ F_{X_1}(0) = F_{X_2}(0) = \mathbb{P}(X_1 \leq 0) = \int_{-\infty}^{0} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x = \frac{1}{2}, \]
+		also gilt $$ F_X(0,0) = 0 \neq \frac{1}{4} = F_{X_1}(0) \cdot F_{X_2}(0)$$ und damit sind $X_1,X_2$ abhängig. Nat\"urlich war intuitiv sowieso klar, dass $X_1, X_2$ nicht unabh\"angig sind. Unabh\"angig bedeutet schlie\ss lich, dass $X_1$ keinen Einfluss auf $X_2$ hat. Bei der Beziehung $X_1=-X_2$ haben wir nat\"urlich eine extreme Abh\"angigkeit: Kennen wir den Wert von $X_1$, so kennen wir auch den Wert von $X_2$.		
+	\end{enumerate}
+\end{beispiel}
+
+\begin{prop}\label{p4}
+	Seien $X_1,...,X_d$ Zufallsvariablen mit gemeinsamer Dichte $f$, es gilt also $ F(t_1,...,t_d) = \int_{(-\infty,t_1]\times ... \times (-\infty, t_d]} f(x)\dint x$, so haben $X_1,...,X_d$ Dichten $f_1,...,f_d$ und es gilt \[ f_i(x) = \underbrace{\int_{-\infty}^{\infty} ... \int_{-\infty}^{\infty}}_{(d-1)\text{-mal}} \underbrace{f(x_1,...,x_d)}_{x_i \text{ fest}} \underbrace{\dint x_1 ... \dint x_d}_{\text{ohne } x_i} \] ist eine Dichte von $X_i$ für $i=1,...,d$. In Worten: Ist $X$ absolutstetig, so sind alle $X_i$ absolutstetig und die Dichten der $X_i$ entstehen durch Ausintegrieren aller anderen Variablen.
+\end{prop}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item $f_i \geq 0$ $\checkmark$ 
+		\item Die Messbarkeit $f_i$ ist Teil der Aussage von Fubini.
+		\item Es gilt  \[ \int_{\R} f_i(x) \dint x = 1 \] weil
+		\[\int_{\R} f_i(x) \dint x = \underbrace{\int_{-\infty}^{\infty} ... \int_{-\infty}^{\infty}}_{d\text{-mal}} f(x_1,...,x_d) \dint x_1 ... \dint x_d \overset{\text{Fubini}}{=} \int_{\R^d} f(x) \dint x \overset{\text{Dichte}}{=} 1.  \]
+		\item Rechnen wir noch die Verteilungsfunktion nach, hierbei nutzen wir zum ersten Mal einen kleinen, jedoch wichtigen, Trick:		
+		\begin{align*}
+			F_{X_i}(t_i) &\overset{\text{Def.}}{=} \mathbb{P}(X_i \leq t_i)\\
+			& \overset{\text{Trick}}{=} \mathbb{P}(X_1 \in \R, ... , X_i \leq t_i, ..., X_d \in \R) \\
+			&\overset{\text{Stet.}}{\underset{\text{Maß}}{=}} \lim\limits_{\substack{t_k \to \infty, \\ k \neq i}} \mathbb{P}(X_1 \leq t_1,...,X_d \leq t_d)\\
+			& \overset{\text{Dichte}}{=} \lim\limits_{\substack{t_k \to \infty, \\ k \neq i}} \underbrace{\int_{-\infty}^{t_1} ... \int_{-\infty}^{t_d}}_{d\text{-mal}} f(x_1,...,x_d) \dint x_d ... \dint x_1 \\
+			&\overset{\text{\ref{allgMonKonv}}}{=} \int_{-\infty}^{t_i} f_i(x_i) \dint x_i.
+		\end{align*}
+		In der Rechnung haben wir fr\"ohlich die Reihenfolge der iterierten Integrale getauscht, das war nat\"urlich der Satz von Fubini.
+	\end{enumerate}
+\end{proof}
+\begin{bem}
+	Die R\"uckrichtung von Proposition \ref{p4} ist falsch. Es gilt im Allgemeinen nicht, dass die Existenz von Dichten $f_1,...,f_d$ f\"ur $X_1, ..., X_d$ auch die Existenz einer gemeinsamen Dichte $f$ impliziert. Als Beispiel kann man $X\sim \mathcal U([0,1])$ und $Y=X$ betrachten. Der Vektor $(X,Y)$ nimmt nur Werte in $A=\{(x,y) \in [0,1]\times [0,1]:x=y\}$ an und das ist eine Lebesgue-Nullmenge. Es m\"usste also eine nichnegative messbare Funktion $f:\R^2\to \R$ geben, mit $1=\int_A f(x)\dint x=\int_{\R^2} \mathbf 1_{A} f \dint x$ geben. Weil aber $\mathbf 1_A f=0$ fast \"uberall gilt, muss das Integral $0$ sein und das ist ein Widerspruch.
+\end{bem}
+Um mit gemeinsamen Verteilungen rumzurechnen, ist das n\"achste Korollar ganz essentiell:
+\begin{korollar}
+	Sind $X_1,...,X_d$ Zufallsvariablen mit gemeinsamer Dichte $f$, dann gilt: 
+	\begin{align*}	
+		X_1,...,X_d\text{ sind unabhängig }\quad \Leftrightarrow \quad f(x) = f_1(x)\cdot ... \cdot f_d(x)\quad \text{Lebesgue-fast \"uberall},
+	\end{align*}	
+	wobei $f_1,...,f_d$ Dichten von $X_1,...,X_d$ sind.
+\end{korollar}
+
+\begin{proof}
+	Zuerst erinnern wir daran, dass die Existenz der gemeinsamen Dichte die Absolutstetigkeit der einzelnen Zufallsvariablen impliziert (nicht andersrum). 
+	\begin{itemize}
+	\item[\enquote{$\Leftarrow$}:] Um die Unabh\"angigkeit zu pr\"ufen, rechnen wir die Verteilungsfunktion aus und zeigen dabei, dass sie faktorisiert:
+	\begin{align*}
+	F_X(t_1,...,t_d) &\overset{\text{Annahme}}{=} \int_{-\infty}^{t_1} ... \int_{-\infty}^{t_d} f_1(x_1) \cdot ... \cdot f_d(x_d) \dint x_d ... \dint x_1\\
+	& \overset{\text{Lin.}}{=} \int_{-\infty}^{t_1} f_1(x_1) \dint x_1 \cdot ... \cdot \int_{-\infty}^{t_d} f_d(x_d) \dint x_d\\
+	&\overset{\text{Def.}}{=} F_{X_1}(t_1) \cdot ... \cdot F_{X_d}(t_d),\quad t_i\in\R.
+	\end{align*}
+	Also sind $X_1,...,X_d$ nach Definitionunabhängig.
+	\item[\enquote{$\Rightarrow$}:] Rechnen wir andersrum mit der gemeinsamen Verteilungsfunktion los:	
+	\begin{align*}
+		\int_{(-\infty,t_1] \times ... \times (-\infty,t_d]} f(x) \dint x &\overset{\text{Dichte}}{=} F_X(t_1,...,t_d)\\
+		& \overset{\text{Ann.}}{=} F_{X_1}(t_1) \cdot ... \cdot F_{X_d}(t_d)\\
+		& = \int_{-\infty}^{t_1} f_1(x_1) \dint x_1 \cdot ... \cdot \int_{-\infty}^{t_d} f_d(x_d)\dint x_d\\
+		&\overset{\text{Lin.}}{=}\int_{-\infty}^{t_1} ... \int_{-\infty}^{t_d} f_1(x_1) \cdot ... \cdot f_d(x_d) \dint x_d ... \dint x_1\\
+		& \overset{\text{Fubini}}{=} \int_{(-\infty,t_1] \times ... \times (-\infty,t_d]} f_1(x_1) \cdot ... \cdot f_d(x_d) \dint (x_1,...,x_d).
+	\end{align*}
+	Mit etwas Ma\ss theorie (??!!) folgt die Gleichheit der Integranden Lebesgue-fast \"uberall.
+	\end{itemize}
+\end{proof}
+Wir kennen jetzt Zufallsvektoren und deren Verteilungen, fehlen noch Erwartungswerte von Zufallsvektoren.
+
+\subsection*{Erwartungswerte}
+Die Definition ist analog zu der Definition f\"ur eine Zufallsvariable:
+\begin{deff}
+	Seien $X_1,...X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ und $ g \colon \R^d \to \overline \R$ $(\mathcal A, \mathcal B(\overline \R))$-messbar. Dann sei 
+	\[ \E[g(X_1,...,X_d)] := \int_{\Omega} g(X_1(\omega),...,X_d(\omega)) \dint \mathbb{P}(\omega), \]
+	wenn das Integral wohldefiniert ist. Wir sprechen von $\E[g(X_1,...,X_d)]$ als Erwartungswert, weil $Y:= g(X_1,...,X_d)$ eine Zufallsvariable ist.
+\end{deff}
+Die Berechnungstheorie geht jetzt komplett analog zu dem Fall einer Zufallsvariablen. Erst der Trafosatz, dann die Rechenregeln f\"ur absolutstetige und diskrete Zufallsvektoren.
+\begin{lemma}\label{gemVert}
+	Seien $X_1,...X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ und sei $\mathbb{P}_X$ die gemeinsame Verteilung von $X = (X_1,...,X_d)$. Dann gilt \[ \E[g(X_1,...,X_d)] = \int_{\R^d} g(x_1,...,x_d) \dint \mathbb{P}_X(x_1,...,x_d), \]
+	wobei eine Seite wohldefiniert ist, wenn es die andere Seite ist.
+\end{lemma}
+
+\begin{proof}
+	Das ist nichts anderes als der Trafosatz, genau wie in Lemma \ref{ewTrafo}:
+	\begin{center}		
+		\begin{tikzcd}
+			{}&{}&{}\\
+			(\Omega, \cA, \mathbb P) \arrow[r, "{X}"] \arrow[rd, "{g \circ X}"']
+			& (\R, \cB(\R^d), \mathbb P_X) \arrow[d, "{g}"] \arrow[ur, phantom, "", near start] \\
+			& (\overline{\R}, \cB(\overline{\R}))
+		\end{tikzcd}
+	\end{center}
+\end{proof}
+Wie f\"ur eine Zufallsvariable in Satz \ref{regeln} kommen nun die Rechenregeln:
+\begin{satz}[Berechnungsregeln]
+Seien $X_1,...X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item Haben $X_1,...X_d$ eine gemeinsame Dichte $f$, so gilt 
+		\[ \E[g(X_1,...,X_d)] = \int_{\R^d} g(x) f(x) \dint x \overset{\text{Fubini}}{=} \int_{\R} ... \int_{\R} g(x_1,...,x_d) f(x_1,...,x_d) \dint x_d ... \dint x_1.  \]
+		\item Ist $X=(X_1,...,X_d)$ diskret und nimmt die Werte $a_1, ..., a_N\in\R^d$ mit Wahrscheinlichkeiten $p_1, ..., p_N$ an, so gilt \[ \E[g(X_1,...,X_d)]= \sum\limits_{k=1}^{N} p_k g(a_k) = \sum\limits_{k=1}^{N} \mathbb{P}(X=a_k) g(a_k) . \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	Exakt wie für $d=1$ in Satz \ref{regeln}.
+\end{proof}
+Rechnen wir einfach mal ein Beispiel aus. In der Tat kennen wir kaum Beispiele von Zufallsvariablen $X_1$ und $X_2$ mit gemeinsamer Dichte. Wir wissen bisher nur, dass unabh\"angige Zufallsvariablen eine gemeinsame Dichte haben, wenn sie alle Dichten haben, denn das war gerade Beispiel \ref{dichte}. Berechnen wir also mal einen Erwartungswert f\"ur unabh\"angige Exponentialverteilungen:
+\begin{beispiel}
+	Seien $X_1 \sim \operatorname{Exp}(\lambda)$ und $X_1 \sim \operatorname{Exp}(\beta)$ unabhängig. Was ist die Verteilungsfunktion von $ Y := \min(X_1,X_2)$? Wir zeigen, dass $Y \sim \operatorname{Exp}(\lambda + \beta)$. Das ist ein ganz typisches Beispiel, wof\"ur wir die Berechnungsregeln nutzen. Erst die Wahrscheinlichkeit als Erwartungswert umschreiben, dann die Formel anwenden und schlie\ss lich die gemeinsame Dichte als Produkt rausintegrieren. Mit $g(x_1,x_2) := \mathbf{1}_{(-\infty,t]}(\min(x_1,x_2))$ und gemeinsamer Dichte $f(x)=f_1(x_1)f_2(x_2)$ gibt das
+	\begin{align*}
+		\mathbb{P}(Y \leq t) & \overset{\ref{rechenregeln}, (iv)}{=} \E[\mathbf{1}_{(-\infty,t]}(Y)] \\
+		&= \E[\mathbf{1}_{(-\infty,t]}(\min(X_1,X_2))] \\
+		&= \E[g(X_1,X_2)] \\
+		&=\int_{\R^2} g(x)f(x)\dint x\\
+		&= \int_{\R^2} g(x_1,x_2) \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint (x_1,x_2)\\
+		&\overset{\text{Fubini}}{=} \int_{\R} \int_{\R} g(x_1,x_2) \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint x_1 \dint x_2 \\
+		&= \int_{\R} \int_{\R} (1 - \mathbf{1}_{(t,\infty)}(x_1)\mathbf{1}_{(t,\infty)}(x_2)) \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint x_1 \dint x_2\\
+		&= 1 - \int_{t}^{\infty} \int_{t}^{\infty} \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint x_1 \dint x_2 \\
+		&= 1 - \int_{t}^{\infty} \lambda e^{-\lambda x_1} \dint x_1 \int_{t}^{\infty} \beta e^{-\beta x_2} \dint x_2\\
+		& = 1 - e^{-\lambda t} e^{-\beta t} = 1 - e^{-(\lambda + \beta)t}.
+	\end{align*}
+	Weil wir die Verteilungsfunktion der Exponentialverteilung kennen, ist  $Y\sim \operatorname{Exp}(\lambda+\beta)$.
+\end{beispiel}
+
+\begin{satz}\label{un}
+	Sind $X_1,...,X_d$ unabhängige Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so gilt
+	$$ \E[g_1(X_1) \cdot ... \cdot g_d(X_d)] = \E[g_1(X_1)] \cdot ... \cdot \E[g_d(X_d)]$$
+	f\"ur alle messbaren $g_1, ..., g_d: \R \to \overline \R$.
+\end{satz}
+
+\begin{proof}
+	Wir schreiben den Beweis nur f\"ur $d=2$, sonst wird die Notation zu h\"a\ss lich. Schauen wir uns zun\"achst nochmal die Verteilung unabh\"angiger Zufallsvariablen an. Wegen
+	 \begin{align*}
+			\mathbb{P}_{(X_1,X_2)}((-\infty,t_1]) \times (-\infty,t_2]) 
+			&\overset{\text{Def.}}{=} \mathbb{P}(X_1\leq t_1, X_2 \leq t_1) \\
+			&\overset{\text{unabh.}}{=} \mathbb{P}(X_1\leq t_1) \cdot \mathbb{P}(X_2 \leq t_1) \\
+			&= \mathbb{P}_{(X_1,X_2)}((-\infty,t_1]) \cdot \mathbb{P}_{(X_1,X_2)}((-\infty,t_2]),
+		\end{align*}
+		erf\"ullt $\mathbb{P}_{(X_1,X_2)}$ die definierende Eigenschaft des Produktma\ss es auf einem $\cap$-stabilen Erzeuger. Damit gilt $\mathbb{P}_{(X_1,X_2)} = \mathbb{P}_{X_1} \otimes \mathbb{P}_{X_2}$ auf ganz $\cB(\R^2)$. Berechnen wir damit den Erwartungswert mit dem Trafosatz und der Funktion $g(x_1,x_2):=g_1(x_1)g_2(x_2)$:
+		 \begin{align*}
+			\E[g_1(X_1) \cdot g_2(X_2)] &= \E[g(X_1,X_2)]\\
+			&\overset{\text{\ref{gemVert}}}{=} \int_{\R^2} g(x_1,x_2) \dint \mathbb{P}_{(X_1,X_2)}(x_1,x_2)\\
+			&= \int_{\R^2} g(x_1,x_2) \dint\mathbb{P}_{X_1} \otimes \mathbb{P}_{X_2}(x_1,x_2)\\
+			&\overset{\text{Fubini}}{=} \int_{\R} \Big(\int_{\R} g_1(x_1) g_2(x_2) \dint\mathbb{P}_{x_1}(x_1)\Big) \dint\mathbb{P}_{x_2}(x_2)\\
+			& \overset{\text{Lin.}}{=} \int_{\R} g_1(x_1) \dint\mathbb{P}_{X_1}(x_1) \int_{\R} g_2(x_2) \dint\mathbb{P}_{X_2}(x_2)\\
+			&\overset{\text{\ref{gemVert}}}{=} \E[g_1(X_1)] \cdot \E[g_2(X_2)].
+		\end{align*}
+\end{proof}
+Als Anwendung kommt jetzt eine ganz wichtige Eigenschaft unabh\"angiger Zufallsvariablen:
+\begin{korollar}
+	Sind $X_1,...,X_d$ unabhängige Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so gilt $$\mathbb{P}(X_1 \in A_1,...,X_d \in A_d) = \mathbb{P}(X_1 \in A_1) \cdot ... \cdot \mathbb{P}(X_d \in A_d)$$ f\"ur alle $A_1, ..., A_d\in \mathcal A$.
+\end{korollar}
+
+\begin{proof}
+	Das ist gerade Satz \ref{un} mit den messbaren Abbildungen $g_1=\mathbf{1}_{A_1},...,g_d=\mathbf{1}_{A_d}$ sowie die wichtige Verbindung von Wahrscheinlichkeiten und Erwartungswerten aus Satz \ref{rechenregeln} (iv).
+\end{proof}
+Eine andere direkte Folgerung aus Satz \ref{un} ist die Folgerung, dass Unabh\"angigkeit erhalten bleibt, wenn messbare Abbildungen angewandt werden. Formulieren wir das f\"ur zwei Zufallsvariablen:
+\begin{korollar}
+	Sind $X$ und $Y$ unabh\"angige Zufallsvariablen auf $(\Omega, \mathcal A, \mathbb P)$ und $f, g:\R\to \R$ messbar. Dann sind auch $f(X)$ und $g(Y)$ unabh\"angig.	
+\end{korollar}
+\begin{proof}
+	Mit Satz \ref{un} gilt f\"ur $s, t\in \R$
+	\begin{align*}
+		\mathbb P(f(X)\leq t, g(Y)\leq s)&=\E[\mathbf 1_{(-\infty,t]}(f(X)) \mathbf 1_{(\infty,s]}(g(Y))]\\
+		&= \E[\tilde f(X) \tilde g(Y)]\\
+				&= \E[\tilde f(X)]\E[ \tilde g(Y)]\\
+		&=\E[\mathbf 1_{(-\infty,t]}(f(X))] \E[\mathbf 1_{(-\infty,s]}(g(y))]\\
+		&=\mathbb P(f(X)\leq t) \mathbb P( g(Y)\leq s),
+	\end{align*}
+	wobei $\tilde f(x)=\mathbf 1_{(-\infty,t]}(f(x)), \tilde g(x)=\mathbf 1_{(-\infty,s}(g(x))$ als Verkn\"upfung messbarer Abbildungen messbar sind. Also sind $f(X)$ und $g(Y)$ unabh\"angig.
+\end{proof}
+
+
+\begin{deff}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Sind $X,Y$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ mit $\E[X^2],\E[Y^2] < \infty$. Dann heißt 
+		$$\Cov(X,Y) = \E[(X - \E[X])(Y - E[Y])]$$ \textbf{Kovarianz} von $X$ und $Y$.
+		\item Sind $\V(X), \V(Y) \neq 0$, so heißt \[ \rho(x,y) = \frac{\Cov(X,Y)}{\sqrt{\V(X)\V(Y)}} \] \textbf{Korrelation} von $X, Y$.
+		\item Ist $\rho(x,y) = 0$, so heißen $X,Y$ \textbf{unkorreliert}.
+	\end{enumerate} 
+\end{deff}
+In der gro\ss en \"Ubung wurden folgende Eigenschaften diskutiert:
+\begin{bem}\abs
+\begin{itemize}
+	\item Die Kovarianz existiert und es gilt $\rho(X,Y)\in [-1,1]$. Das ist einfach nur Cauchy-Schwarz (d. h. H\"older mit $p=q=2$):
+	\begin{align*}
+		\Cov(X,Y)&= \E[(X - \E[X])(Y - E[Y])]\\
+		&\leq  \sqrt{\E[(X - \E[X])^2]} \sqrt{ \E[(Y - E[Y])^2]}=\sqrt{\V(X)\V(Y)}.
+	\end{align*}
+	Durchteilen gibt $\rho(X,Y)\in [-1,1]$.
+	\item Sind $X$ und $Y$ unabh\"angig, so gilt $\Cov(X,Y)=\rho(X,Y)=0$. Unabh\"angige Zufallsvariablen sind also auch unkorelliert! Das folgt sofort durch Ausmultiplizieren und Satz \ref{un}. 
+	\item Die Korrelation wird in der Statistik genutzt, um Abh\"angigkeiten zu beschreiben. Positive Korrelation bedeutet, dass $X$ und $Y$ eher gleiches Vorzeichen haben, negative Korrelation bedeutet, dass $X$ und $Y$ eher ungleiches Vorzeichen haben. Je n\"aher $\rho(X,Y)$ an $\pm 1$ ist, desto st\"arker ist dieser Effekt. Je n\"aher $\rho(X,Y)$ bei $0$ ist, desto weniger wissen wir \"uber den Zusammenhang von $X$ und $Y$. Am besten sieht man das an den Extremf\"allen: F\"ur $X=Y$ gilt $\rho(X,Y)=1$, f\"ur $X=-Y$ gilt $\rho(X,Y)=-1$, f\"ur unabh\"angige Zufallsvariablen gilt $\rho(X,Y)=0$.
+\end{itemize}
+\end{bem}
+

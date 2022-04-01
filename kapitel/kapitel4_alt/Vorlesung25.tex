@@ -1,0 +1,141 @@
+
+\begin{satz}[Zusammenhang Konvergenzarten]
+	Bildchen Website. % mache ich irgendwann noch richtig
+\end{satz}
+
+
+
+
+\begin{proof}
+	\textbf{Konvergenz in } $\mathcal L^p$ $\Rightarrow$ \textbf{ Konvergenz in } $\mathcal L^q$ \textbf{ f\"ur } $q<p$:  Wir wissen schon, wie aus H\"older $\E[X^q]\leq \E[X^p]$ folgt, man f\"ugt einfach eine $1$ hinzu. Als Wiederholung machen wir das nochmal: Definiere dazu $r' = \frac{p}{q}$ und $r=\frac{r'}{r'-1}$, also gilt
+	\begin{align*}
+		\E[|X_n - X|^q]& = \E[1 \cdot |X_n - X|]\\
+		& \leq (\E[1])^{1/r}(\E[|X_n - X|^{qr}])^{1/{r'}}\\
+		& = 1 \cdot \E[|X_n - X|^p]^{q/p} \overset{\text{Vor.}}{\to} 0, \quad n\to\infty.
+	\end{align*}
+	Also gilt die Konvergenz in $\mathcal L^q$.\smallskip
+	
+\textbf{Konvergenz in } $\mathcal L^p$  $\Rightarrow$ \textbf{ stochastische Konvergenz}: Wegen des ersten Teils reicht es, $p=1$ zu betrachten. Mit der Markov Ungleichung gilt:
+\begin{align*}
+	\mathbb{P}(|X_n - X| > \varepsilon) \leq \frac{\E[|X_n - X|]}{\varepsilon} \overset{\text{Vor.}}{\rightarrow }0,\quad n \to \infty.
+\end{align*}
+Das war es schon.\smallskip
+
+\textbf{Fast sichere Konvergenz } $\Rightarrow$ \textbf{ Stochastische Konvergenz}: Der Trick ist es, die Definition der Konvergenz aus Analysis 1 als Schnitte und Vereinigungen von Mengen zu schreiben:
+	\begin{align*}
+			1& = \mathbb{P}(X_n \to X)\\
+			& \overset{\text{Notation}}{=} \mathbb{P}(\{ \omega \colon X_n(\omega)\to X(\omega), n\to\infty \}) \\
+			&\overset{\text{Def. }}{=} \mathbb{P}(\{\omega \colon \forall \varepsilon > 0 \exists N \in \N \colon |X_n(\omega) - X(\omega)| < \varepsilon \: \forall n \geq N \})\\
+			&= \mathbb{P}\Big(\bigcap_{\varepsilon > 0} \bigcup_{N \in \N} \bigcap_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| < \varepsilon \}\Big).
+		\end{align*}
+		Mit Komplementbildung und de Morgan'schen Regeln folgt daraus
+		\begin{gather*}
+			0 = \mathbb{P}\Big(\Big(\bigcap_{\varepsilon > 0} \bigcup_{N \in \N} \bigcap_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| < \varepsilon \}\Big)^C\Big) \\
+			= \mathbb{P}\Big(\bigcup_{\varepsilon > 0} \bigcap_{N \in \N} \bigcup_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| \geq \varepsilon \}\Big)\\
+			\overset{\text{Mon.}}{\underset{\varepsilon\text{ fest}}{\geq}} \mathbb{P}\Big(\bigcap_{N \in \N} \bigcup_{n \geq N} \{\omega\colon |X_n(\omega) - X(\omega)| \geq \varepsilon \}\Big)\\
+			\overset{\text{Mon.}}{\underset{\text{Maß}}{=}} \lim\limits_{N \to \infty} \mathbb{P}\Big(\bigcup_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| \geq \varepsilon \}\Big)\\ \overset{\text{Mon.}}{\geq} \lim\limits_{N \to \infty} \mathbb{P}(\{ \omega\colon | X_n(\omega) - X(\omega) | > \varepsilon \}) \geq 0.\\
+		\end{gather*}
+		Also gilt  $\lim\limits_{n \to \infty} \mathbb{P}(|X_n - X| > \varepsilon) = 0$ für alle $\varepsilon > 0$, also gilt stochastische Konvergenz.\smallskip
+
+
+\textbf{Stochatische Konvergenz } $\Rightarrow$ \textbf{ Konvergenz in Verteilung}: Wir zeigen die Aussage in zwei Schritten, erst f\"ur gleichm\"assig stetiges $f$, dann f\"ur stetiges $f$.\smallskip
+
+(i) Sei $f$ gleichm\"assig stetig, \mbox{d. h.} 
+			\begin{equation}\label{delta}
+				\forall \varepsilon>0 \exists \delta > 0\colon |x-x'| < \delta \Rightarrow |f(x)-f(x')| < \varepsilon.
+			\end{equation}
+			Sei also $\varepsilon > 0$ beliebig und $\delta$ aus \eqref{delta}. Definiere $A_n = \{ \omega\colon |X_n(\omega) - X(\omega)| \geq \delta \}$. Damit gilt, mit $||f||_\infty=\sup_{x\in\R} |f(x)|$,
+			\begin{align*}
+				0 &\leq | \E[f(X_n)] - \E[f(X)] |\\
+				& \leq \E[|f(X_n) - f(X)|]\\
+				& \overset{\substack{\text{vgl.}\\\text{Bew.}}}{\underset{\ref{markov}}{=}} \E[|f(X_n) - f(X)|\cdot \underbrace{1}_{\mathbf 1_{A_n}+\mathbf 1_{A_n^C}}]|\\ 
+				&= \E[|f(X_n) - f(X)|\cdot \mathbf{1}_{A_n}] + \E[|f(X_n) - f(X)|\cdot \mathbf{1}_{A_n^C}]\\
+				&\overset{\text{\eqref{delta}}}{\underset{\text{Def. } A_n}{\leq}} \E[2 ||f||_{\infty} \mathbf{1}_{A_n}] + \E[\varepsilon \mathbf{1}_{A_n^C}]\\
+				& = 2 ||f||_{\infty} \mathbb{P}(A_n) + \varepsilon \mathbb{P}\big(A_n^C\big)\\
+				&\leq 2 ||f||_{\infty}\mathbb{P}(A_n) + \varepsilon\\
+				& = 2 ||f||_{\infty}\mathbb{P}(|X_n-X| > \delta) + \varepsilon\\
+				&\overset{\text{Vor.}}{\rightarrow} \epsilon, \quad n\to\infty.
+			\end{align*}
+			Weil $\varepsilon > 0$ beliebig, gilt damit \[ \lim\limits_{n \to \infty} |\E[f(X_n)] - \E[f(X)]| = 0 \]
+			und somit
+			\[ \lim\limits_{n \to \infty} \E[f(X_n)] = \E[f(X)]. \]
+		Damit ist die Definition der Konvergenz in Verteilung f\"ur gleichm\"assig stetige beschr\"ankte Funktionen gezeigt.\smallskip
+		
+		(ii) Sei jetzt $f$ eine beliebige stetige beschr\"ankte Funktion und $\varepsilon>0$ fest. %hier irgendwann Bildchen...
+			 F\"ur Intervalle $I_k = [-k,k]$ gilt wegen der Stetigkeit von Maßen $\mathbb{P}(X\in I_k) \to 1$, $k \to \infty$. Wähle $k_0 \in \N$ mit $\mathbb{P}(X \notin I_k) < \varepsilon$, $\forall k \geq k_0$. Sei $U_{\varepsilon} = (\text{Bildchen in der Vorlesung})$ und $f' = f \cdot U_{\varepsilon}$. In Worten: $f'$ ist $f$ in $[-k,k]$, null in $[-k-1,k+1]^C$ und verbindet dazwischen stetig $0$ und f(k) bzw. $f(-k)$. Die wichtige dazugewonnene Information ist, dass $f'$ gleichm\"assig stetig ist. Das gilt, weil (siehe Analysis 1) stetige Funktionen auf kompakten Mengen gleichm\"a\ss ig stetig sind und $f'$ au\ss erhalb der kompakten Menge $[-k-1,k+1]$ null ist. Jetzt kommt ein mehrfach genutzter Trick (Ana 1 + Ana 2), wir addieren zwei Mal $0$ und nutzen die Dreicksungleichung
+			 \begin{align}\label{F4}
+				  |\E[f(X_n)] - \E[f(X)]|
+			 	\overset{\triangle}{\leq} \underbrace{\E[|f(X_n) - f'(X_n)|]}_{:= \text{ I}_n} + \underbrace{\E[|f'(X_n) - f'(X)|]}_{:= \text{ II}_n} + \underbrace{\E[|f'(X) - f(X)|]}_{:= \text{ III}_n}
+			 \end{align}
+			 und betrachten einzeln die Grenzwerte der drei Summanden. Aus (i), und weil $f'$ gleichmäßig stetig, wissen wir, dass $\text{II}_n \to 0$, $n \to \infty$. F\"ur den dritten Summanden gilt
+			 \begin{align*}
+			 	\text{III}_n = \E[|f(X) - f'(X)| \mathbf{1}_{I_k^C}] \leq 2||f||_{\infty} \E[\mathbf{1}_{I_k^C}]
+			 	= 2||f||_{\infty} \mathbb{P}(X \in I_k^C)
+				= 2||f||_{\infty} \mathbb{P}(X \notin I_k),
+			 \end{align*}
+			 weil $f(x)-f'(x)=0$ f\"ur $|x|<k$. Schlie\ss lich noch der erste Summand. Weil nach Definition $f'=f\cdot U_\epsilon$ und $1-U_\epsilon \leq \mathbf 1_{I_{k+1}^C}$ gilt, bekommen wir
+			\begin{align*}
+			 	\text{I}_n &\overset{\text{Def.}}{=} \E[|f(X_n)|(1-U_{\varepsilon}(X_n))] \\
+			 	&\leq ||f||_{\infty} \E[1-U_{\varepsilon}(X_n)]\\
+				&\overset{\text{Mon.}}{\leq} ||f||_{\infty} \E[\mathbf{1}_{I_{k+1}^C}(X)]\\
+			 	&= ||f||_{\infty} \mathbb{P}(X \in I_{k+1}^C) \leq ||f||_{\infty} \varepsilon.
+			 \end{align*}
+			 Die drei einzelnen Betrachtungen zusammen ergeben wegen \eqref{F4}
+			 
+			  \[0\leq \lim\limits_{n \to \infty} |\E[f(X_n)] - \E[f(X)]| \leq ||f||_{\infty} \varepsilon + 0 + 2||f||_{\infty}\varepsilon. \] 
+			 Weil $\varepsilon$ beliebig war, folgt $\lim\limits_{n \to \infty} |\E[f(X_n)] - \E[f(X)]|=0$ und damit \[ \lim\limits_{n \to \infty} \E[f(X_n)] = \E[f(X)]. \] 
+
+
+
+\end{proof}
+
+\begin{bem}
+	Das Ziel ist immer, die \enquote{starken} Konvergenzen (links im Bildchen) zu zeigen. Das geht leider nicht immer!
+\end{bem}
+Um die Begriffe mit Leben zu f\"ullen, zeigen wir drei ber\"uhmte S\"atze, je einen f\"ur fast sichere, stochastische Konvergenz und Konvergenz in Verteilung:
+\begin{itemize}
+	\item schwaches Gesetz der gro\ss en Zahlen (stochastische Konvergenz)
+	\item starkes Gesetz der gro\ss en Zahlen (fast sicher Konvergenz)
+	\item Zentraler Grenzwertsatz (Konvergenz in Verteilung)
+\end{itemize}
+Beim schwachen Gesetz der gro\ss en Zahlen werden wir merken, dass Konvergenz in $\mathcal L^p$ gerade f\"ur $p=1$ oder $p=2$ ein extrem n\"utzliches Werkzeug ist. Der Grund ist, dass man mit Momenten gut rumrechnen kann (Linearit\"at, ...). 
+
+\begin{satz}[Schwaches Gesetz der großen Zahlen]\label{schwaches}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Sind $X_1,X_2,...$ u.i.v. mit $\E[X_1^2] < \infty$, so gilt
+		\[ \frac{1}{n} \sum_{k=1}^{n} X_k \overset{P}{\longrightarrow} \E[X_1], \quad n \to \infty. \]
+		\item Variante mit schw\"acheren Annahmen: Sind $X_1,X_2,...$ paarweise unkorreliert (z. B. paarweise unabh\"angig) mit 
+		\begin{align}
+		 \frac{1}{n^2} \sum\limits_{k=1}^{n} \V(X_k) \to 0, \label{F1}
+		\end{align}
+		so gilt
+		\[ \frac{1}{n} \sum_{k=1}^{n} X_k \overset{P}{\longrightarrow} \E[X_1], \quad n \to \infty. \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	(i)  Wenn man den Beweis gesehen hat, ist alles ziemlich simple: \textbf{Erst Tschebyscheff, dann Bienaym\'e}. Zun\"achst merken wir an, dass wir ohne Einschr\"ankung $\E[X_1]=0$ annehmen k\"onnen. Sonst f\"uhren wir die Aussage einfach auf diesen Fall mit $Y_i:=X_i-\E[X_i]$ zur\"uck (der Trick hei\ss t zentrieren), denn es gilt $\E[Y_i]=0$ und $\frac{1}{n}\sum_{k=1}^n Y_i=\frac{1}{n}\sum_{k=1}^n X_i-\E[X_1]$, also gilt die Behauptung f\"ur $(X_i)$ genau dann, wenn sie f\"ur $(Y_i)$ gilt.\smallskip
+	
+	Es gelte nun also $\E[X_1]=0$, insbesondere $\E[\sum_{k=1}^nX_k]=0$. Mit Tschebyscheff und Bienaym\'e gilt f\"ur beliebiges $\varepsilon>0$ aufgrund der u.i.v. Annahme
+		\begin{align*}
+		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{k=1}^{n} X_k\Big| \geq \varepsilon\Big)
+		&=\mathbb{P}\Big(\Big| \sum\limits_{k=1}^{n} X_k\Big| \geq n \varepsilon\Big)\\
+		&\overset{\ref{Markov}}{\leq} \frac{\V \big( \sum_{k=1}^n X_k\big) }{n^2\varepsilon^2}\\
+		&\overset{\ref{bien}}{=} \frac{\sum\limits_{k=1}^{n} \V(X_k)}{n^2 \varepsilon^2}\\
+		& = \frac{n \cdot \V(X_1)}{n^2 \varepsilon^2} \to 0, \quad n \to \infty.
+		\end{align*}
+		Also gilt $\frac{1}{n}\sum_{k=1}^n X_k\overset{P}{\rightarrow}0= \E[X_1]$ f\"ur $n\to\infty$. Um ganz genau zu sein, merken wir noch an, dass \enquote{$>$} oder \enquote{$\geq$} in der Definition der schwachen Konvergenz nat\"urlich keine Rolle spielt, $\varepsilon$ ist schlie\ss lich beliebig.\smallskip
+		
+		In dem Beweis kann man die Schritte auch ein wenig anders mit Korollar \ref{vari} begr\"unden. Zum einen kann man wegen $\V(X_i-\E[X_i])=\V(X_i)$ auch ohne Zentrieren mit $X_i-\E[X_i]$ rechnen, zum anderen kann man den Faktor $\frac 1 n$ nach Tschebyscheff quadratisch aus der Varianz rausziehen, statt ihn vor Tschebyscheff r\"uberzumultiplizieren. Schreibt das zum \"Uben einfach mal hin!\smallskip
+		
+		(ii) Um die schw\"acheren Annahmen von (ii) zu verstehen, brauchen wir nur in den vier Zeilen des Arguments zu schauen, wie wir die Unabh\"angigkeit abschw\"achen k\"onnen, so dass die Konvergenz immer noch folgt. Wir sehen dann sofort, dass f\"ur Bienaym\'e nur paarweise unkorreliert gebraucht wird, dann aber f\"ur die Konvergenz noch \eqref{F1} gefordert werden muss (es wird nicht mehr identisch verteilt angenommen, es gilt also nicht $\V[X_k]=\V[X_1]$). Schaut euch das in Ruhe an, um die Idee \enquote{erst Tschebyscheff, dann Bienaym\'e} einzubrennen.
+\end{proof}
+
+	Zum besseren Verst\"andniss kann man ja mal ausprobieren, ob man das schwache Gesetz genauso mit der Annahme $\E[|X_1|]<\infty$ beweisen k\"onnte. Warum funktioniert der Beweis nicht, wenn man die Markovungleichung f\"ur das erste Moment statt f\"ur das zweite Moment ausprobiert? Der Trick an dem Beweis mit zweiten Momenten ist, dass die Varianz der Summe, die eigentlich aus $n^2$ vielen Summanden besteht, sich aufgrund der Annahme (unabh\"angig oder unkorreliert) zu einer Summe aus nur $n$ vielen Summanden reduziert (vergleiche Bienaym\'e). Damit dominiert der Nenner mit $n^2$ und die obere Schranke konvergiert gegen $0$. Der Effekt passiert beim ersten Moment nicht, weil keine \enquote{gemischten Terme} $\E[X_iX_j]=0$ auftauchen. Deshalb st\"unde sowohl in Z\"ahler als auch in Nenner etwas mit $n$, die obere Schranke w\"urde also nicht gegen $0$ konvergieren:
+	\begin{align*}
+		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{k=1}^{n} X_k\Big| \geq \varepsilon\Big)
+		&\overset{\ref{Markov},\, h(x)=|x|}{\leq} \frac{\E \big[\big|\sum_{k=1}^n X_k\big|\big] }{n\varepsilon}\leq \frac{\sum_{k=1}^n \E[|X_k|]}{n\varepsilon}= \frac{n\E[|X_1|]}{n\varepsilon} \not\to 0,
+	\end{align*}
+	f\"ur $n\to\infty$. Genau den selben Effekt werden wir beim Beweis des starken Gesetzes der gro\ss en Zahlen sehen, bei dem wir endliche 4.te Momente annehmen und bei der Markovungleichung mit $h(x)=x^4$ genug Summanden verschwinden, dass der Nenner dominiert.
+	
+	

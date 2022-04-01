@@ -1,0 +1,142 @@
+
+
+
+\marginpar{\textcolor{red}{Vorlesung 16}}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\alph*)]
+		\item Wir zeigen zun\"achst, dass $\cM_X$ in $(-\varepsilon,\varepsilon)$ eine Potenzreihe ist. Nach Analysis 1 ist 
+		\[ e^{tX} = \sum\limits_{k=0}^{\infty} \frac{(tX)^n}{k!} = \lim\limits_{m \to \infty} \sum\limits_{k=0}^{m} \frac{(tX)^n}{k!} =: \lim\limits_{m \to \infty} S_m. \]
+		Die Zufallsvariable $e^{tX}$ kann also als Grenzwert der Folge $(S_m)$ von Zufallsvariablen geschrieben werden. Um gleich dominierte Konvergenz zu nutzen, brauchen wir einen integrierbare Majorante $S$ f\"ur die Folge $(S_m)$. Das ist gar nicht so schwer: \[ |S_m| \overset{\text{Def.}}{=} \Big|\sum\limits_{k=0}^{m} \frac{(tX)^n}{k!} \Big| \overset{\triangle}{\leq} 
+		\sum\limits_{k=0}^{m} \Big| \frac{(tX)^n}{k!} \Big| \leq \sum\limits_{k=0}^{\infty} \Big| \frac{(tX)^n}{k!} \Big| =: S.
+		\]
+		Wegen $S=e^{|tX|} \leq e^{tX} + e^{-tX}$ ist $S$ integrierbar:
+		\[ \mathbb{E}[|S|] = \mathbb{E}[e^{|tX|}] \overset{\text{Mon.}}{\underset{\text{Lin.}}{\leq}} \mathbb{E}[e^{tX}] + \mathbb{E}[e^{-tX}] \overset{\text{Def.}}{=} \cM_X(t) + \cM_X(-t) < \infty
+		\]
+		nach Annahme. Jetzt kann also dominierte Konvergenz angewandt werden. Es gilt dann
+		\begin{align*}
+		M_X(t)=\E[\lim_{m\to\infty} S_m] \overset{\text{DCT}}{=} \lim_{m\to\infty} \E[S_m]\overset {\text{Lin.}}{=} \lim_{m\to\infty} \sum_{k=0}^m\frac{t^k \E[X^k]}{k!}=\sum_{k=0}^\infty\frac{t^k \E[X^k]}{k!}.
+		\end{align*}
+		Damit ist $M_X$ in $(-\epsilon,\epsilon)$ eine Potenzreihe mit Koeffizienten $a_k=\frac{\E[X^k]}{k!}$. 
+		\item	Aus Analysis 1 wissen wir (so haben wir die Taylor-Koeffizienten bestimmt), dass $M_X$ in $(-\epsilon, \epsilon)$ unendlich oft differenzierbar ist und die Reihe gliedweise differenziert werden kann. $n$-faches Ableiten gibt dann $M_X^{(n)}(0)=\E[X^n]$.
+	\end{enumerate}
+\end{proof}
+
+\begin{beispiel}\abs
+	\begin{itemize}
+		\item F\"ur $X \sim \cN(\mu, \sigma^2)$ ergibt die explizite Formel der momenterzeugenden Funktion mit dem Satz
+		\begin{align*}
+		\mathbb{E}[X] &= \cM_X'(0) = \exp\Big(\mu\cdot0 + \frac{\sigma^2 t^2}{2}\Big)\cdot (\mu + \sigma^2 \cdot 0) = \mu, \\
+		\mathbb{E}[X^2] &= \cM_X''(0) = \mu^2 + \sigma^2.
+		\end{align*}
+		Beides zusammen ergibt $\mathbb{V}(X) = \mathbb{E}[X^2] - \mathbb{E}[X]^2 = \mu^2 + \sigma^2 - \mu^2 = \sigma^2$. Die zwei Parameter der Normalverteilung sind also gerade Erwartungswert $\mu$ und Varianz $\sigma^2$.
+		\item F\"ur $X \sim \operatorname{Poi}(\lambda)$ ergibt die explizite Formel der momenterzeugenden Funktion mit dem Satz
+		\begin{align*}
+		\mathbb{E}[X] = \cM_X'(0) = \lambda \quad \text{ und }\quad  \mathbb{E}[X^2] = \cM_X''(0) = \lambda^2 + \lambda.
+		\end{align*}
+		Beides zusammen ergibt $\mathbb{V}[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2 = \lambda^2 + \lambda - \lambda^2$.
+	\end{itemize}
+\end{beispiel}
+
+
+\begin{prop}[Jensen’sche Ungleichung]\label{jensen}
+	Ist $X$ eine Zufallsvariable mit $\mathbb{E}[|X|] < \infty$ und $\varphi \colon \R \to \R $ \textit{konvex} mit $\mathbb{E}[\varphi(X)] < \infty$, so gilt
+	\[ \varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]. \]
+\end{prop}
+
+
+\begin{proof}
+	Wir geben den Beweis nur f\"ur differenzierbares $\varphi$. Wegen der Konvexität gibt es f\"ur jedes feste $x_0 \in \R$ ein $b\in\R$ mit
+	\begin{itemize}
+		\item $ \varphi'(x_0) x + b \leq \varphi(x)$ f\"ur alle $x\in\R$,
+		\item $ \varphi'(x_0) x_0 + b = \varphi(x_0)$.
+	\end{itemize}
+	Wir w\"ahlen $x_0 = \E[X]$. Mit der zweiten Eigenschaft schreiben wir $\varphi(\E[X])$ wie folgt um:
+	\begin{align*}
+	\varphi(\E[X]) = \varphi(x_0) = \varphi'(x_0) x_0 + b = \varphi'(x_0) \E[X] + b.
+	\end{align*}
+	Weil der Erwartungswert linear und monoton ist, sowie der Erwartungswert einer konstanten Zufallsvariable gerade die Konstante ist, k\"onnen wir die rechte Seite wie folgt behandeln:
+	\begin{align*}	
+	\varphi'(x_0) \E[X] + b= \E[\varphi'(x_0) X] + \E[b] = \E[\varphi'(x_0) X + b] \overset{\text{Mon.}}{\leq} \E[\varphi(x)].
+	\end{align*}
+	Zusammen folgt die Behauptung.
+\end{proof}
+
+\begin{beispiel1}
+	Als Merkregel für das \enquote{$\leq$} in Proposition \ref{jensen} nimmt man $\varphi(x)=x^2$. Weil
+	\[ 0 \leq \V(X) = \E[(X - \E[X])^2] \overset{\text{Üb.}}{=} \E[X^2] - \E[X]^2,
+	\]
+	muss $\E[X]^2\leq \E[X^2]$ gelten. Also muss in \ref{jensen} \enquote{$\leq$} und nicht \enquote{$\geq$} stehen.
+\end{beispiel1}
+Zum Abschluss nochmal die Markov- und Tschebyscheff-Ungleichungen, die wir f\"ur Integrale \"uber beliebige Ma\ss e schon angeschaut haben. Weil Erwartungswerte Integrale sind, geht das in diesem Spezialfall nat\"urlich genauso:
+\begin{satz}[Markov- und Tschebyscheff-Ungleichung]\label{Markov}
+	Sei $X$ eine Zufallsvariable, dann gelten für $a > 0$ folgende Ungleichungen:
+	\begin{enumerate}[label=(\roman*)]
+		\item F\"ur $h \colon \R \to (0, \infty)$ wachsend gilt
+		 \[ \mathbb{P}(X\geq a) \leq \frac{\E[h(X)]}{h(a)} \quad\quad \text{(Markov-Ungleichung)} \]
+		\item F\"ur $h \colon (0,\infty) \to (0, \infty)$ wachsend gilt		
+		 \[ \mathbb{P}(|X|\geq a) \leq \frac{\E[h(|X|)]}{h(a)} \quad\quad \text{(Markov-Ungleichung)} \]
+		\item \[ \mathbb{P}(|X - \E[X]| \geq  a) \leq \frac{\V(X)}{a^2} \quad\quad \text{(Tschebyscheff-Ungleichung)} \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{itscheby} Definiere $A = [a, \infty)$, dann gilt weil $h$ wachsend ist
+		\begin{align*}
+		\E[h(X)]& \overset{\text{Mon.}}{\geq} \E[h(X) \cdot \mathbf{1}_A(X)] \\
+		&\geq \E[h(a) \cdot \mathbf{1}_A(X)]\\
+		& \overset{\text{Lin.}}{=} h(a) \cdot \E[\mathbf{1}_A(X)]\\
+		&\overset{\ref{rechenregeln}, (iv)}{=} h(a) \cdot \mathbb{P}(X\geq a).
+		\end{align*}
+		Durchteilen gibt die Absch\"atzung. Hier haben wir den kleinen Trick genutzt, dass $1\equiv \mathbf 1_{\Omega}\equiv \mathbf 1_A+\mathbf 1_{A^C}\geq \mathbf 1_A$ gilt. Der Trick wird jetzt immer wieder kommen!
+		\item Genau wie (i).
+		\item Benutze $h(x) = x^2$ in (ii) mit der \enquote{zentrierten} Zufallsvariablen $X - \E[X]$.
+	\end{enumerate}
+\end{proof}
+
+\begin{beispiel1}
+	Ist $ X \sim \cN(\mu, \sigma^2)$, so gilt $ \mathbb{P}(|X - \mu| \geq a) \leq \frac{\sigma^2}{a^2}$.
+\end{beispiel1}
+Bevor wir wieder in die abstrakte Ma\ss theorie gehen, noch ein echtes Anwendungsbeispiel von Zufallsvariablen.
+\begin{beispiel}
+	Eine Website wird im Mittel pro Stunde zweimal geklickt. Wie groß ist die Wahrscheinlichkeit, dass die Website in einer Stunde mindestens fünfmal geklickt wird?\smallskip
+	
+	Um das Beispiel stochastisch zu behandeln, m\"ussen wir zun\"achst ein Modell annehmen. Welche uns bekannte Zufallsvariable k\"onnte die Anzahl der Klicks pro Stunde modellieren? Da die Ergebnisse der Zufallszahlen nat\"urliche Zahlen sind, muss die Verteilung diskret sein. Nun ist die Anzahl nicht beschr\"ankt, es sollte also eine Zufallsvariable sein, die alle Werte in $\N$ annehmen kann. Dazu kennen wir bisher nur die geometrische- oder die Poissonverteilung. An der jetzigen Stelle k\"onnen wir ohne weitere Annahmen keine von beiden ausschlie\ss en. Sobald wir \"uber Unabh\"angigkeit sprechen, sehen wir aber, dass die Poissonverteilung sinnvoll ist. Wir nehmen also an, dass $X\sim \operatorname{Poi}(\lambda)$ ein gutes Modell ist. Aber was ist $\lambda$? Weil wir wissen, dass $\E[X]=\lambda$ ist, schlie\ss en wir $\lambda=2$ aus der Vorinformation. Um nun die Aufgabe zu l\"osen, m\"ussen wir f\"ur eine $\operatorname{Poi}(2)$-verteilte Zufallsvariable $\mathbb P(X\geq 5)$ berechnen. Das geht ganz einfach:
+	\begin{align*}
+	\mathbb{P}(X \geq 5) &= 1 - \mathbb{P}(X \leq 4)\\
+	& = 1 - \sum\limits_{k=0}^{4} \mathbb{P}(X = 4)\\ 
+	&= 1 - e^{-2} \left(\frac{2^0}{0!} + \frac{2^1}{1!} + \frac{4}{2} + \frac{8}{6} + \frac{16}{24}\right) \approx 0,053.
+	\end{align*} 
+	Hierbei haben wir genutzt, dass f\"ur eine diskrete Zufallsvariable immer $\mathbb P(X\in A)=\sum_{k\in A} \mathbb P(X=k)$ gilt. Das folgt nat\"urlich aus der $\sigma$-Additivit\"at von Ma\ss en weil $\mathbb P(X\in A)$ nur die Kurzschreibweis f\"ur das Bildma\ss{} (push-forward) $\mathbb P_X(A)$ ist. 
+\end{beispiel}
+
+\section{$L^p$-Räume}
+
+Sei jetzt wieder $(\Omega, \cA, \mu)$ ein beliebiger messbarer Raum und $f \colon \Omega \to \overline \R$ sei $(\cA, \cB(\overline{\R}))$-messbar. Wir werden in diesem Kapitel mehrfach nutzen, dass wegen Satz \ref{S7} folgende \"Aquivalenz gilt:
+\begin{align*}
+\int_{\Omega} |f| \dint \mu = 0 \quad \Leftrightarrow \quad  |f| = 0 \, \, \mu \text{-fast überall }\quad \Leftrightarrow\quad f = 0 \, \,\mu\text{-fast überall.}
+\end{align*}
+
+\begin{satz}[Hölder-Ungleichung]\label{hoelder}
+	Seien $p,q > 1$ mit $ \frac{1}{p} + \frac{1}{q} = 1$. Dann gilt 
+	\[ \int_{\Omega} |fg| \dint \mu \leq \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{\frac{1}{p}} \Big( \int_{\Omega} |g|^q \dint \mu \Big)^{\frac{1}{q}}. \]
+\end{satz}
+
+\begin{proof}
+	\begin{enumerate}[label=(\roman*)]
+		\item Alle auftretenden integranden sind messbar und nichtnegativ, also sind alle Integrale definiert, $+\infty = +\infty$ ist aber möglich.
+		\item Wir erinnern an die Young-Ungleichung aus Analysis 2 (das ist gerade die Konvexität des $\ln$): F\"ur $\alpha, \beta >0$ gilt
+		\[ \alpha \beta \leq \frac{\alpha^p}{p} + \frac{\beta^q}{q}. \]
+		\item Ist ein Faktor der rechten Seite $0$ oder $+ \infty$, so ist nichts zu zeigen. Das ist sofort klar für $+\infty$, aber auch der Fall $0$ ist nicht schwer: Wenn n\"amlich
+		$ (\int_{\Omega} |f|^p \dint \mu )^{1/p}= 0$ gilt, so muss $f = 0$ $\mu$-fast überall gelten. Also ist auch $|fg| = 0$ $\mu$-fast überall und damit ist auch die linke Seite $0$. Die Ungleichung ergibt dann also $0\leq 0$ und das ist richtig.
+		\item Definiere \[ \sigma = \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{p} > 0\quad \text{ und } \quad \tau = \Big( \int_{\Omega} |g|^q \dint \mu \Big)^{q} > 0 \]
+		sowie die messbaren Abbildungen
+		\[ \alpha(\omega) =  \frac{|f(\omega)|}{\sigma} \quad \text{ und }\quad \beta(\omega) =  \frac{|g(\omega)|}{\tau}  \]
+		f\"ur alle $\omega\in \Omega$.
+		Mit Young folgt \[ \frac{|f(\omega) g(\omega)|}{\sigma \tau} \leq \frac{|f(\omega)|^p}{\sigma^p p} + \frac{|g(\omega)|^q}{\tau^q q}. \]
+		Integrieren beider Seiten gibt wegen der Monotonie des Integrals
+		\[ \frac{1}{\sigma \tau} \int_{\Omega} |fg| \dint \mu \leq \frac{\int_{\Omega}|f|^p \dint \mu}{\sigma^p p} + \frac{\int_{\Omega}|g|^q \dint \mu}{\tau^q q} = \frac{1}{p} + \frac{1}{q} = 1. \]
+		Durchmultiplizieren gibt die H\"oldersche Ungleichung.
+	\end{enumerate}
+\end{proof}

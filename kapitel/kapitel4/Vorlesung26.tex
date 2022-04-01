@@ -1,0 +1,202 @@
+
+%\begin{bem}
+%	Gilt $\E[X_2] < \infty$, so gilt $\V(X) = \V(X+a)$. Warum? $\V(X+a) = \E[(X+a -\E[X+a])^2] = \E[(X+a -(\E[X]+\E[a]))^2] = \E[(X -\E[X])^2] = \V(X)$.
+%\end{bem}
+
+%\begin{proof}
+%	\OE \space gelte $\E[X_1] = 0$. Warum? Wenn nicht, betrachte $Y_n = X_n - \E[X_n]$ (das nennt man zentrieren). Damit gilt 
+%	\begin{gather*}
+%		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} (X_i - \E[X_1]) - 0\Big| > \varepsilon\Big) = \mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} (X_i - \E[X_i]) - 0\Big| > \varepsilon\Big) \\
+%		= \mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} Y_i - 0\Big| > \varepsilon\Big) \to 0, \: n \to \infty,
+%	\end{gather*}
+%	weil $\E[Y_i] = \E[X_i - \E[X_i]] = \E[X_i] - \E[X_i] = 0$.
+%	Sei also $\E[X_1] = 0$. 
+%	\begin{gather*}
+%		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} X_i - 0\Big| > \varepsilon\Big) = \mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} X_i - \E[\frac{1}{n} \sum\limits_{i=1}^{n} X_i]\Big| > \varepsilon\Big) \\
+%		\overset{\text{\ref{tscheby}}}{\leq} \frac{\V\Big(\frac{1}{n} \sum\limits_{i=1}^{n} X_i\Big)}{\varepsilon^2} = \frac{\frac{1}{n^2} \V\Big(\sum\limits_{i=1}^{n} X_i\Big)}{\varepsilon^2} \overset{\text{\ref{bien}}}{=} \frac{\frac{1}{n^2} \sum\limits_{i=1}^{n} \V\Big(X_i\Big)}{\varepsilon^2}  \\
+%		= \frac{\frac{1}{n^2} \cdot n \cdot \sum\limits_{i=1}^{n} \V\Big(X_i\Big)}{\varepsilon^2} = \frac{\sum\limits_{i=1}^{n} \V\Big(X_i\Big)}{n \varepsilon^2} \to 0, \: n \to \infty.
+%	\end{gather*}
+%\end{proof}
+
+
+\section{Starkes Gesetz der großen Zahlen}
+	Was bedeutet die stochastische Konvergenz, bzw. warum ist sie schwach? Seien als Beispiel $X_1,X_2,...$ u.i.v. Würfel, also diskret gleichverteilt auf $\{1,...,6\}$. Wegen $\E[X_1]=3,5$ bedeutet das schwache Gesetz der großen Zahlen (w\"ahle zum Beispiel $\epsilon=0.01$), dass 
+	\[ \mathbb{P}\Big(3,49 < \frac{1}{n} \sum\limits_{i=1}^{n} X_i < 3,51\Big) = \mathbb{P}\Big(\Big|\frac 1 n\sum\limits_{i=1}^{n} X_i - \E[X_1]\Big| < 0,01\Big) \to 1, \quad n \to \infty. \]
+	In Worten steht hier: \enquote{Der Mittelwert wird mit hoher Wahrscheinlichkeit nah bei 3,5 liegen, wenn $n$ groß ist.} Es wird damit nicht ausgeschlossen, dass der Mittelwert mit kleiner Wahrscheinlichkeit weit vom Erwartungswert entfernt liegt. Genau hier liegt der Unterschied zum starken Gesetz der gro\ss en Zahlen, das wir als n\"achstes beweisen wollen. Hier wird die stochastische Konvergenz durch fast sichere Konvergenz ersetzt. Weil in der Definition der fast sicheren Konvergenz die Variable $n$ \textit{innerhalb} der Wahrscheinlichkeit steht, $\mathbb P(X_n\to X)=1$, kann der Effekt nicht auftreten.\smallskip
+
+\marginpar{\textcolor{red}{Vorlesung 26}}
+	
+Als Hilfsmittel f\"ur den Beweis diskutieren wir zun\"achst das Borel-Cantelli Lemma. Dazu zun\"achst ein paar Definitionen:	
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse.
+	\begin{enumerate}[label=(\roman*)]
+		\item \begin{align*}
+			\limsup\limits_{n \to \infty} A_n 
+			&:= \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k\\
+			&= \{ \omega \in \Omega\colon \omega \in A_n \text{ für unendlich viele } n \}\\ 
+			&\overset{\text{Not.}}{=} \{ A_n \text{ unendlich oft} \} 
+		\end{align*}
+		heißt \textbf{Limes superior} der Folge $A_n$.
+		\item \begin{align*}
+			\liminf\limits_{n \to \infty} A_n 
+			&:= \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{\infty} A_k\\
+			&= \{ \omega \in \Omega\colon \omega \in A_n \text{ schließlich immer} \}\\
+			&\overset{\text{Notation}}{=} \{ A_n \text{ schließlich immer} \}
+		\end{align*}
+		\textbf{Limes inferior} der Folge $A_n$.
+	\end{enumerate}
+\end{deff}
+Weil aufgrund einer $\sigma$-Algebra abz\"ahlbare Schnitte und Vereinigungen wieder in $\mathcal A$ sind, sind auch $\limsup_{n\to\infty} A_n$ und $\liminf_{n\to\infty} A_n$ in $\mathcal A$. Wem der Begriff \enquote{schlie\ss lich immer} suspekt ist, der (oder die) schaue einfach die formelle Definition an. Diese besagt, dass es eine nat\"urliche Zahl $n$ gibt, so dass das Ereigniss danach immer eintritt (der Durchschnitt von Mengen enth\"alt alle Elemente, die in allen Mengen enthalten sind).\smallskip
+
+Tats\"achlich haben die neuen Begriffe $\liminf$ und $\limsup$ f\"ur Mengen auch etwas mit den uns bekannten Begriffen $\liminf$ und $\limsup$ f\"ur Folgen zu tun:
+\begin{lemma}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse. Dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \liminf\limits_{n \to \infty} A_n \subseteq \limsup\limits_{n \to \infty} A_n, \]
+		\item \[ (\liminf\limits_{n \to \infty} A_n)^C = \limsup\limits_{n \to \infty} A_n^C, \]
+		\item \[ \limsup\limits_{n \to \infty} \mathbf{1}_{A_n}(\omega) = \mathbf{1}_{\limsup\limits_{n \to \infty} A_n}(\omega),\quad \forall \omega \in \Omega, \]
+		\item \[ \liminf\limits_{n \to \infty} \mathbf{1}_{A_n}(\omega) = \mathbf{1}_{\liminf\limits_{n \to \infty} A_n}(\omega),\quad \forall \omega \in \Omega. \]
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Übung. Denkt einfach mal kurz dar\"uber nach, was $\liminf_{n\to\infty} a_n=1$ oder $\liminf_{n\to\infty} a_n=0$ f\"ur eine reelle Folge $(a_n)$ bedeutet, wenn diese nur die Werte $0$ und $1$ annimmt.
+\end{proof}
+
+Borel-Cantelli gibt uns ein Kriterium, ob die Wahrscheinlichkkeit des $\limsup A_n$ null ist oder (mit einer st\"arkeren Annahme) $1$ ist. Daf\"ur basteln wir mit Zufallsvariablen rum, alles basiert auf folgender Bemerkung:
+\begin{bem}\label{ereig}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse. Dann gilt
+	\begin{align*}
+		A_1, A_2, ... \text{ sind unabh\"angig}\quad \Leftrightarrow\quad  \mathbf{1}_{A_1},\mathbf{1}_{A_2},... \text{ sind unabhängig}.
+	\end{align*}
+	Beachte: $A_1, A_2, ...$ ist ein Folge von Ereignissen, wohingegen $\mathbf{1}_{A_1},\mathbf{1}_{A_2},... $ eine Folge von Zufallsvariablen ist. Das ist also ein guter Moment, in Kapitel \ref{Sunab} die Definitionen von Unabh\"angigkeit von Ereignissen und Zufallsvariablen nochmal zu vergleichen! Warum gilt die \"Aquivalenz? Checken wir die Definitionen:
+	\begin{align*}
+		\mathbf{1}_{A_1},\mathbf{1}_{A_2},... \text{ unabh\"angig}\quad 
+		&\overset{\text{Def. }\ref{unab}}{\Leftrightarrow} \quad \sigma(\mathbf{1}_{A_1}),\sigma(\mathbf{1}_{A_2}),... \text{ unabhängig}\\
+		&\Leftrightarrow\quad \{ \emptyset, \Omega, A_1, A_1^C \},\{ \emptyset, \Omega, A_2, A_2^C \}, ... \text{ unabhängig}\\
+		&\Leftrightarrow\quad A_1, A_2, ... \text{ unabh\"angig}.
+	\end{align*}
+F\"ur die dritte \"Aquivalenz haben wir Definition \ref{Ka} genutzt, sowie die Eigenschaft, dass Unabh\"angigkeit von Ereignissen sich auch auf die Komplemente \"ubertr\"agt (\"Ubung). 
+	
+	
+\end{bem}
+
+\begin{satz}[Borel-Cantelli-Lemma]\label{BC}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \sum\limits_{n = 1}^{\infty} \mathbb{P}(A_n) < \infty \quad \Rightarrow\quad  \mathbb{P}\big(\limsup\limits_{n \to \infty} A_n\big) =0. \]
+		\item Sind die $A_1, A_2, ...$ \textit{zusätzlich} paarweise unabhängig, so gilt \[ \sum\limits_{n = 1}^{\infty} \mathbb{P}(A_n) = \infty \quad \Rightarrow \quad \mathbb{P}\big(\limsup\limits_{n \to \infty} A_n\big) = 1. \]
+	\end{enumerate}
+\end{satz}
+	Damit kennt ihr nun euer erstes \enquote{0-1-Gesetz}: Sind die Ereignisse $A_1, A_2, ...$ paarweise unabh\"angig, so ist $\mathbb P(\limsup_{n\to\infty} A_n)\in \{0,1\}$ und es gilt $\mathbb P(\limsup_{n\to\infty}A_n)=1$ genau dann, wenn $\sum_{n=1}^\infty \mathbb P(A_n)=\infty$. Das witzige an 0-1-Gesetzen ist, dass man nur zeigen muss, dass etwas strikt positive Wahrscheinlichkeit hat, um sogar Wahrscheinlichkeit $1$ zu schlie\ss en. 
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \enquote{triviale Rechnung}: Die einfache Richtung folgt aus einfachen Manipulationen mit Mengen und Eigenschaften des Ma\ss es:
+		\begin{align*}
+			\mathbb{P}(\limsup\limits_{n \to \infty} A_n) 
+			&= \mathbb{P}\Big(\bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k\Big)\\
+			&\overset{\text{Stet. Ma\ss e}}{=} \lim\limits_{N \to \infty} \mathbb{P}\Big(\bigcap_{n=1}^{N} \bigcup_{k=n}^{\infty} A_k\Big)\\
+			&\overset{\text{Mon. Ma\ss e}}{\leq} \lim\limits_{N \to \infty} \mathbb{P}(\bigcup_{k=N}^{\infty} A_k) \\
+			&\overset{\text{subadd.}}{\leq} \lim\limits_{N \to \infty} \sum\limits_{k=N}^{\infty} \mathbb{P}(A_k) = 0.
+		\end{align*}
+		Die letzte Gleichheit gilt nach Annahme und Analysis 1 (Eigenschaft konvergenter Reihen).
+		\item Die R\"uckrichtung ist deutlich schwieriger, wir nutzen die sogenannte \enquote{zweite-Momente-Methode}. Daf\"ur werden erstes und zweites Moment einer geeigneten Zufallsvariable miteinander verglichen. Wir betrachten im Folgenden die Zufallsvariablen $\mathbf 1_{A_n}$, die aufgrund von Bemerkung \ref{ereig} unabh\"angig sind. Weil die Zufallsvariablen nur die Werte $0$ und $1$ annehmen, sind sie Bernoulli-verteilt. Genauer, es gilt $\mathbf 1_{A_n}\sim \operatorname{Ber}(p_n)$, wobei $p_n=\mathbb P(A_n)$ die Wahrscheinlichkeit f\"ur den Wert $1$ ist. Kleine Erinnerung: F\"ur $\operatorname{Ber}(p)$-verteilte Zufallsvariablen ist der Erwartungswert $p$ und die Varianz $p(1-p)$. Das werden wir im Folgenden ausnutzen.\smallskip
+		
+		Wir betrachten die Folge
+		\[ Z_k = \sum\limits_{n=1}^{k} \mathbf{1}_{A_n},\quad k\in\N, \]
+		weil mit dieser Folge $\limsup_{n\to\infty} A_n$ beschrieben werden kann:
+		\begin{align}\label{kyp}
+			\omega \in \limsup\limits_{n \to \infty} A_n \quad \Leftrightarrow \quad +\infty=\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n}(\omega) = \lim\limits_{k \to \infty} Z_k(\omega).
+		\end{align}
+		Das gilt nat\"urlich weil die Reihe nur aus Summanden $0$ oder $1$ besteht und daher unendlich ist genau dann, wenn unendlich viele Summanden $1$ sind, also wenn $\omega$ in unendlich vielen $A_n$ ist. Berechnen wir Erwartungswert und Varianz:
+		 \begin{align*}
+		 	\E[Z_k] &= \sum\limits_{n=1}^{k} \E[\mathbf{1}_{A_n}] = \sum\limits_{n=1}^{k} \mathbb P(A_n) \overset{\text{Ann.}}{\longrightarrow}+\infty, \quad k \to \infty,\\
+		 	\V(Z_k) &\underset{\text{\ref{ereig}}}{\overset{\text{\ref{bien}}}{=}} \sum\limits_{n=1}^{k}\V(\mathbf{1}_{A_n}) 
+		 	= \sum\limits_{n=1}^{k} \mathbb P(A_n)(1-\mathbb P(A_n)) \leq \sum\limits_{n=1}^{k} \mathbb P(A_n) = \E[Z_k],
+		 \end{align*}
+		 weil unabh\"angige Zufallsvariablen auch unkorrelliert sind. Jetzt benutzen wir Tschebyscheff mit den Formeln f\"ur Erwartungswert und Varianz:
+		  \begin{align}\label{absch}
+		 	\mathbb{P}\Big(|Z_k - \E[Z_k]| \geq \frac{\E[Z_k]}{2}\Big) \overset{\ref{Markov}}{\leq}\frac{\V(Z_k)}{\frac{1}{4} \E[Z_k]^2} \leq \frac{4\E[Z_k]}{\E[Z_k]^2} = \frac{4}{\E[Z_k]} \to 0,
+		 \end{align}
+		 f\"ur $k\to\infty$. Sei nun $\lambda > 0$ beliebig. Dann existiert wegen der Konvergenz der Erwartungswerte gegen unendlich ein $k_0 \in \N$ mit $\frac{\lambda}{\E[Z_k]} < \frac{1}{2}$ f\"ur alle $k\geq k_0$.
+		 Weil aufgrund der Definition von $Z_k$ auch $Z_k \leq \sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n}$ gilt, bekommen wir für beliebiges $k \geq k_0$
+		 \begin{align*}
+		 	\mathbb{P}\Big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < \lambda \Big)& \leq \mathbb{P}(Z_k < \lambda)\\
+			& = \mathbb{P}\Big(\frac{Z_k}{\E[Z_k]} < \frac{\lambda}{\E[Z_k]}\Big)\\
+			& \leq \mathbb{P}\Big(\frac{Z_k}{\E[Z_k]} < \frac{1}{2}\Big)\\ 
+		 	&= \mathbb{P}\Big(\frac{Z_k}{\E[Z_k]} - 1 < -\frac{1}{2}\Big)\\
+			& \leq \mathbb{P}\Big(\Big|\frac{Z_k}{\E[Z_k]} - 1\Big| > \frac{1}{2}\Big)\\
+		 	&= \mathbb{P}\Big(\big|Z_k - \E[Z_k]\big| > \frac{\E[Z_k]}{2}\Big) \overset{\text{\eqref{absch}}}{\longrightarrow} 0, \quad k \to \infty.
+		 \end{align*}
+		Also gilt $\mathbb{P}\big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < \lambda \big)=0$. Weil $\lambda$ beliebig gew\"ahlt war, folgt aufgrund der Stetigkeit von Ma\ss en auch $\mathbb{P}\big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < \infty \big)=\lim_{k\to\infty}\mathbb{P}\big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < k \big) =0$.	Wegen \eqref{kyp} gilt nun \[ \mathbb{P}\big(\limsup\limits_{n \to \infty}A_n\big) = \mathbb{P}\Big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} = +\infty\Big) = 1. \]
+	\end{enumerate}
+\end{proof}
+Nach diesem Highlight der Ma\ss theorie, nun zur\"uck zur fast sicheren Konvergenz und dem starken Gesetz der gro\ss en Zahlen. 
+\begin{korollar}\label{ko}
+	Seien $X, X_1, X_2, ...$ Zufallsvariablen auf einem Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$, dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $$\sum_{n=1}^\infty \mathbb P(|X_n-X|>\epsilon)<\infty\text{  f\"ur alle }\varepsilon>0 \quad\Longrightarrow\quad X_n\overset{\text{f.s.}}{\to}X, n\to\infty.$$
+		\item Unter der zus\"atzlich Annahme $X_1-X, X_2-X, ...$ sind unabh\"angig, gilt: $$\sum_{n=1}^\infty \mathbb P(|X_n-X|>\epsilon)=+\infty\text{ f\"ur ein }\varepsilon>0\quad \Longrightarrow\quad X_n\overset{\text{f.s.}}{\not\to}X, n\to\infty.$$
+	\end{enumerate}
+\end{korollar}
+\begin{proof}
+	Beide Aussagen folgen sofort aus Borel-Cantelli:\smallskip
+	
+	(i) Mit $\epsilon=\frac 1 k$ impliziert das Borel-Cantelli-Lemma $\mathbb P(|X_n-X|>\frac 1 k\text{ unendlich oft})=0$ bzw. $\mathbb P(|X_n-X|>\frac 1 k\text{ nur endlich oft})=1$ f\"ur alle $k\in\N$. Daraus folgt
+	\begin{align*}
+		\mathbb P(X_n\to X)&=\mathbb P\Big(\Big\{\omega: \forall k \in \N\, \exists N\in \N: |X_n(\omega)-X(\omega)|\leq \frac{1}{k}\, \forall n\geq N\Big\}\Big)\\
+		&=\mathbb P\Big( \bigcap_{k=1}^\infty \Big\{ |X_n-X|>\frac{1}{k}\text{ endlich oft}\Big\}\Big)=1,
+	\end{align*}
+	weil der Durchschnitt abz\"ahlbar vieler Mengen von Ma\ss{} $1$ auch Ma\ss{} $1$ hat (wegen Komplementbildung, abz\"ahlbare Schnitte von Nullmengen sind Nullmengen).\smallskip
+	
+	(ii) Borel-Cantelli impliziert $\mathbb P(|X_n-X|>\epsilon\text{ unendlich oft})=1$, also ist die Wahrscheinlichkeit, dass $X_n$ gegen $X$ konvergiert, sogar $0$.
+\end{proof}
+
+Bevor wir mit dem Korollar \ref{ko} das starke Gesetz der gro\ss en Zahlen diskutieren, schauen wir uns nochmal Beispiel \ref{Adam} an, aber etwas allgemeiner:
+\begin{example}
+Seien $X_1, X_2, ... $ unabh\"angige Zufallsvariablen mit $$\mathbb{P}(X_n = 1) = \frac{1}{n^p}, \quad \mathbb{P}(X_n = 0) = 1 - \frac{1}{n^p},$$ also $X_n \sim \operatorname{Ber}(\frac{1}{n^p})$, $n \in \N$. Man stelle sich wieder unabh\"angige Versuche vor ($1$ bedeutet \enquote{Erfolg}, $0$ bedeutet \enquote{Misserfolg}), bei denen die Wahrscheinlichkeit f\"ur \enquote{Erfolg} immer kleiner wird. Fragen wir uns wieder: Konvergiert die Folge fast sicher gegen die Zufallsvariable $X=0$? Wegen der angenommenen Unabh\"angigkeit gilt mit Korollar \ref{ko} 
+\begin{align*}
+	X_n\overset{\text{f.s.}}{\to} 0,\quad n\to\infty \quad &\Leftrightarrow\quad \sum_{n=1}^\infty \mathbb P(X_n=1)=\sum_{n=1}^\infty \frac{1}{n^p}<+\infty\quad
+	\Leftrightarrow\quad p>1.
+\end{align*}
+Ausformuliert ist die Aussage noch spektakul\"arer weil die Konvergenz gegen $0$ einer Folge mit Werten $0$ oder $1$ bedeutet, dass die Folge irgendwann nur noch den Wert $0$ annimmt. Ist $p\leq 1$, so ist der Versuch immer mal wieder erfolgreich, wohingegen f\"ur $p>1$ der Versuch nur endlich oft erfolgreich ist. Wenn man bedenkt, dass der Versuch unendlich oft ausgef\"uhrt wird und jedes Mal positive Wahrscheinlichkeit f\"ur Erfolg besteht, ist der Fall $p>1$ schon \"uberraschend!
+\end{example}
+Mit Borel-Cantelli k\"onnen wir den Unterschied von stochastischer und fast sicherer Konvergenz besser verstehen:
+\begin{bem}\label{bem4}
+	Um stochastische Konvergenz zu zeigen, muss f\"ur beliebiges $\epsilon>0$ $\lim_{n\to\infty}\mathbb P(|X_n-X|>\epsilon)=0$ gezeigt werden. Mit Korollar \ref{ko} m\"ussen wir f\"ur fast sichere Konvergenz hingegen $\sum_{n=1}^\infty \mathbb P(|X_n-X|>\epsilon)<\infty$ zeigen. Wenn wir uns an Analysis 1 erinnern, ist es ein gro\ss er Unterschied, ob eine Reihe konvergiert oder die Folge eine Nullfolge ist. Beispielsweise reicht f\"ur stochastische Konvergenz die Absch\"atzung $\mathbb P(|X_n-X|>\epsilon)\leq \frac{1}{n}$, f\"ur fast sichere Konvergenz aber nicht!	
+\end{bem}
+
+
+Jetzt zum starken Gesetz der gro\ss en Zahlen:
+
+\begin{satz}[Starkes Gesetz der großen Zahlen]
+	Sind $X_1,X_2,...$ u.i.v. mit $\E[|X_1|] < \infty$, so gilt \[ \frac{1}{n} \sum\limits_{i=1}^{n} X_i \overset{\text{f. s.}}{\longrightarrow} \E[X_1], \quad n \to \infty. \]
+\end{satz}
+
+
+\begin{proof}
+	Wir beweisen den Satz nur unter der zus\"atzlichen Annahme $\E[X_1^4] < \infty$. Die Aussage gilt auch unter der schwachen Annahme $\E[|X_1|]<\infty$, den Beweis werden wir aber erst in der WT1 Vorlesung diskutieren. Wie beim schwachen Gesetz nehmen wir ohne Einschr\"ankung $\E[X_1] = 0$ (sonst mit $Y_i:=X_i-\E[X_i]$ zentrieren). Um Korollar \ref{ko} anzuwenden, m\"ussen wir $\mathbb P(A_n)$ absch\"atzen, wobei 
+	\[ A_n = \Big\{ \Big| \frac{1}{n} \sum\limits_{k=1}^{n} X_k \Big| >\epsilon \Big\}. \] 
+	Dazu nutzen wir wieder Tschebyscheff und die Annahme der endlichen vierten Momente:
+	\begin{align*}
+		\mathbb{P}(A_n) &= \mathbb{P}\Big(\Big| \frac{1}{n} \sum\limits_{i=1}^{n} X_i \Big| \geq \epsilon \Big)\\
+		& = \mathbb{P}\Big(\Big| \frac{1}{n} \sum\limits_{i=1}^{n} X_i \Big|^4 \geq \epsilon^4 \Big)\\
+		&\overset{\text{\ref{Markov}}, h(x)=x}{\leq} \frac{\E\Big[ \Big| \frac{1}{n} \sum\limits_{i=1}^{n} X_i \Big|^4\Big]}{\epsilon^4}\\
+		& = \frac{1}{\epsilon^4 n^4}\E\Big[\sum\limits_{i_1,i_2,i_3,i_4=1}^{n} X_{i_1}  X_{i_2}  X_{i_3}  X_{i_4}  \Big] \\
+		&\overset{\text{unabh.}}{=}  \frac{1}{\epsilon^4 n^4} \Big( \sum\limits_{i=1}^{n} \E[X_i^4]+ \sum\limits_{k,l=1}^{n} \E[X_k^2  X_l^2] \Big)\\
+		&= \frac{1}{\epsilon^4n^4} \Big(n  \E[X_1^4] +\frac{n(n-1)}{2} \E[X_1^2]  \E[X_1^2] \Big)\\
+		&\leq \frac{C}{n^2},
+	\end{align*}
+	mit $C=\frac{\E[X_1^4]}{\epsilon^4}+\frac{\E[X_1^2]^2}{2}$. Damit haben wir die Voraussetzung von Korollar \ref{ko} (i) gecheckt und die Aussage folgt. Wie beim schwachen Gesetzt gilt auch hier wieder: Weil $\epsilon$ beliebig ist, spielt \enquote{$>$} oder \enquote{$\geq$} keine Rolle.
+	\end{proof}
+Der Trick im Beweis ist die vierte Gleichheit. Eigentlich sollten bei Tschebyscheff mit vierter Potenz $n^4$ Summanden im Z\"ahler auftauchen. Wegen der Unabh\"angigkeit fallen von den Summanden $\E[X_{i_1}  X_{i_2}  X_{i_3}  X_{i_4}]$ jedoch alle Summanden als $0$ weg, bei denen eine der Zufallsvariablen nur einmal auftaucht (es gilt wegen der Unabh\"angigkeit zum Beispiel $\E[X_1 X_1 X_4X_5]=\E[X_1^2] \E[X_3]\E[X_4]=\E[X_1^2] 0=0$). Es bleiben also nicht $n^4$ viele Summanden stehen, sondern nur die, bei denen entweder immer die gleiche oder nur zwei verschiedene Zufallsvariablen auftauchen. Das sind aber nur etwa $n^2$ viele und damit bringt der Nenner $n^4$ die Reihe zum konvergieren. Bemerkung \ref{bem4} zeigt uns ganz genau den Unterschied zwischen dem schwachen und dem starken Gesetz der gro\ss en Zahlen: Im Beweis des schwachen Gesetzes haben wir mit zweiten Momenten die obere Schranke $\frac{\V(X_1)}{\epsilon n}$ hergeleitet. Das reichte f\"ur stochastische Konvergenz, aber nicht f\"ur fast sichere Konvergenz weil die harmonische Reihe divergiert. Das Tschebyscheff Argument mit vierten Momenten hingeben gibt die summierbare obere Schranke $\frac{C}{n^2}$.  Dritte Momente funktionieren \"ubrigens auch nicht, da st\"ort der Betrag. Der richtige Beweis (nur unter der Voraussetzung $\E[|X_1|]<\infty$ funktioniert anders, Tschebyscheff ist einfach keine gute Absch\"atzung.
+\begin{bem}
+Unabh\"angig von den Annahmen an die Folge $X_1, X_2, ...$ spricht man immer von einem \enquote{starken Gesetz}, wenn fast sichere Konvergenz vorliegt. Man spricht von einem \enquote{schwachen Gesetz}, wenn stochastische Konvergenz vorliegt. Weil fast sichere Konvergenz die stochastische Konvergenz impliziert, impliziert ein starkes Gesetz immer ein schwaches Gesetz. Wir haben also das schwache Gesetz der gro\ss en Zahlen f\"ur u.i.v. Folgen mit endlichen zweiten Momenten gezeigt, das starke Gesetz der gro\ss en Zahlen f\"ur u.i.v. Folgen mit endlichen ersten Momenten. Weil $\E[X_1^2]<\infty$ auch $\E[|X_1|]<\infty$ impliziert, ist die Annahme $\E[X_1^2]<\infty$ im schwachen Gesetz nat\"urlich viel zu stark, es gilt schlie\ss lich mit der schw\"acheren Annahme $\E[|X_1|]<\infty$ die st\"arkere Aussage der fast sicheren Konvergenz! Teil (i) in Satz \ref{schwaches} ist also im Prinzip \"uberfl\"ussig und wurde nur aus didaktischen Gr\"unden behandelt. Interessanter ist eigentlich Teil (ii), denn unter diesen schw\"acheren Annahmen muss das starke Gesetz der gro\ss en Zahlen nicht gelten. Ein Beispiel ist folgendes: Ist $X_1, X_2, ...$ eine Folge von unabh\"angigen (nicht identisch verteilten) Zufallsvariablen mit 
+\begin{align*}
+	\mathbb P(X_n=n)&=\frac{1}{2 n \log(n+1)},\\
+	\mathbb P(X_n=-n)&=\frac{1}{2 n \log(n+1)},\\
+	\mathbb P(X_n=0)&=1-\frac{1}{ n \log(n+1)},
+\end{align*}
+so gilt das schwache Gesetz, aber nicht das starke Gesetz. Es gibt also durchaus einen Grund f\"ur Teil (ii) von Satz \ref{schwaches}.
+\end{bem}

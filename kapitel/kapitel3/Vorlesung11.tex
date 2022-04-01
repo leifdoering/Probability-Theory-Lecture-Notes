@@ -1,0 +1,144 @@
+\marginpar{\textcolor{red}{Vorlesung 11}}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Sei $A := \{ |f| = \infty \} = f^{-1}(\{ -\infty, \infty \}) \in \cA$. Weil  $ n \mathbf{1}_A \leq |f| $ f\"ur alle $n\in\N$ gilt, folgt \[ n \mu(A) \overset{\text{Def.}}{=} \int_{\Omega} n \mathbf{1}_A\, \mathrm{d}\mu \overset{\text{Mon.}}{\leq} \int_{\Omega} |f|\, \mathrm{d}\mu \overset{f}{\underset{\mu\text{-int.}}{<}} \infty \] f\"ur alle $n\in\N$.
+		Weil $\mu(A) > 0$ einen Widerspruch gibt (dann w\"are $n \mu(A)$ unbeschr\"ankt aber $\int |f|\,d\mu$ ist eine obere Schranke), folgt die Behauptung.
+		\item 
+		Weil aus $ f=g $ fast überall auch $f^+ = g^+ $ und $ f^- = g^- $ fast \"uberall folgt, impliziert die Definition des Integrals als 
+		\begin{align*}
+			\int_{\Omega} f \dint \mu &= \int_{\Omega} f^+ \dint \mu - \int_{\Omega} f^- \dint \mu
+		\end{align*}
+		bzw.
+		\begin{align*}
+			\int_{\Omega} g \dint \mu &= \int_{\Omega} g^+ \dint \mu - \int_{\Omega} g^- \dint \mu,
+		\end{align*}
+		dass die Aussage nur für $f,g\geq0$ gezeigt werden muss (wende Aussage dann auf Positiv- und Negativteil an). Seien also $f,g \geq 0 $ und $$N = \{ f\neq g  \} = \{ \omega \colon f(\omega) \neq g(\omega) \}$$ die Nullmenge auf der $f$ und $g$ nicht \"ubereinstimmen. Wir definieren die Indikatorfunktion 
+		\[ h(\omega) = (+\infty)\cdot \mathbf{1}_N (\omega) = \begin{cases}
+		+\infty&: \omega \in N\\
+		0&: \omega \notin N\\
+		\end{cases}, \]
+		die nur die Werte $0$ und $+\infty$ annimmt. Damit gilt
+		\[ \int_{\Omega} h \dint \mu \overset{\text{Def. Int.}}{ =} (+\infty)\cdot \mu(N) \overset{\text{Ann.}}{=} (+\infty)\cdot 0 \overset{\text{Def.}}{=} 0. \]
+		Es gilt aufgrund der Definition von $h$, dass $f \leq g + h$. Das sieht merkw\"urdigt aus, liegt aber an folgender Fallunterscheidung: Ist $\omega\notin N$, so gilt $f(\omega)=g(\omega)$ und f\"ur $\omega\in N$ gilt aufgrund der Definition von $h$
+		\begin{align*}
+			f(\omega) &\leq +\infty = g(\omega) + h(\omega).
+		\end{align*}
+		Die Monotonie vom Integral impliziert nun
+		\[ \int_{\Omega} f \dint \mu \leq \int_{\Omega} (g+h) \dint \mu \overset{\text{Lin.}}{=} \int_{\Omega} g \dint \mu + \int_{\Omega} h \dint \mu = \int_{\Omega} g \dint \mu. \]
+		Mit exakt dem selben Argument, vertausche die Rollen von $f$ und $g$, folgt auch \[\int_{\Omega} g \dint \mu \leq \int_{\Omega} f \dint \mu. \] Beide Ungleichungen zusammen implizieren die Behauptung.
+		\item Sei $A_n = \{ f \geq \frac{1}{n} \} = \{ \omega \colon f(\omega) \geq \frac{1}{n} \}$. Damit ist 
+		\[ 0 \overset{\text{Ann.}}{=} \int_{\Omega} f \dint \mu \overset{\text{Mon.}}{\geq} \int_{\Omega} f \mathbf{1}_{A_n} \dint \mu \overset{\text{Mon.}}{\geq} \int_{\Omega} \frac{1}{n} \mathbf{1}_{A_n} \dint \mu\overset{\text{Def.}}{=} \frac 1 n \mu(A_n)\geq 0, \]
+		weil $\frac{1}{n} \mathbf{1}_{A_n} \leq f \mathbf{1}_{A_n}\leq f$. Also ist $\mu(A_n) = 0$ f\"ur alle $n\in\N$. Letztlich ist 
+		\[  0\leq \mu( \{ \omega\colon f(\omega) > 0 \}) = \mu\Big( \bigcup\limits_{n=1}^{\infty} A_n \Big) \overset{\text{subadd.}}{\leq} \sum\limits_{n=1}^{\infty} \mu(A_n) = 0. \]
+		Es gilt also $f=0$ $\mu$-fast überall.
+	\end{enumerate}
+\end{proof}
+F\"ur sp\"atere Verwendungen noch ein Satz zur Transformation von Integralen:
+\begin{satz}[abstrakter Transformationssatz]\label{trafo}
+	Seien $(\Omega, \cA)$, $(\Omega', \cA')$ messbare Räume, $\mu$ ein Maß auf $\cA$, $f \colon \Omega \rightarrow \Omega'$ messbar, $g \colon \Omega' \rightarrow \overline{\R}$ messbar und $g \geq 0$. Dann gilt 
+	\[ \int_{\Omega'} g \dint \mu_f = \int_{\Omega} g \circ f \dint \mu, \] wobei $+\infty=+\infty$ m\"oglich ist. Dabei ist $\mu_f$ der push-forward (Bildma\ss ) von $\mu$.
+\begin{center}	
+	\begin{tikzcd}
+		(\Omega, \mathcal A, \mu) \arrow[r, "{f}"'] \arrow[rd, "{g \circ f}" sloped, "{\int_{\Omega} g \circ f \dint \mu}"' near start]
+		& (\Omega',\mathcal A', \mu_f) \arrow[d, "{g}"', "{\int_{\Omega'} g \dint \mu_f}"]\\
+		& (\overline{\R}, \mathcal B(\overline \R))\\
+	\end{tikzcd}	
+\end{center}
+\end{satz}
+
+\begin{proof} Einmal durch die Gebetsm\"uhle der Integrationstheorie:
+	\begin{enumerate}[label=(\Alph*)]
+		\item Ist \[ g = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} \geq 0 \] eine nichtnegative einfache Funktion, so ist auch \[ g \circ f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{f^{-1}(A_k)} \geq 0 \] auch einfach. Weil nach Definition des push-forwards $ \mu_f(A_k) = \mu(f^{-1}(A_k)) $ gilt, bekommen wir \[ \int_{\Omega} g \circ f \dint \mu \overset{\text{Def.}}{=} \sum\limits_{k = 1}^{n} \alpha_k \mu(f^{-1}(A_k))=\sum\limits_{k = 1}^{n} \alpha_k \mu_f(A_k) \overset{\text{Def.}}{=} \int_{\Omega'} g \dint \mu_f. \]
+		Damit gilt die Behauptung für einfache Funktionen.
+		\item Weil $g$ messbar ist, existiert eine Folge $(g_n) \subseteq \cE^+$ mit $g_n \uparrow g$, $n \to \infty$. Also gilt \[ \int_{\Omega'} g \dint \mu_f \overset{\text{\ref{monKonv}}}{=} \lim\limits_{n \to \infty} \int_{\Omega'} g_n \dint \mu_f \overset{\text{(A)}}{=} \int_{\Omega} \lim_{n\to\infty} g_n\circ f \dint \mu \overset{\ref{monKonv}}{=} \int_{\Omega} g \circ f \dint \mu. \]
+		Im letzten Schritt haben wir genutzt, dass auch $g_n \circ f$ einfach ist (siehe (A)) und $g_n \circ f \uparrow g \circ f$, $n\to\infty$, gilt.
+	\end{enumerate}
+\end{proof}
+\begin{korollar}\label{korTrafo}
+	Unter den Voraussetzungen von \ref{trafo} gelte jetzt nur noch $g \colon \Omega' \rightarrow \overline{\R}$. Dann ist $g$ $\mu_f$-integrierbar genau dann, wenn $ g \circ f$ $\mu$-integrierbar ist. Ist eine dieser Aussagen erfüllt, so gilt ebenfalls die Transformationsformel
+	\[ \int_{\Omega'} g \dint \mu_f = \int_{\Omega} g \circ f \dint \mu. \]
+\end{korollar}
+\begin{proof}
+	Wegen $g^+ \circ f = (g \circ f)^+$ und $g^- \circ f = (g \circ f)^-$ folgt aus dem Transformationssatz f\"ur nichtnegative Funktionen
+	\begin{align*}
+		g \text{ $\mu_f$-integrierbar} \quad & \overset{\text{Def.}}{\Leftrightarrow} \quad \int_{\Omega'} g^+ \dint \mu_f < \infty\quad \text{ und }\quad \int_{\Omega'} g^- \dint \mu_f < \infty\\ 
+		&\Leftrightarrow  \quad\int_{\Omega} g^+ \circ f \dint \mu < \infty\quad \text{ und }\quad \int_{\Omega} g^- \circ f \dint \mu < \infty\\
+		&\overset{\text{Def.}}{ \Leftrightarrow} \quad g \circ f \text{ $\mu$-integrierbar}.
+	\end{align*}
+	Nun zur Berechnung der Integrale:
+	 \begin{align*}
+		\int_{\Omega'} g \circ f \dint \mu&\overset{\text{Def.}}{=} \int_{\Omega'} g^+ \dint \mu_f - \int_{\Omega'} g^- \dint \mu_f\\
+		& \overset{\ref{korTrafo}}{=} \int_{\Omega} g^+ \circ f \dint \mu - \int_{\Omega} g^- \circ f \dint \mu\\
+		&=\int_{\Omega} (g \circ f)^+ \dint \mu - \int_{\Omega} (g \circ f)^- \dint \mu\\
+		& \overset{\text{Def.}} {=}\int_{\Omega} g \circ f \dint \mu.
+	\end{align*}
+\end{proof}
+
+\section{Konvergenzsätze}
+
+Sei immer $(\Omega, \cA, \mu)$ ein fester Maßraum. Gezeigt haben wir schon \[ \lim_{n\to\infty}\int_{\Omega} f_n \dint \mu = \int_{\Omega} f \dint \mu, \]
+wenn $(f_n)_{n\in\N}$ eine Folge nichtnegativer \underline{einfacher} Funktionen ist, die wachsend gegen $f$ konvergieren. Wir wollen nun die gleiche Aussage f\"ur beliebige nichtnegative wachsende Folgen zeigen.
+
+\begin{satz}[Monotone Konvergenz Theorem (MCT)]\label{allgMonKonv}
+	Seien $f,f_1,f_2,...\colon \Omega \to \overline{\R}$ messbar und es gelte $f_1 \leq f_2 \leq ... \leq f$ sowie $f = \lim\limits_{n \to \infty} f_n$ $\mu$-f.\"u. Dann gilt \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu=\int_{\Omega} f \dint \mu, \]
+	$+\infty=+\infty$ ist dabei m\"oglich.
+\end{satz}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{allgMCTfastu} Wir nehmen an, dass $f_1 \leq f_2 \leq ... \leq f$ und $f = \lim\limits_{n \to \infty} f_n$ nicht nur fast überall, sondern für alle $\omega \in \Omega$ gelten.
+		\begin{itemize}
+			\item[\enquote{$\geq$}:] Wegen der Monotonie des Integrals gilt \[ \int_{\Omega} f_n \dint\mu \leq \int_{\Omega} f \dint\mu \] f\"ur alle $n\in\N$. Weil die Folge der Integrale aufgrund der Monotonie wachsend ist, existiert nach Analysis 1 also der Grenzwert ($+\infty$ ist m\"oglich). Auch nach Analysis 1 (Vergleichssatz f\"ur Folgen) gilt damit \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint\mu \leq \int_{\Omega} f \dint\mu. \]
+			\item[\enquote{$\leq$}:] Weil alle $f_n$ messbar sind, existieren Folgen $(g_{n,k}) \subseteq \cE^+$ mit $g_{n,k} \uparrow f_n$, $ k\to \infty $. Sei $h_n = g_{1,n} \lor ... \lor g_{n,n} = \max \{ g_{1,n},...,g_{n,n} \} $. Die $h_n$ sind einfache Funktionen, für die zwei Eigenschaften gelten:
+			\begin{enumerate}[label=(\alph*)]
+				\item\label{h_nOne} $h_n \leq f_n$
+				\item\label{h_nTwo} $h_n \uparrow f$ punktweise
+			\end{enumerate}
+			Zu \ref{h_nOne}: Es gilt $g_{i,n} \leq f_n$ für alle $i \leq n$, also ist auch das punktweise Maximum kleiner als $f_n$. Zu \ref{h_nTwo}: Weil $h_n \geq g_{i,n}$ f\"ur alle $i = 1,...,n$ gilt, ist auch $$\lim\limits_{n \to \infty} h_n \geq \lim\limits_{n \to \infty} g_{i,n} = f_i$$ f\"ur alle festen $i \in \N$. Weil aber $\lim\limits_{i \to \infty} f_i = f$, ist $\lim\limits_{n \to \infty} h_n \geq f$, erneut nach dem Vergleichssatz f\"ur Folgen aus Analysis 1. Weil auch noch $h_n \leq f_n \leq f$ gilt, folgt mit der letzten Aussage $\lim\limits_{n \to \infty} h_n = f$ punktweise. Die Folge $(h_n)$ ist also eine wachsende Folge von einfachen Funktionen, die zwischen $(f_n)$ und $f$ liegt und punktweise gegen $f$ konvergiert. Damit bekommen wir aus dem monotone Konvergenz Theorem f\"ur einfache Funktionen durch Einschachtelung die Behauptung: \[ \lim\limits_{n \to \infty} \int_{\Omega}  f_n \dint \mu \underset{\text{Mon.}}{\overset{\text{\ref{h_nOne}}}{\geq}} \lim\limits_{n \to \infty} \int_{\Omega}  h_n \dint \mu \overset{\text{\ref{monKonv}}}{=} \int_{\Omega} \lim\limits_{n \to \infty} h_n \dint \mu \overset{\text{(b)}}{=} \lim\limits_{n \to \infty} \int_{\Omega}  f \dint \mu. \]
+		\end{itemize}
+		\item Sei $N$ die Nullmenge, auf der die Annahme aus \ref{allgMCTfastu} nicht gilt. Es gilt $ f_n \mathbf{1}_{N^C} \rightarrow f \mathbf{1}_{N^C}$, $n \to \infty$, für alle $\omega \in \Omega$. Wegen \ref{allgMCTfastu} gilt \[ \int_{\Omega}f_n \dint \mu = \int_{\Omega}f_n \mathbf{1}_{N^C} \dint \mu \overset{\text{\ref{allgMCTfastu}, }n \to \infty}{\longrightarrow} \int_{\Omega}f \mathbf{1}_{N^C} \dint \mu = \int_{\Omega}f \dint \mu, \] 
+		weil Integrale zweier Funktionen gleich sind, wenn sie nur auf Nullmengen unterschiedlich sind.
+	\end{enumerate}
+\end{proof}
+\begin{anwendung}\label{ccd}
+	Sei $f\colon (\Omega, \cA) \rightarrow (\overline{\R}, \cB(\R))$ messbar und nichtnegativ und $\mu$ ein Ma\ss{} auf $\cA$. Dann ist 
+	\[ \nu(A)  := \int_{A} f \dint \mu = \int_{\Omega} f \mathbf{1}_A\dint \mu \] ein Maß auf $\cA$.
+\end{anwendung}
+
+\begin{proof}
+	\item $\nu \geq 0$ $\checkmark$ wegen Integral über nichtnegative Funktion
+	\item $\sigma$-Additivität: Seien $A_1,A_2,... \in \cA$ paarweise disjunkt. Dann gilt 
+	\begin{align*}
+		\nu \Big(\bigcupdot\limits_{n=1}^{\infty} A_n \Big) &\overset{\text{Def.}}{=} \int_{\Omega} f \mathbf{1}_{\bigcupdot\limits_{n=1}^{\infty} A_n} \dint \mu \\
+			&= \int_{\Omega} f \cdot\Big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n}\Big) \dint \mu\\
+			& \underset{\text{Reihe}}{\overset{\text{Def.}}{=}} \int_{\Omega} \lim\limits_{N \to \infty} \sum\limits_{n=1}^{N} f \mathbf{1}_{A_n} \dint \mu\\
+	&		\overset{\text{\ref{allgMonKonv}}}{=} \lim\limits_{N \to \infty} \int_{\Omega} \sum\limits_{n=1}^{N} f \mathbf{1}_{A_n} \dint \mu\\
+	& \overset{\text{Lin.}}{=} \lim\limits_{N \to \infty} \sum\limits_{n=1}^{N} \int_{\Omega}  f \mathbf{1}_{A_n} \dint \mu\\
+	& \overset{\text{Def.}}{=} \lim\limits_{N \to \infty} \sum\limits_{n=1}^{N} \int_{\Omega} \nu(A_n) \dint \mu\\
+	& \underset{\text{Reihe}}{\overset{\text{Def.}}{=}} \sum\limits_{n=1}^{\infty} \int_{\Omega} \nu(A_n) \dint \mu.
+	\end{align*}
+	Weil hier die Folge $\Big(\sum\limits_{n=1}^{N} f \mathbf{1}_{A_n}\Big)_{N \in \N} \not\subseteq \cE^+$, reicht die einfache Version der monotonen Konvergenz aus \ref{monKonv} nicht aus, wir brauchen monotone Konvergenz wirklich für allgemeine messbare Funktionen.
+\end{proof}
+
+
+\begin{bem}
+	\begin{enumerate}[label=(\roman*)]
+		\item Man schreibt mit $\nu$ aus vorheriger Anwendung auch \[ \frac{\mathrm{d}\nu}{\mathrm{d}\mu} = f \] und nennt $f$ die \textbf{Radon-Nikodým-Ableitung} oder \textbf{-Dichte von $\nu$ bez\"uglich $\mu$}.
+		\item Wir kennen das schon: Ist $\mathbb{P}_F$ ein Maß auf $(\R, \cB(\R))$ mit Verteilungsfunktion $ F $ und Dichte $f$, so gilt $ \frac{\mathrm{d}\mathbb{P}_F}{\mathrm{d}\lambda} = f$.
+		\item $\nu$ ist ein Wahrscheinlichkeitsmaß (\mbox{d. h.} $\nu(\Omega)=1$) genau dann, wenn $\int_{\Omega} f \dint \mu = 1$. Beachte: So war eine Dichtefunktion auf $\R$ definiert.
+	\end{enumerate}
+\end{bem}
+
+\begin{anwendung}
+	Kommen wir nochmal zur\"uck zu Beispiel \ref{bsp2}, (ii), und best\"atigen die Behauptung. Sei $f\geq 0$ und $\mu$ das Z\"ahlma\ss{} auf $\N$
+	\begin{align*}
+		\int_\N f \, d\mu
+		&= \int_\N f\,\sum_{k=0}^\infty \mathbf 1_{\{k\}} \, d\mu\\
+		&= \int_\N \lim_{n\to\infty}f \, \sum_{k=0}^n  \mathbf 1_{\{k\}} \, d\mu\\
+		&\overset{\ref{allgMonKonv}}{=} \lim_{n\to\infty}\int_\R\sum_{k=0}^n f\, \mathbf 1_{\{k\}}\, d\mu\\
+		&\overset{\text{Lin.}}{=} \lim_{n\to\infty}\sum_{k=0}^n \int_\R f(k)\, \mathbf 1_{\{k\}} \, d\mu\\
+		&\overset{\text{Def. Int.}}{=} \lim_{n\to\infty}\sum_{k=0}^n f(k) \mu(\{k\})\\
+		&\overset{\text{Z\"ahlma\ss }}{=}\sum_{k=0}^\infty f(k).
+	\end{align*}
+\end{anwendung}

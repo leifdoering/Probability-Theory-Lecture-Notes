@@ -1,0 +1,176 @@
+%% Nach ein bisschen nachdenken bin ich zu dem Schluss gekommen, dass die sinnvollste Lösung für einen guten workflow wahrscheinlich mit Git wäre. Der Vorteil ggü. Dropbox ist, dass VIEL mehr an Änderungen dokumentiert wird (also tatsächlich exakt was im Code und PDF verändert wurde) und mehr Möglichkeiten zum zusammenführen bestehen. Langfristig wäre das lohnenswert, für nur ein Semester braucht man's sicher nicht.
+
+\marginpar{\textcolor{red}{Vorlesung 2}}
+
+\begin{satz}[Stetigkeit von Maßen]\label{S1}
+	Sei $(\Omega, \cA, \mu)$ ein Maßraum und $(A_n)_{n\in \N}$ eine Folge messbarer Mengen, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item Aus $A_n \uparrow A$ (d. h. $A_1 \subseteq A_2 \subseteq A_3\subseteq ...$, $\bigcup_{n=1}^{\infty} A_n = A$) folgt $\lim\limits_{n \to \infty} \mu (A_n)= \mu (A)$.
+		\item Aus $\mu$ endlich und $A_n \downarrow A$ (d. h. $A_1 \supseteq A_2 \supseteq ...$, $\bigcap\limits_{n=1}^{\infty}A_n=A$) folgt $\lim\limits_{n \to \infty}\mu (A_n)=\mu(A)$.
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{disjunkt} Definiere
+		\begin{align*}
+		% keine Ahnung wie man das machen sollte...
+		%\begin{array}{ccc}
+		%A_{1}' &:=& A_1\\
+		%A_{2}' &:= &A_2 \backslash A_1\\		
+		%\vdots&&\vdots\\
+		%A_{n}' &:= &A_n \backslash A_{n-1}.\\
+		%\end{array}
+		A_{1}' & \coloneqq  A_1\\
+		A_{2}' & \coloneqq  A_2 \backslash A_1\\
+		A_{n}' & \coloneqq  A_n \backslash A_{n-1},\quad n\geq 3.
+		\end{align*}
+		Weil die $A_n'$ paarweise disjunkt sind und $A_n=\bigcupdot\limits_{i=1}^{n} A_{i}'$ gilt, folgt
+		\begin{gather*} 
+		% das sind doch schöne Klammern!?
+		\lim\limits_{n \to \infty} \mu (A_n)  = \lim\limits_{n \to \infty} \mu \Big(\bigcupdot\limits_{i=1}^{n} A_{i}'\Big) \overset{\text{Def.}}{\overset{\text{Maß}}{=}} \lim\limits_{n \to \infty} \sum\limits_{i=1}^{n} \mu (A_{i}') \overset{\text{Def.}}{=} \sum\limits_{i=1}^{\infty} \mu (A_{i}')\\ \overset{\text{Def. Maß}}{\overset{\text{und disj.}}{=}} \mu \Big(\bigcupdot\limits_{i = 1}^{\infty}A_{i}'\Big) = \mu \Big(\bigcup\limits_{i = 1}^{\infty}A_{i}\Big) = \mu (A).\\
+		\end{gather*}
+		\item \label{Gegenbsp} Folgt sofort aus \ref{disjunkt} weil
+		\[ A_n \downarrow A \quad \Leftrightarrow \quad A_{n}^{C} \uparrow A^C, \quad n\to\infty. \]
+		Weil $\mu$ endlich ist gilt f\"ur alle messbaren Mengen 
+		\[ \mu(\Omega) = \mu(A \cupdot A^C) \overset{\text{Maß}}{=} \mu (A) + \mu (A^C) \]
+		und damit auch $\mu (A^C) = \mu (\Omega) - \mu (A)$. Damit folgt mit (i) \[ 
+		\lim\limits_{n \to \infty} \mu(A_{n}^{C}) = \lim\limits_{n \to \infty} \left( \mu(\Omega) - \mu(A_n^{C})\right) = \mu(\Omega) - \lim\limits_{n \to \infty} \mu(A_n^C) = \mu(\Omega) - \mu (A^C) = \mu (A). \]
+		
+	\end{enumerate}
+\end{proof}
+
+\begin{beispiel}[Gegenbeispiel zu \ref{Gegenbsp} mit $\mu(\Omega) = \infty$]
+	Sei $\Omega = \N, \cA = \cP(\N)$, $p_k = 1$ f\"ur alle $k\in\N$ und $\mu$ das Z\"ahlma\ss: \[ \mu (A) = \sum\limits_{k \in A} p_k. \] Mit $A_n=\{ n, n+1, ... \}$ gilt $\mu(A_n)=+\infty$ f\"ur alle $n\in\N$ und $A_n\downarrow A=\emptyset$. Weil $\mu(\emptyset)=0$ aber $\mu(A_n)=+\infty$ f\"ur alle $n\in\N$, gilt die Aussage von Satz \ref{S1} hier nicht.	
+\end{beispiel}
+
+\section{Erzeuger von $\sigma$-Algebren und Dynkin-Systeme}
+Wir wollen Ma\ss e auf komplizierten $\sigma$-Algebren studieren, indem wir die Ma\ss e nur auf sehr wenigen Mengen der $\sigma$-Algebra betrachten (auf Erzeugern). Das ist ein wenig wie in der linearen Algebra, dort m\"ussen lineare Abbildungen auch nur auf einer Basis definiert werden. Ganz konkret halten wir folgendes Ziel im Kopf: Wir werden zeigen, dass Ma\ss e auf $\mathcal B(\R^d)$ schon durch die Werte auf den Quadern eindeutig definiert werden k\"onnen.
+
+\begin{satz}
+	Der Durchschnitt einer beliebigen Menge von $\sigma$-Algebren ist eine $\sigma$-Algebra.
+\end{satz}
+\begin{proof}
+	Sei $\cA_i$, $i \in I$, eine Menge von $\sigma$-Algebren und $\cA \coloneqq \bigcap\limits_{i \in I} A_i$. Wir checken die drei Eigenschaften einer $\sigma$-Algebra f\"ur $\mathcal A$:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\emptyset \in \cA$ ist klar weil $\emptyset\in \mathcal A_i$ f\"ur alle $i\in I$ und damit ist $\emptyset$ auch im Durchschnitt.
+		\item Sei $A \in \cA$, also ist  $A \in \cA_i$ f\"ur alle $i\in I$. Weil alle $\mathcal A_i$ $\sigma$-Algebren sind, ist auch $A^C\in \mathcal A_i$ f\"ur alle $i\in I$ und damit ist $A^C\in \mathcal A$. Folglich ist $\mathcal A$ abgeschlossen bez\"uglich Komplementbildung.
+				\item Sei $(A_n)$ eine Folge paarweiser disjunkter Mengen in $\mathcal A$, also $A_n \in \mathcal A_i$ f\"ur alle $i$ und $n$. Weil das alles $\sigma$-Algebren sind, gilt \[\bigcupdot\limits_{n = 1}^{\infty} A_n \in \mathcal A_i \]
+				f\"ur alle $i\in I$. Damit ist die Vereinigung auch im Durchschnitt aller $\mathcal A_i$, also 
+				$\bigcupdot\limits_{n = 1}^{\infty} A_n \in \mathcal A.$
+				Folglich ist $\mathcal A$ auch abgeschlossen bez\"uglich beliebigen Vereinigungen.
+	\end{enumerate}
+\end{proof}
+
+\begin{bem}
+	Die Vereinigung von $\sigma$-Algebren ist nicht immer eine $\sigma$-Algebra. F\"ur das \"Ubungsblatt sollt ihr euch dazu Beispiele \"uberlegen.
+\end{bem}
+
+\begin{korollar}
+	Sei $\mathcal E \subseteq \cP (\Omega)$, so existiert genau eine $\sigma$-Algebra $\cA$ mit
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mathcal E \subseteq \cA$
+		\item \label{kleinste} Ist $\mathcal E \subseteq \cB$ und $\cB$ ist eine $\sigma$-Algebra, so gilt $\cA \subseteq \cB$.
+	\end{enumerate}
+	Dabei bedeutet \ref{kleinste}, dass $\cA$ die kleinste $\sigma$-Algebra ist, die $\mathcal E$ enthält.
+\end{korollar}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Existenz: \[ \cA := \bigcap\limits_{\substack{\mathcal E \subseteq \cB, \\ \cB \: \sigma \text{-Alg.}}} \! \! \! \! \cB  \]
+		tut's.
+		\item Eindeutigkeit: Sei $\cA'$ eine weitere solche $\sigma$-Algebra. Dann ist $\cA \subseteq \cA'$ weil $\cA $ der Schnitt über alle solche $\cA'$ ist. Wegen \ref{kleinste} ist auch $\cA' \subseteq \cA$. Also ist $\cA = \cA'$.
+	\end{enumerate}
+\end{proof}
+
+\begin{deff}
+	Für $\mathcal E \subseteq \cP(\Omega)$ heißt  \[\sigma (\mathcal E) = \bigcap\limits_{\substack{\mathcal E \subseteq \cB, \\ \cB \: \sigma \text{-Alg.}}} \! \! \! \! \cB \] die von $\mathcal E$ \textbf{erzeugte $\sigma$-Algebra}. Ist $\cA = \sigma(\mathcal E)$, so nennt man $\mathcal E$ einen Erzeuger von $\cA.$
+	
+\textit{Warnung:} Der Erzeuger einer $\sigma$-Algebra ist nicht eindeutig.
+\end{deff}
+
+\begin{beispiel}
+	Sei $\Omega \neq \emptyset$ und $\mathcal E=\{ \{ x \} \! : x\in \Omega \}$. Dann ist \[ \sigma(\mathcal E)= \{ A \subseteq \Omega \! : \text{$A$ abzählbar oder $A^C$ abzählbar}\}=:\mathcal B . \]
+	Warum? Es gilt offensichtlich $\sigma(\mathcal E) \subseteq \mathcal B$ weil $\sigma(\mathcal E)$ die kleinste $\sigma$-Algebra ist, die $\mathcal E$ enth\"alt und $\mathcal B$ auch eine $\sigma$-Algebra ist, die $\mathcal E$ enth\"alt (siehe Beispiel \ref{E1}). Es gilt aber auch $\mathcal B \subseteq \sigma(\mathcal E)$ weil jede abzählbare Menge als abzählbare Vereinigung von einelementigen Mengen wieder zu $\sigma(\mathcal E)$ gehört und auch Komplemente abzählbarer Mengen wieder in $\sigma(\mathcal E)$ enthalten sind (Definition $\sigma$-Algebra).
+\end{beispiel}
+
+\begin{beispiel}
+	Sei $\Omega = \mathbb{R}^d$, $\mathcal E = \{ O \subseteq \mathbb{R}^d \! : O \text{ offen} \}$. Dann heißt $\sigma(\mathcal E) \eqqcolon \cB(\mathbb{R}^d)$ \textbf{Borel-$\sigma$-Algebra auf $\mathbb{R}^d$}. In $\cB(\mathbb{R}^d)$ messbare Mengen heißen \textbf{Borelmengen}.\smallskip
+	
+	\textit{Übung:} Die Borel-$\sigma$-Algebra hat viele verschiedene Erzeuger, z. B. 
+	\begin{align*}
+		&\mathcal E_2 = \{ K \subseteq \mathbb{R}^d \! : \text{$K$ kompakt} \},\\		
+		&\mathcal E_3 = \{ Q \subseteq \mathbb{R}^d \! : \text{$Q$ Quader} \},\\
+		&\mathcal E_4 = \{ (a_1,b_1)\times...\times(a_d,b_d) \! : a_i, b_i \in \mathbb{R} \},\\
+		&\mathcal E_5 = \{ (-\infty,b_1]\times...\times(-\infty,b_n] \! : b_i \in \mathbb{R} \},\\
+		&\mathcal E_6 = \{ A \subseteq \mathbb{R}^d \! : \text{$A$ abgeschlossen} \}.
+	\end{align*}
+	Wir zeigen hier nur, dass $\sigma(\mathcal E_4) = \cB(\mathbb{R}^d)$ gilt. Wie zeigt man nun allgemein für zwei Mengensysteme $\mathcal E$, $\mathcal E' \subseteq \cP(\Omega)$, dass $\sigma(\mathcal E) = \sigma(\mathcal E')$ gilt? Indem man zeigt, dass \begin{equation} \label{reicht}
+		\mathcal E \subseteq \sigma(\mathcal E') \quad \text{ sowie } \quad  \mathcal E' \subseteq \sigma(\mathcal E)
+	\end{equation} 
+	gelten. Warum reicht das? Dazu nutzen wir zwei Eigenschaften, die direkt aus der Definition der erzeugen $\sigma$-Algebra folgen:
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{doppeltgemoppelt} $\sigma(\sigma(\mathcal E)) = \sigma(\mathcal E)$
+		\item \label{teilm} $\cA \subseteq \cA' \Rightarrow \: \sigma(\cA) \subseteq \:  \sigma(\cA')$
+	\end{enumerate}
+	Aus \eqref{reicht} und \ref{doppeltgemoppelt}, \ref{teilm} folgt \begin{align*}
+		&\sigma(\mathcal E) \subseteq \sigma(\sigma(\mathcal E')) = \sigma(\mathcal E')
+		\end{align*}
+		sowie
+		\begin{align*}
+		&\sigma(\mathcal E') \subseteq \sigma(\sigma(\mathcal E)) = \sigma(\mathcal E),
+	\end{align*}
+	also zusammen $\sigma(\mathcal E) = \sigma(\mathcal E')$. Nun zurück zu $\sigma(\mathcal E_4)$ und $\cB(\mathbb{R}^d)$. Es ist klar, dass $\mathcal E_4 \subseteq \sigma(\{ O \! : O \text{ offen} \})$, denn $\mathcal E_4$ enth\"alt nur offene Mengen und die von einer Menge von Mengen erzeuge $\sigma$-Algebra enth\"alt auch all die Mengen selbst. Umgekehrt existieren für jedes Element $x$ einer offenen Menge $O$ irgendwelche $a_1,...a_d,b_1,...b_d \in \Q$ mit $x \in (a_1,b_1)\times...\times(a_d,b_d)\subseteq O$. Damit gilt: \[ O= \bigcup\limits_{\text{abz. viele}} (a_1,b_1)\times...\times(a_d,b_d) \in \sigma(\mathcal E_4) \]
+	und damit gilt $\{ O \! : O \text{ offen} \}\subseteq  \sigma(\mathcal E_4)$ weil abz\"ahlbar viele Vereinigungen von Mengen einer $\sigma$-Algebra wieder drin sind.
+\end{beispiel}
+
+\begin{deff}
+	$\cD \subseteq \cP (\Omega)$ heißt \textbf{Dynkin-System}, falls
+	\begin{enumerate}[label=(\roman*)]
+		\item $\Omega \in \cD$
+		\item $A \in \cD \Rightarrow A^C \in \cD$
+		\item $A_{1},A_{2},... \in \mathcal{D}$ \textbf{paarweise disjunkt}  $\Rightarrow \bigcupdot\limits_{k=1}^{\infty}A_k \in \mathcal{D}$
+	\end{enumerate}
+	Im Gegensatz zu einer $\sigma$-Algebra ist ein Dynkin-System als nur abgeschlossen bez\"uglich paarweise disjunkter Vereinigungen.
+	\end{deff}
+
+\begin{beispiel} 
+	\abs
+	\begin{itemize}
+		\item Jede $\sigma$-Algebra ist ein Dynkin-System, die Definition einer $\sigma$-Algebra fordert mehr.
+		\item Sind $\mu_1,\mu_2$ endliche Maße auf einem messbaren Raum $(\Omega, \cA)$ mit $\mu_1(\Omega) = \mu_2(\Omega)$, so ist $\mathcal M = \{ A\in \cA \! : \mu_1(A) = \mu_2(A) \}$ ein Dynkin-System. Warum? \begin{enumerate}[label=(\roman*)]
+			\item Klar, wegen der Definition von Ma\ss en.
+			\item Ist $A\in \mathcal M$, so gilt $\mu_1(A^C) = \mu_1(\Omega) - \mu_1(A) = \mu_2(\Omega) - \mu_2(A) = \mu_2(A^C)$ wegen der Rechenregel f\"ur Ma\ss e und der Annahme an $\mu_1, \mu_2$. Damit ist auch $A^C\in \mathcal M$.
+			\item Seien $A_1,A_2,...\in \mathcal M$ paarweise disjunkt. Es gilt also $\mu_1(A_n) = \mu_2(A_n)$ f\"ur alle $n =\geq 1$. Damit folgt wegen der $\sigma$-Additivit\"at f\"ur Ma\ss e \[ \mu_1\Big({\bigcupdot\limits_{n \in \N}} A_n\Big) =\sum_{n=1}^{\infty} \mu_1(A_n) = \sum_{n=1}^{\infty} \mu_2(A_n) = \mu_2\Big({\bigcupdot\limits_{n \in \N}} A_n\Big), \] also ist $\bigcupdot\limits_{n=1}^{\infty} A_n \in \mathcal M$.
+		\end{enumerate}
+	\end{itemize}
+\end{beispiel}
+
+\begin{satz}\label{dschnitt}
+	Ein Dynkin-System $\cD$ ist eine $\sigma$-Algebra genau dann, wenn $\cD$ $\cap$-stabil ist (d. h. $A,B \in \cD \Rightarrow A \cap B \in \cD$).
+\end{satz}
+
+\begin{proof}
+	\abs
+	\begin{enumerate}[label=(\roman*)]		
+		\item \label{diff}
+		Es gilt $A,B \in \cD, \: B \subseteq A \Rightarrow A \backslash B \in \cD$ weil
+		\begin{gather*}
+			A \backslash B = A \cap B^C = \underbrace{(\underbrace{A^C \cupdot B}_{\in \cD, \text{ weil disj.}})^C.}_{\in \cD, \text{ weil Kompl.}}
+		\end{gather*}
+		\item \label{Verein} Beliebige endliche Vereinigungen von Mengen aus $\cD$ sind in $\cD$: Seien dazu $A,B \in \cD$. Da $A \cap B\in \cD$ per Annahme, gilt
+		\begin{gather*}
+			A \cup B = A \cupdot (B \backslash (A \cap B)) \in \cD.
+		\end{gather*}
+		Per Induktion bekommt man aus der Vereinigung zweier Mengen nat\"urlich auch die Vereinigung endlich vieler Mengen.
+		\item Seien $A_1, A_2,... \in \cD$. Definiere
+		\begin{gather*}
+			B_n = \bigcup\limits_{k = 1}^{n} A_k\quad \text{ sowie }\quad C_n = B_n \backslash B_{n-1}.
+		\end{gather*}
+		Weil nach \ref{Verein} $B_n \in \cD $ und dann nach \ref{diff} $C_n \in \cD$ gilt, folgt mit der Definition der Dynkin-Systeme
+		\begin{gather*}
+			\bigcup\limits_{n=1}^{\infty} A_n = \bigcup\limits_{n=1}^{\infty} B_n = \bigcupdot\limits_{n=1}^\infty C_n \in \cD.
+		\end{gather*}
+		Also ist $\mathcal D$ abgeschlossen bez\"uglich abz\"ahlbarer Vereinigungen und damit ist $\mathcal D$ eine $\sigma$-Algebra.
+	\end{enumerate}
+\end{proof}

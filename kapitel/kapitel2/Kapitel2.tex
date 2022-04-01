@@ -1,0 +1,216 @@
+\begin{deff}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=1295s}
+	Ist $f \! : (\mathbb{R}^d,\cB(\mathbb{R}^d)) \rightarrow (\mathbb{R}^d,\cB(\mathbb{R}^{d'}))$ messbar, so heißt $f$ \textbf{Borel-messbar}.
+\end{deff}
+
+\begin{beispiel}\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=1371s}
+\abs
+	\begin{itemize}
+		\item Jede stetige Abbildung $f \! : \mathbb{R^d} \rightarrow \mathbb{R^d}$  ist auch Borel-messbar. Warum? Wir nutzen Proposition \ref{S2}, angewandt auf $\sigma(\{ O\subseteq \R\! : O\text{ offen} \}) = \mathcal B (\mathbb{R^d})$ mit der Erinnerung, dass Urbilder offener Mengen unter stetigen Abbildungen offen (insbesondere Borel-messbar) sind.
+	\item Indikatorfunktionen
+	\begin{align*}
+		\mathbf 1_A: \Omega \rightarrow \mathbb{R}, \:  \mathbf{1}_A(\omega) &= \begin{cases}
+		1&: \omega\in A\\
+		0&: \omega \notin A\\
+		\end{cases}
+	\end{align*}
+	sind  $(\mathcal A, \mathcal B(\R))$-messbar genau dann, wenn $A$ messbar ist. Das zu pr\"ufen ist relativ simpel, weil wir alle m\"oglichen Urbilder direkt hinschreiben k\"onnen:
+	\begin{align*}
+		\mathbf 1_A^{-1}(B) = \{ \omega\in \Omega \,:\, \mathbf 1_A(\omega) \in B \} &= \begin{cases}
+		A&: 1 \in B, \: 0 \notin B\\
+		A^C&: 1 \notin B, \: 0 \in B\\
+		\mathbb{R}&: 1,0 \in B\\
+		\emptyset&: 1,0 \notin B\\	
+		\end{cases}.
+	\end{align*}
+	\end{itemize}
+\end{beispiel}
+Wie f\"ur stetige Abbildungen zeigt man, dass die Verkn\"upfung messbarer Abbildungen wieder messbar ist. Auch das ist eine kleine \"Ubungsaufgabe.
+\begin{bem}\label{yui}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=1862s}
+	Wir erinnern daran, dass
+	\begin{align*}
+		\cB(\mathbb{R}) &= \sigma(\{ (-\infty,t] \! : t \in \mathbb{R} \})= \sigma(\{ (-\infty,t) \! : t \in \mathbb{R} \})= \sigma(\{ (a,b) \! : a < b \}).
+	\end{align*}
+	% t ist hier gar nicht richtig definiert
+	Wegen Proposition \ref{S2} ist deshalb $f \! : \Omega \rightarrow \mathbb{R}$ $(\mathcal A, \mathcal B(\R))$-messbar genau dann, wenn 
+	\begin{gather*}
+		f^{-1} ((-\infty,t]) = \{ \omega \in \Omega \! : f(\omega) \leq t \} =: \{ f \leq t \} \in \mathcal A
+	\end{gather*}
+	f\"ur alle $t\in\R$. Die Kurzschreibweise $\{f\leq t\}$ ist etwas ungewohnt, wird ab jetzt aber oft genutzt. Analog ist auch $f$ messbar genau dann, wenn
+	\begin{align*}
+		f^{-1} ((-\infty,t)) = \{ \omega\in \Omega \! : f(\omega) < t \} =: \{ f < t \} \in \mathcal A
+	\end{align*}
+	f\"ur alle $t\in\R$ oder 
+	\begin{align*}
+		f^{-1} ((a,b)) = \{ \omega\in\Omega \! : f(\omega) \in (a,b) \} =: \{ f \in (a,b) \}\in \mathcal A
+	\end{align*}
+	f\"ur alle reellen Zahlen $a<b$.
+	Analog kann man auch halb-offene Intervalle, abgeschlossene Mengen, kompakte Mengen, offene Mengen und so weiter nutzen, jeder Erzeuger von $\mathcal B(\R)$ gibt eine M\"oglichkeit um Messbarkeit zu pr\"ufen.
+\end{bem}
+
+\begin{deff}\label{Kat}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=2172s}
+	Sei $f \! : \Omega \rightarrow \Omega'$ für einen messbaren Raum $(\Omega', \cA')$ ist. Dann ist die Menge aller Urbilder \[ \cA := \big\{ f^{-1}(A') \! : A' \in \cA' \big\} \] eine $\sigma$-Algebra und $\mathcal A$ nat\"urlich ist die kleinste $\sigma$-Algebra auf $\Omega$, f\"ur die $f$ $(\cA, \cA')$-messbar. Wir nennen die $\sigma$-Algebra $\cA$ auch die \textbf{von $f$ erzeugte $\sigma$-Algebra} und schreiben $\sigma(f)$.
+\end{deff}
+
+Schreibt euch das n\"achste Beispiel einmal selber hin:
+\begin{beispiel}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=2493s}
+\label{yu}\abs
+	\begin{itemize}
+		\item $\sigma(\mathbf{1}_A) = \{ \emptyset, \Omega, A, A^C \}$
+		\item Sei $f \! : \mathbb{R} \rightarrow \mathbb{R}, \: f\equiv c$ eine konstante Funktion, dann ist $\sigma(f) = \{ \emptyset, \mathbb{R} \}$.
+	\end{itemize}
+\end{beispiel}
+Die n\"achste Definition verallgemeinert die erzeugte $\sigma$-Algebra von einer auf beliebig viele Funktionen. Der Begriff ist f\"ur die Stochastik 1 nicht besonders wichtig, ist f\"ur die Finanzmathematik aber essentiell. Mit der Definition wird das Konzept von Information mathematisiert.
+\begin{deff}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=2608s}
+	Seien $(\Omega_i',\cA_i')$ messbare Räume und $f_i \! : \Omega \rightarrow \Omega_i', i \in I,$ f\"ur eine beliebige Indexmenge. Dann ist \[\sigma(f_i, \: i \in I) := \sigma \Big(\bigcup_{i \in I}\sigma(f_i)\Big) = \sigma(\{ f_i^{-1}(A_i) \! : A'_i \in \cA'_i, \: i \in I \}) \] die kleinste $\sigma$-Algebra auf $\Omega$, bez\"uglich derer alle $f_i$ messbar sind. Man spricht auch hier von der \textbf{von den $f_i, i\in I$, erzeugte $\sigma$-Algebra}.
+\end{deff}
+
+\section{Bildmaße oder \enquote{push-forward} eines Maßes}
+
+Wir nutzten die Messbarkeit einer $(\mathcal A, \mathcal A')$-messbaren Abbildung $f:\Omega\to \Omega'$, um ein Ma\ss{} $\mu$ auf $\mathcal A$ auf ein Ma\ss{} $\mu_f$ auf $\mathcal A'$ r\"uberzuschieben (deshalb \enquote{push-forward}). In dem Stochastikteil werden wir noch sehen, dass der push-forward extrem wichtig ist.
+
+\begin{satz}\label{pushf}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=2897s}
+	Sei $f:\Omega \rightarrow \Omega'$ $(\mathcal A, \mathcal A')$-messbar und $\mu$ ein Maß auf $\cA$. Dann ist 
+	\[ \mu_f(B) := \mu\left(f^{-1}(B)\right),\quad B\in \mathcal A', \] ein Maß auf $\cA'$. Dieses Maß heißt \enquote{Bildmaß} oder \enquote{push-forward} von $f$.
+\end{satz}
+
+\begin{proof}
+	$\mu_f$ ist wohldefiniert weil $f$ messbar ist und daher $f^{-1}(B)\in \mathcal A$ gilt. Auf $\cA$ ist $\mu$ definiert, also macht die Definition von $\mu_f$ Sinn. Die Positivit\"at von $\mu_f$ folgt nat\"urlich direkt aus der Positivit\"at von $\mu$. Checken wir noch die zwei definierenden Eigenschaften eines Ma\ss es:
+	\begin{itemize}
+		\item[(i)] $\mu_f ( \emptyset) = \mu\left(f^{-1}(\emptyset)\right) = \mu(\emptyset) = 0$
+		\item[(ii)] Seien $B_1,B_2,... \in \cA'$ paarweise disjunkt, dann folgt aus der Definition und den Ma\ss eigenschaften von $\mu$
+		\begin{align*}
+			\mu_f\Big(\bigcupdot_{k=1}^{\infty}B_k\Big)\overset{\text{Def.}}&{=} \mu\Big(f^{-1}\Big(\bigcupdot_{k=1}^{\infty}B_k\Big)\Big)\\
+			 \overset{\text{Urbild}}&{=} \mu\Big(\bigcupdot_{k=1}^{\infty}f^{-1}(B_k)\Big)\\
+			\overset{\mu\text{ Ma\ss}}&{=} \sum\limits_{k=1}^{\infty} \mu\Big( f^{-1}(B_k)\Big) \overset{\text{Def.}}{=} \sum\limits_{k=1}^{\infty} \mu_f(B_k).
+		\end{align*}
+		Damit ist $\mu_f$ auch $\sigma$-additiv.
+	\end{itemize}
+\end{proof}
+
+\begin{beispiel} \link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=3378s}
+	Sei $f \! : \mathbb{R} \rightarrow \mathbb{R}$, $f(x) = x + a$. $f$ ist Borel-messbar weil $f$ stetig ist. Sei $\mu:=\lambda$ das Lebesgue-Maß auf $\mathcal B(\R)$, was ist dann der push-forward $\mu_f$? $\mu_f$ ist laut Satz \ref{pushf} ein Maß, aber welches? Es gilt tats\"achlich, dass der Push-forward das gleiche Ma\ss{} ist: $\mu_f = \lambda$.
+	
+	Warum gilt das? Berechnen wir dazu $\mu_f$ auf einem $\cap$-stabilen Erzeuger von $\mathcal B(\R)$:
+	\begin{gather*}
+		\mu_f((c,d]) \overset{\text{Def.}}{=} \mu(f^{-1}((c,d])) = \lambda((c-a,d-a]) = (d-a) - (c-a) = d-c=\lambda((c,d]).
+	\end{gather*}	
+	Weil $\cE = \{ (c,d] \! : c<d \}$ $\cap$-stabil ist mit $\sigma(\cE) = \cB(\mathbb{R})$, gilt aufgrund von Folgerung \ref{folg} auch $\lambda = \mu_f$ (wir w\"ahlen dabei $E_n=(-n,n]$). Weil $a$ beliebig war, gilt also $$\lambda(B) = \lambda(B + a),\quad \forall a\in\R, B\in \mathcal B(\R),$$ wobei $B+a := \{ b+a:b\in B \}$ die um $a$ verschobene Menge ist. Man sagt, das Lebesgue-Maß ist \textbf{translationsinvariant}, Verschiebungen von Mengen \"andert ihr Ma\ss{} (die \glqq Gr\"o\ss e\grqq) nicht. Diese Eigenschaft gilt nat\"urlich nicht f\"ur alle Ma\ss e. Mehr noch, bis auf triviale Modifikationen (Konstanten addieren) ist das Lebesgue-Ma\ss{} das einzige translationsinvariante Ma\ss{} auf $\mathcal B(\R)$.
+\end{beispiel}
+
+\section{Messbare numerische Funktionen}
+
+Wir nutzen wie in Kapitel 1 die erweiterte Zahlengerade $\overline \R=[-\infty,+\infty]$. Dabei nutzen wir die definierten \glqq Rechenregeln\grqq{} aus Kapitel 1 und auch die Konvergenzen am Rand: $$a_n \rightarrow +\infty, n \to \infty, \quad \text{ und }\quad a_n \rightarrow -\infty, n \to \infty,$$ wie in Analysis 1 definiert. Oft schreiben wir $\infty$ statt $+\infty$.
+\begin{deff}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=4031s}
+ Auf $\overline \R$ definieren wir die erweiterte Borel-$\sigma$-Algebra:
+\begin{align*}
+	\mathcal B(\overline \R):=\big \{ B\subseteq \overline \R\,: \, B\cap \R\in \mathcal B(\R)\big \}.
+\end{align*}
+
+\end{deff}
+Kurz \"uberlegen zeigt uns, dass $\mathcal B(\overline \R)$ folgende Mengen enth\"alt: alle $B\in \mathcal B(\R)$, sowie $B \cup \{+\infty\}$, $B\cup \{-\infty\}$ und $B\cup \{-\infty,+\infty\}$.
+\begin{deff}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=4204s}
+	F\"ur einen messbaren Raum $(\Omega, \cA)$ hei\ss t $f \! : \Omega \rightarrow \overline{\mathbb{R}}$ \textbf{messbare numerische Funktion}, falls $f$ $(\mathcal A, \cB(\overline{\mathbb{R}}))$-messbar ist.
+\end{deff}
+In der Stochastik 1 spielen numerische Funktionen noch keine besonders wichtige Rolle. Ihr solltet euch nicht erschrecken lassen, bei (fast) allen Argumenten spielt es keine Rolle, ob eine Funktion reell oder numerisch ist. Numerische Funktionen sind einfach nur eine etwas gr\"o\ss ere Klasse von Funktionen, die reelle Funktionen enthalten. Gew\"ohnt euch einfach direkt daran, dass unsere messbaren Funktionen auch die Werte $+\infty$ oder $-\infty$ annehmen d\"urfen. 
+\begin{bem}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=4270s}
+\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Jede $(\mathcal A, \mathcal B(\R))$-messbare Funktion $f \! : \Omega \rightarrow \mathbb{R}$ ist auch eine messbare numerische Funktion, denn $f^{-1} (A \cup B) = f^{-1}(B) \in \mathcal{A} $ für alle  $B\in \mathcal B(\R)$ und $A \in \{ \{+\infty\}, \{-\infty\}, \{+\infty,-\infty\} \}$.
+		\item Aussagen für messbare reelle Funktionen gelten ganz analog für messbare numerische Funktionen. So gilt etwa: $f \! : \Omega \rightarrow \overline{\mathbb{R}}$ ist $(\cA, \cB(\mathbb{\overline R}))$-messbar genau dann, wenn $\{ f \leq t \} \in \cA$ f\"ur alle $t \in \overline{\mathbb{R}}$. Das folgt auch aus Proposition \ref{S2} weil $\cE = \{ [-\infty,t] \! : t \in \overline{\mathbb{R}} \}$ die $\sigma$-Algebra $\cB(\mathbb{R})$ erzeugt (\"uberlegt mal, warum das stimmt).
+	\end{enumerate}
+\end{bem}
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=4665s}
+	Für $a,b \in \overline{\mathbb{R}}$ definieren wir
+	\begin{align*}
+		a \land b := \min\{ a,b \} \quad \text{und}\quad
+		a \lor b := \max\{ a,b \}
+	\end{align*}
+	sowie
+	\begin{align*}
+		a^{+} := \max\{ 0, a \} \quad\text{und}\quad
+		a^{-} := -\min\{ 0, a \}.
+	\end{align*}
+	F\"ur numerische Funktionen werden entsprechend punktweise  $f \land g$, $f \lor g$, $f^{+}$, $f^{-}$ definiert. $f^{+}$ heißt \textbf{Positivteil} von f und $f^{-}$ \textbf{Negativteil} von f.
+\end{deff}
+Beachte: Postivteil und Negativteil sind beide positiv aufgrund des zus\"atzlichen Minus in der Definition des Negativteils.\smallskip
+
+Es gelten direkt aus der Definition folgende wichtige Identit\"aten
+\begin{align*}
+	f = f^{+} - f^{-}\quad \text{ und }\quad |f| = f^{+} + f^{-},
+\end{align*}
+die uns zeigen, weshalb es oft reicht $f^+$ und $f^-$ zu untersuchen.
+
+
+
+\begin{lemma}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=5100s}
+	Sind $f,g \! : \Omega \rightarrow \overline{\mathbb{R}}$ $(\cA, \cB(\overline{\mathbb{R}}))$-messbar, so sind die Mengen 
+\begin{align*}
+	\{ f < g \},\quad \{ f \leq g \}, \quad \{ f = g \}\quad\text{ und }\quad \{ f \neq g \}
+\end{align*}	
+	messbar, also in $\mathcal A$.
+\end{lemma}
+
+\begin{proof}
+Der Trick ist es, die Mengen als abz\"ahlbare Vereinigungen, Komplemente, Schnitte, etc. von messbaren Mengen zu schreiben. Weil $f$ und $g$ messbar sind, f\"uhren wir also auf Urbilder offener Mengen von $f$ und $g$ zur\"uck. Als erstes schreiben wir 
+ \begin{gather*}
+		\{ f < g \} \overset{\text{Trick!}}{=} \bigcup\limits_{t \in \Q} \{ f < t < g \} =\underbrace{\bigcup\limits_{t \in \Q} \underbrace{\{ f < t \}}_{\in \cA} \cap \underbrace{\{ t < g \}}_{\in \cA}}_{\in \cA}.
+\end{gather*}	
+Der wesentliche Trick war nat\"urlich die erste Gleichheit. Genauso zeigt man auch $\{ f > g \} \in \cA$. Weil $\{ f = g \} = (\{ f < g \} \cup \{ f>g \})^C$ und $\{ f \neq g \} = \{ f = g \}^C$ gelten, sind auch die letzten beiden Mengen in $\cA$. Die zweite Menge schreiben wir als $\{f\leq g\}=\{f<g\}\cup \{f=g\}$, die rechte Seite ist in $\cA$.
+\end{proof}
+
+\begin{lemma}\label{hilf}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=5661s}
+	Sind $f,g \! : \Omega \rightarrow \overline{\mathbb{R}}$ $(\cA, \cB(\overline{\mathbb{R}}))$-messbar, so sind auch $f+g$, $\alpha f$ f\"ur $\alpha\in \R$, $f \cdot g$, $f \land g$, $f \lor g$, und $|f|$ messbar.
+\end{lemma}
+\begin{proof}
+	Tricks aus dem letzten Beweis ausprobieren, und in \"Ubungen/\"Ubungsaufgaben \"uben!
+\end{proof}
+Eine kleine Warnung: Wir m\"ussen beim Addieren von numerischen Funktionen aufpassen, dass die Addition wohldefiniert ist. Es darf niemals $+\infty+(-\infty)$ auftauchen, das ist nicht definiert worden. Man sollte also immer schreiben, \glqq$f+g$ (wenn die Addition wohldefiniert ist)\grqq. Weil solche Probleme in der Stochastik 1 keine ernsthafte Rolle spielen, sind wir hier bewusst etwas unsauber, um nicht von den wichtigsten Punkten abzulenken.\smallskip
+
+Auch sehr wichtig ist, dass punktweise Grenzwerte von Folgen messbarer numerischer Funktionen wieder messbar sind:
+\begin{prop}
+\link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=5851s}
+	Es sei $f_1, f_2, ...: \Omega \to \overline \R$ eine Folge $(\cA, \mathcal B(\overline\R))$-messbarer numerischer Funktionen. 
+	\begin{itemize}
+	\item[(i)]
+	Dann sind auch die punktweise definierten Funktionen 
+	\begin{itemize}
+		\item $g_1(\omega):=\inf_{n\in\N} f_n(\omega),\quad \omega \in \Omega$,
+		\item $g_2(\omega):=\sup_{n\in\N} f_n(\omega),\quad \omega\in \Omega$,
+		\item $g_3(\omega):=\limsup_{n\to \infty} f_n(\omega),\quad \omega\in \Omega$,
+		\item $g_4(\omega):=\liminf_{n\to\infty} f_n(\omega), \quad \omega\in \Omega$,
+	\end{itemize}
+	messbare numerische Funktionen. Beachte: Weil wir \"uber numerische Funktionen reden, sind alle Ausdr\"ucke wohldefiniert, die Werte $+\infty$ und $-\infty$ d\"urfen auftauchen.
+	\item[(ii)] Existieren die Grenzwerte in $\overline \R$ f\"ur alle $\omega\in \Omega$, so ist auch die punktweise definierte Funktion
+	\begin{align*}
+		g(\omega):=\lim_{n\to\infty} f_n(\omega),\quad \omega\in \Omega,
+	\end{align*}
+	messbar.
+\end{itemize}
+\end{prop}
+\begin{proof}
+	Der Beweis wird in der gro\ss en \"Ubung diskutiert, hier nur f\"ur $g_1$. Wegen Bemerkung \ref{yui} reicht es, f\"ur alle $t\in\R$, $\{g_1< t\}\in \cA$ zu zeigen. Die Mengen $\{g_1< t\}$ werden wieder geschrieben als abz\"ahlbare Vereinigungen, Komplemente, Schnitte, etc. von aufgrund der Voraussetzung messbaren Mengen:
+	\begin{align*}
+		\{g_1< t\}&=\big\{ \omega \in \Omega: \inf_{n\in\N} f_n(\omega)< t\big\}\\
+		&=\{\omega \in \Omega: f_n(\omega)<t \text{ f\"ur ein n}\in\N\}\\
+		&=\bigcup_{n\in\N} \{\omega\in \Omega: f_n(\omega)< t\}\\
+		&=\underbrace{\bigcup_{n\in\N}\underbrace{\{f_n< t\}}_{\in \cA}}_{\in \cA}.
+	\end{align*}
+	F\"ur $g_2,...,g_4$ muss man sich \"uberlegen, was $\{g_i<t\}$ eigentlich bedeutet und das dann in abz\"ahlbare Vereinigungen, Komplemente, Schnitte, etc. messbarer Mengen der Form $\{f_n\in ...\}$ umschreiben. Probiert es aus! Jetzt ist ein guter Moment zu wiederholen, wie $\liminf$, $\limsup$ definiert sind.
+\end{proof}
+An dieser Stelle ist noch nicht so klar, warum Messbarkeit n\"utzlich ist. Die gerade gezeigten Aussagen sind der Grund, weshalb die im Anschluss zu entwickelnde Lebesgue Integrationstheorie so erfolgreich ist: Alle m\"oglichen Manipulationen mit messbaren Funktionen bleiben messbar.
+
+
+

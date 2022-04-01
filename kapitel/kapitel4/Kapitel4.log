@@ -1,0 +1,36 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.24)  21 DEC 2021 10:18
+entering extended mode
+**./Kapitel4.tex
+(Kapitel4.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-07-12>
+
+Kapitel4.tex:1: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 I
+     n Analogie zum eindimensionalen Fall fragen wir nun, ob die Umkehrung a...
+
+? 
+Kapitel4.tex:1: Emergency stop.
+ ...                                              
+                                                  
+l.1 I
+     n Analogie zum eindimensionalen Fall fragen wir nun, ob die Umkehrung a...
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ 
+Here is how much of TeX's memory you used:
+ 19 strings out of 480805
+ 689 string characters out of 2898031
+ 286464 words of memory out of 3000000
+ 17793 multiletter control sequences out of 15000+600000
+ 403430 words of font info for 27 fonts, out of 8000000 for 9000
+ 0 hyphenation exceptions out of 8191
+ 13i,0n,12p,463b,14s stack positions out of 5000i,500n,10000p,200000b,80000s
+Kapitel4.tex:1:  ==> Fatal error occurred, no output PDF file produced!

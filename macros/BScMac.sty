@@ -1,0 +1,223 @@
+%% "\ifthenelse"
+\RequirePackage{ifthen}
+%% font encoding vector
+\RequirePackage[T1]{fontenc}
+%% set up language support
+\RequirePackage[english,ngerman]{babel}
+%% AMS math
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{amsfonts}
+\RequirePackage[most]{tcolorbox}
+
+\usepackage{bbm, dsfont}
+\usepackage{stmaryrd}
+\usepackage{cancel}
+%% set graphics support (to include pictures etc.)
+\RequirePackage{graphicx}
+%% set up color support
+\RequirePackage{color}
+%% dynamic cross referencing in pdf
+\RequirePackage{hyperref}
+%% support for listing of code and output
+\RequirePackage{listings} 
+\RequirePackage{moreverb}
+\RequirePackage[german,ruled]{algorithm2e}
+%% optionally set up times text font
+\newcommand{\TimesFont}{\RequirePackage{times}\RequirePackage[scaled=0.92]{helvet}}
+
+%% options for one or two side set up
+\newcommand{\doppelseitig}{\@twosidetrue  \@mparswitchtrue}
+\newcommand{\einseitig}{\@twosidefalse \@mparswitchfalse}
+
+\DeclareMathOperator{\Dim}{Dim}
+\DeclareMathOperator{\Rang}{rang}
+\DeclareMathOperator{\Spur}{Spur}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Bias}{Bias}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\GCV}{GCV}
+
+
+%% use the next macro only if you are sure that you do
+%% need the math symbol ">>" which is the std. use for
+%% for "\gg"
+%\renewcommand{\gg}{\gamma}
+\newcommand{\hsp}{\hspace{0,1cm}}
+\newcommand{\abs}{\ \\*[-0.5cm]}
+\newcommand{\fur}{\text{f\"ur alle}}
+\newcommand{\exist}{\text{existiert ein}}
+\newcommand{\eqbegin}{\begin{equation*}}
+\newcommand{\eqend}{\end{equation*}}
+\newcommand{\arraybegin}{\begin{eqnarray*}}
+\newcommand{\arrayend}{\end{eqnarray*}}
+\newcommand{\T}{{^\top}}
+\newcommand{\epsi}{\varepsilon}
+
+%% math calligraphy
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+%% math blackboard bold
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\Real}{\text{Re}}
+\newcommand{\Imag}{\text{Im}}
+
+%% AMS Theorem Environments
+%\theoremstyle{plain}% default
+\newtheoremstyle{normal}
+{10pt}
+{10pt}
+{\normalfont}
+{}
+{\bfseries}
+{}
+{0.8em}
+{\bfseries{\thmname{#1}\thmnumber{ #2}.\thmnote{ \hspace{0.5em}(#3)\newline}}}
+\theoremstyle{normal}
+
+\newtheorem{satz}{Satz}[section]
+\newtheorem*{satz1}{Satz}
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{exercise}[satz]{Exercise}
+
+\newtheorem*{lemma1}{Lemma}
+\newtheorem{prop}[satz]{Proposition}
+\newtheorem{corollary}[satz]{Corollary}
+
+\newtheorem*{prop1}{Proposition}
+
+\newtheorem*{korollar1}{Korollar}
+\newtheorem{korollar}[satz]{Korollar}
+%\theoremstyle{definition1}
+\newtheorem{deff}[satz]{Definition}
+\newtheorem*{deff1}{Definition}
+\newtheorem{beispiel}[satz]{Beispiel}
+\newtheorem{remark}[satz]{Remark}
+
+\newtheorem{theorem}[satz]{Theorem}
+\newtheorem{warning}[satz]{Warning}
+
+
+\newtheorem{bem}[satz]{Bemerkung}
+\newtheorem*{bem1}{Bemerkung}
+% neu:
+\newtheorem{disc}[satz]{Diskussion}
+\newtheorem{folg}[satz]{Folgerung}
+\newtheorem{anwendung}[satz]{Anwendung}
+\newtheorem{warnung}[satz]{Warnung}
+\newtheorem*{beispiel1}{Beispiel}
+\newtheorem{example}[satz]{Example}
+
+
+%%%%%%%%%%%
+\theoremstyle{remark}
+%%%%%%%%%%%
+\newtheorem*{example1}{Beispiel}
+\newtheorem*{anm}{Anmerkung}
+\newtheorem*{vor}{Vorwort}
+\newtheorem*{erin1}{Erinnerung}
+\newtheorem*{warn1}{Warnung}
+\newtheorem{warn}[satz]{Warnung}
+\newtheorem{notat}[satz]{Notation}
+\newtheorem*{notat1}{Notation}
+\newtheorem{beo}[satz]{Notation}
+\newtheorem*{beo1}{Notation}
+\newtheorem{kon}[satz]{Konsequenz}
+\newtheorem*{kon1}{Konsequenz}
+
+
+\newtcolorbox{lbeispiel}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable, enhanced, arc=0mm, colback=blue!2, colframe=blue!50!green, leftrule=10mm, overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/idea.png}}; }}
+
+
+\newtcolorbox{lbemerkung}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=blue!2,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/warning.png}}; }}
+
+
+\newtcolorbox{ldefwichtig}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/open-book-2.png}}; }}
+\newtcolorbox{lsatzwichtig}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
+\newtcolorbox{ltippwichtig}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/idea.png}}; }}
+
+\newtcolorbox{lwarnhinweis}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/warning.png}}; }}
+
+
+\newtcolorbox{luebung}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=blue!1,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/stretching.png}}; }}
+\newtcolorbox{ltipp}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/idea.png}}; }}
+\newtcolorbox{ldef}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/open-book-2.png}}; }}
+\newtcolorbox{lsatz}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
+\newtcolorbox{llemma}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
+\newtcolorbox{lstep}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable, enhanced, arc=0mm, colback=blue!2, colframe=blue!50!green, leftrule=10mm, overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/footprints.png}}; }}
+
+\newtcolorbox{lsuperwichtigersatz}{breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/heart.png}}; }}
+
+\newcommand{\bigexclaim}{\raisebox{-0.1em}{\BigTriangleUp}\hspace{-0.32em}\llap{\small\textbf{!}}\hspace{0.32em}}
+
+%% misc
+\allowdisplaybreaks[1]
+\newcommand{\nocolorlinks}{\hypersetup{linkbordercolor=1 1 1, citebordercolor=1 1 1}}
+
+% settings for the listings package - see documentation of the package
+\lstset{%
+numberstyle=\footnotesize,%                 style of the code line numbers
+numbersep=5pt,%                             separation to the code lines
+basicstyle=\small,%                         basic style of displays
+stringstyle=\ttfamily,%                     style of the strings in the code
+captionpos=b,%                              position of the caption: 'b' or 't'
+numberblanklines=false,%                    number blank lines?
+literate=%                                  translations: items are separated with 'n',
+    {:=}{{$\gets$}}1%                           where 'n' is the number of tokens after translation
+    {<=}{{$\leq$}}1%
+    {>=}{{$\geq$}}1%
+    {<>}{{$\neq$}}1%
+}
+
+
+
+\endinput

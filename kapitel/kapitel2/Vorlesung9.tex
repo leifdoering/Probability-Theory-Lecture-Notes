@@ -1,0 +1,180 @@
+\marginpar{\textcolor{red}{Vorlesung 9}}
+
+\begin{lemma}\label{hilf}
+	Seien $f,g$ messbar, dann sind auch $f+g$, $\alpha f$, $f \cdot g$, $f \land g$, $f \lor g$, $|f|$ messbar.
+\end{lemma}
+
+\begin{proof}
+	Übung.
+\end{proof}
+
+\begin{lemma}
+	Sind $f,g \! : \Omega \rightarrow \overline{\mathbb{R}}$ $(\cA, \cB(\overline{\mathbb{R}}))$-messbar, so sind die Mengen 
+\begin{align*}
+	\{ f < g \},\quad \{ f \leq g \}, \quad \{ f = g \}\quad\text{ und }\quad \{ f \neq g \}
+\end{align*}	
+	messbar.
+\end{lemma}
+
+\begin{proof}
+Der Trick ist es, die Mengen als abz\"ahlbare Vereinigungen, Komplemente, Schnitte, etc. von messbaren Mengen zu schreiben. Weil $f$ und $g$ messbar sind, f\"uhren wir also auf Urbilder offener Mengen von $f$ und $g$ zur\"uck. Als erstes schreiben wir 
+ \begin{gather*}
+		\{ f < g \} = \bigcup\limits_{t \in \Q} \{ f < t < g \} =\underbrace{\bigcup\limits_{t \in \Q} \underbrace{\{ f < t \}}_{\in \cA} \cap \underbrace{\{ t < g \}}_{\in \cA}}_{\in \cA}.
+\end{gather*}	
+Der wesentliche Trick war nat\"urlich die erste Gleichheit. Mit genau diesem Trick konnte man im vorherigen Lemma zeigen, dass $f+g$ messbar ist weil $\{f+g<t\}=\{f<t-g\}$ gilt. Genauso zeigt man auch $\{ f > g \} \in \cA$. Weil $\{ f = g \} = (\{ f < g \} \cup \{ f>g \})^C$ und $\{ f \neq g \} = \{ f = g \}^C$, sind auch die letzten beiden Mengen in $\cA$. Die zweite Menge schreiben wir als $\{f\leq g\}=\{f<g\}\cup \{f=g\}$, die rechte Seite ist in $\cA$.
+\end{proof}
+Auch sehr wichtig ist, dass punktweise Grenzwerte von Folgen wieder messbar sind:
+\begin{prop}
+	Sei $f_1, f_2, ...: (\Omega, \mathcal A)\to (\overline \R, \mathcal B(\overline\R))$ eine Folge messbarer numerischer Funktionen. 
+	\begin{itemize}
+	\item[(i)]
+	Dann sind auch die punktweise definierten Funktionen 
+	\begin{itemize}
+		\item $f_1(\omega):=\inf_{n\in\N} f_n(\omega)$,
+		\item $f_2(\omega):=\sup_{n\in\N} f_n(\omega)$,
+		\item $f_3(\omega):=\limsup_{n\to \infty} f_n(\omega)$,
+		\item $f_4(\omega):=\liminf_{n\to\infty} f_n(\omega)$
+	\end{itemize}
+	messbare numerische Funktionen. Beachte: Weil wir \"uber numerische Funktionen reden, sind alle Ausdr\"ucke wohldefiniert, die Werte $+\infty$ und $-\infty$ d\"urfen auftauchen.
+	\item[(ii)] Existieren die Grenzwerte in $\overline \R$ f\"ur alle $\omega\in \Omega$, so ist auch die punktweise definierte Funktion
+	\begin{align*}
+		f(\omega):=\lim_{n\to\infty} f_n(\omega) 
+	\end{align*}
+	messbar.
+\end{itemize}
+\end{prop}
+\begin{proof}
+	Der Beweis (und Beispiele) wird in der gro\ss en \"Ubung diskutiert, hier nur einer der F\"alle. Wie immer reicht es, f\"ur alle $t\in\R$, $\{f_i\leq t\}\in \cA$ zu zeigen. Die Menge wird wieder geschrieben als abz\"ahlbare Vereinigungen, Komplemente, Schnitte, etc. von messbaren Mengen:
+	\begin{align*}
+		\{f_1\leq t\}=\big\{ \omega \in \Omega: \inf_{n\in\N} f_n(\omega)\leq t\big\}=\underbrace{\bigcup_{n\in\N}\underbrace{\{\omega: f_n(\omega)\leq t\}}_{\in \cA}}_{\in \cA}.
+	\end{align*}
+\end{proof}
+
+\chapter{Integrationstheorie}
+Wir haben in Analysis 2 schon die Lebesgue-Integration im $\R^d$ kennengelernt. Das war damals ziemlich kompliziert, weil wir konsequent den Begriff und Eigenschaften von Ma\ss en vermieden haben. Als Spezialfall der nun folgenden Integrationstheorie f\"ur die Borel-$\sigma$-Algebra mit dem Lebesgue-Ma\ss{} $(\R^d, \mathcal B(\R^d), \lambda)$ ist die Theorie hier in der Stochastik 1 viel einfacher. Das liegt aber daran, dass wir schon viel M\"uhe in die Ma\ss theorie gesteckt hatten. Weil wir tats\"achlich gar keine Eigenschaften des $\R^d$ oder des Lebesguema\ss{} nutzen m\"ussen, ist die folgende allgemeine Integrationstheorie auf messbaren R\"aumen kein bisschen komplizierter.
+
+\section{Das (allgemeine) Lebesgue-Integral}
+
+In diesem Abschnitt werden wir Integrale der Form $ \int_{\Omega} f \mathrm{d}\mu$ für beliebige Ma\ss r\"aume $(\Omega, \cA, \mu)$ definieren. Es sei jetzt immer $(\Omega, \cA, \mu)$ ein Maßraum. Das Ma\ss{} kann endlich sein (z.B. ein Wahrscheinlichkeitsma\ss) oder unendlich sein (z.B. das Lebesguema\ss). Um leichter zu folgen, kann man sich einfach den Spezialfall $(\R, \mathcal B(\R), \lambda)$ zur Veranschaulichung vorstellen.
+% Indikatorfunktionen sind schon in z. B. 2.1.6
+
+\begin{deff}
+	Eine messbare Abbildung $f \! : (\Omega, \cA) \rightarrow (\overline{\mathbb{R}}, \cB(\overline{\mathbb{R}}))$ heißt \textbf{einfach} (alternativ \textbf{elementar} oder \textbf{Treppenfunktion}), falls $f$ nur endlich viele Werte annimmt, \mbox{d. h.} $f$ hat die Form
+	\begin{equation}\label{treppe}
+		f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k}
+	\end{equation}
+	mit $\alpha_1, ..., \alpha_n\in \overline \R$ und
+	\begin{equation*}
+		A_k  = \{ f = \alpha_k \} = \{ \omega \! : f(\omega)=\alpha_k \}= f^{-1} ( [\alpha_k,\alpha_k]).
+	\end{equation*}
+	Ganz wichtig in der Theorie ist, dass alle $A_k$ messbar sind weil $f$ messbar ist. Weil die Mengen $A_k$ paarweise disjunkt sind, nennt man eine Darstellung der Form \eqref{treppe} auch disjunkte Darstellung von $f$. Wir definieren auch noch
+	\begin{align*}
+		\cE &= \{f \, : \,\text{$f$ einfache Funktion}\}\\
+		\cE^+ &= \{f \, : \,f \geq 0 \text{, $f$ einfache Funktion}\}.\\
+	\end{align*}
+	Wie in Analysis 2 sind disjunkte Darstellungen messbarer Funktionen nicht eindeutig, z. B. gilt 
+	\begin{align*}
+		 \mathbf{1}_{[-2,-1]} + 2\cdot\mathbf{1}_{[1,2]}=f=\mathbf{1}_{[-2,-3/2]} + \mathbf{1}_{(-3/2,-1]} +2\cdot\mathbf{1}_{[1,2]}.
+	\end{align*}
+\end{deff}
+Wir definieren nun \"ahnlich wie in Analysis 2 das Integral nicht-negativer einfacher Funktionen, dann durch Approximation das Integral nicht-negativer messbarer Funktionen und dann durch die Zerlegen $f=f^+-f^-$ das Integral beliebiger messbarer Funktionen.
+\subsection{Integrale nicht-negativer einfacher Funktionen}
+
+\begin{deff}
+	Für $f \in \cE^+$ definiert man \[ \int\limits_{\Omega} f \,\mathrm{d}\mu := \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) \in [0, \infty], \] wenn $f$ die disjunkte Darstellung 
+	\begin{align*}
+		f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k}
+	\end{align*}
+	hat. Weil $\alpha_k = + \infty$ sowie $\mu(A_k) = +\infty$ möglich ist, muss definiert sein, wie $+$ und $\cdot$ mit $\infty$ geht, siehe die Definition in Abschnitt \ref{sigmaalgebra}.
+\end{deff}
+
+\begin{beispiel1}
+Weil das Integral den \glqq Fl\"acheninhalt\grqq{} zwischen Graphen und Achse beschreiben soll, sind die Rechenregeln $+$ und $\cdot$ mit $\infty$ sinnvoll definiert worden:
+\begin{align*}
+	 \int\limits_{\mathbb{R}} 0 \cdot \mathbf {1}_{\mathbb R} \,\mathrm{d}\lambda  &= 0\cdot \lambda(\mathbb{R} )= 0 \cdot (+\infty) = 0,\\
+	 \int\limits_{\mathbb{R}} \mathbf{1}_{\mathbb R}\, \mathrm{d}\lambda &= 1 \cdot \lambda(\mathbb{R})= 1 \cdot (+\infty) = +\infty,\\
+	 \int\limits_{\mathbb{R}} (+\infty)\cdot  \mathbf{1}_{[a,b]} \,\mathrm{d}\lambda &= +\infty \cdot \lambda([a,b] )= +\infty\cdot (b-a)=+\infty,\\
+	 \int\limits_{\mathbb{R}} 3\cdot \mathbf{1}_{[0,1]}\, \mathrm{d}\lambda &= 3 \cdot \lambda([0,1] )= 3. 
+\end{align*} 	 
+Was sollen die Integrale auch sonst sein?
+\end{beispiel1}
+
+Rechnen wir wie in Analysis 2 (vergleiche dort mit 12.1.9) noch nach, dass das Integral einer nicht-negativen einfachen Funktion nicht von der disjunkten Darstellung abh\"angt:
+\begin{lemma}
+	Sei \[ f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} = \sum\limits_{l = 1}^{m} \beta_l \mathbf{1}_{B_l} \]
+	mit $ \alpha_k, \beta_l \geq 0$ und paarweise disjunkten $A_k$ bzw. $B_k$, so gilt \[ \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) = \sum\limits_{l = 1}^{m} \beta_l \mu(B_l). \]
+\end{lemma}
+
+\begin{proof}
+	Ohne Einschr\"ankung der Allgemeinheit seien alle $\alpha_k, \beta_l \neq 0$. Wegen $\bigcup_{k=1}^n A_k=\{f>0\}=\bigcup_{l=1}^mB_k$ und der $\sigma$-Additivit\"at von $\mu$ gilt	\begin{gather*}
+		\sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) \overset{\sigma\text{-add.}}{=} \sum\limits_{k = 1}^{n} \alpha_k \sum\limits_{l = 1}^{m} \mu(A_k \cap B_l) \overset{(\star)}{=} \sum\limits_{k = 1}^{n} \sum\limits_{l = 1}^{m} \alpha_k\mu(A_k \cap B_l)\\
+		= \sum\limits_{l = 1}^{m} \sum\limits_{k = 1}^{n}\beta_l \mu(B_l \cap A_k) = \sum\limits_{l = 1}^{m} \beta_l \mu(B_l).
+	\end{gather*}
+	$(\star)$ gilt, weil entweder $\mu(A_k\cap B_l)=0$ oder $\mu(A_k\cap B_l)>0$ gilt. Im ersten Fall gilt  $\alpha_k\mu(A_k\cap B_l)=\beta_l\mu(A_k\cap B_l)=0$ trivialerweise, im zweiten Fall impliziert $\mu(A_k\cap B_l)>0$ schon $A_k \cap B_l \neq 0$ und damit $\alpha_k=\beta_l$ weil die beiden Darstellungen disjunkt sind.
+\end{proof}
+
+\begin{lemma}
+	Für $f,g \in \cE^+,$ $ \alpha \geq 0$ und $A\in \cA$ gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mathbf{1}_A \in \cE^+$
+		\item $\alpha f \in \cE^+$ und $\int_{\Omega} \alpha f \, \mathrm{d}\mu = \alpha \int_{\Omega} f\,  \mathrm{d}\mu$ 
+		\item $ f + g \in \cE^+$ und $\int_{\Omega}(f + g) \,\mathrm{d}\mu = \int_{\Omega} f\, \mathrm{d}\mu + \int_{\Omega} g \,\mathrm{d}\mu$
+		\item $ f \leq g \Rightarrow \int_{\Omega} f \,\mathrm{d}\mu \leq \int_{\Omega} g\, \mathrm{d}\mu$.
+ 	\end{enumerate}
+\end{lemma}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item $\checkmark$
+		\item $\alpha f$ ist wegen 
+		\begin{align*}
+			\alpha f = \alpha \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} = \sum\limits_{k = 1}^{n} (\alpha \alpha_k) \mathbf{1}_{A_k}
+		\end{align*}	
+		auch eine nicht-negative einfache Funktion. Das Integral berechnet sich aus der Definition:
+		\begin{align*}
+			 \int\limits_{\Omega} (\alpha f) \, \mathrm{d}\mu \overset{\text{Def.}}{=} \sum\limits_{k = 1}^{n} (\alpha \alpha_k)\, \mu(A_k) = \alpha \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k)  \overset{\text{Def.}}{=}  \alpha \int\limits_{\Omega} f\, \mathrm{d}\mu\\
+		\end{align*}
+		\item Seien \[ f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k}\quad \text{ und } \quad g = \sum\limits_{l = 1}^{m} \beta_l \mathbf{1}_{B_l} \]
+		und seien ohne Einschr\"ankung $\bigcup\limits_{k = 1}^{n} A_k = \Omega = \bigcup\limits_{l = 1}^{m} B_k.$
+		W\"are das nicht der Fall, so w\"urden wir $A_{n+1}:=(\bigcup_{k=1}^n A_k)^C$ und $\alpha_{n+1}=0$ w\"ahlen (analog f\"ur $g$). Damit ist dann mit $1=\mathbf{1}_\Omega= \sum_{k=1}^n \mathbf{1}_{A_k}=\sum_{l=1}^m \mathbf{1}_{B_k}$ und
+		$\mathbf{1}_{A_k} \cdot \mathbf 1_{B_l}=\mathbf 1_{A_k\cap B_l}$ auch
+		\begin{align*}
+			f + g&= \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} + \sum\limits_{l = 1}^{m} \beta_l \mathbf{1}_{B_l}\\ 
+			&= \sum\limits_{k = 1}^{n} \alpha_k \sum\limits_{l = 1}^{m} \mathbf{1}_{A_k \cap B_l} + \sum\limits_{l = 1}^{m} \beta_l \sum\limits_{k = 1}^{n} \mathbf{1}_{A_k \cap B_l} \\
+			&= \sum\limits_{k = 1}^{n} \sum\limits_{l = 1}^{m} (\alpha_k + \beta_l) \mathbf{1}_{A_k \cap B_l}.
+		\end{align*}
+		Also gilt
+		\begin{align*}
+			\int\limits_{\Omega} (f + g)\, \mathrm{d}\mu &\overset{\text{Def.}}{=} \sum\limits_{k = 1}^{n} \sum\limits_{l = 1}^{m} (\alpha_k + \beta_l) \mu(A_k \cap B_l)\\ &\overset{\sigma\text{-add.}}{=}	\sum\limits_{k = 1}^{n} \alpha_k \mu\Big(\bigcupdot\limits_{l=1}^{m} A_k \cap B_l \Big) + \sum\limits_{l = 1}^{l} \beta_l \mu\Big(\bigcupdot\limits_{k=1}^{n} A_k \cap B_l \Big)\\
+			&= \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) + \sum\limits_{l = 1}^{l} \beta_l \mu(B_l)\\
+			& \overset{\text{Def.}}{=} \int\limits_{\Omega} f \mathrm{d}\mu + \int\limits_{\Omega} g \mathrm{d}\mu
+		\end{align*}
+		und damit die Behauptung.
+		\item Monotonie $\checkmark$, folgt direkt aus der Definition.
+	\end{enumerate}
+\end{proof}
+
+\subsection{Integral \underline{nichtnegativer}\platz messbarer numerischer Funktionen}
+Die Definition des Integrals nicht-negativer Funktionen l\"auft anders als in Analysis 2. Wir definieren zun\"achst einen sofort wohldefinierten Ausdruck und zeigen danach, dass dies auch der Grenzwert beliebiger wachsender Folgen von unten ist.
+\begin{deff}
+	Für messbare $f \! :( \Omega, \mathcal A) \rightarrow (\overline{\mathbb R}, \mathcal B(\overline{\mathbb R}))$ mit $f\geq 0$ definieren wir
+	\[ \int\limits_{\Omega} f\, \mathrm{d}\mu = \sup \Bigg\{ \int\limits_{\Omega} g \,\mathrm{d}\mu \, \Bigg| \, 0\leq g \leq f, \: g \in \cE^+ \Bigg\}. \]
+	\textit{Warnung:} Wie bei nicht-negativen einfachen Funktionen ist $\int_{\Omega} f\, \mathrm{d}\mu = +\infty$ ausdr\"ucklich erlaubt!
+\end{deff}
+Jetzt wollen wir diese komplizierte Definition (wie soll man damit irgendwas zeigen?) durch eine handlichere \"aquivalente Darstellung ersetzen. Dazu kommt zun\"achst eine extrem wichtige Proposition, die man unbedingt mit dem Beweis von Satz 12.3.3 in der Analysis 2 vergleichen sollte!
+\begin{prop}[Darum sind messbare Funktionen so wichtig]\label{k}
+	Für jede nichtnegative messbare numerische Funktion existiert eine wachsende Folge von Treppenfunktionen $(f_n)_{n \in \N} \subseteq \cE^+$ mit $f_n \uparrow f$ punktweise f\"ur $n \to \infty$.
+\end{prop}
+
+\begin{proof}
+	Wir definieren \[ f_n = \underbrace{\sum\limits_{k = 1}^{n\cdot 2^n} \frac{k}{2^n} \mathbf{1}_{\underbrace{A_k}_{\in \cA}} + n \mathbf{1}_{\underbrace{f^{-1}((n,+\infty])}_{\in \cA}}}_{\text{messbar}} \]
+	mit 
+	\[ A_k = f^{-1} \Big(\Big(\frac{k}{2^n}, \frac{k + 1}{2^n}\Big]\Big). \]
+	F\"urs bessere Verst\"andniss zeichne man die Folge $f_n$ f\"ur das Beispiel $f:\R\to\overline \R$ mit $f(x)=+\infty\cdot \textbf{1}_{(-\infty,0]}+\frac{1}{x}\cdot\mathbf{1}_{(0,+\infty)}$ hin!
+	Die Messbarkeit von $f_n$ folgt aus Lemma \ref{hilf} und dem Fakt, dass Indikatorfunktionen $\mathbf{1}_A$ genau f\"ur messbare $A$ messbar sind. Aufgrund der Definition gelten sofort die geforderten Eigenschaften:
+	\begin{itemize}
+		\item $0\leq f_n \leq f$ f\"ur alle $n\in\N$.
+		\item Die Folge $(f_n)$ ist punktweise wachsend.
+		\item Die Folge $(f_n)$ konvergiert punktweise gegen $f$.
+	\end{itemize}
+\end{proof}

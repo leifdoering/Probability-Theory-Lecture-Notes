@@ -1,0 +1,508 @@
+
+\marginpar{\textcolor{red}{Vorlesung 4}}
+
+
+\begin{bem}
+	$\cR$ Ring $\Rightarrow \cR$ Semiring. 
+\end{bem}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item $\checkmark$
+		\item Folgt sofort aus der Beobachtung $A \cap B = A \backslash (A \backslash B)$.
+		\item Folgt sofort mit $n=1$, denn $A \backslash B \in \cR$.
+	\end{enumerate}
+\end{proof}
+
+Um ein besseres Gef\"uhl f\"ur die Definitionen zu bekommen, zeigen wir, dass die Menge der altbekannten disjunkten Vereinigungen von Quadern ein Ring bildet. Allgemeiner geht das f\"ur beliebige Semiringe:
+
+\begin{bem}
+	Ist $\cS$ ein Semiring, so ist die Menge aller endlicher disjunkter Vereinigungen
+	\[ \cR := \left\{ \bigcupdot\limits_{i = 1}^{n} A_i \! : n \in \N, \: A_1,...,A_n \in \cS \right\} \]
+	der kleinste Ring, der $\cS$ enth\"alt.
+	% die Formulierung im Skript von Gärtner finde ich persönlich hübscher: "Man kann auf natürliche Weise aus jedem Semiring S einen Ring R konstruieren."
+\end{bem}
+
+\begin{proof}
+	Dass $\cR$ der \textit{kleinste} Ring ist, ist klar (es gilt $\cS \subseteq \cR$ mit $n=1$ und damit m\"ussen aufgrund der Eigenschaft eines Rings alle endlichen Vereinigungen wieder enthalten sein). Wir m\"ussen also noch zeigen, dass $\cR$ tats\"achlich ein Ring ist. Checken wir also die Eigenschaften:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\checkmark$
+		\item \label{A,B} Seien dazu $A, B\in \cR$, also
+		\begin{gather*}
+			A = \bigcupdot\limits_{i=1}^{n} A_i\quad \text{ und }\quad  B = \bigcupdot\limits_{j=1}^{m} B_j.
+		\end{gather*}
+		Dann gilt
+			\begin{gather*}
+			A \backslash B = \bigcupdot\limits_{i=1}^{n} \underbrace{\Big( A_i \backslash \bigcupdot\limits_{j=1}^{m} \underbrace{(A_i \cap B_i)}_{\substack{\in \cS \text{, weil }\\ \cS \: \cap \text{-stabil}}}\Big)}_{\overset{\text{\ref{Skriptschreiberlemma}}}{=} \bigcupdot \limits_{k=1}^{r} C_{i,k}}\\
+			= \bigcupdot \limits_{i=1}^{n} \bigcupdot \limits_{k=1}^{r_i} C_{i,k}.
+		\end{gather*}
+		\item Seien $A,B$ wie in \ref{A,B}, so gilt $ A \cup B = \underbrace{(A\backslash B)}_{\in \cR} \cupdot \underbrace{B}_{\in \cR} \overset{\text{Def.}}{\in} \cR$ weil eine disjunkte Vereinigungen disjunkter Mengen in $\mathcal S$ wieder eine disjunkte Vereinigung von Mengen in $\mathcal S$ ist.
+	\end{enumerate}
+\end{proof}
+
+\begin{deff}
+	$\cA \subseteq \cP(\Omega)$ heißt Algebra, falls $\cA$ ein Ring ist und $\Omega \in \cA$.
+\end{deff}
+Die Definition einer Algebra ist \"aquivalent zur Forderung
+	\begin{enumerate}[label=(\roman*)]
+		\item $\emptyset \in \cA$,
+		\item $A \in \cA \Rightarrow A^C \in \cA$,
+		\item $A_1,...,A_n \in \cA \Rightarrow \bigcup\limits_{i = 1}^{n} A_i \in \cA$,
+	\end{enumerate}
+weil $\Omega\backslash A=A^C$.
+\begin{deff}
+	$\cR \subseteq \cP(\Omega)$ heißt $\sigma$-Ring, falls (iii) in der Definition des Rings durch 
+	\begin{align*}
+		A_1,A_2,... \in \cR \Rightarrow \bigcup\limits_{i = 1}^{\infty} A_i \in \cR 
+	\end{align*}
+	ersetzt wird. Das $\sigma$ steht also wieder für \enquote{abzählbar viele}.
+	% Wir haben bei der ersten Definition des Maßes schon so nen ähnlichen Satz; ist nicht schlimm, aber könnte man evtl. auch in nur einen Satz zusammenführen.
+\end{deff}
+	Ein $\sigma$-Ring $\cR$ mit $\Omega \in \cR$ ist also nichts anderes als eine $\sigma$-Algebra.
+\begin{lemma}[Rechenregeln ähnlich zu Maßen auf Semiringen]\label{Rechenregeln}
+	Sei $\cS$ ein Semiring und $\mu \! : \mathcal S \rightarrow [0, \infty] $ eine Mengenfunktion mit
+	\begin{itemize}
+		\item $\mu(\emptyset) = 0$
+		\item $\mu$ ist \textbf{$\sigma$-additiv} (d.h. sind $A_1, A_2, ... \in S$ paarweise disjunkt mit $A:=\bigcupdot_{n=1}^\infty A_i\in \mathcal S$, so gilt $\mu(A)=\sum_{n=1}^\infty \mu(A_i)$).
+	\end{itemize}
+	Dann gilt
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{MonotQuasiMass} Monotonie: $\mu(A) \leq \mu(B)$ für alle $A,B \in \cS$ mit $ A \subseteq B$.
+		\item  \glqq \textbf{Subadditivit\"at}\grqq: Sind $A,A_1,A_2,... \in \cS $ und $A\subseteq \bigcup\limits_{n=1}^{\infty} A_n$, so gilt\[ \mu(A) \leq \sum\limits_{n = 1}^{\infty} \mu(A_n). \]
+	\end{enumerate}
+\end{lemma}
+Man beachte, dass die Eigenschaften der Additivit\"at etwas komisch sind. Da wir nicht fordern, dass Semiringe abgeschlossen bez\"uglich Vereinigungen sind (sie sind es auch meistens nicht, man denke nur an den Semiring der Quader), muss immer gefordert werden, dass die Vereinigungen in den Eigenschaften wieder in $\cS$ liegen. Sonst w\"are $\mu(A)$ gar nicht definiert. Auch zu beachten ist, dass Komplemente nicht automatisch in $\mathcal S$ liegen. Daher sind leichte Eigenschaften f\"ur Ma\ss e auf $\sigma$-Algebren, nicht so klar f\"ur Mengenfunktionen auf Semiringen.
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Es gibt wegen der Eigenschaften eines Semirings Mengen $C_1,...,C_n \in \cS$ mit \[B \backslash A = \bigcup\limits_{i=1}^{n} C_i.\] Damit gilt wegen der Additivit\"at von $\mu$
+		\begin{align*}
+		\mu(B) &= \mu(A \cupdot (B \backslash A)) = \mu(A \cupdot C_1 \cupdot ... \cupdot C_n) = \mu(A) + \mu(C_1) + ... + \mu(C_n) \\
+		&\geq \mu(A).
+		\end{align*} 
+		\item Erst machen wir die $A_n$ disjunkt:
+		\begin{align*}
+			A'_1 &:= A_1,\\
+			A_2' &:= A_2 \backslash A_1',\\
+			 & \cdots\\
+			A_n' &:= A_n \backslash (A_1' \cupdot ... \cupdot A_{n-1}' ), \quad n \geq 4.
+		\end{align*}
+		\textit{Beachte:} Die $A'_{n}$ müssen nicht in in $\cS$ sein. Weil die $A'_{n}$ die Form $A_n \backslash ...$ haben, gibt es wegen \ref{Skriptschreiberlemma} allerdings paarweise disjunkte $C_{n,j} \in \cS$ mit 
+		\begin{equation}\label{C_ns}
+			A_{n}' = \bigcupdot\limits_{j=1}^{l_n} C_{n,j}
+		\end{equation}
+		für alle $n \in \N$. Wieder wegen \ref{Skriptschreiberlemma} gibt es $D_{n,k} \in \cS$ mit
+		\begin{equation}\label{D_nks}
+			A_n \backslash A_{n}' = \bigcupdot\limits_{n = 1}^{m_n} D_{n,k}.
+		\end{equation}
+		Damit gelten
+		\begin{itemize}
+			\item $A \cap C_{n,j} \in \cS$ weil $\cS$ $\cap$-stabil ist,
+			\item 
+			\begin{equation*}
+				A = \bigcupdot\limits_{n=1}^{\infty} A'_{n} \cap A = \bigcupdot\limits_{n=1}^{\infty} \bigcupdot\limits_{j=1}^{m} A \cap C_{n,j}
+			\end{equation*}
+			weil $A\subseteq \bigcup\limits_{n=1}^{\infty} A_{n}= \bigcupdot\limits_{n=1}^{\infty} A_{n}'$ angenommen wurde,
+			\item 
+			\begin{gather*}
+				A_n = A'_{n} \cupdot (A_n \backslash A'_{n}) \underset{\eqref{D_nks}}{\overset{\eqref{C_ns}}{=}} \bigcupdot\limits_{j=1}^{l_n} C_{n,j} \cupdot \bigcupdot\limits_{n = 1}^{m_n} D_{n,k}.
+			\end{gather*}
+		\end{itemize}
+	Alles zusammen ergibt die Subadditivit\"at:
+	\begin{align*}
+		\mu(A) &= \mu\Big(\bigcupdot\limits_{n=1}^{\infty} \bigcupdot\limits_{j=1}^{l_n} \underbrace{A \cap C_{n,j}}_{\substack{\in \cS \text{, weil}\\ \cap \text{-stabil}}}\Big) \\
+		&\overset{\sigma \text{-add.}}{=} \sum\limits_{n=1}^{\infty} \sum\limits_{n=1}^{\infty} \mu(A \cap C_{n,j}) \\ 
+		&\overset{\text{Monotonie}}{\leq} \sum\limits_{n=1}^{\infty} \sum\limits_{n=1}^{\infty} \mu(C_{n,j}) \\
+		&\overset{\mu \geq 0}{\leq} \sum\limits_{n=1}^{\infty} \Big( \sum\limits_{n=1}^{l_n} \mu(C_{n,j}) + \sum\limits_{j=1}^{m_n} \mu(D_{n,k})\Big) \\ 
+		&\overset{\sigma \text{-add.}}{=} \sum\limits_{n=1}^{\infty} \mu\Big(\bigcupdot\limits_{n=1}^{l_n} C_{n,j} \cupdot \bigcupdot\limits_{j=1}^{m_n} D_{n,k}\Big)\\
+		& = \sum\limits_{n=1}^{\infty} \mu(A_n).
+	\end{align*}
+	\end{enumerate}
+	
+	Folgende Animation macht das Argument an einem Beispiel mit Quadern bzw. Rechtecken besser verst\"andlich% \footnote{Zum Abspielen wird der Adobe Acrobat Reader empfohlen. Eventuell muss 3D-content erlaubt und anschlie�end das Dokument neu ge�ffnet werden.}:
+	
+	\includemedia[
+	label=QuaderAnimation,
+	width=\linewidth,
+	height=0.5625\linewidth,
+	activate=pageopen,
+	addresource=StochastikTest2.mp4,
+	%addresource=StochastikTest2.mp4,
+	flashvars={source=StochastikTest2.mp4},
+	playbutton=fancy
+	]{}{VPlayer.swf}
+	\begin{center}
+		\mediabutton[overface=click, jsaction=QuaderAnimation:{
+			time1 = 0; time2 = 5.5; time3 = 12.9; time4 = 22; time5 = 28; time6 = 37.5; 
+			time7 = 54; time8 = 66.5; time9 = 77.5; time10 = 82.5; time11 = 85.2; time12 = 92.7;
+			stop1 = 0; stop2 = 3; stop3 = 4; stop4 = 0; stop5 = 6; stop6 = 3; stop7 = 3; stop8 = 3; stop9 = 3.9; stop10 = 2; stop11 = 3; stop12 = 6;
+			maxtime = 12; mintime = 1;
+			tnew1 = time1 + stop1; tnew2 = time2 + stop2; tnew3 = time3 + stop3; tnew4 = time4 + stop4; tnew5 = time5 + stop5; tnew6 = time6 + stop6; tnew7 = time7 + stop7; tnew8 = time8 + stop8; tnew9 = time9 + stop9; tnew10 = time10 + stop10; tnew11 = time11 + stop11; tnew12 = time12 + stop12;
+			try{app.clearTimeOut(tout);}catch(e){console.println("clear")}
+			try{annotRM.QuaderAnimation.callAS("play");}catch(e){};
+			try{
+				currentTime = annotRM.QuaderAnimation.callAS("currentTime");
+				if (currentTime < time2) {
+					counter = 0;
+				} 
+				else if (time2 <= currentTime && currentTime < time3) {
+					counter = 1;
+				} 
+				else if (time3 <= currentTime && currentTime < time4) {
+					counter = 2;
+				} 
+				else if (time4 <= currentTime && currentTime < time5) {
+					counter = 3;
+				}
+				else if (time5 <= currentTime && currentTime < time6) {
+					counter = 4;
+				} 
+				else if (time6 <= currentTime && currentTime < time7) {
+					counter = 5;
+				} 
+				else if (time7 <= currentTime && currentTime < time8) {
+					counter = 6;
+				} 
+				else if (time8 <= currentTime && currentTime < time9) {
+					counter = 7;
+				}  
+				else if (time9 <= currentTime && currentTime < time10) {
+					counter = 8;
+				} 
+				else if (time10 <= currentTime && currentTime < time11) {
+					counter = 9;
+				} 
+				else {
+					counter = 10;
+				}
+			}catch(e){console.println("currentTime"), alert("keine currentTime");};					
+			%try{counter = counter + 2;}catch(e){counter = 0;console.println("counter")};
+			try{annotRM.QuaderAnimation.callAS("pause");}catch(e){};		
+			switch (counter) {
+				case 1:
+				annotRM.QuaderAnimation.callAS("play", tnew1);
+				%annotRM.QuaderAnimation.callAS("play", tnew1);
+				%console.println(tnew1);
+				%skibidi();
+				break;
+				case 2:
+				annotRM.QuaderAnimation.callAS("play", tnew2);
+				break;
+				case 3:
+				annotRM.QuaderAnimation.callAS("play", tnew3);
+				break;
+				case 4:
+				annotRM.QuaderAnimation.callAS("play", tnew4);
+				break;
+				case 5:
+				annotRM.QuaderAnimation.callAS("play", tnew5);
+				break;
+				case 6:
+				annotRM.QuaderAnimation.callAS("play", tnew6);
+				break;
+				case 7:
+				annotRM.QuaderAnimation.callAS("play", tnew7);
+				break;
+				case 8:
+				annotRM.QuaderAnimation.callAS("play", tnew8);
+				break;
+				case 9:
+				annotRM.QuaderAnimation.callAS("play", tnew9);
+				break;
+				case 10:
+				annotRM.QuaderAnimation.callAS("play", tnew10);
+				break;
+				case 11:
+				annotRM.QuaderAnimation.callAS("play", tnew11);
+				break;
+			}
+			try{annotRM.QuaderAnimation.callAS("pause");}catch(e){};
+		}]{\fbox{\faStepBackward}}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+		\mediabutton[overface=click, jsaction=QuaderAnimation:{					
+			time1 = 0; time2 = 5.5; time3 = 12.9; time4 = 22; time5 = 28; time6 = 37.5; 
+			time7 = 54; time8 = 66.5; time9 = 77.5; time10 = 82.5; time11 = 85.2; time12 = 92.7;
+			stop1 = 0; stop2 = 3; stop3 = 4; stop4 = 0; stop5 = 6; stop6 = 3; stop7 = 3; stop8 = 3; stop9 = 3.9; stop10 = 2; stop11 = 3; stop12 = 6;
+			maxtime = 12; mintime = 1;
+			try{app.clearTimeOut(tout);}catch(e){console.println("clear")}
+			annotRM.QuaderAnimation.callAS("play");
+			try{
+				currentTime = annotRM.QuaderAnimation.callAS("currentTime");
+				if (currentTime < time2) {
+					counter = 0;
+				} 
+				else if (time2 <= currentTime && currentTime < time3) {
+					counter = 1;
+				} 
+				else if (time3 <= currentTime && currentTime < time4) {
+					counter = 2;
+				} 
+				else if (time4 <= currentTime && currentTime < time5) {
+					counter = 3;
+				}
+				else if (time5 <= currentTime && currentTime < time6) {
+					counter = 4;
+				} 
+				else if (time6 <= currentTime && currentTime < time7) {
+					counter = 5;
+				} 
+				else if (time7 <= currentTime && currentTime < time8) {
+					counter = 6;
+				} 
+				else if (time8 <= currentTime && currentTime < time9) {
+					counter = 7;
+				}  
+				else if (time9 <= currentTime && currentTime < time10) {
+					counter = 8;
+				} 
+				else if (time10 <= currentTime && currentTime < time11) {
+					counter = 9;
+				} 
+				else {
+					counter = 10;
+				}
+			}catch(e){console.println("currentTime"), alert("keine currentTime");};
+			try{
+				annotRM.QuaderAnimation.callAS("pause");}catch(e){}
+			try{if (counter < maxtime) {
+					counter = counter + 1;
+				};
+			}catch(e){counter = 1;console.println("counter")};
+			switch (counter) {
+				case 1:
+				annotRM.QuaderAnimation.callAS("play", time2);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop2+1);
+				break;
+				case 2:
+				annotRM.QuaderAnimation.callAS("play", time3);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop3+1);
+				break;
+				case 3:
+				annotRM.QuaderAnimation.callAS("play", time4);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop4+1);
+				break;
+				case 4:
+				annotRM.QuaderAnimation.callAS("play", time5);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop5+1);
+				break;
+				case 5:
+				annotRM.QuaderAnimation.callAS("play", time6);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop6+1);
+				break;
+				case 6:
+				annotRM.QuaderAnimation.callAS("play", time7);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")',1000*stop7+1);
+				break;
+				case 7:
+				annotRM.QuaderAnimation.callAS("play", time8);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop8+1);
+				break;
+				case 8:
+				annotRM.QuaderAnimation.callAS("play", time9);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop9+1);
+				break;
+				case 9:
+				annotRM.QuaderAnimation.callAS("play", time10);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop10+1);
+				break;
+				case 10:
+				annotRM.QuaderAnimation.callAS("play", time11);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop11+1);
+				break;
+				case 11:
+				annotRM.QuaderAnimation.callAS("play", time12);
+				tout=app.setTimeOut('annotRM.QuaderAnimation.callAS("pause")', 1000*stop12+1);
+				break;
+		}}]{\fbox{\faStepForward
+		}}
+	\end{center}	
+
+\end{proof}
+\newpage
+\begin{deff}
+	$\mu^{*} \! : \cP (\Omega) \rightarrow [0,\infty]$ heißt \textbf{äußeres Maß}, falls
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mu^{*}(\emptyset) = 0$
+		\item $A \subseteq B \subseteq \Omega\, \Rightarrow \, \mu^{*}(A) \leq \mu^{*}(B)$
+		\item $A_1,A_2,... \subseteq \Omega \, \Rightarrow \, \mu^{*} \Big(\bigcup\limits_{n=1}^{\infty} A_n \Big) \leq \sum\limits_{n=1}^{\infty} \mu^{*}(A_n)$
+	\end{enumerate}
+\end{deff}
+
+\begin{deff}
+	Sei $\mu^{*}$ ein äußeres Maß auf $\Omega$. Dann heißt $A \subseteq \Omega$ \textbf{$\mu^{*}$-messbare Menge}, falls für alle $Z \subseteq \Omega$ \[ \mu^{*}(Z) = \mu^{*}(Z\cap A) + \mu^{*}(Z \cap A^C) \] gilt. Die Menge der $\mu^{*}$-messbaren Mengen heißt $\cA_{\mu^{*}}$.
+\end{deff}
+
+\begin{satz}\abs
+	\begin{enumerate}[label=(\roman*)]		
+		\item $\cA_{\mu^{*}}$ ist eine $\sigma$-Algebra.
+		\item $\mu^{*}$ eingeschränkt auf $\cA_{\mu^{*}}$ ist ein Maß.
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	Wir zeigen nacheinander (a) $\cA_{\mu^{*}}$ ist eine Algebra, (b) $\cA_{\mu^{*}}$ ist eine $\sigma$-Algebra und (c) $\mu^{*}$ ist ein Maß auf $\cA_{\mu^{*}}$.
+	\begin{enumerate}[label=(\alph*)]
+		\item \abs
+		\begin{enumerate}[label=(\roman*)]
+			\item $\emptyset \in \cA_{\mu^{*}}$. Sei dazu $Z \subseteq \Omega$. Dann gilt 
+			\begin{gather*}
+			\mu^{*}(Z) = \mu^{*}(Z) + 0 = \mu^{*}(Z \cap \Omega) + \mu^{*}(Z \cap \underbrace{\Omega^C}_{= \emptyset}).
+			\end{gather*}
+			\item Sei $A \in \cA_{\mu^{*}}$, dann ist ($+$ drehen) auch $A^C \in \cA_{\mu^{*}}$.
+			\item Seien $A_1, A_2 \in \cA_{\mu^{*}}$. Sei $Z \subseteq \Omega$ beliebig, dann folgt mit $Z':= Z\cap A_2$
+			\begin{align*}
+			\mu^{*}(Z \cap (A_1 \cup A_2))&\overset{A_1 \in \cA_{\mu^{*}}}{=} \mu^*(Z\cap(A_1\cup A_2)\cap A_1)+\mu^*(Z\cap(A_1\cup A_2)\cap A_1^C)\\
+			&= \mu^{*}(Z \cap A_1) + \mu^{*}(Z \cap A_2 \cap A_1^C).
+			\end{align*}
+			Folglich gilt auch
+			\begin{align*}
+			&\quad \mu^{*}(Z \cap (A_1 \cup A_2)) + \mu^{*}(Z \cap (A_1 \cup A_2)^C)\\
+			&= \mu^{*}(Z \cap A_1) + \mu^{*}(Z \cap A_2 \cap A_1^C) + \mu^{*}(Z \cap (A_1 \cup A_2)^C)&\\
+			&= \mu^{*}(Z \cap A_1) + \mu^{*}(\underbrace{Z \cap A_1^C}_{:= Z''} \cap A_2) + \mu^{*}(\underbrace{Z \cap A_1^C}_{:= Z''} \cap A_2^C)&\\
+			&\overset{A_2 \in \cA_{\mu^{*}}}{=} \mu^{*}(Z \cap A_1) + \mu^{*}(Z \cap A_1^C)\\& \overset{A_1 \in \cA_{\mu^{*}}}{=} \mu^{*}(Z)
+			\end{align*}
+			und damit ist $A_1\cup A_2 \in \cA_{\mu^{*}}$.
+		\end{enumerate}
+		Damit ist  $\cA_{\mu^*}$ eine Algebra.
+\marginpar{\textcolor{red}{Vorlesung 5}}
+	\item Seien also $A_1,A_2,...\in \cA_{\mu^{*}}$, zu zeigen ist $\bigcup\limits_{n=1}^{\infty} A_n \in \cA_{\mu^{*}}.$ Zuerst nutzen wir den schon bekannten Trick, der uns erlaubt, ohne Einschr\"ankung der Allgemeinheit anzunehmen, dass die Mengen diskjunkt sind. Dazu definieren wir die paarweise disjunkten Mengen
+	\begin{align*}
+		A_1'=A_1\quad \text{ und }\quad A_n'= A_n \backslash (A_1' \cup A_{n-1}'), \quad n \geq 2,
+	\end{align*}
+	und beachten, dass damit $\bigcup\limits_{n=1}^{\infty} A_n = \bigcupdot\limits_{n=1}^{\infty} A_n'$ gilt. Wenn also die Vereinigung der disjunkten $A_n'$ wieder in $\mathcal A_{\mu^*}$ ist, ist auch die Vereinigung \"uber die $A_n$ in $\mathcal A_{\mu^*}$. Es reicht also die Aussage f\"ur disjunkte Mengen zu beweisen. Damit die Rechnungen lesbarer bleiben, nehmen wir also ohne Beschr\"ankung der Allgemeinheit an, dass die Mengen $A_1, A_2, ...$ paarweise disjunkt sind, so sparen wir uns die $'$ in den Gleichungen. Aufgrund der Definition von $\mathcal A_{\mu^*}$ w\"ahlen wir ein $Z\subset \Omega$ beliebig. Wir zeigen erstmal induktiv 
+	\begin{equation}\label{IndVor}
+		\mu^{*}(Z)= \sum\limits_{i=1}^{n} \mu^{*}(Z \cap A) + \mu^{*}\Big(Z \cap \bigcap\limits_{i=1}^{n} A_i^C \Big),\quad \forall n \in \N.
+	\end{equation}
+	\begin{itemize}
+		\item [IA:] Für $n=1$ gilt die Behauptung, weil $A_1 \in \cA_{\mu^{*}}$.
+		\item [IV:] Es gelte \eqref{IndVor} für ein \underline{beliebiges, aber festes} $n \in \N$.
+		\item [IS:] Eine kleine Runde Kampfrechnen mit Mengen. Weil nach Annahme $A_{n+1} \in \cA_{\mu^{*}}$ und die $A_n$ paarweise disjunkt sind, gilt
+		\begin{align*}
+			\mu^{*}\Big(Z \cap \bigcap\limits_{i=1}^{n} A_i^C \Big)
+			&= \mu^{*}\Big(Z \cap \bigcap\limits_{i=1}^{n} A_i^C \cap A_{n+1} \Big) + \mu^{*}\Big(Z \cap \bigcap\limits_{i=1}^{n} A_i^C \cap A_{n+1}^C \Big)\\
+			 &= \mu^{*}\Big(Z \cap \bigcap\limits_{i=1}^{n + 1} A_i^C \Big) + \mu^{*}(Z \cap A_{n+1}).
+		\end{align*}
+		Einsetzen der (aufgel\"osten) IV in die rechte Seite gibt
+		\begin{align*}
+			  \mu^{*}(Z) - \sum\limits_{i = 1}^{n} \mu^{*}(Z \cap A_i) & = \mu^{*}\Big(Z \cap \bigcap\limits_{i=1}^{n + 1} A_i^C \Big) + \mu^{*}(Z \cap A_{n+1}), 
+		\end{align*}
+		also 
+		\begin{align*}
+			\mu^{*}(Z) & = \sum\limits_{i = 1}^{n + 1} \mu^{*}(Z \cap A_i) + \mu^{*}\Big(Z \cap \bigcap\limits_{i=1}^{n + 1} A_i^C \Big).
+		\end{align*}
+		Damit ist die Induktion gezeigt.
+	\end{itemize}
+	Zur\"uck zur Vereinigung: Wegen der schon gezeigten Monotonie von $\mu^*$ folgt aus \eqref{IndVor}  \[ \mu^{*}(Z) \geq \sum\limits_{i=1}^{n} \mu^{*}(Z \cap A_i) + \mu^{*}\Big(Z \cap \bigcap\limits_{i = 1}^{\infty} A_i^C\Big), \quad \forall n \in \N. \]
+		Mit $n \to \infty$ folgt (Monotonie von Grenzwertbildung aus Analysis 1)
+		\begin{align}\label{ab}
+		\begin{split}
+			\mu^{*}(Z) &\geq \sum\limits_{i=1}^{\infty} \mu^{*}(Z \cap A_i) + \mu^{*}\Big(Z \cap \bigcap\limits_{i = 1}^{\infty} A_i^C\Big)\\ 
+			&\geq \mu^{*} \Big(\bigcup\limits_{i = 1}^{\infty} A_i \cap Z \Big) + \mu^{*}\Big(Z \cap \Big(\bigcup\limits_{i = 1}^{\infty} A_i\Big)^C\Big)\\
+			&\geq  \mu^{*}\Big(\Big(Z \cap \bigcup\limits_{i = 1}^{\infty} A_i\Big) \cup \Big(Z\cap \Big(\bigcup\limits_{i = 1}^{\infty} A_i\Big)^C\Big)\Big)\\
+			& = \mu^{*}\Big(Z \cap \underbrace{\Big(\bigcup\limits_{i = 1}^{\infty} A_i \cup \Big(\bigcup\limits_{i = 1}^{\infty} A_i\Big)^C\Big)}_{\Omega}\Big) = \mu^{*}(Z).
+		\end{split}
+		\end{align}
+		F\"ur die letzten beiden Ungleichungen haben wir Subadditivit\"at (Ungleichung andersrum als \"ublich) genutzt. 
+	Weil die linke und rechte Seite der Kette von Ungleichungen identisch sind, sind die Ungleichungen alles Gleichungen, also gilt \[ \mu^{*}(Z) = \mu^{*}\Big(Z \cap \bigcup\limits_{i=1}^{\infty} A_i\Big) + \mu^{*}\Big(Z \cap \Big(\bigcup\limits_{i=1}^{\infty} A_i\Big)^C\Big).  \] Weil $Z$ beliebig war, ist damit \[ \bigcup\limits_{i=1}^{\infty} A_i \in \cA_{\mu^{*}} \] aufgrund der Definition von $\mathcal A_{\mu^*}$.	Damit ist die Abgeschlossenheit bez\"uglich abz\"ahlbarer Vereinigungen gezeigt und folglich ist $\cA_{\mu^{*}}$ eine $\sigma$-Algebra. 
+	\item	Aufgrund der Gleichheiten in \eqref{ab} gilt auch
+	 \[ \mu^{*}(Z) = \sum\limits_{i = 1}^{\infty} \mu^{*}(Z \cap A_i) + \mu^{*}\Big(Z \cap \bigcap\limits_{i = 1}^{\infty} A_i^C\Big). \] 
+	Wählen wir  $	Z = \bigcup\limits_{i = 1}^{\infty} A_i$, so gilt wegen $\mu(\emptyset)=0$
+	\begin{align*}
+		 \mu^{*}\Big(\bigcup\limits_{i = 1}^{\infty} A_i\Big)=\sum\limits_{i = 1}^{\infty} \mu^{*}(A_i) + 0
+	\end{align*}
+	und das ist gerade die $\sigma$-Additivit\"at von $\mu^*$. Also ist $\mu^*$ auch ein Ma\ss{} auf der $\sigma$-Algebra $\mathcal A_{\mu^*}$.
+	\end{enumerate}
+\end{proof}
+Kommen wir endlich zum H\"ohepunkt der ersten Wochen:
+\begin{satz}[Fortsetzungssatz von Carathéodory] \label{KarlTheodor}
+	Sei $\cS$ ein Semiring, $\mu \! :\cS \rightarrow [0, \infty]$ mit
+	\begin{itemize}
+		\item $\mu(\emptyset) = 0$,
+		\item $ \mu$ ist $\sigma$-additiv.
+	\end{itemize}
+	Dann existiert ein Maß $\bar{\mu}$ auf $\sigma(S)$ mit $\mu(A) = \bar{\mu}(A)$ für alle $A \in \cS$.
+\end{satz}
+Man sagt, dass die Mengenfunktion $\mu$ von $\cS$ nach $\sigma(\cS)$ \glqq fortgesetzt\grqq{} wird.
+
+\begin{proof}
+	Für $A \in \cP(\Omega)$ definieren wir \[ \mu^{*}(A) = \inf\left\{ \sum\limits_{i=1}^{\infty} \mu(A_i) \! : A_1,A_2,... \in \cS \text{ mit } A \subseteq \bigcup\limits_{i = 1}^{\infty} A_i \right\}. \]
+	Wir zeigen nacheinander (a) $\mu*$ ist ein \"au\ss eres Ma\ss{}, (b) $\cS \subseteq \mathcal A_{\mu^*}$ und (c) $\mu^*(A)=\mu(A)$ f\"ur alle $A\in \cS$. Der Beweis ist dann vollendet, weil nach dem vorherigen Satz $\mathcal A_{\mu^*}$ eine $\sigma$-Algebra ist und $\mu^*$ ein Ma\ss{} auf $\mathcal A_{\mu^*}$ ist. Wegen (b) gilt $\sigma(S)\subseteq \mathcal A_{\mu^*}$, weil die kleinste $\sigma$-Algebra die $\cS$ enth\"alt, auch Teilmenge von allen $\sigma$-Algebras ist, die $\cS$ enthalten. Damit ist auch die Einschr\"ankung von $\mu^*$ auf $\sigma(S)$ ein Ma\ss{} (das nennen wir dann $\bar \mu$) und wegen (c) ist $\bar\mu$ eine Fortsetzung von $\mu$.
+\begin{enumerate}[label=(\alph*)]
+\item	
+	Wir checken die definierenden Eigenschaften eines \"au\ss eren Ma\ss es:
+	\begin{itemize}
+		\item $\mu^{*}(\emptyset) = 0$
+		\item Monotonie folgt direkt aus der Definition.
+		\item Nun zur Subadditivität. Seien dazu $A_1,A_2,... \in \Omega $ und $A = \bigcup\limits_{n = 1}^{\infty} A_n.$ Wir k\"onnen annehmen, dass $ \: \mu^{*}(A_n) < \infty$ f\"ur alle $n\in\N$ gilt (sonst gilt die Ungleichung sowieso). Sei nun $\varepsilon > 0$ beliebig. Für jedes $n \in \N$ existiert qua Definition (Infimum=gr\"o\ss te untere Schranke) eine Folge von Mengen $A_{n,1},A_{n,2},... \in \cS$ mit
+		\begin{align*}
+			A_n \subseteq \bigcup\limits_{k=1}^{\infty} A_{n,k} \quad \text{ und }\quad \sum\limits_{k=1}^{\infty} \mu^{*}(A_{n,k}) \leq \mu^{*}(A_n) + \frac{\varepsilon}{2^n}.			\end{align*}
+		Wem das nicht klar ist, der schaue bitte in den Analysis 1 Mitschrieb! Weil \[A \overset{\text{Def.}}{=} \bigcup\limits_{n = 1}^{\infty} A_n \subseteq \bigcup\limits_{n = 1}^{\infty} \bigcup\limits_{k=1}^{\infty} A_{n,k}, \] gilt
+		\begin{gather*}
+			\mu^{*}(A) \underset{\text{als } \inf}{\overset{\text{Def. } \mu^{*}}{\leq}} \sum\limits_{n = 1}^{\infty} \sum\limits_{k = 1}^{\infty} \mu(A_{n,k}) \leq \sum\limits_{n = 1}^{\infty} \Big( \mu^{*}(A_n) + \frac{\varepsilon}{2^n} \Big) = \sum\limits_{n = 1}^{\infty} \mu^{*}(A_n) + \underbrace{\sum_{n=1}^\infty \frac{\varepsilon}{2^n}}_{\epsilon}.
+		\end{gather*}
+		Beachte: Weil das Infimum einer Menge kleiner oder gleich jedem Element der Menge ist, gilt nach Definition $\mu^*(A)\leq \sum \mu(A_k)$ f\"ur beliebige \"Uberdeckungen $A\subseteq \bigcup A_k$ durch Mengen $A_k\in \cS$. Weil $\varepsilon$ beliebig gew\"ahlt wurde, gilt damit \[ \mu^{*} \Big(\bigcup\limits_{n = 1}^{\infty} A_n\Big) = \mu^{*}(A) \leq \sum\limits_{n = 1}^{\infty} \mu^{*}(A_n). \]
+		Daraus folgt Subadditivität und damit ist $\mu^{*}$ ein äußeres Maß.		
+	\end{itemize}
+	\item 	
+		Nächster Schritt: Wir zeigen $\cS \subseteq \cA_{\mu^{*}}$. Dazu brauchen wir $\mu^{*}(Z) = \mu^{*}(Z \cap S) + \mu^{*}(Z \cap S^C)$ für alle $Z \subseteq \Omega$, $S \in \cS$.
+		
+		\enquote{$\leq$}: $\mu^{*}(Z) = \mu^{*}(Z \cap S \cupdot Z \cap S^C) \leq \mu^{*}(Z \cap S) + \mu^{*}(Z \cap S^C)$ aufgrund der gezeigten Subadditivit\"at.
+		
+		\enquote{$\geq$}: Sei $(B_n) \subseteq \cS$ mit $Z \subseteq \bigcup\limits_{n = 1}^{\infty} B_n.$ Weil $\cS$ ein Semiring ist, existieren $C_{n,1},..., C_{n,m_n} \in \cS$ mit \[ B_n \cap S^C = B_n \backslash \underbrace{B_n \cap S}_{\substack{\in \cS \text{, denn }\\ \cS \: \cap \text{-stabil}}} = \bigcup\limits_{k = 1}^{m_n} C_{n,k}. \]
+		Es gelten 
+			 \[ Z \cap S \subseteq \Big(\bigcup\limits_{n = 1}^{\infty} B_n\Big) \cap S = \bigcup\limits_{n = 1}^{\infty} \big( B_n \cap S \big) \]
+			 sowie analog
+			 \[ Z \cap S^C \subseteq  \Big(\bigcup\limits_{n = 1}^{\infty} B_n\Big) \cap S^C= \bigcup\limits_{n = 1}^{\infty} \big( B_n \cap S^C \big). \]
+		Mit den Definitionen folgt
+		\begin{align*}
+			\mu^{*} (Z \cap S) + \mu^{*} (Z \cap S^C) 
+			&\leq \sum\limits_{n=1}^{\infty} \Big(\mu( B_n \cap S) +\sum\limits_{k=1}^{m_n} \mu(C_{n,k})\Big )\\
+			&\overset{\mu\,\sigma\text{-add.}}{=} \sum\limits_{n=1}^{\infty} \mu \Big((B_n \cap S) \cupdot \bigcupdot\limits_{k=1}^{m_n} C_{n,k} \Big)\\
+			& = \sum\limits_{n=1}^{\infty} \mu \big((B_n \cap S )\cupdot( B_n \cap S^C)\big)\\
+			&=\sum_{n=1}^\infty \mu(B_n).
+		\end{align*}
+		Daraus folgt $\mu^{*}(Z \cap S) + \mu^{*}(Z \cap S^C) \leq \mu^{*}(Z)$, weil \[\mu^{*}(Z) = \inf\left\{ \sum\limits_{i=1}^{\infty} \mu(B_i) \! : B_1,B_2,... \in \cS \text{ mit } Z \subseteq \bigcup\limits_{i = 1}^{\infty} B_i \right\}.\] Somit ist \enquote{$\geq$} gezeigt.		
+		Also ist jedes $S \in A_{\mu^{*}}$ und damit gilt $\cS \subseteq A_{\mu^{*}}$.
+		
+		\item Fehlt noch $\mu^{*}(A) = \mu(A)$ für alle $A \in \cS$. Dann ist $\bar{\mu} := \mu^{*}|_{\mu(\cS)}$ das gewünschte Maß auf $\mu(\cS)$. Es gilt
+		
+		\enquote{$\leq$}: \[ \mu^{*}(A) = \inf\left\{ \sum\limits_{i=1}^{\infty} \mu(A_i) \! : A_1,A_2,... \in \cS \text{ mit } A \subseteq \bigcup\limits_{i = 1}^{\infty} A_i \right\} \leq \mu(A) \:  \]f\"ur alle $A\in \mathcal S$.
+		
+		\enquote{$\geq$}:  Ist $A \subseteq \bigcup\limits_{n=1}^{\infty} A_n$ f\"ur $A_1,A_2,... \in \cS$, 
+		so gilt \[ \mu(A) \overset{\ref{Rechenregeln}}{\leq} \sum\limits_{n=1}^{\infty} \mu(A_n). \] Folglich gilt \[ \mu(A) \leq \inf\left\{ \sum\limits_{i=1}^{\infty} \mu(A_i) \! : A_1,A_2,... \in \cS \text{ mit } A \subseteq \bigcup\limits_{i = 1}^{\infty} A_i \right\} = \mu^{*}(A). \]		
+		
+	\end{enumerate}
+\end{proof}
+
+\begin{satz}[Existenz und Eindeutigkeit von Maßen] \label{ExistMasse}
+	Ist $(\Omega, \cA)$ ein messbarer Raum, $\cE$ ein Semiring mit $\sigma(\cE) = \cA$. Sei $\mu \! : \cE \rightarrow [0,\infty]$ mit
+	\begin{itemize}
+		\item $\mu(\emptyset) = 0$
+		\item $\mu$ ist $\sigma$-additiv
+		\item es gibt Folge eine $E_1,E_2,... \in \cE$ mit $E_n \uparrow \Omega$ und $\mu(E_n) < \infty$ f\"ur alle $n\in\N$.
+	\end{itemize}
+	Dann existiert genau ein Maß $\bar{\mu}$ auf $\cA = \sigma(\cE)$, so dass $\bar{\mu}(A) = \mu(A)$ f\"ur alle $A\in \cE$.
+\end{satz}
+
+\begin{proof}\abs\par
+	Existenz: \ref{KarlTheodor}
+	
+	Eindeutigkeit: \ref{folg} 
+\end{proof}
+
+\section{\mbox{\underline{Das}\platz Beispiel} -- Maße aus Verteilungsfunktionen}
+
+\begin{deff}
+	$F \! : \mathbb{R} \rightarrow \mathbb{R}$ heißt \textbf{Verteilungsfunktion}, falls 
+	\begin{enumerate}[label=(\roman*)]
+		\item $0 \leq F(t) \leq 1$ f\"ur alle $t\in\R$,
+		\item $F$ ist nicht fallend,
+		\item $F$ ist rechtsstetig, \mbox{d. h.} $\lim\limits_{s \downarrow t} F(s) = F(t)$,
+		\item $\lim\limits_{t \to \infty} F(t) = 1$ und $\lim\limits_{t \to - \infty} F(t) = 0$.
+	\end{enumerate}
+\end{deff}
+
+\begin{satz}\label{EindVert}
+	Für jede Verteilungsfunktion F gibt es \textbf{genau} ein Wahrscheinlichkeitsmaß $\mathbb{P}_F$ auf $(\R,\cB(\mathbb{R}))$ mit $\mathbb{P}_F((-\infty,t]) = F(t)$. Man sagt dann, \enquote{$\mathbb{P}_F$ ist gemäß $F$ verteilt} oder \enquote{$\mathbb{P}$ hat Verteilung $F$}.
+\end{satz}
+

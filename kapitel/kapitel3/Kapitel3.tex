@@ -1,0 +1,1963 @@
+
+\chapter{Integrationstheorie}
+\marginpar{\textcolor{red}{Vorlesung 9}}
+Im Folgenden entwickeln wir die Integrationstheorie im Sinne von Henry Lebesgues. An und f\"ur sich hat das nichts mit Stochastik zu tun und geh\"ort eher in den Bereich der Analysis. Im Sinne der abstrakten Modellierung eines zuf\"alligen Experimentes durch einen Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$ wollen wir aber Lebesgue Integrale nutzen, um Begriffe wie Erwartungswert und Varianz als Integrale \"uber $(\Omega, \mathcal A, \mathbb P)$ definieren. Damit kann man dann in der Stochastik die Massenverteilung zuf\"alliger Experimente genauer untersuchen.
+
+\section{Das (allgemeine) Lebesgue Integral}
+
+In diesem Abschnitt werden wir Integrale der Form $ \int_{\Omega} f \mathrm{d}\mu$ für \underline{beliebige} Ma\ss r\"aume $(\Omega, \cA, \mu)$ und messbare numerische Funktionen $f:\Omega\to \bar \R$ definieren. Das Ma\ss{} kann endlich sein (z. B. ein Wahrscheinlichkeitsma\ss) oder unendlich sein (z. B. das Lebesguema\ss{} auf $\mathcal B(\R)$).\smallskip
+
+ Bevor wir mit der Konstruktion starten, diskutieren wir ganz kurz den Zusammenhang zum Riemann Integral, das ihr vermutlich aus der Schule oder den Analysis Vorlesungen kennt. Dort habt ihr für reelle Funktionen Integrale $\int_a^b f(x)\dint x$ definiert, indem Treppenfunktionen (st\"uckweise konstant auf einer Zerlegung von $[a,b]$ in kleine Intervalle) \"uber und unter den Graphen von $f$ gelegt wurden. Wenn die Treppenfunktionen von oben und unten immer feiner an $f$ angen\"ahert werden und dabei die Integrale (Ober- und Untersummen) im Grenzwert gleich sind, so hei\ss t $f$ Riemann integrierbar und das Integral von $f$ ist als dieser Grenzwert definiert (wer alles vergessen hat, kann mal schnell die \href{https://de.wikipedia.org/wiki/Riemannsches_Integral}{Bildchen bei Wikipedia zum Riemann Integral anschauen}). Die Interpretation des Integrals als Fl\"acheninhalt wird dadurch visuell klar. Anschlie\ss end habt ihr das uneigentliche Riemann Integral $\int_\R f(x)\dint x$ als Grenzwert des (eigentlichen) Riemann Integrals $\lim_{n\to\infty} \int_{-n}^n f(x)\dint x$ definiert, falls der Grenzwert existiert. Wenn ihr also eigentliche Riemann Integrale durch Stammfunktionen, partielle Integration oder Substitution berechnen k\"onnt, so k\"onnt ihr auch uneigentliche Riemann Integrale berechnen. 
+ 
+Wenn wir jetzt f\"ur $f:\Omega\to \R$ statt für $f:\R\to \R$ genauso vorgehen wollen, haben wir ein Problem: Wie zerlegen wir $\Omega$ in kleine Intervalle? Das geht nicht einfach so, $\Omega$ ist schlie\ss lich eine v\"ollig beliebige Menge! Was ist aber in beiden F\"allen gleich? Der Bildbereich! Der Trick beim Lebesgue Integral ist deshalb, nicht das Urbild in Intervalle zu zerlegen, sondern den Bildbereich in Intervalle zu zerlegen! Warum daf\"ur gerade messbare Funktionen geeignet sind, wird in Satz \ref{k} deutlich werden. Die Idee von Lebesgue den Bildbereich zu zerteilen, wird es uns daher sp\"ater erlauben, Erwartungswerte, Varianzen, etc. f\"ur beliebige zuf\"allige Experimente zu definieren.\smallskip
+
+Um leichter zu folgen, kann es n\"utzliche sein, den Spezialfall $(\R, \mathcal B(\R), \lambda)$ im Kopf zu halten, denn da k\"onnen wir besser zeichnen. Wir schreiben in dem Fall statt $\int_\R f \dint \lambda$ auch $\int_\R f(x)\dint x$, um klar zu stellen, dass das Lebesgue Integral f\"ur viele \glqq nette\grqq{} Integranden $f:\R\to\R$ das gleiche ist, wie das (uneigentliche) Riemann Integral. Merkt euch f\"ur sp\"ater schon mal, dass beispielsweise f\"ur 
+\begin{itemize}
+	\item nicht-negative st\"uckweise stetige Integranden,
+	\item st\"uckweise stetige Integranden, die au\ss erhalb eines Intervalls $0$ sind,
+\end{itemize}
+das neue Lebesgue Integral und das schon bekannte uneigentliche Riemann Integral gleich sind. Sp\"ater wird das n\"utzlich sein, weil ihr dann die Rechenregeln der Analysis 1 (oder Schule) nutzen k\"onnt, um $\int_\R f\dint \lambda$ als Grenzwert von $\int_{-n}^n f(x)\dint x$ auszurechnen. Alternativ k\"onnten wir die Rechenregeln aus der Analysis nochmal f\"ur das Lebesgue Integral nachrechnen, aber das w\"are vielleicht etwas langweilig.\smallskip
+
+Genug der Vorrede, kommen wir nun zum Lebesgue Integral:
+\begin{deff}
+\link{https://www.youtube.com/watch?v=emTd5oRxBJw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=10&t=849s}
+	Eine messbare Abbildung $f \! : \Omega \rightarrow \overline{\mathbb{R}}$ heißt \textbf{einfach} (alternativ \textbf{elementar}, manchmal auch \textbf{Treppenfunktion}), falls $f$ nur endlich viele Werte annimmt. Wir definieren auch noch
+	\begin{align*}
+		\cE &= \{f:\Omega \to \bar \R \ |  \,\text{$f$ einfache Funktion}\},\\
+		\cE^+ &= \{f: \Omega \to \bar \R \, | \, \text{ $f$ einfache Funktion, }f \geq 0\}.
+	\end{align*}
+\end{deff}
+	Eine Darstellung der Form
+	\begin{equation}\label{treppe}
+		f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k}
+	\end{equation}
+	nennen wir disjunkte Darstellung, wenn $\alpha_1,...,\alpha_n\in \overline{\mathbb{R}}$ und $A_1,...,A_n\in \mathcal A$ paarweise disjunkt sind. Nimmt eine einfache Funktion die Werte $\alpha_1,...,\alpha_n$ an, so gilt \eqref{treppe} zum Beispiel mit den messbaren Mengen	
+	\begin{equation*}
+		A_k  = \{ f = \alpha_k \} = \{ \omega \! : f(\omega)=\alpha_k \}= f^{-1} ( [\alpha_k,\alpha_k]) \in \mathcal A.
+	\end{equation*}
+\begin{bem1}
+	Wenn wir von einfachen Funktionen sprechen, meinen wir also immer, dass entweder $f$ endlich viele Werte annimmt, oder $f$ die obige Darstellung als Summe von Indikatorfunktionen hat. Meistens nutzen wir aber die disjunkten Darstellungen weil die f\"ur Integrale ben\"otigt werden.
+\end{bem1}	
+	Disjunkte Darstellungen messbarer Funktionen sind nicht eindeutig, z. B. gilt
+	\begin{align*}
+		 \mathbf{1}_{[-2,-1]} + 2\cdot\mathbf{1}_{[1,2]}=\mathbf{1}_{[-2,-3/2]} + \mathbf{1}_{(-3/2,-1]} +2\cdot\mathbf{1}_{[1,2]}.
+	\end{align*}
+Wir definieren im Folgenden das Integral nicht-negativer einfacher Funktionen, dann durch Approximation das Integral nicht-negativer messbarer Funktionen und schlie\ss lich durch die Zerlegen $f=f^+-f^-$ das Integral beliebiger messbarer Funktionen.
+\subsection*{Integrale nicht-negativer einfacher Funktionen}
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=emTd5oRxBJw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=10&t=1756s}
+	Für $f \in \cE^+$ definiert man \[ \int\limits_{\Omega} f \,\mathrm{d}\mu := \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) \in [0,+\infty], \] wenn $f$ die disjunkte Darstellung $f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k}$ hat. $\int_\Omega f\mathrm{d}\mu$ hei\ss t Integral von $f$ bez\"uglich $\mu$, $f$ hei\ss t Integrand. Weil $\alpha_k = + \infty$ sowie $\mu(A_k) = +\infty$ möglich sind, muss festgelegt werden, wie $+$ und $\cdot$ mit $\infty$ geht. Siehe dazu die Definition in Abschnitt \ref{sigmaalgebra}.
+\end{deff}
+
+\begin{beispiel1}
+Weil das Integral den \glqq Fl\"acheninhalt\grqq{} zwischen Graphen und Achse beschreiben soll, sind die Rechenregeln $+$ und $\cdot$ mit $\infty$ durchaus sinnvoll definiert worden:
+\begin{align*}
+	 \int\limits_{\mathbb{R}} 0 \cdot \mathbf {1}_{\mathbb R} \,\mathrm{d}\lambda  &= 0\cdot \lambda(\mathbb{R} )= 0 \cdot (+\infty) = 0,\\
+	 \int\limits_{\mathbb{R}} \mathbf{1}_{\mathbb R}\, \mathrm{d}\lambda &= 1 \cdot \lambda(\mathbb{R})= 1 \cdot (+\infty) = +\infty,\\
+	 \int\limits_{\mathbb{R}} (+\infty)\cdot  \mathbf{1}_{[a,b]} \,\mathrm{d}\lambda &= +\infty \cdot \lambda([a,b] )= +\infty\cdot (b-a)=+\infty,\\
+	 \int\limits_{\mathbb{R}} 3\cdot \mathbf{1}_{[0,1]}\, \mathrm{d}\lambda &= 3 \cdot \lambda([0,1] )= 3. 
+\end{align*} 	 
+Was sollten die Integrale auch sonst sein?
+\end{beispiel1}
+
+Rechnen wir noch nach, dass das Integral einer nicht-negativen einfachen Funktion nicht von der disjunkten Darstellung abh\"angt. Weil es verschiedene disjunkte Darstellungen f\"ur die gleiche Funktion gibt, w\"urde die Definition sonst keinen Sinn machen.
+\begin{lemma}
+\link{https://www.youtube.com/watch?v=emTd5oRxBJw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=10&t=2193s}
+	Es gelte \[  \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} = \sum\limits_{l = 1}^{m} \beta_l \mathbf{1}_{B_l} \]
+	mit $ \alpha_k, \beta_l \geq 0$ und paarweise disjunkten $A_1,...,A_n,B_1,...,B_m$, so gilt \[ \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) = \sum\limits_{l = 1}^{m} \beta_l \mu(B_l). \]
+\end{lemma}
+
+\begin{proof}
+	Ohne Einschr\"ankung der Allgemeinheit seien alle $\alpha_k, \beta_l \neq 0$. Wegen $\bigcupdot_{k=1}^n A_k=\{f>0\}=\bigcupdot_{l=1}^mB_k$ und der $\sigma$-Additivit\"at von $\mu$ gilt dann	\begin{align*}
+		\sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) \overset{\sigma\text{-add.}}&{=} \sum\limits_{k = 1}^{n} \alpha_k \sum\limits_{l = 1}^{m} \mu(A_k \cap B_l) =\sum\limits_{k = 1}^{n} \sum\limits_{l = 1}^{m} \alpha_k\mu(A_k \cap B_l)\\
+		\overset{(\star)}&{=}  \sum\limits_{l = 1}^{m} \sum\limits_{k = 1}^{n}\beta_l \mu(B_l \cap A_k) = \sum\limits_{l = 1}^{m} \beta_l \mu(B_l).
+	\end{align*}
+	$(\star)$ gilt, weil entweder $\mu(A_k\cap B_l)=0$ oder $\mu(A_k\cap B_l)>0$ gilt. Im ersten Fall gilt  $\alpha_k\mu(A_k\cap B_l)=0=\beta_l\mu(A_k\cap B_l)$ trivialerweise, im zweiten Fall impliziert $\mu(A_k\cap B_l)>0$ schon $A_k \cap B_l \neq \emptyset$ und damit $\alpha_k=\beta_l$ weil die beiden Darstellungen disjunkt sind.
+\end{proof}
+
+\begin{lemma}
+\link{https://www.youtube.com/watch?v=emTd5oRxBJw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=10&t=2966s}
+	Für $f,g \in \cE^+,$ $ \alpha \geq 0$ und $A\in \cA$ gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mathbf{1}_A \in \cE^+$ und $\int_\Omega \mathbf 1_A\dint \mu=\mu(A)$.
+		\item $\alpha f \in \cE^+$ und $\int_{\Omega} \alpha f \, \mathrm{d}\mu = \alpha \int_{\Omega} f\,  \mathrm{d}\mu$,
+		\item $ f + g \in \cE^+$ und $\int_{\Omega}(f + g) \,\mathrm{d}\mu = \int_{\Omega} f\, \mathrm{d}\mu + \int_{\Omega} g \,\mathrm{d}\mu$,
+		\item $ f \leq g \,\Rightarrow\, \int_{\Omega} f \,\mathrm{d}\mu \leq \int_{\Omega} g\, \mathrm{d}\mu$.
+ 	\end{enumerate}
+\end{lemma}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item $\checkmark$
+		\item $\alpha f$ nimmt auch nur endlich viele Werte an (ist also eine einfache Funktion) und hat die disjunkte Darstellung
+		\begin{align*}
+			\alpha f = \alpha \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} = \sum\limits_{k = 1}^{n} (\alpha \alpha_k) \mathbf{1}_{A_k}.
+		\end{align*}	
+		Das Integral berechnet sich aus der Definition:
+		\begin{align*}
+			 \int\limits_{\Omega} (\alpha f) \, \mathrm{d}\mu \overset{\text{Def.}}{=} \sum\limits_{k = 1}^{n} (\alpha \alpha_k)\, \mu(A_k) = \alpha \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k)  \overset{\text{Def.}}{=}  \alpha \int\limits_{\Omega} f\, \mathrm{d}\mu\\
+		\end{align*}
+		\item Wir nehmen an, dass $f$ und $g$ die disjunkten Darstellungen \[ f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k}\quad \text{ und } \quad g = \sum\limits_{l = 1}^{m} \beta_l \mathbf{1}_{B_l} \] haben. Ohne Einschr\"ankung gelte $\bigcupdot\limits_{k = 1}^{n} A_k = \Omega = \bigcupdot\limits_{l = 1}^{m} B_k.$
+		W\"are das nicht der Fall, so w\"urden wir $A_{n+1}:=(\bigcupdot_{k=1}^n A_k)^C$ und $\alpha_{n+1}=0$ w\"ahlen (analog f\"ur $g$). Damit ist dann wegen $1=\mathbf{1}_\Omega= \sum_{k=1}^n \mathbf{1}_{A_k}=\sum_{l=1}^m \mathbf{1}_{B_k}$ und
+		$\mathbf{1}_{A_k} \cdot \mathbf 1_{B_l}=\mathbf 1_{A_k\cap B_l}$ auch
+		\begin{align*}
+			f + g&= \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} + \sum\limits_{l = 1}^{m} \beta_l \mathbf{1}_{B_l}\\ 
+			&= \sum\limits_{k = 1}^{n} \alpha_k \sum\limits_{l = 1}^{m} \mathbf{1}_{A_k \cap B_l} + \sum\limits_{l = 1}^{m} \beta_l \sum\limits_{k = 1}^{n} \mathbf{1}_{A_k \cap B_l} \\
+			&= \sum\limits_{k = 1}^{n} \sum\limits_{l = 1}^{m} (\alpha_k + \beta_l) \mathbf{1}_{A_k \cap B_l}.
+		\end{align*}
+		Damit haben wir eine disjunkte Darstellung f\"ur die einfache Funktion $f+g$ und es gilt
+		\begin{align*}
+			\int\limits_{\Omega} (f + g)\, \mathrm{d}\mu \overset{\text{Def.}}&{=} \sum\limits_{k = 1}^{n} \sum\limits_{l = 1}^{m} (\alpha_k + \beta_l) \mu(A_k \cap B_l)\\ \overset{\sigma\text{-add.}}&{=}	\sum\limits_{k = 1}^{n} \alpha_k \mu\Big(\bigcupdot\limits_{l=1}^{m} (A_k \cap B_l) \Big) + \sum\limits_{l = 1}^{l} \beta_l \mu\Big(\bigcupdot\limits_{k=1}^{n} (A_k \cap B_l) \Big)\\
+			&= \sum\limits_{k = 1}^{n} \alpha_k \mu(A_k) + \sum\limits_{l = 1}^{l} \beta_l \mu(B_l)\\
+			 \overset{\text{Def.}}&{=} \int\limits_{\Omega} f \mathrm{d}\mu + \int\limits_{\Omega} g \mathrm{d}\mu,
+		\end{align*}
+		und damit die Behauptung.
+		\item Monotonie $\checkmark$, folgt direkt aus der Definition.
+	\end{enumerate}
+\end{proof}
+
+\subsection*{Integral \underline{nicht-negativer}\platz messbarer numerischer Funktionen}
+Weiter geht's f\"ur nicht-negative Integranden. Wir definieren zun\"achst einen sofort wohldefinierten Ausdruck und zeigen danach, dass dies auch der Grenzwert beliebiger wachsender Folgen von unten ist.
+\begin{deff}
+\link{https://www.youtube.com/watch?v=emTd5oRxBJw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=10&t=4225s}
+	Für $(\mathcal A, \mathcal B(\overline{\mathbb R}))$-messbares  $f : \Omega\to \overline{\mathbb{R}}$ mit $f\geq 0$ definieren wir
+	\[ \int\limits_{\Omega} f\, \mathrm{d}\mu := \sup \Bigg\{ \int\limits_{\Omega} g \,\mathrm{d}\mu \, : \, 0\leq g \leq f, \: g \in \cE^+ \Bigg\}. \]
+$\int_\Omega f\mathrm{d}\mu$ hei\ss t wieder \textbf{Integral von $f$ bez\"uglich $\mu$}, $f$ hei\ss t \textbf{Integrand}. Wie bei nicht-negativen einfachen Funktionen ist $\int_{\Omega} f\, \mathrm{d}\mu = +\infty$ ausdr\"ucklich erlaubt!
+\end{deff}
+Jetzt wollen wir diese komplizierte Definition (wie soll man damit irgendwas zeigen?) durch eine handlichere \"aquivalente Darstellung ersetzen.
+\begin{satz}\label{k}
+\link{https://www.youtube.com/watch?v=emTd5oRxBJw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=10&t=4473s}\textbf{[Darum sind messbare Funktionen so wichtig!!!]}
+	Für jede nicht-negative messbare numerische Funktion existiert eine wachsende Folge von Treppenfunktionen $(f_n)_{n \in \N} \subseteq \cE^+$ mit $f_n \uparrow f$ punktweise f\"ur $n \to \infty$.
+\end{satz}
+
+\begin{proof}
+	Wir definieren \[ f_n = \underbrace{\sum\limits_{k=0}^{n\cdot 2^n-1} \frac{k}{2^n} \mathbf{1}_{\underbrace{f^{-1} \Big(\Big[\frac{k}{2^n}, \frac{k + 1}{2^n}\Big)\Big)}_{\in \cA}} + n \mathbf{1}_{\underbrace{f^{-1}([n,+\infty])}_{\in \cA}}}_{\text{messbar}}. \]
+	F\"urs bessere Verst\"andnis zeichne man die Folge $f_n$ f\"ur das Beispiel $f:\R\to\overline \R$ mit $f(x)=+\infty\cdot \textbf{1}_{(-\infty,0]}+\frac{1}{x}\cdot\mathbf{1}_{(0,+\infty)}$ hin! Weil $f$ messbar ist, sind die $A_k$ messbare Mengen. Also sind die $f_n$ einfache Funktionen. Aufgrund der Definition gelten sofort die geforderten Eigenschaften:
+	\begin{itemize}
+		\item $0\leq f_n \leq f$ f\"ur alle $n\in\N$.
+		\item Die Folge $(f_n)$ ist punktweise wachsend.
+		\item Die Folge $(f_n)$ konvergiert punktweise gegen $f$.
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}\label{monKonv}
+\link{https://www.youtube.com/watch?v=emTd5oRxBJw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=10&t=5176s}\textbf{[Montone Konvergenz Theorem (MCT) für einfache Funktionen]}
+	Sei $(f_n) \subseteq \cE^+$ mit $f_n \uparrow f$, $n \to \infty$, für eine nicht-negative messbare numerische Funktion $f$. Dann gilt
+	\[ \lim_{n \to \infty} \int_{\Omega} f_n \, \mathrm{d}\mu = \int_{\Omega} f \, \mathrm{d}\mu, \]
+	wobei in der Gleichheit $ + \infty = + \infty$ m\"oglich ist. 
+\end{lemma}
+F\"ur monoton wachsende Folgen einfacher Funktionen darf der Limes also in das Integral getauscht werden.
+\begin{proof}
+	Die Folge $(\int_{\Omega} f_n \, \mathrm{d}\mu)_{n \in \N}$ wächst (Monotonie des Integrals f\"ur einfache Integranden) und konvergiert also in $[0, +\infty]$.
+	\begin{itemize}
+		\item [\enquote{$\leq$}:] Folgt direkt aus der Definition \[ \int_{\Omega} f \,\mathrm{d}\mu = \sup \Big\{ \int_{\Omega} g\, \mathrm{d}\mu \! : g \leq f, \: g \in \cE^+ \Big\},\]
+		weil das Supremum einer Menge eine obere Schranke der Menge ist und $f_n\leq f$ nach Voraussetzung.
+		\item [\enquote{$\geq$}:] Wir behaupten: Ist $ g \in \cE^+$ mit $ g \leq f$, so gilt
+		\begin{align}\label{s}
+			\lim_{n \to \infty} \int_{\Omega} f_n \,\mathrm{d}\mu \geq \int_{\Omega} g \,\mathrm{d}\mu.
+		\end{align}
+		 Weil das Supremum einer Menge $M$ die \textit{kleinste} obere Schranke ist, sind wir dann fertig weil aufgrund von \eqref{s} auch $\lim_{n \to \infty} \int_{\Omega} f_n \,\mathrm{d}\mu$ eine obere Schranke ist.\smallskip
+		
+		Warum gilt die Behauptung? Sei $\varepsilon \in (0,1)$ beliebig und sei 
+		\begin{align*}
+		 g = \sum_{k = 1}^{r} \gamma_k \mathbf{1}_{C_k} \in \mathcal E^+ \quad \text{ mit }\quad g\leq f.
+		 \end{align*}
+		  Wegen $f_n \uparrow f$ gilt $A_n \uparrow \Omega$, $n \to \infty$, 	  
+		   für \[A_n := \big\{ f_n \geq (1 - \varepsilon)g \big\} = \big\{ \omega \! : f_n (\omega) \geq (1 - \varepsilon) g(\omega) \big\}.\]
+		Weil aufgrund der Definition der Mengen $A_n$ und $f\geq 0$		
+		$$f_n(\omega)\geq f_n(\omega)\mathbf{1}_{A_n}(\omega)\geq  (1-\varepsilon)g(\omega)\mathbf{1}_{A_n}(\omega)$$ f\"ur alle $\omega \in \Omega$ gilt (man teste die zwei M\"oglichkeiten $\omega \in A_n$ und $\omega \notin A_n$), folgt
+		\begin{align*}
+			\int_{\Omega} f_n\, \mathrm{d}\mu \overset{\text{Mon.}}&{\geq} \int_{\Omega} f_n \mathbf{1}_{A_n}\, \mathrm{d}\mu\\
+			\overset{\text{Mon.}}&{\geq} \int_{\Omega} (1-\varepsilon) g \mathbf{1}_{A_n}\, \mathrm{d}\mu \\
+			\overset{\text{Lin.}}&{=}  (1 - \varepsilon) \int_{\Omega} \Big(\sum_{k = 1}^{r} \gamma_k \mathbf{1}_{C_k}\Big) \mathbf{1}_{A_n} \,\mathrm{d}\mu\\& = (1 - \varepsilon) \int_{\Omega} \sum_{k = 1}^{r} \gamma_k \mathbf{1}_{A_n \cap  C_k}\,\mathrm{d}\mu\\
+			\overset{\text{Def.}}&{=} (1-\varepsilon) \sum_{k=1}^r \gamma_k \mu(A_n\cap C_k).
+		\end{align*} 
+		Wegen Stetigkeit von Maßen gilt \[\lim_{n \to \infty} \mu(A_n \cap C_k) = \mu \Big(\bigcup_{n = 1}^{\infty} (A_n \cap  C_k) \Big) = \mu \Big(\underbrace{\Big(\bigcup_{n = 1}^{\infty} A_n \Big)}_{= \Omega} \cap \,C_k \Big)=\mu(C_k),\]
+	also gilt zusammen
+		\[ \lim_{n\to\infty} \int_{\Omega} f_n \, \mathrm{d}\mu \geq (1-\varepsilon) \sum\limits_{k = 1}^{r}  \gamma_k \mu(C_k) = (1-\varepsilon) \int_{\Omega} g\, \mathrm{d}\mu. \]
+		Weil $\varepsilon$ beliebig gew\"ahlt war folgt die Hilfsbehauptung und damit ist der Beweis fertig.
+	\end{itemize}	
+\end{proof}
+\marginpar{\textcolor{red}{Vorlesung 10}}
+
+
+
+Warum war das Lemma so wichtig? Die Definition des Integrals als Supremum ist sehr unhandlich. Es hat nat\"urlich den Vorteil, dass das Integral sofort sinnvoll definiert ist, daf\"ur k\"onnen wir mit der Definition nichts anstellen. Schauen wir uns als Beispiel die Beweise der folgenden elementaren Rechenregeln an. Per Approximation durch einfache Funktionen sind die Argumente sehr einfach, per Definition als Supremum w\"aren die Argumente ziemlich fies.
+
+\begin{lemma}\label{RRnichtneg}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=124s}
+	Für $f,g \! : \Omega \rightarrow [0,+\infty]$ messbar und $ \alpha \geq 0$ gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item $\int_{\Omega} \alpha f \,\mathrm{d}\mu = \alpha \int_{\Omega} f \,\mathrm{d}\mu,$
+		\item $\int_{\Omega} (f + g)\, \mathrm{d}\mu = \int_{\Omega} f \,\mathrm{d}\mu + \int_{\Omega} g \,\mathrm{d}\mu,$
+		\item $f \leq g \, \Rightarrow\, \int_{\Omega} f\, \mathrm{d}\mu \leq \int_{\Omega} g\, \mathrm{d}\mu.$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Wir zeigen nur (ii), (i) geht analog und (iii) folgt direkt aus der Definition als Supremum. Beachtet dabei folgende Eigenschaften vom Supremum: $M\subseteq N$ impliziert nat\"urlich $\sup M\leq \sup N$.\smallskip
+	
+		Seien $(f_n), (g_n) \subseteq \cE^+$ mit $f_n \uparrow f$, $g_n \uparrow g$, $n \to \infty$. Weil dann auch $f_n+g_n \in \cE^+$ und $f_n+g_n\uparrow f+g$ gelten, folgt mit Lemma \ref{monKonv} und der Linearit\"at des Integrals f\"ur einfache Funktionen
+		\begin{align*}
+			 \int_{\Omega} f \,\mathrm{d}\mu + \int_{\Omega} g\, \mathrm{d}\mu=\lim_{n\to\infty}\Big(\int_{\Omega} f_n\, \mathrm{d}\mu + \int_{\Omega} g_n \,\mathrm{d}\mu\Big)  &=\lim_{n\to\infty} \int_{\Omega} (f_n + g_n)\, \mathrm{d}\mu=\int_{\Omega} (f + g)\, \mathrm{d}\mu.
+		\end{align*}
+\end{proof}
+
+\subsection*{Integral messbarer numerischer Funktionen}
+Im letzten Schritt wollen wir noch die Annahme der Nichtnegativit\"at weglassen. Sei dazu $f \! : \Omega \rightarrow \overline{\mathbb{R}}$ $(\cA, \cB(\mathbb{\overline R}))$-messbar. Um $f$ auf nicht-negative Funktionen zur\"uckzuf\"uhren, erinnern wir an die Zerlegung von $f$ in Postiv- und Negativteil $$f = f^+ - f^-\quad \text{ und }\quad |f| = f^+ + f^-$$ aus dem Kapitel \"uber messbare Abbidungen.
+
+\begin{deff}\label{nnn}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=1128s}
+	Sei $f:\Omega\to \overline{\mathbb{R}}$ messbar und \[ \int_{\Omega} f^+ \,\mathrm{d}\mu < \infty\quad \text{ \underline{oder} }\quad\int_{\Omega} f^- \,\mathrm{d}\mu < \infty. \] Dann definieren wir
+	\[ \int_{\Omega} f \,\mathrm{d}\mu = \int_{\Omega} f^+ \,\mathrm{d}\mu - \int_{\Omega} f^-\, \mathrm{d}\mu\in [-\infty,+\infty] \]
+	und sagen, das Integral $\int f\dint \mu$ ist wohldefiniert. Ist $\int f \dint \mu \in \R$, d.h. die Integrale \"uber Positiv- und Negativteil sind beide endlich, so hei\ss t $f$ \textbf{$\mu$-integrierbar} und wir sagen, das Integral existiert. Existiert bedeutet also wohldefiniert \underline{und} endlich. Zur Notation: Man schreibt statt $\int_{\Omega} f \,\mathrm{d}\mu$ auch
+	\[ \int_{\Omega} f(\omega) \,\mathrm{d}\mu(\omega) \quad \text{ oder }\quad
+	 \int_{\Omega} f(\omega)\, \mu(\mathrm{d}\omega), \]
+	 oft l\"asst man aus Faulheit auch $\Omega$ unter dem Integral weg.
+\end{deff}
+Ohne die Einschr\"ankung, dass eines der Integrale endlich ist, k\"onnten wir das Integral nicht sinnvoll definieren. Das liegt daran, dass $+\infty-(+\infty)$ nicht sinnvoll definierbar ist. 
+\begin{deff}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=1669s}
+	Ist $ f \! : \Omega \rightarrow \overline{\mathbb{R}}$ messbar und $A \in \cA$, so definiert man 
+	\[ \int_{A} f\, \mathrm{d}\mu := \int_{\Omega} f \mathbf{1}_A\, \mathrm{d}\mu, \]
+	wenn die rechte Seite wohldefiniert ist. Alternativ schreibt man auch hier \[ \int_{A} f(\omega)\, \mathrm{d}\mu(\omega) \quad \text{ oder }\quad \int_{A} f(\omega) \,\mu(\mathrm{d}\omega) \]
+\end{deff}
+und wenn $\Omega=\R$ ist, auch $\int_\R f(x)  \mathrm{d}\mu(x)$.  F\"ur den Spezialfall des Lebesgue-Ma\ss es auf $\mathcal B(\R)$ schreiben wir wieder
+\begin{align*}
+	\int_a^b f(x)\dint x\quad \text{statt} \quad \int_{[a,b]} f\dint \lambda,
+\end{align*}
+damit die Analogie zur Analysis nicht verloren geht.
+ Weil das Integral nur f\"ur messbare Funktionen definiert ist, ist es ganz essentiell, dass auch $f \mathbf{1}_A$ eine messbare Funktion ist. Das liegt an der gro\ss en Flexibilit\"at von messbaren Funktionen: $\mathbf{1}_A$ ist messbar, weil $A$ messbar ist und das Produkt messbarer Funktionen ist messbar.
+
+
+\begin{lemma}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=1910s}
+	F\"ur $ f, g \! : \Omega \rightarrow \overline{\mathbb{R}}$ $\mu$-integrierbar und $\alpha \in \mathbb{R}$ gelten
+	\begin{enumerate}[label=(\roman*)]
+		\item $\alpha f$ ist $\mu$-integrierbar und \[ \int_{\Omega} \alpha f \,\mathrm{d}\mu = \alpha \int_{\Omega} f\, \mathrm{d}\mu. \]
+		\item Wenn $f+g$ sinnvoll definiert ist (\mbox{d. h.} kein $+\infty + (-\infty)$), so ist $f + g$ $\mu$-integrierbar und \[ \int_{\Omega} (f + g) \,\mathrm{d}\mu = \int_{\Omega} f \,\mathrm{d}\mu + \int_{\Omega} g\, \mathrm{d}\mu. \]
+		\item \[ f \leq g \quad \Rightarrow \quad \int_{\Omega} f \dint \mu \leq \int_{\Omega} g \dint \mu \]
+		\item $\triangle$-Ungleichung: 
+		\[ \Big|\int_{\Omega} f \,\mathrm{d}\mu\Big| \leq \int_{\Omega} |f| \,\mathrm{d}\mu\]
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}\abs 
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+			 F\"ur $\alpha \geq 0$ gelten $$(\alpha f)^+ = \alpha f^+\quad \text{ und }\quad 
+				(\alpha f)^- = \alpha f^-.$$
+			Damit ist $\alpha f$ $\mu$-integrierbar, weil mit Lemma \ref{RRnichtneg}(i)
+			\[ \int_{\Omega} \alpha f^+\, \mathrm{d}\mu = \alpha \int_{\Omega} f^+ \,\mathrm{d}\mu < \infty\quad \text{ und }\quad \int_{\Omega} \alpha f^- \mathrm{d}\mu = \alpha \int_{\Omega} f^-\, \mathrm{d}\mu < \infty\]
+			gelten. Es gilt dann per Definition des Integrals als Differenz der Integrale \"uber Positiv- und Negativteil
+			\begin{gather*}
+				\int_{\Omega} \alpha f \,\mathrm{d}\mu \overset{\text{Def.}}{=} \int_{\Omega} \alpha f^+ \,\mathrm{d}\mu - \int_{\Omega} \alpha f^-\, \mathrm{d}\mu
+				\overset{\text{\ref{RRnichtneg}}}{=} \alpha \int_{\Omega} f^+\, \mathrm{d}\mu -\alpha \int_{\Omega} f^-\, \mathrm{d}\mu =\alpha \int_{\Omega} f \,\mathrm{d}\mu.\\
+			\end{gather*}
+			Der Fall $\alpha <0$ geht genauso, wir nutzen hierbei $(\alpha f)^+ = -\alpha f^-$ und $(\alpha f)^- = -\alpha f^+$ und gehen dann genauso vor.
+		\item Die Summe ist bei Integralen immer der delikate Teil. Es gelten zun\"achst punktweise (Fallunterscheidungen)
+		\begin{align*}
+			0\leq(f+g)^+ \leq f^+ + g^+\quad \text{ und }\quad 0\leq (f+g)^- \leq f^- + g^-.
+		\end{align*}	
+		 Damit gelten 
+		\begin{align*}
+		\int_{\Omega} (f + g)^+ \,\mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{\leq} \int_{\Omega} (f^+ + g^+)\,\mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{=} \int_{\Omega} f^+\, \mathrm{d}\mu + \int_{\Omega} g^+ \,\mathrm{d}\mu < \infty
+		\end{align*}
+		und
+		\begin{align*}
+		\int_{\Omega} (f + g)^- \mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{\leq} \int_{\Omega} (f^- + g^-) \mathrm{d}\mu \overset{\text{\ref{RRnichtneg}}}{=} \int_{\Omega} f^- \mathrm{d}\mu + \int_{\Omega} g^- \mathrm{d}\mu < \infty.
+		\end{align*}
+		Also ist gem\"a\ss{} Definition $f + g$ $\mu$-integrierbar. Die Berechnung des Integrals von $f+g$ ist clever. Wir kennen die Linearit\"at bisher nur f\"ur nicht-negative Funktionen. F\"uhren wir die Behauptung also auf den Fall zur\"uck, indem wir wie folgt $f+g$ auf zwei Arten in Positiv- und Negativteil zerlegen:
+		\begin{align*}
+			\underset{\geq 0}{(f+g)^+} - \underset{\geq 0}{(f+g)^-} = f + g = (\underset{\geq 0}{f^+} - \underset{\geq 0}{f^-}) + (\underset{\geq 0}{g^+} - \underset{\geq 0}{g^-}).
+		\end{align*}
+		Umformen ergibt
+		\begin{align*}
+			 (f + g)^+ + f^- + g^- = (f + g)^- + f^+ + g^+.
+		\end{align*}
+		Weil jetzt nur noch Summen nicht-negativer Funktionen auftauchen, k\"onnen wir die bereits bekannte Linearit\"at des Integrals aus Lemma \ref{RRnichtneg} nutzen:
+		\begin{align*}
+			 \int_{\Omega} (f + g)^+\, \mathrm{d}\mu + \int_{\Omega} f^-\, \mathrm{d}\mu + \int_{\Omega} g^- \,\mathrm{d}\mu = \int_{\Omega} (f + g)^- \,\mathrm{d}\mu + \int_{\Omega} f^+ \,\mathrm{d}\mu + \int_{\Omega} g^+ \,\mathrm{d}\mu.
+		\end{align*}
+		Erneutes Auflösen ergibt 
+		\begin{align*}
+			\int_{\Omega} (f + g)^+ \,\mathrm{d}\mu - \int_{\Omega} (f + g)^- \,\mathrm{d}\mu &= \int_{\Omega} f^+ \,\mathrm{d}\mu - \int_{\Omega} f^- \,\mathrm{d}\mu + \int_{\Omega} g^+ \,\mathrm{d}\mu - \int_{\Omega} g^-\, \mathrm{d}\mu
+		\end{align*}
+		und Ausn\"utzen der Definition des Integrals als Differenz der Positiv- und Negativteile
+		\begin{align*}	
+			 \int_{\Omega} (f + g)\, \mathrm{d}\mu &= \int_{\Omega} f\, \mathrm{d}\mu + \int_{\Omega} g\, \mathrm{d}\mu.
+		\end{align*}
+		\item Nat\"urlich gilt $f \leq g \Leftrightarrow g - f \geq 0$. Weil die Nullfunktion sowie $g-f$ nicht-negativ sind, gilt wegen der Linearit\"at und der Definition des Integrals f\"ur einfache Funktionen (die Nullfunktion)
+		\[ 0 = \int_{\Omega} 0 \,\mathrm{d}\mu \leq \int_{\Omega} (g-f)\, \mathrm{d}\mu \overset{\text{(i),(ii)}}{=} \int_{\Omega} g \mathrm{d}\mu - \int_{\Omega} f \mathrm{d}\mu. \]
+		Umformen gibt die Behauptung.
+		\item Die Dreicksungleichung f\"ur Integrale folgt aus der Dreiecksungleichung in $\R$:
+		\begin{align*}
+			\Big|\int_{\Omega} f\, \mathrm{d}\mu\Big| \overset{\text{Def.}}&{=} \Big|\int_{\Omega} f^+ \,\mathrm{d}\mu - \int_{\Omega} f^- \,\mathrm{d}\mu\Big| \\
+			\overset{\triangle}&{\leq} \Big|\int_{\Omega} f^+ \,\mathrm{d}\mu\Big| + \Big|\int_{\Omega} f^- \,\mathrm{d}\mu\Big|\\
+			\overset{\geq 0}&{=} \int_{\Omega} f^+\, \mathrm{d}\mu + \int_{\Omega} f^- \,\mathrm{d}\mu\\
+		 \overset{\text{(ii)}}&{=} \int_{\Omega} (f^+ + f^- )\,\mathrm{d}\mu = \int_{\Omega} |f| \,\mathrm{d}\mu.
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+
+Eine Konsequenz der gerade genutzten Linarit\"at kombiniert mit $|f|=f^++f^-$ ist folgendes \"Aquivalenz:
+\begin{align}\label{Betrag}
+	f\text{ ist }\mu\text{-integrierbar}\quad \Longleftrightarrow\quad \int_\Omega f\,\mathrm{d}\mu\text{ existiert}\quad \Longleftrightarrow\quad \int_\Omega |f|\,\mathrm{d}\mu<\infty.
+\end{align}
+Die rechte Seite sieht sehr viel n\"utzlicher aus als die eigentliche Definition von $\mu$-Integrierbarkeit, ist aber nur eine recht triviale Modifikation.
+\begin{beispiel}\label{bsp7}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=3674s}
+	\begin{itemize}
+		\item[(i)] Für den wichten Spezialfall $(\Omega, \cA, \mu) = (\mathbb{R}, \cB(\mathbb{R}), \lambda)$ schauen wir uns mal ein paar Beispiele an:
+		\begin{itemize}
+			\item[(a)] Ist $f$ st\"uckweise stetig, so ist $f$ Riemann integrierbar auf Intervallen $[a,b]$ und gleich dem Lebesgue Integral $\int_{[a,b]} f \dint \lambda$. Das erkl\"art auch wieder, warum wir auch f\"ur das Lebesgue integral die $\dint x$-Notation nutzen und $\int_{[a,b]} f \dint \lambda=\int_a^b f(x)\dint x$ schreiben. Ihr k\"onnt also f\"ur nette Integranden $\int_{[a,b]} f\dint \lambda$ mit den Rechnenregeln aus der Schule und Analysis berechnen (Stammfunktionen, partielle Integration, Substitution). St\"uckweise stetig ist eigentlich nicht die richtige Annahme, die richtige Formulierung ist folgende (Lebesgue'schen Kriterium für Riemann-Integrierbarkeit): Eine Funktion ist Riemann integrierbar auf $[a,b]$ genau dann, wenn die Unstetigkeitsstellen eine Nullmenge sind. Solch eine Funktion ist auch Lebesgue integrierbar und die Integrale sind gleich. Weil wir uns in dieser Vorlesung nicht f\"ur das Riemann Integral interessieren, f\"uhren wir das nicht weiter aus.	
+			\item[(b)] Ist $f\geq 0$ und st\"uckweise stetig, so stimmt $\int_\R f \dint \lambda$ mit dem uneigentlichen Riemann Integral \"uberein. Das sehen wir sp\"ater mit dem monotonen Konvergenz Theorem und (a). Ihr d\"urft das Integral in dem Fall als
+			\begin{align}\label{trick}
+				\int_\R f\dint \lambda=\lim_{n\to\infty} \int_{-n}^n f(x)\dint x
+			\end{align}
+			schreiben, und die rechte Seite mit den Tricks der Analysis berechnen. Deshalb schreiben wir auch wie in Analysis $\int_\R f(x)\dint x$ statt $\int_\R f \dint \lambda$. Warum das gilt, schauen wir uns nach Satz \ref{allgMonKonv} nochmal an.
+			\item[(c)] Warnung: Den Rechentrick aus \eqref{trick} d\"urft ihr nicht immer nutzen, wir haben schlie\ss lich angenomnen, dass $f$ nicht-negativ ist. Hier sind zwei Gegenbeispiele: 
+			\begin{align*}
+				f(x)&=\frac{\sin(x)}{x},\quad x\in\R,\\
+				f(x)&=\sum_{k=1}^\infty (-1)^{k} \frac{1}{k} \mathbf 1_{[k-1,k)}(x), \quad x\in\R.
+			\end{align*}
+			Bei beiden Beispielen sind Positiv- und Negativteil nicht integrierbar (das kann man mit (b) nachrechnen), $\int_\R f \dint \lambda$ ist also nicht einmal wohldefiniert, der Grenzwert $\lim_{n\to\infty} \int_{-n}^n f(x)\dint x$ existiert jedoch. F\"ur das Riemann Integral (auf einem Interval) gilt zwar, \glqq Riemann integrierbar impliziert Lebesgue integrierbar und die Integrale sind gleich\grqq, f\"ur das uneigentliche Riemann Integral gilt das weder der Beispiele jedoch nicht!
+			\item[(d)] In (a) haben wir gesagt, dass Riemann integrierbare Funktionen auch Lebesgue integrierbar sind. Hier ist ein Beispiel, das zeigt, dass die Umkehrung nicht immer gilt: $f=\mathbf 1_{\mathbb Q\cap [0,1]}$, die Funktion die nur den Wert $1$ f\"ur rationale Zahlen in $[0,1]$ annimmt. Weil $f$ eine einfache Funktion ist, $f=1\cdot \mathbf 1_A$ f\"ur die Borel-messbare Menge $A=\mathbb Q\cap [0,1]$, ist sie Lebesgue integrierbar mit Integral $\int_{[0,1]} \mathbf 1_{\mathbb Q} \dint \lambda=1\cdot \lambda (\mathbb Q\cap [0,1])=0$. Die Funktion ist aber nicht Riemann integrierbar: Jede Treppenfunktion \"uber kleine Intervalle, die \"uber $f$ liegt, ist auf $[0,1]$ gr\"o\ss er als $1$. Liegt eine Treppenfunktion unter $f$, so ist sie kleiner als $0$ auf $[0,1]$. Damit k\"onnen die Ober- und Untersummen nicht gegen den gleichen Wert konvergieren.		
+		\end{itemize}
+		\item[(ii)]  Schauen wir uns jetzt das Beispiel $(\Omega, \cA, \mu) = (\N, \cP(\N), \mu)$, $\mu(A) = \#A$, an. Ganz am Anfang der Vorlesung hatten wir dieses Ma\ss{} Z\"ahlma\ss{} genannt. An diesem Beispiel lernen wir: Summen sind auch nur Integrale! Warum? F\"ur $f:\N\to [0,\infty)$ gilt
+		\begin{gather*}
+			\int_{\N} f\, \mathrm{d}\mu = \sum\limits_{k=0}^{\infty} f(k).
+		\end{gather*}
+		Das folgt direkt aus Lemma \ref{monKonv} weil $f$ als $f=\sum_{k=0}^\infty f(k)\mathbf 1_{\{k\}}$ geschrieben werden kann (setzt mal $m$ in die rechte Seite ein, es ist immer nur ein Summand ungleich $0$!) und damit $f_n\uparrow f$ gilt, mit der Folge $f_n:=\sum_{k=1}^n f(k)\mathbf 1_{\{k\}}$ einfacher Funktionen. Zusammen gibt das aufgrund der Definition des allgemeinen Lebesgue Integrals f"ur einfache Integranden
+		\begin{align*}
+			\int_\N f\, \mathrm{d}\mu\overset{\eqref{monKonv}}{=} \lim_{n\to\infty} \int_\N f_n\, \mathrm{d}\mu\overset{\text{Def.}}{=}\lim_{n\to\infty} \sum_{k=0}^n f(k)\, \mu(\{k\})=\lim_{n\to\infty} \sum_{k=0}^n f(k)= \sum_{k=0}^\infty f(k).
+		\end{align*}				
+	\end{itemize}
+\end{beispiel}
+Vielleicht habt ihr in der Analysis 2 schon \"uber Nullmengen gesprochen. Dann habt ihr schon gelernt, dass Nullmengen bei Integralen keine Rolle spielen. Wenn nicht, lernt ihr Nullmengen und ihre Bedeutung f\"ur Integrale jetzt kennen:
+\begin{deff}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=5412s}
+	$ N \in \cA$ heißt $ \mu $-\textbf{Nullmenge}, falls $ \mu (N) = 0$. \footnote{Eigentlich macht man das Allgemeiner: Eine Teilmenge $N$ von $\Omega$ hei\ss t Nullmenge, falls es eine messbare Menge $A$ mit $N\subseteq A$ und $\mu(A)=0$ gibt. Weil in der Stochastik 1 alle von uns ben\"otigten Nullmengen selber messbar sind, ignorieren wir das. Das Thema wird erst relevant, wenn ihr die Brownsche Bewegung kennenlernt.
+	}
+\end{deff}
+Aufgrund der Subadditivit\"at von Ma\ss en (folgt aus der $\sigma$-Additivit\"at) folgt sofort, dass abz\"ahlbare Vereinigungen von Nullmengen wieder Nullmengen sind (kleine \"Ubung).
+
+
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=5688s}
+	\begin{enumerate}[label=(\roman*)]
+		\item Gilt eine Eigenschaft für alle $\omega \in \Omega$ außer einer $\mu$-Nullmenge (d. h. f\"ur $N:=\{\omega \in \Omega: \text{Eigenschaft gilt nicht}\}$ gilt $\mu(N)=0$), so gilt die Eigenschaft $\mu$-fast überall. Man schreibt kurz auch $\mu$-f.\"u.
+		\item Ist $\mu$ ein Wahrscheinlichkeitsmaß, so sagt man anstelle von \enquote{$\mu$-fast überall} auch \enquote{$\mu$-fast sicher} oder kurz $\mu$-f.s.
+	\end{enumerate}
+\end{deff}
+Wenn klar ist \"uber welches Ma\ss{} $\mu$ gesprochen wird, sagt man auch nur \enquote{fast \"uberall} oder \enquote{fast sicher}.\smallskip
+\marginpar{\textcolor{red}{Vorlesung 11}}
+
+Weil aufgrund der Definition des Integrals f\"ur Indikatorfunktionen $f=\mathbf 1_N$ \"uber Nullmengen $\int_\Omega f \mathrm{d} \mu=1\cdot \mu(N)=0$, ist es nicht \"uberraschend, dass Nullmengen beim Integrieren keine Rolle spielen. Das wird in (ii) des folgendes sehr wichtigen Satzes deutlich:
+\begin{satz}\label{S7}
+\link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=5896s}
+	Sind $f,g \colon \Omega \rightarrow \overline{\mathbb{R}}$ $\mu$-integrierbar, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $f$ ist $\mu$-fast überall endlich.
+		\item $f=g$ $\mu$-fast überall impliziert
+		$ \int_{\Omega} f \,\mathrm{d}\mu = \int_{\Omega} g\, \mathrm{d}\mu.$
+		\item $f \geq 0$ und $ \int_{\Omega} f\, \mathrm{d} \mu=0$ impliziert $f = 0$ $\mu$-fast überall.
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Sei $A := \{ |f| = \infty \} = f^{-1}(\{ -\infty, +\infty \}) \in \cA$. Weil  $ n \mathbf{1}_A \leq |f| $ f\"ur alle $n\in\N$ gilt, folgt \[ n \mu(A) \overset{\text{Def.}}{=} \int_{\Omega} n \mathbf{1}_A\, \mathrm{d}\mu \overset{\text{Mon.}}{\leq} \int_{\Omega} |f|\, \mathrm{d}\mu= \int_\Omega(f^++f^-)\mathrm{d}\mu \overset{f}{\underset{\mu\text{-int.}}{<}} \infty \] f\"ur alle $n\in\N$.
+		Weil $\mu(A) > 0$ einen Widerspruch gibt (dann w\"are $n \mu(A)$ unbeschr\"ankt aber $\int |f|\,d\mu$ ist eine obere Schranke), folgt die Behauptung.
+		\item F\"ur $N:=\{ f\neq g\}\in \mathcal A$ gilt aufgrund der Voraussetzung $\mu(N)=0$.
+			Weil aus $ f=g $ fast überall auch $f^+ = g^+ $ und $ f^- = g^- $ fast \"uberall folgt, impliziert die Definition des Integrals als $\int_{\Omega} f \dint \mu = \int_{\Omega} f^+ \dint \mu - \int_{\Omega} f^- \dint \mu$ bzw. $\int_{\Omega} g \dint \mu = \int_{\Omega} g^+ \dint \mu - \int_{\Omega} g^- \dint \mu$, dass die Aussage nur für $f,g\geq0$ gezeigt werden muss (wende Aussage dann auf Positiv- und Negativteil an). Seien also $f,g \geq 0 $ und $$N = \{ f\neq g  \} = \{ \omega \colon f(\omega) \neq g(\omega) \}$$ die Nullmenge, auf der $f$ und $g$ nicht \"ubereinstimmen. Dann gilt aufgrund der Monotonie und der Definition des Integrals
+		\begin{align*}
+			0\leq \int_\Omega f\mathbf 1_{N}\dint \mu &\leq \int_\Omega (+\infty) \mathbf 1_{N}\dint \mu=+\infty \cdot \mu(N)=+\infty \cdot 0=0.
+		\end{align*}
+		F\"ur die letzte Gleichung haben wir die Konvention $+\infty\cdot 0=0$ genutzt. Genauso gilt $\int_\Omega g \mathbf 1_{N} \dint \mu=0$. Wenn wir jetzt $1=\mathbf 1_N+\mathbf 1_{N^C}$ schreiben, ergibt sich mit der Linearit\"at des Integrals
+		\begin{align*}
+			\int_\Omega f\dint \mu= \int_\Omega f\mathbf 1_{N} \dint \mu+\int_\Omega f \mathbf 1_{N^C}\dint \mu=\int_\Omega f\mathbf 1_{N^C} \dint \mu=\int_\Omega g\mathbf 1_{N^C} \dint \mu=\int_\Omega g\dint \mu.
+		\end{align*} 
+		\item Seien $A_n = \{ f > \frac{1}{n} \} = \{ \omega \colon f(\omega) > \frac{1}{n} \}$ f\"ur $n\in\N$. Damit ist mit der Monotonie des Integrals
+		\[ 0 \overset{\text{Ann.}}{=} \int_{\Omega} f \dint \mu \overset{\text{Mon.}}{\geq} \int_{\Omega} f \mathbf{1}_{A_n} \dint \mu \overset{\text{Mon.}}{\geq} \int_{\Omega} \frac{1}{n} \mathbf{1}_{A_n} \dint \mu\overset{\text{Def.}}{=} \frac 1 n \mu(A_n)\geq 0, \]
+		weil $\frac{1}{n} \mathbf{1}_{A_n} \leq f \mathbf{1}_{A_n}\leq f$. Also ist $\mu(A_n) = 0$ f\"ur alle $n\in\N$. Damit gilt
+				\[  0\leq \mu( \{ \omega\colon f(\omega) > 0 \}) = \mu\Big( \bigcup\limits_{k=1}^{\infty} A_k \Big) \overset{\text{subadd.}}{\leq} \sum\limits_{k=1}^{\infty} \mu(A_k) = 0. \]
+		Es gilt also $f=0$ $\mu$-fast überall.
+	\end{enumerate}
+\end{proof}
+F\"ur sp\"atere Verwendungen noch ein Satz zur Transformation von Integralen. In Analysis 2 habt ihr den schon in konkreter Form im $\R^d$ kennengelernt.
+\begin{satz}\label{trafo}
+\link{https://www.youtube.com/watch?v=qlAlnSAhqr0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=12&t=1465s} \textbf{[abstrakter Transformationssatz]}
+	Seien $(\Omega, \cA)$, $(\Omega', \cA')$ messbare Räume, $\mu$ ein Maß auf $\cA$, $f \colon \Omega \rightarrow \Omega'$ messbar, $g \colon \Omega' \rightarrow \overline{\R}$ messbar und $g \geq 0$. Dann gilt 
+	\[ \int_{\Omega'} g \dint \mu_f = \int_{\Omega} g \circ f \dint \mu, \] wobei $+\infty=+\infty$ m\"oglich ist. Dabei ist $\mu_f$ der push-forward (Bildma\ss ) von $\mu$.
+\begin{center}	
+	\begin{tikzcd}
+		(\Omega, \mathcal A, \mu) \arrow[r, "{f}"'] \arrow[rd, "{g \circ f}" sloped, "{\int_{\Omega} g \circ f \dint \mu}"' near start]
+		& (\Omega',\mathcal A', \mu_f) \arrow[d, "{g}"', "{\int_{\Omega'} g \dint \mu_f}"]\\
+		& (\overline{\R}, \mathcal B(\overline \R))\\
+	\end{tikzcd}	
+\end{center}
+\end{satz}
+\begin{proof} Einmal durch die \glqq Gebetsm\"uhle\grqq{} der Integrationstheorie (d. h. zeige die Aussage f\"ur einfache Integranden und nehme dann den Grenzwert):
+	\begin{enumerate}[label=(\Alph*)]
+		\item Sei erstmal \[ g = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{A_k} \geq 0 \] eine nicht-negative einfache Funktion. Wir nehmen die Darstellung mit $A_k=g^{-1}(\{\alpha_k\})$. Dann gilt \[ g \circ f = \sum\limits_{k = 1}^{n} \alpha_k \mathbf{1}_{f^{-1}(A_k)} \geq 0, \] $g\circ f$ ist also auch eine einfache Funktion. Weil nach Definition des push-forwards $ \mu_f(A_k) = \mu(f^{-1}(A_k)) $ gilt, bekommen wir \[ \int_{\Omega} g \circ f \dint \mu \overset{\text{Def.}}{=} \sum\limits_{k = 1}^{n} \alpha_k \mu(f^{-1}(A_k))=\sum\limits_{k = 1}^{n} \alpha_k \mu_f(A_k) \overset{\text{Def.}}{=} \int_{\Omega'} g \dint \mu_f. \]
+		Damit gilt die Behauptung für einfache Funktionen.
+		\item Weil $g$ messbar ist, existiert eine Folge $(g_n) \subseteq \cE^+$ mit $g_n \uparrow g$, $n \to \infty$. Also gilt \[ \int_{\Omega'} g \dint \mu_f \overset{\text{\ref{monKonv}}}{=} \lim\limits_{n \to \infty} \int_{\Omega'} g_n \dint \mu_f \overset{\text{(A)}}{=}  \lim_{n\to\infty} \int_{\Omega}g_n\circ f \dint \mu \overset{\ref{monKonv}}{=} \int_{\Omega} g \circ f \dint \mu. \]
+		Im letzten Schritt haben wir genutzt, dass auch $g_n \circ f$ einfach ist (siehe (A)) und $g_n \circ f \uparrow g \circ f$, $n\to\infty$, gilt.
+	\end{enumerate}
+\end{proof}
+Wir h\"atten den letzten Satz auch direkt ohne die Nichtnegativit\"at formulieren k\"onnen. Aus didaktischen Gr\"unden zerlegen wir die Aussage in den Satz und das folgende Korollar. Der nicht-negative Fall ist einfacher zu formulieren weil Integrale \"uber nicht-negative Funktionen \underline{immer} definiert sind. Bei allgemeinen Integranden muss man immer aufpassen, dass nicht $+\infty+(-\infty)$ auftaucht, das haben wir Wohldefiniertheit genannt. Die Formulierung des Satzes muss also die Wohldefiniertheit beinhalten. Um sich das Leben leichter zu machen, nimmt man meistens sogar die Integrierbarkeit (Wohldefiniert und endlich) an, das reicht in den Anwendungen ohnehin meistens aus.
+\begin{korollar}\label{korTrafo}
+\link{https://www.youtube.com/watch?v=qlAlnSAhqr0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=12&t=2548s}
+	Unter den Voraussetzungen von Satz \ref{trafo} gelte jetzt nur noch $g \colon \Omega' \rightarrow \overline{\R}$. Dann ist $g$ $\mu_f$-integrierbar genau dann, wenn $ g \circ f$ $\mu$-integrierbar ist. Ist eine dieser Aussagen erfüllt, so gilt ebenfalls die Transformationsformel
+	\[ \int_{\Omega'} g \dint \mu_f = \int_{\Omega} g \circ f \dint \mu. \]
+\end{korollar}
+\begin{proof}
+	Wegen $g^+ \circ f = (g \circ f)^+$ und $g^- \circ f = (g \circ f)^-$ folgt aus dem Transformationssatz f\"ur nicht-negative Funktionen
+	\begin{align*}
+		g \text{ $\mu_f$-integrierbar} \quad  \overset{\text{Def.}}&{\Leftrightarrow} \quad \int_{\Omega'} g^+ \dint \mu_f < \infty\quad \text{ und }\quad \int_{\Omega'} g^- \dint \mu_f < \infty\\ 
+		&\Leftrightarrow  \quad\int_{\Omega} g^+ \circ f \dint \mu < \infty\quad \text{ und }\quad \int_{\Omega} g^- \circ f \dint \mu < \infty\\
+		\overset{\text{Def.}}&{ \Leftrightarrow} \quad g \circ f \text{ $\mu$-integrierbar}.
+	\end{align*}
+	Nun zur Berechnung der Integrale:
+	 \begin{align*}
+		\int_{\Omega'} g  \dint \mu_f \overset{\text{Def.}}&{=} \int_{\Omega'} g^+ \dint \mu_f - \int_{\Omega'} g^- \dint \mu_f\\
+		 \overset{\ref{trafo}}&{=} \int_{\Omega} g^+ \circ f \dint \mu - \int_{\Omega} g^- \circ f \dint \mu\\
+		&=\int_{\Omega} (g \circ f)^+ \dint \mu - \int_{\Omega} (g \circ f)^- \dint \mu\\
+		 \overset{\text{Def.}}& {=}\int_{\Omega} g \circ f \dint \mu.
+	\end{align*}
+\end{proof}
+
+\section{Konvergenzsätze}
+
+Im folgenden sei $(\Omega, \cA, \mu)$ ein fester Maßraum. Gezeigt haben wir schon \[ \lim_{n\to\infty}\int_{\Omega} f_n \dint \mu = \int_{\Omega} f \dint \mu, \]
+wenn $(f_n)_{n\in\N}$ eine Folge nicht-negativer \underline{einfacher} Funktionen ist, die wachsend gegen $f$ konvergieren. Wir wollen nun die gleiche Aussage f\"ur beliebige nicht-negative wachsende Folgen zeigen.
+
+\begin{satz}\label{allgMonKonv}
+\link{https://www.youtube.com/watch?v=qlAlnSAhqr0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=12&t=3320s} \textbf{[Monotone Konvergenz Theorem (MCT)]}
+	Seien $f,f_1,f_2,...\colon \Omega \to \overline{\R}$ messbar und es gelte $0\leq f_1 \leq f_2 \leq ... \leq f$ sowie $f = \lim\limits_{n \to \infty} f_n$ $\mu$-f.\"u. Dann gilt \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu=\int_{\Omega} f \dint \mu, \]
+	wobei $+\infty=+\infty$ m\"oglich ist.
+\end{satz}
+F\"ur monoton wachsende Funktionenfolgen darf der Limes also in das Integral getauscht werden.
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{allgMCTfastu} Wir nehmen an, dass $f_1(\omega) \leq f_2(\omega) \leq ... \leq f(\omega)$ und $f(\omega) = \lim\limits_{n \to \infty} f_n(\omega)$ nicht nur fast überall, sondern für alle $\omega \in \Omega$ (also punktweise) gelten.
+		\begin{itemize}
+			\item[\enquote{$\leq$}:] Wegen der Monotonie des Integrals gilt \[ \int_{\Omega} f_n \dint\mu \leq \int_{\Omega} f \dint\mu \] f\"ur alle $n\in\N$. Weil die Folge der Integrale aufgrund der Monotonie wachsend ist, existiert der Grenzwert ($+\infty$ ist m\"oglich). Warum? Entweder die Folge divergiert nach $+\infty$, oder sie ist beschr\"ankt. Im ersten Fall haben wir die Konvergenz gegen $+\infty$, im zweiten Fall haben wir die Konvergenz gegen eine reelle Zahl (beschr\"ankte monotone Folgen konvergieren nach Analysis 1). Wieder nach Analysis 1, Vergleichssatz f\"ur Folgen, gilt damit \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint\mu \leq \int_{\Omega} f \dint\mu. \]
+			\item[\enquote{$\geq$}:] Weil alle $f_n$ messbar sind, existieren Folgen $(g_{n,k}) \subseteq \cE^+$ mit $g_{n,k} \uparrow f_n$, $ k\to \infty $. Sei $h_n = g_{1,n} \lor ... \lor g_{n,n} = \max \{ g_{1,n},...,g_{n,n} \} $. Die $h_n$ sind einfache Funktionen, für die zwei Eigenschaften gelten:
+			\begin{enumerate}[label=(\alph*)]
+				\item\label{h_nOne} $h_n \leq f_n$
+				\item\label{h_nTwo} $h_n \uparrow f$
+			\end{enumerate}
+			Zu \ref{h_nOne}: Es gilt $g_{i,n} \leq f_i\leq f_n$ für alle $i \leq n$, also ist auch das punktweise Maximum kleiner als $f_n$. Zu \ref{h_nTwo}: Weil $h_n \geq g_{i,n}$ f\"ur alle $i = 1,...,n$ gilt, ist auch $$\lim\limits_{n \to \infty} h_n \geq \lim\limits_{n \to \infty} g_{i,n} = f_i$$ f\"ur alle festen $i \in \N$. Weil aber $\lim\limits_{i \to \infty} f_i = f$ gilt, ist $\lim\limits_{n \to \infty} h_n \geq f$, erneut nach dem Vergleichssatz f\"ur Folgen aus Analysis 1. Weil auch noch $h_n \leq f_n \leq f$ gilt, folgt mit der letzten Aussage $\lim\limits_{n \to \infty} h_n = f$ punktweise. Die Folge $(h_n)$ ist also eine wachsende Folge von einfachen Funktionen, so dass $(f_n)$ zwischen $(h_n)$ und $f$ liegt und $(h_n)$ punktweise gegen $f$ konvergiert. Damit bekommen wir aus dem Monotone Konvergenz Theorem f\"ur einfache Funktionen durch Einschachtelung die Behauptung: \[ \lim\limits_{n \to \infty} \int_{\Omega}  f_n \dint \mu \underset{\text{Mon.}}{\overset{\text{\ref{h_nOne}}}{\geq}} \lim\limits_{n \to \infty} \int_{\Omega}  h_n \dint \mu \overset{\text{\ref{monKonv}}}{=} \int_{\Omega} \lim\limits_{n \to \infty} h_n \dint \mu \overset{\text{(b)}}{=} \lim\limits_{n \to \infty} \int_{\Omega}  f \dint \mu. \]
+		\end{itemize}
+		\item Sei $N$ die Nullmenge, auf der die Annahme aus \ref{allgMCTfastu} nicht gilt, also $$N=\{\omega\in \Omega: f_n(\omega)\not\to f(\omega)\}.$$ Es gilt $ f_n \mathbf{1}_{N^C} \uparrow f \mathbf{1}_{N^C}$, $n \to \infty$, punktweise, weil f\"ur alle $\omega\in N$ die Folge  konstant $0$. Wegen \ref{allgMCTfastu} gilt dann 
+		\begin{align*}
+			\lim_{n\to\infty}\int_{\Omega}f_n \dint \mu \overset{\ref{S7}}{=}  \lim_{n\to\infty}\int_{\Omega}f_n \mathbf{1}_{N^C} \dint \mu \overset{\ref{allgMCTfastu}}{=} \int_{\Omega}f \mathbf{1}_{N^C} \dint \mu \overset{\ref{S7}}{=} \int_{\Omega}f \dint \mu,
+			\end{align*}
+		weil Integrale zweier Funktionen gleich sind, wenn sie nur auf Nullmengen unterschiedlich sind.
+	\end{enumerate}
+\end{proof}
+
+
+
+Kommen wir zu einer Anwendung, die f\"ur die Stochastik sehr wichtig ist. Gerade in der Finanzmathematik wird folgender \glqq Ma\ss wechsel\grqq{} essentiell sein!
+\begin{anwendung}\label{ccd}
+\link{https://www.youtube.com/watch?v=qlAlnSAhqr0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=12&t=4542s}
+	Sei $(\Omega, \mathcal A, \mu)$ ein Ma\ss raum, $f\colon \Omega \rightarrow \overline{\R}$ messbar und nicht-negativ und $\mu$ ein Ma\ss{} auf $\cA$. Dann ist 
+	\[ \nu(A)  := \int_{A} f \dint \mu = \int_{\Omega} f \mathbf{1}_A\dint \mu \] ein Maß auf $\cA$.
+\end{anwendung}
+
+\begin{proof}
+	\item $\nu \geq 0$ $\checkmark$ wegen Integral über nicht-negative Funktion.
+	\item $\nu(\emptyset)=0$ $\checkmark$ weil Integral \"uber die Nullfunktion $0$ ist.
+	\item $\sigma$-Additivität: Seien $A_1,A_2,... \in \cA$ paarweise disjunkt. Dann gilt 
+	\begin{align*}
+		\nu \Big(\bigcupdot\limits_{k=1}^{\infty} A_k \Big) \overset{\text{Def.}}&{=} \int_{\Omega} f \mathbf{1}_{\bigcupdot\limits_{k=1}^{\infty} A_k} \dint \mu \\
+			&= \int_{\Omega} f \cdot\Big(\sum\limits_{k=1}^{\infty} \mathbf{1}_{A_k}\Big) \dint \mu\\
+		\overset{\text{Lin. Reihe}}&{=} \int_{\Omega} \Big(\sum\limits_{k=1}^{\infty} f \cdot \mathbf{1}_{A_k}\Big) \dint \mu\\
+		 \overset{\text{Def. Reihe}}&{=} \int_{\Omega} \lim\limits_{n \to \infty} \sum\limits_{k=1}^{n} f \mathbf{1}_{A_k} \dint \mu\\
+		\overset{\text{\ref{allgMonKonv}}}&{=} \lim\limits_{n \to \infty} \int_{\Omega} \sum\limits_{k=1}^{n} f \mathbf{1}_{A_k} \dint \mu\\
+	 \overset{\text{Lin. Integral}}&{=} \lim\limits_{n \to \infty} \sum\limits_{k=1}^{n} \int_{\Omega}  f \mathbf{1}_{A_k} \dint \mu\\
+	 \overset{\text{Def.}}&{=} \lim\limits_{n \to \infty} \sum\limits_{k=1}^{n}  \nu(A_k)
+	\overset{\text{Def. Reihe}}{=} \sum\limits_{k=1}^{\infty}  \nu(A_k).
+	\end{align*}
+	Weil hier die Folge $\Big(\sum\limits_{k=1}^{n} f \mathbf{1}_{A_k}\Big)_{n \in \N} \not\subseteq \cE^+$, reicht die einfache Version der monotonen Konvergenz aus \ref{monKonv} nicht aus, wir brauchen monotone Konvergenz wirklich für allgemeine messbare Funktionen.
+\end{proof}
+Anschlie\ss end an den Ma\ss wechsel noch eine Bemerkung, die f\"ur diese Stochastik 1 Vorlesung nicht wichtig ist. Da das Thema zum Beispiel in der Finanzmathematik extrem relevant ist, schreiben wir die Notation zum Gew\"ohnen schon einmal auf:
+\begin{bem}
+\link{https://www.youtube.com/watch?v=qlAlnSAhqr0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=12&t=5232s}
+	\begin{enumerate}[label=(\roman*)]
+		\item Man schreibt mit $\nu$ aus vorheriger Anwendung auch \[ \frac{\mathrm{d}\nu}{\mathrm{d}\mu} = f \] und nennt $f$ die \textbf{Radon-Nikodým-Ableitung} oder \textbf{-Dichte von $\nu$ bez\"uglich $\mu$}. Man sagt auch, dass $\nu$ absolutstetig bez\"uglich $\mu$ ist. $\nu$ ist ein Wahrscheinlichkeitsmaß (\mbox{d. h.} $\nu(\Omega)=1$) genau dann, wenn $\int_{\Omega} f \dint \mu = 1$. Das kennen wir ja schon!
+		
+		\item Wir kennen den Begriff der Absolutstetigkeit schon f\"ur Verteilungsfunktionen (siehe Definition \ref{as}). In der Tat passt das genau zu dem neuen Begriff der Absolutstetigkeit f\"ur Ma\ss e: Ist $\mathbb{P}_F$ ein Wahrscheinlichkeitsmaß auf $\cB(\R)$ mit Verteilungsfunktion $F$ und Dichte $f$, so gilt aufgrund der Definition von $\mathbb{P}_F$ (Ma\ss e sind auf einem $\cap$-stabilen Erzeuger eindeutig festgelegt!), dass $$\frac{\mathrm{d}\mathbb{P}_F}{\mathrm{d}\lambda} = f,\quad \lambda=\text{Lebesguema\ss}.$$ Ist also $F$ absolutstetig mit Dichte $f$, so ist das Ma\ss{} $\mathbb{P}_F$ absolutstetig bez\"uglich dem Lebesguema\ss{} mit Dichte $f$. Die zwei Begriffe der Absolutstetigkeit f\"ur Verteilungsfunktionen und Ma\ss e passen damit zusammen.\smallskip		
+		
+		 Ganz analog funktioniert das f\"ur diskrete Verteilungen. Ist $F$ diskret mit Sprungstellen $(a_k)_{k=1,...,N}$ und Sprungh\"ohen $(p_k)_{k=1,...,N}$, so gilt
+		$$\frac{\mathrm{d}\mathbb{P}_F}{\mathrm{d}\mu} = \sum_{k=1}^N p_k \mathbf 1_{\{a_k\}},\quad \mu=\sum_{k=1}^N \delta_{a_k}.$$
+		Das ist der Grund daf\"ur, weshalb bei diskreten Verteilungen die Wahrscheinlichkeiten $(p_k)_{k=1,...,N}$ manchmal auch Z\"ahldichte genannt werden.		
+		Die Formel ist nat\"urlich furchtbar, sie hat aber eine einfache Bedeutung: Das Ma\ss{} $\mu$ wird durch die Dichte \glqq umgewichtet\grqq. Die Masse liegt auf den gleichen Werten $a_1,...,a_N$, $\mathbb P_F$ hat aber eine andere Verteilung der Masse auf $a_1,...,a_N$: Auf den Werten $a_k$ liegt nun nicht Masse $1$, sondern Masse $p_k$.
+		
+		
+			\end{enumerate}
+\end{bem}
+
+
+\marginpar{\textcolor{red}{Vorlesung 12}}
+
+\begin{satz}\label{fatou}
+\link{https://www.youtube.com/watch?v=UhqmHKPR_4A&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=13&t=45s} \textbf{[Lemma von Fatou]}
+	Seien $f_1,f_2,...\colon \Omega \to \overline{\R}$ messbar und nicht-negativ, die Folge $(f_n)$  muss dabei nicht konvergieren. Dann gilt \[ \int_{\Omega} \liminf\limits_{n \to \infty} f_n \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu,\]
+	$+\infty\leq +\infty$ ist dabei m\"oglich.
+	
+\end{satz}
+	Wenn $(f_n)$ sogar $\mu$-f.\"u. konvergiert und $(\int_{\Omega} f_n \dint \mu)$ konvergiert, gilt damit 
+	\[ \int_{\Omega} \lim\limits_{n \to \infty} f_n \dint \mu \leq \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu \]
+	weil f\"ur konvergente Folgen $\liminf_{n\to\infty} a_n=\lim_{n\to\infty} a_n$ gilt. Die Ungleichung \enquote{$\leq$} gilt in den Konvergenzs\"atzen also mit weniger Annahmen als Satz \ref{allgMonKonv} (und anschliessend in Satz \ref{DCT}).
+
+\begin{proof}
+	Definieren wir $g_n := \inf\limits_{k\geq n} f_k$, so ist $g_n$ messbar für alle $n \in \N$, wachsend in $n$ und erf\"ullt $g_n \leq f_n$, $n\in\N$, sowie punktweise $ \lim\limits_{k \to \infty} g_k = \liminf\limits_{n \to \infty} f_n$ (das ist eine der \"aquivalenten Definition des Limes Inferiors). Satz	\ref{allgMonKonv} und Monotonie von Integralen und Folgengrenzwerten gibt dann die Aussage:
+	\begin{gather*}
+		\int_{\Omega} \liminf\limits_{n \to \infty} f_n \dint \mu = \int_{\Omega} \lim\limits_{n \to \infty} g_n \dint \mu = \lim\limits_{n \to \infty} \int_{\Omega} g_n \dint \mu
+		= \liminf\limits_{n \to \infty} \int_{\Omega} g_n\dint \mu\leq \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu.
+	\end{gather*} 
+	Das dritte Gleichheitszeichen gilt weil $g_n$ (und damit das Integral) wachsend in $n$ ist.
+\end{proof}
+
+\begin{satz}\label{DCT}
+\link{https://www.youtube.com/watch?v=UhqmHKPR_4A&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=13&t=706s}\textbf{[Dominierte Konvergenz Theorem (DCT)]}
+	Seien $f,f_1,f_2,...\colon \Omega \to \overline{\R}$ messbar. Es sollen gelten 
+	\begin{enumerate}[label=(\alph*)]
+		\item\label{DCA} $\lim\limits_{n \to \infty} f_n = f$ $\mu$-fast \"uberall,
+		\item\label{DCB} $|f_n| \leq g$ $\mu$-fast überall f\"ur alle $n\in\N$, für eine beliebige $\mu$-integrierbare nicht-negative messbare numerische Funktion $g$. 
+	\end{enumerate}
+	Dann sind $f,f_1,f_2,...$ $\mu$-integrierbar und \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu = \int_{\Omega} f \dint \mu. \]
+	Die Funktion $g$ spielt keine gro\ss e Rolle (sie muss nur existieren) und wird integrierbare Majorante f\"ur die Folge $(f_n)$ genannt.
+\end{satz}
+
+
+\begin{proof}
+	Die behauptete Integrierbarkeit von $f, f_1,f_2,...$ folgt aus \eqref{Betrag} weil $|f_n|\leq g$ $\mu$-fast überall angenommen wird (das gilt dann auch f\"ur den Grenzwert). Wie beim Beweis der monotonen Konvergenz nehmen wir zun\"achst an, dass die Konvergenz sogar für alle $\omega \in \Omega$ gilt. In einem zweiten Schritt kann man dann wie bei monotoner Konvergenz mit der Hilfsfolge $(f_n \mathbf{1}_{N^C})$ f\"ur die Nullmenge $N=\{\omega:f_n(\omega)\nrightarrow f(\omega)\}$ den Fall der $\mu$-f.\"u. Konvergenz zeigen.\smallskip
+	
+	Der Beweis beruht auf einer elementaren Erkenntniss: Wenn $|f_n| \leq g$ gilt, so gilt $f_n \leq g$ und $-f_n \leq g$ oder umgeformt auch $0 \leq f_n + g$ und $0 \leq g - f_n$. In anderen Worten: Wir k\"onnen die $f_n$ so geschickt verschieben, dass wir nicht-negative Funktionen bekommen und Fatou anwenden k\"onnen.
+	
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+		\begin{align*}
+			\int_{\Omega} f \dint \mu + \int_{\Omega} g \dint \mu \overset{\text{Lin.}}&{=} \int_{\Omega} (f+g) \dint \mu\\
+			 \overset{\text{Ann.}}&{=} \int_{\Omega} \big(\lim\limits_{n \to \infty} f_n + g\big) \dint \mu\\ 
+			&= \int_{\Omega} \big(\liminf\limits_{n \to \infty} f_n+g\big) \dint \mu\\
+			 \overset{\text{\ref{fatou}}}&{\leq} \liminf\limits_{n \to \infty} \int_{\Omega} (f_n+g) \dint \mu\\
+			 \overset{\text{Lin.}}&{=} \liminf\limits_{n \to \infty} \Big(\int_{\Omega} f_n \dint \mu + \int_{\Omega} g \dint \mu \Big)\\ 
+			&= \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu  + \int_{\Omega} g \dint \mu.
+		\end{align*}
+		Wenn wir nun auf beiden Seiten das Integral \"uber $g$ abziehen, dann bekommen wir
+		 \[ \int_{\Omega} f \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu. \]
+		\item Das selbe Argument wenden wir auf $0 \leq g - f_n$ an. Dieselbe Rechnung gibt
+		\begin{gather*}
+			 \int_{\Omega} -f \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} -f_n \dint \mu
+			\overset{\text{Lin.}}{=} \liminf\limits_{n \to \infty} -\int_{\Omega} f_n \dint \mu = - \limsup\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu,
+		\end{gather*}
+		also \[ \limsup\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu \leq \int_{\Omega} f \dint \mu. \]
+	\end{enumerate}
+		Beide Schritte zusammen ergeben \[ \int_{\Omega} f \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu \leq \limsup\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu \leq \int_{\Omega} f \dint \mu. \]
+		Also stimmen $\liminf$ und $\limsup$ \"uberein und geben nach Analysis 1 den Grenzwert		
+		\[  \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu=\int_{\Omega} f \dint \mu . \]
+\end{proof}
+\begin{beispiel1}
+	In beiden Beispielen sei $(\Omega, \mathcal A, \mu)=(\mathbb R, \mathcal B(\mathbb R), \lambda)$.
+	\begin{itemize}
+		\item[(i)] Schauen wir uns mal ein Gegenbeispiel f\"ur die Konvergenzs\"atze an, daf\"ur nehmen wir die Folge $f_n= n \mathbf 1_{(0,\frac 1 n)}$. Das sind Indikatorfunktionen, deren Breite kleiner wird, die H\"ohe allerdings gr\"o\ss er wird. Es gilt punktweise $\lim_{n\to\infty} f_n=f$, wobei $f$ die Nullfunktion ist. Wegen 
+		\begin{align*}
+			\lim_{n\to\infty} \int_\R f_n\dint \lambda\overset{\text{H\"ohe mal Breite}}{=} \lim_{n\to\infty} 1 =1\neq 0=\int_\R f\dint \lambda,
+		\end{align*}
+		scheinen MCT und DCT nicht zu funktionieren. Warum? Die Annahme von MCT ist nicht erf\"ullt weil die Folge $f_n$ nicht punktweise w\"achst. Die Folge ist auch nicht beschr\"ankt durch \enquote{die selbe} integrierbare Funktion $g$, daher ist die Annahme von DCT nicht erf\"ullt.		
+		\item[(ii)] F\"ur reelle Integrale k\"onnen wir jetzt einmal schnell den Berechnungsweg  
+\begin{align*}
+	\int_\R f \dint \lambda= \lim_{n\to\infty} \int_{[-n,n]} f\dint \lambda
+\end{align*}
+f\"ur $f\geq 0$ begr\"unden. Das folgt direkt aus MCT mit der Wahl $f_n=f \mathbf 1_{[-n,n]}$ ($f$ wird also au\ss erhalb von $[-n,n]$ auf $0$ gesetzt) weil $f_n\uparrow f$ (das gilt nur f\"ur $f\geq 0$!). In $\dint x$-Notation steht da also, wie in Beispiel \ref{bsp7} (b) behauptet,
+\begin{align*}
+	\int_\R f(x)\dint x= \lim_{n\to\infty} \int_{-n}^n f(x)\dint x.
+\end{align*}
+Warnung: Gegenbeispiele wie $\frac{\sin(x)}{x}$ aus Beispiel \ref{bsp7} (c) zeigen, dass das Integral \"uber ganz $\R$ nicht umbedingt der Grenzwert der Integrale von $-n$ bis $n$ sein muss! Weil die Folge $(f_n)$ in dem Fall nicht wachsend ist, kann in dem Fall MCT auch nicht angewandt werden.\smallskip	\end{itemize}
+\end{beispiel1}
+
+
+Eine ganz wichtige Folgerung f\"ur die sp\"atere Stochastik ist der Spezialfall, wenn $\mu$ ein endliches Ma\ss{} (insbesondere ein Wahrscheinlichkeitsma\ss ) ist:
+\begin{korollar}\label{K7}
+\link{https://www.youtube.com/watch?v=UhqmHKPR_4A&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=13&t=2484s}
+	Ist $\mu$ ein endliches Maß (\mbox{z. B.} ein Wahrscheinlichkeitsmaß) und $|f_n| \leq C$ für alle $n \in \N$ $\mu$-f.\"u., \mbox{d. h.} alle $f_n$ sind \textit{beschränkt} durch das gleiche $C$, und $\lim_{n\to\infty}f_n = f$ $\mu$-f.\"u., so gilt \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu = \int_{\Omega} f \dint \mu. \]
+\end{korollar}
+
+\begin{proof}
+	Das ist dominierte Konvergenz mit der Majorante $ g \equiv C$. Als Indikatorfunktion ist die Majorante integrierbar, weil \[ \int_{\Omega} g \dint \mu = \int_{\Omega} C \mathbf{1}_{\Omega} \dint \mu \overset{\text{Def.}}{=} C \mu(\Omega) < \infty. \]
+\end{proof}
+\section[Integrale f\"ur \underline{das}{ }Beispiel ]{{\underline{Das} \platz Beispiel} - Integrale \"uber Wahrscheinlichkeitsma\ss e auf $\mathcal B(\R)$}
+Weil in dem Spezialfall $(\R, \mathcal B(\R),\mathbb{P}_F)$ die Integrale sp\"ater in der Stochastik unter dem Namen \glqq Erwartunswerte\grqq{} eine enorm wichtige Rolle spielen werden, schauen wir uns den Spezialfall jetzt schon mal in Ruhe an. Das gibt euch genug Zeit, die wichtigsten Rechnungen \"uber das Semester mehrfach zu \"uben.\smallskip
+
+Kurze Erinnerung: Ein Wahrscheinlichkeitsmaß $\mathbb{P}_F$ auf $\cB(\R)$ mit Verteilungsfunktion $F$ beschreibt ein reellwertiges Zufallsexperiment, bei dem die \enquote{gezogene Zahl}  mit Wahrscheinlichkeit $\mathbb{P}_F((a,b]) = F(b) - F(a)$ in $(a,b]$ liegt. Hat $F$ eine Dichte $f$, so gilt
+\begin{align*}
+	F(t)=\int_{-\infty}^t f(x)\dint x,\quad\text{also } \mathbb{P}_F((a,b])=\int_a^bf(x)\dint x.
+\end{align*}	
+Ist $F$ diskret mit Werten $a_1,...,a_N$ und Wahrscheinlichkeiten $p_1,...,p_N$, so gilt
+\begin{align*}
+	F(t)=\sum_{k=1}^N p_k\mathbf 1_{[a_k,+\infty)}=\sum_{a_k\leq t} p_k,\quad\text{also }\mathbb{P}_F((a,b])=\sum_{a<a_k\leq b} p_k.
+\end{align*}
+Wir summieren also die Wahrscheinlichkeiten der Werte in $(a,b]$.\smallskip
+
+Ein paar konkreten Integralen geben wir jetzt Namen und \"uberlegen uns anschlie\ss end, wie man die Integrale in vielen Beispielen berechnen kann.
+\begin{deff} \link{https://www.youtube.com/watch?v=UhqmHKPR_4A&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=13&t=3619s}
+
+
+	\begin{enumerate}[label=(\roman*)]
+		\item F\"ur $k\in \mathbb{N}$ hei\ss t \[ \int_{\R} x^k \dint \mathbb{P}_F(x) \]  \textbf{k-tes Moment} von $ \mathbb{P}_F $ (oder k-tes Moment der Verteilungsfunktion $F$), wenn das Integral wohldefiniert ist.
+		\item F\"ur $\lambda \in \mathbb{R}$ hei\ss t\[ \int_{\R} e^{\lambda x} \dint \mathbb{P}_F(x) \] heißt \textbf{exponentielles Moment} von $ \mathbb{P}_F $ (oder exponentielles Moment der Verteilungsfunktion $F$).
+	\end{enumerate}
+	 Allgemein betrachten wir f\"ur messbare Abbildungen $g:\R\to \overline \R$ auch die Integrale 
+		\[ \int_{\R} g(x) \dint \mathbb{P}_F(x), \] 
+		jedoch ohne ihnen extra einen Namen zu geben.\smallskip
+
+	Beachte: \underline{Alle} Integrale \"uber nicht-negative messbare Integranden sind wohldefiniert, das Integral k\"onnte aber $+\infty$ sein. Damit sind exponentielle Momente und gerade Momente immer in $[0,+\infty]$ definiert, existieren nach unserer Konvention aber nur, wenn sie endlich sind.
+\end{deff}
+
+
+
+\begin{satz}\label{IntDichten}
+\link{https://www.youtube.com/watch?v=UhqmHKPR_4A&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=13&t=4092s}\textbf{[Integrale f\"ur absolutstetige Verteilungen]}
+	Sei $\mathbb{P}_F$ ein Wahrscheinlichkeitsmaß auf $\cB(\R)$ und $F$ habe Dichte $f$.	Dann gilt für $g\colon \R \to \overline{\R}$ Borel-messbar: 
+	\begin{align}\label{Gleich}
+		\int_{\R} g \dint \mathbb{P}_F \text{ ist wohldefiniert }\quad \Leftrightarrow\quad \int_{\R} g(x)f(x) \dint x\text{ ist wohldefiniert}
+	\end{align}
+	und, wenn die Integrale wohldefiniert sind, gilt die Rechenregel  \[ \int_{\R} g \dint \mathbb{P}_F = \int_{\R} g(x) f(x) \dint x. \]
+\end{satz}
+ Der Satz besagt, dass wir die abstrakten Integrale $\int_\R g \dint \mathbb P_F$ durch sehr viel weniger abstrakte Integrale behandeln k\"onnen. Beachtet, dass mit $\int_{\R} g(x)f(x) \dint x$ das Lebesgue Integral $\int_\R g f \dint \lambda$ gemeint ist. Nach dem Beweis diskutieren wir nochmal ausf\"uhrlich, wie ihr das mit den Tricks aus der Analysis berechnen k\"onnt. 
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item F\"ur $g\geq 0$ starten wir die Gebetsm\"uhle der Integrationstheorie:
+		\begin{itemize}
+			\item  Sei zun\"achst $g = \mathbf{1}_A$ für $A \in \cB(\R)$. Es gilt
+			\begin{align*}
+				\int_{\R} g \dint \mathbb{P}_F\overset{\text{Def.}}{ =} 1 \cdot \mathbb{P}_F(A) \overset{\text{\hypertarget{stern}{($\ast$)}}}{=} \int_{A} f(x) \dint x = \int_{\R} \mathbf{1}_A (x) f(x)\,dx = \int_{\R} g(x) f(x) \dint x.
+			\end{align*}
+			Warum gilt \hyperlink{stern}{($\ast$)}, also $ \mathbb{P}_F(A) = \int_{A} f(x) \dint x$? Ist $A = (a,b]$, so gilt $\mathbb{P}_F((a,b)) = \int_{a}^{b} f(x) \dint x$ weil $F$ Dichte $f$ hat. In Anwendung \ref{ccd} haben wir gezeigt, dass $\nu(A) = \int_{A} f(x) \dint x$ ein Maß auf $\cB(\R)$ ist. Es gilt also $\mathbb{P}_F = \nu$ auf einem $\cap$-stabilen Erzeuger von $\mathcal B(\R)$ und damit aufgrund von Korollar \ref{Dynkin-Folgerung} auch auf $\mathcal B(\R)$. Also gilt  ($\ast$) f\"ur alle $A\in \mathcal B(A)$.
+			\item Ist $g$ eine einfache Funktion, so folgt nun \[ \int_{\R}g \dint \mathbb{P}_F = \int_{\R} g(x)f(x) \dint x\] aufgrund der Linearit\"at des Integrals.
+			\item Ist $g \geq 0$, wählen wir eine Folge $(g_n) \subseteq \cE^+$ mit $g_n \uparrow g$, $n \to \infty$. Die Folge existiert weil $g$ messbar ist. Mit dem Monotone Konvergenz Theorem und dem gerade Gezeigen f\"ur einfache Funktionen folgt \[ \int_{\R}g \dint \mathbb{P}_F \overset{\text{\ref{allgMonKonv}}}{=} \lim\limits_{n \to \infty} \int_{\R} g_n \dint \mathbb{P}_F = \lim\limits_{n \to \infty} \int_{\R} g_n(x) f(x) \dint x \overset{\text{\ref{allgMonKonv}}}{=} \int_{\R} g(x) f(x) \dint x. \]
+		\end{itemize}		
+		\item Für $g$ beliebig zerlegt man $g$ in $g^+ - g^-$ und wende (i) auf die Integrale der Positiv- und Negativteile an. Vergleiche den Anfang des Beweises von Korollar \ref{korTrafo}. 
+	\end{enumerate}
+\end{proof}
+Weil ihr mit dem Satz in dieser Vorlesung viel rechnen werdet, verbinden wir den Satz noch schnell mit Beispiel \ref{bsp7}. Das Integral auf der rechten Seite der \"Aquivalenzen ist das Lebesgue Integral $\int_\R g f \dint \lambda$ in der weniger angstverbreitenden $\dint x$-Notation. F\"ur nette Integranden (st\"uckweise stetig) ist das Integral aufgrund der Diskussion aus Beispiel \ref{bsp7} wie folgt zu berechnen ist:
+ \begin{itemize}
+ 	\item Ist $g\geq 0$ (z. B. $g(x)=e^{x}$), so ist alles einfach: Weil $f$ als Dichte immer nicht-negativ ist, ist auch das Produkt $gf$ nicht-negativ. Damit ist das Integral \underline{immer} wohldefiniert (es k\"onnte aber unendlich sein). Daher k\"onnt ihr den ersten Teil im Satz ignorieren und sofort
+	\begin{align*}
+		\int_{\R} g \dint \mathbb{P}_F=\int_{\R} g(x) f(x) \dint x\overset{\text{MCT}}{=}\lim_{n\to\infty}\int_{-n}^n g(x) f(x) \dint x
+	\end{align*}	
+	mit den Tricks der Analysis ausrechnen.
+	\item Habt ihr Pech, so gilt $g\geq 0$ nicht (z. B. f\"ur $g(x)=x$). Dann \"uberlegt ihr euch, was Positivteil $g^+$ ist und was Negativteil $g^-$ ist. Weil beide nicht-negativ sind, macht ihr 2x das gerade beschriebene, ihr berechnet also $\int_{\R} g^+(x) f(x) \dint x$ und $\int_{\R} g^-(x) f(x) \dint x$. Wenn eines von beiden (oder beide) endlich ist, so ist nach dem Satz $\int_{\R} g \dint \mathbb{P}_F$ wohldefiniert und ihr habt den Wert $$\int_{\R} g \dint \mathbb{P}_F=\int_{\R} g^+(x) f(x) \dint x-\int_{\R} g^-(x) f(x) \dint x$$ schon ausgerechnet. Wir haben dabei $(gf)^+=g^+f$ und $(gf)^-=g^-f$ benutzt, weil $f$ als Dichte nicht-negativ ist. Vorsicht: In diesem zweiten Fall d\"urft ihr \underline{nicht} einfach $\int_{\R} g \dint \mathbb{P}_F=\lim_{n\to\infty} \int_{-n}^n g(x)f(x)\dint x$ nutzen! Nach Beispiel \ref{bsp7} (iii) kann das falsch sein! Wenn ihr neugierig seid, k\"onnt ihr f\"ur ein konkretes Beispiel zu Warnung \ref{kkk} vorbl\"attern.
+ \end{itemize}
+ 
+Angelehnt an \eqref{Betrag} k\"onnen wir auch folgendes formulieren, wenn wir uns nur f\"ur die Endlichkeit des Integrals interessieren:
+	\begin{align}\label{Gleich}
+		g\text{ ist }\mathbb{P}_F\text{-integrierbar}\quad\Longleftrightarrow\quad	\int_{\R} g \dint \mathbb{P}_F \text{ existiert }\quad \Leftrightarrow\quad \int_{\R} |g(x)|f(x) \dint x<\infty.
+	\end{align}
+	\marginpar{\textcolor{red}{Vorlesung 13}}
+	
+	
+
+Im diskreten Fall nehmen wir mal diese Formulierung:
+
+\begin{satz}\label{IntDiskr}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=70s}\textbf{[Integrale f\"ur diskrete Verteilungen]}
+	Sei $ \mathbb{P}_F $ ein Maß auf $\cB(\R)$ und $F$ sei diskret, d. h.
+	\[ F(t) = \sum\limits_{k = 1}^{N} p_k \mathbf{1}_{[a_k,\infty)}(t), \quad t\in\R, \]
+	mit $N \in \N \cup \{ + \infty \}$, $a_1, ..., a_N \in \R$ und $\sum_{k = 1}^{N} p_k = 1$. Dann gilt f\"ur $g:\R\to\overline\R$ messbar:
+	\[g\,\,\mathbb{P}_F \text{-integrierbar }\quad  \Leftrightarrow \quad \sum\limits_{k = 1}^{N} |g(a_k)|p_k<\infty \] und, wenn $g$ $\mathbb{P}_F$-integrierbar ist, gilt  \[ \int_{\R} g \dint \mathbb{P}_F = \sum\limits_{k = 1}^{N} g(a_k)p_k . \]
+	Zu beachten ist, dass in vielen diskreten Modellen $N$ endlich ist und $g$ die Werte $+\infty$ und $-\infty$ nicht annimmt, dann ist das Integral $\int_{\R} g\, \dint \mathbb P_F$ nat\"urlich immer definiert und ihr merkt euch einfach die Rechenregel $\int_{\R} g \dint \mathbb{P}_F = \sum\limits_{k = 1}^{N} g(a_k)p_k$.
+\end{satz}
+
+
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Sei zun\"achst $g \geq 0$: \begin{enumerate}[label=(\alph*)]
+			\item Am einfachsten ist der Fall $N \in \N$, denn dann sprechen wir nur von endlichen Summen. Weil das Ma\ss{} $\mathbb{P}_F$ von der Form $\mathbb{P}_F = \sum_{k = 1}^{N} p_k \delta_{a_k} $ ist, gilt $g = g \mathbf{1}_{\{ a_1,...,a_N \}}$  $\mathbb P_F$-fast überall. Es folgt dann
+			\begin{align*}
+				\int_{\R} g \dint \mathbb{P}_F \overset{\text{Satz }\ref{S7}}&{=} \int_{\R} g\mathbf{1}_{\{ a_1,...,a_N \}} \dint \mathbb{P}_F\\
+				& = \int_{\R} g \sum_{k = 1}^{N} \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+				&= \int_{\R} \sum_{k = 1}^{N} g(a_k) \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+				 \overset{\text{Lin.}}&{=} \sum_{k = 1}^{N} \int_{\R} \underbrace{g(a_k) \mathbf{1}_{ \{ a_k \}}}_{\text{einfach}} \dint \mathbb{P}_F\\
+				\overset{\text{Def. Int.}}&{=} \sum_{k = 1}^{N} g(a_k) \mathbb{P}_F(\{ a_k \}) \overset{\text{Def. Ma\ss}}{=} \sum_{k = 1}^{N}  g(a_k)p_k.
+			\end{align*}
+			\item $N = + \infty$ funktioniert im Prinzip genauso, wir m\"ussen nur einmal monotone Konvergenz f\"ur die wachsende Folge von messbaren Funktionen $g_n:=\sum_{k = 1}^{n} g(a_k) \mathbf{1}_{ \{ a_k \}}$ nutzen, um Integral und Summe zu vertauschen:
+			\begin{align*}
+				\int_{\R} g \dint \mathbb{P}_F &= \int_{\R} g\mathbf{1}_{\{ a_1,a_2,... \}} \dint \mathbb{P}_F\\
+				& = \int_{\R} g \sum_{k = 1}^{\infty} \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+			\overset{\text{Def. Reihe}}&{=} \int_{\R} \lim\limits_{n \to \infty} \sum_{k = 1}^{n} g(a_k) \mathbf{1}_{ \{ a_k \}} \dint \mathbb{P}_F\\
+			 \overset{\text{\ref{allgMonKonv}}}&{=} \lim_{n\to\infty} \int_{\R}\sum_{k = 1}^{n} g(a_k) \mathbf{1}_{ \{ a_k \}}\dint \mathbb{P}_F\\
+		 \overset{\text{Lin.}}&{=} \lim_{n\to\infty}\sum_{k = 1}^{n} \int_{\R} \underbrace{g(a_k) \mathbf{1}_{ \{ a_k \}}}_{\text{einfach}} \dint \mathbb{P}_F\\
+			\overset{\text{Def. Int.}}&{=} \sum_{k = 1}^{\infty} g(a_k) \mathbb{P}_F(\{ a_k \}) \overset{\text{Def. Ma\ss}}{=} \sum_{k = 1}^{\infty} g(a_k)p_k.
+			\end{align*}
+		\end{enumerate}
+		\item Sei nun $g$ messbar, aber nicht mehr nicht-negativ. Es gilt also wegen \eqref{Betrag} und Teil (i)
+		\begin{align*}
+			\int_{\R} g \dint \mathbb P_F \text{ existiert} \quad& \Leftrightarrow \quad \int_{\R} |g|\dint \mathbb{P}_F<\infty\quad
+				 \Leftrightarrow\quad \sum_{k=1}^{N} |g(a_k)|p_k < \infty.
+		\end{align*}
+		Wenn das Integral existiert, gilt wegen (i)
+		\begin{align*}
+			\int_{\R} g \dint \mathbb{P}_F &\overset{\text{Def.}}{=} \int_{\R} g^+ \dint \mathbb{P}_F - \int_{\R} g^- \dint \mathbb{P}_F \\
+			&\overset{\text{(i)}}{=} \sum_{k = 1}^{N}  g^+(a_k) p_k- \sum_{k = 1}^{N}  g^-(a_k)p_k\\
+			&= \sum_{k = 1}^{N} \big(g^+(a_k) - g^-(a_k\big))p_k = \sum_{k = 1}^{N}  g(a_k)p_k .
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+Wir werden in der Stochastik das $1.$te Moment Erwartungswert nennen, das soll also so etwas wie der Mittelwert \"uber Versuchsausf\"uhrungen sein (In Vorlesung 26 wird das mit dem Gesetz der gro\ss en Zahlen klar). Um mal zwei Beispiele konkret mit den gerade gezeigten Rechenregeln auszurechnen, schauen wir uns die Erwartungswerte ($1.$te Momente) vom W\"urfelexperiment und vom gleichverteilten Ziehen aus $[0,1]$ mal an:
+%Warum der abstrakte Erwartungswert \"uberhaupt Erwartungswert hei\ss t, wird aus Beispielen am klarsten ersichtlich. Jeder hat eine Vorstellung, was der \enquote{Erwartungswert} eines W\"urfelwurfs sein sollte, n\"amlich 3,5. Beim gleichverteilten Ziehen aus $[0,1]$ \enquote{erwarten} wir im Mittel $\frac 1 2$. Das kommt nat\"urlich bei unserer Modellierung aufgrund der vorherigen S\"atze auch raus:
+\begin{beispiel}\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=1771s} \abs
+
+	\begin{itemize}
+		\item Seien $a_1=1, ..., a_6=6$ und $p_1=...=p_6=\frac 1 6$. Dann gilt \[ \int_{\R} x \dint \mathbb{P}_F(x) = \sum\limits_{k = 1}^{6}k  \frac{1}{6} = 3,5. \] Dies ist so ein Beispiel, bei dem die Summe nat\"urlich endlich ist ($N$ endlich, $g$ endlich), wir uns also gar keine Gedanken um Wohldefiniertheit und Endlichkeit machen m\"ussen. Wir k\"onnen Satz \ref{IntDiskr} also als einfache Rechenregeln benutzen.
+		\item Sei jetzt $\mathbb{P}_F$ absolutstetig mit Dichte $f = \mathbf{1}_{[0,1]}$, daf\"ur nutzen wir Satz \ref{IntDichten}. Der Integrand von $\int_\R x f(x)\dint x$ ist nicht-negativ, also sind alle Integrale wohldefiniert (k\"onnten aber den Werte $+\infty$ annehmen). Wir k\"onnen also direkt die Rechenregel aus dem Satz benutzen:
+		\[  \int_{\R} x \dint \mathbb{P}_F(x)=\int_{\R} x f(x) \dint x = \int_{\R} x \mathbf{1}_{[0,1]}(x) \dint x = \int\limits_{0}^1	x \dint x = {\Big[ \frac{1}{2} x^2\Big]}_{0}^{1} = \frac{1}{2}.\]
+	\end{itemize}
+	Falls ihr eine grobe Vorstellung von dem Begriff Erwartungswert habt, so sollten diese zwei Beispiele dazu passen. In ein paar Wochen wird euch das auch klar sein.
+\end{beispiel}
+
+\begin{warnung}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=2181s}
+	Es ist nicht immer der Fall, dass eine Verteilungsfunktion diskret oder absolutstetig ist. In diesen F\"allen gibt es keine einfach Formel für $\int_{\R} g \dint \mathbb{P}_F$! Es gibt drei Typen von Verteilungsfunktionen:
+	\begin{itemize}
+		\item $F$ ist absolutstetig,
+		\item $F$ ist diskret,
+		\item $F$ ist \glqq stetigsingul\"ar\grqq{} (stetig, hat aber keine Dichte).
+\end{itemize}
+Jede stetige Verteilungsfunktion l\"asst sich zerlegen in absolutstetigen und stetigsingul\"aren Anteil (Satz von Lebesgue). Das geht hier aber zu weit, Beispiele f\"ur stetigsingul\"are Verteilungen sind tricky (z. B. die Cantorverteilung).
+\end{warnung}
+
+
+In vielen Beispielen m\"ussen wir gar nicht rechnen, sondern sehen das Ergebniss direkt. Kurze Erinnerung an die Schule: $f$ hei\ss t punktsymmetrisch, falls $f(x)=-f(-x)$ und achsensymmetrisch, falls $f(x)=f(-x)$ f\"ur alle $x\in \R$. F\"ur integrierbare punktsymmetrische Funktionen gilt $\int_\R f(x)\dint x=0$. Das k\"onnen wir direkt ausnutzen, um viele Momente direkt als $0$ zu erkennen:
+\begin{lemma}\label{ky}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=2488s}
+	Ist $F$ absolutstetig mit Dichte $f$ und ist das $(2k+1)$-te Moment von $F$ wohldefiniert, so gilt
+	\[ f \text{ achsensymmetrisch} \quad \Rightarrow \quad \int_\R x^{2k+1}\dint \mathbb P_F(x)= 0. \]
+\end{lemma}
+\begin{proof}
+	Ist $f$ achsensymmetrisch, so ist $h(x) := x^{2k+1}f(x)$ punktsymmetrisch weil dann $h(-x) = (-x)^{2k+1}f(-x) = -x^{2k+1}f(x) = -h(x)$. Wegen \ref{IntDichten} ist also \[ \int_{\R} x^{2k+1} \dint \mathbb{P}_F(x) = \int_{\R} x^{2k+1} f(x) \dint x \overset{\text{punktsym.}}{=} 0. \]	
+\end{proof}
+
+\begin{warnung}\label{kkk}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=2854s} \textbf{[Cauchyverteilung]}
+ Wir m\"ussen in Lemma \ref{ky} auf jeden Fall annehmen, dass die Momente existieren. Beispielsweise hat die Cauchyverteilung eine achsensymmetrische Dichte, das erste Moment ist aber gar nicht definiert, damit insbesondere nicht $0$! Dies ist einer der fiesen $\infty-\infty$ F\"alle. Rechnen wir das mal nach. Wir betrachten also die Cauchy-Dichte $f(x) = \frac{1}{\pi}\frac{1}{1+x^2}$ und berechnen zun\"achst den Positivteil, wobei wir die konkrete Form des Positivteils $x^+$ einsetzen:
+  	\begin{align*}
+		\int_{\R} x^+ \dint \mathbb{P}_F(x)
+		 \overset{\ref{IntDichten}, x^+\geq 0}&{=} \frac{1}{\pi} \int_{\R} x^+ \frac{1}{1+x^2}\dint x\\
+		&= \frac{1}{\pi} \int_{-\infty}^{\infty} x\mathbf 1_{[0,\infty)}(x) \frac{1}{1+x^2}\dint x\\
+		&= \frac{1}{\pi} \int_{0}^{\infty}  \frac{1}{1/x+x} \dint x\\ 
+		& \geq\frac{1}{\pi} \int_{1}^{\infty}  \frac{1}{1+x} \dint x\\ 
+		\overset{\ref{allgMonKonv}}&{=} \frac{1}{\pi}\lim\limits_{N \to \infty} \int_{1}^{N}  \frac{1}{1+x} \dint x \\
+		\overset{\text{Hauptsatz}}&{=} \frac{1}{\pi}\lim\limits_{N \to \infty} \Big[\ln(1+x)\Big]_1^N=+\infty.
+	\end{align*}
+	Genauso gibt die selbe Rechnung, mit der konkreten Form des Negativteils $x^-$,
+	\begin{gather*}
+	\int_{\R} x^- \dint \mathbb{P}_F(x)  \overset{\ref{IntDichten}, x^+\geq 0}{=} \frac{1}{\pi} \int_{-\infty}^{0} -x \frac{1}{1+x^2} \dint x =\frac{1}{\pi} \int_0^\infty x \frac{1}{1+x^2}\dint x= +\infty.
+	\end{gather*}
+	Damit ist $\int_{\R} x \dint \mathbb{P}_F(x) = \int_{\R} x^+ \dint \mathbb{P}_F(x) - \int_{\R} x^- \dint \mathbb{P}_F(x) = +\infty - (+\infty)$ nicht wohldefiniert. F\"ur die Cauchyverteilung ist das erste Moment also nicht wohldefiniert!
+\end{warnung}
+Die Absch\"atzung f\"ur die Cauchyverteilung war nicht so einfach. Daher w\"are es n\"utzlich, den Integralen direkt anzusehen, ob sie existieren, oder nicht. Wenn man weis was zu tun ist, dann ist die formelle Rechnung viel leichter. Hier ist eine grobe Heuristik:
+\begin{bem}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=3990s} \textbf{[Heuristik mit Dichten]}
+	Wie \enquote{sieht} man, ob ein Integral existiert? Man vergleicht mit bekannten Integralen. Erinnern wir uns kurz an die Analysisvorlesung:
+	\begin{align*}
+		\int_{1}^{\infty} \frac{1}{x^a} \dint x &\overset{\ref{allgMonKonv}}{=} \lim\limits_{N \to \infty} \int_{1}^{N} \frac{1}{x^a} \dint x\\
+		&= \lim\limits_{N \to \infty} \begin{cases}
+		\Big[\ln(x)\Big]_1^N&:a = 1\\
+		\frac{1}{1-a}\Big[x^{1-a}\Big]_1^N&:a \neq 1
+		\end{cases}\\
+		&= \lim\limits_{N \to \infty} \begin{cases}
+		\ln(N)&:a = 1\\
+		\frac{1}{1-a}(N^{1-a} - 1)&: a \neq 1
+		\end{cases}\\
+		&= \begin{cases}
+		+\infty&:a \leq 1\\
+		\frac{1}{a - 1} < \infty&:a > 1
+		\end{cases}.
+	\end{align*}
+	Unsere Heuristik f\"ur die Integrierbarkeit bei unendlich ist es, grob mit der Funktion $\frac 1 x$ zu vergleichen. F\"allt ein Integrand $f$ deutlich schneller gegen $0$, ist vermutlich $\int_{1}^{\infty} f(x) \dint x < \infty$. F\"allt der Integrand langsamer als $\frac 1 x$ gegen $0$, so ist sicherlich $\int_{1}^{\infty} f(x) \dint x = + \infty$.\smallskip
+	
+	Hier sind ein paar Beispiele:
+	\begin{enumerate}[label=(\roman*)]
+		\item Nochmal die Cauchyverteilung: $\frac{1}{\pi} x \frac{1}{1+x^2}$ ist bei $\infty$ ungefähr wie $\frac{1}{x}$, das ist aber \textit{nicht} integrierbar. Die Heuristik sagt uns also auf einen Blick, dass etwas schief gehen sollte. Um daraus ein sauberes Argument zu machen, m\"ussen wir leider doch die Absch\"atzung aus \ref{kkk} durchgehen.	
+		\item Für welches $\beta$ hat $\operatorname{Exp}(\lambda)$ ein endliches exponentielle Moment, wann ist also 
+		\[\lambda\int_{\R} e^{\beta x} e^{-\lambda x} \mathbf{1}_{[0,\infty)}(x) \dint x = \lambda \int_{0}^{\infty} e^{x(\beta - \lambda)} \dint x \]
+		endlich? Weil $e^{ax}$ f\"ur $a>0$ schneller als jedes Polynom wächst, fällt $e^{-a x}$ $(\lambda > 0)$ viel schneller als jedes Polynom gegen $0$. Also sind alle exponentiellen Momente genau dann endlich, wenn $\beta < \lambda$. In dem Fall k\"onnen wir alles nat\"urlich sofort ausrechnen, weil der Integrand eine einfache Stammfunktion hat.
+		\item Für welches $\beta$ hat $\cN(\mu, \sigma^2)$ ein endliches exponentielles Moment, wann ist also
+		\[ \frac{1}{\sqrt{2 \pi \sigma^2}} \int_{\R} e^{\beta x} e^{-\frac{(x-\mu)^2}{2\sigma^2}} \dint x \] definiert?
+		Nat\"urlich geht $e^{\beta x} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ viel schneller als $\frac{1}{x}$ gegen 0, weil $x^2$ schneller wächst als $x$, und die Exponentialfunktion alles polynomielle dominiert.
+	\end{enumerate}
+\end{bem}
+
+Um einen ersten Eindruck zu bekommen, warum Momente \"uberhaupt n\"utzlich sind, schauen wir uns eine Variante der Markov-Ungleichung an. Wir sehen hier, dass wir mit den Momenten etwas \"uber die Verteilung der Masse aussagen k\"onnen. Schauen wir uns dazu die Konzentration der Masse der Normalverteilung um $\mu$ an:
+\begin{beispiel}\label{NV}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=4644s} \textbf{[Konzentrationsungleichung]}
+	Wir kennen bereits die Normalverteilung $\mathcal N(\mu,\sigma^2)$. Der Parameter $\mu$ verschiebt die Stelle des Maximalpunktes der Dichte an die Stelle $\mu$, der Parameter $\sigma^2$ ist f\"ur die Stauchung zust\"andig. F\"ur kleines $\sigma^2$ ist die Dichte \enquote{spitzer}, f\"ur gro\ss es $\sigma^2$ flacher. Qualitativ wissen wir schon, dass viel Masse nah bei $\mu$ liegt, dort ist die Dichte schlie\ss lich gro\ss{} (vergleiche die Diskussion \ref{diskussion}). K\"onnen wir das auch genauer machen? Wenn jemand fragt, wie weit man von $\mu$ weggehen muss, so dass beispielsweise 99,7 Prozent der Masse in $[\mu-a,\mu+a]$ liegt, was antworten wir? Schauen wir das Bildchen an: Reicht der gr\"une Bereich, um $\mathbb P([\mu-a,\mu+a])\approx 0,997$ zu erreichen? Vermutlich nicht. Gr\"un, rot und orange zusammen k\"onnten vom Bild her aber hinhauen. Solche Fragen durch Ungleichungen m\"oglichst gut zu beantworten, sind das Themengebiet der \textbf{Konzentrationsungleichungen}, also Ungleichungen der Art
+	\begin{align*}
+		\mathbb P([a,b])\leq ...\quad \text{oder}\quad
+				\mathbb P([a,b])\geq ...
+	\end{align*}
+	Das ist nat\"urlich einfach zu beantworten, wenn die Dichte $F$ von $\mathbb P${} explizit ist, weil dann $\mathbb P_F([a,b])=F(b)-F(a)$ gilt. Bei der Exponentialverteilung braucht man z. B. nichts abzusch\"atzen weil $F$ eine einfache Formel hat. F\"ur die Normalverteilung geht das allerdings nicht, $F$ ist als Integral gegeben und das Integral kann nicht ausgerechnet werden.
+	\begin{center}
+		\begin{tikzpicture}
+		\begin{axis}[
+		legend pos = outer north east,
+		x = 2cm,
+		y = 2cm,
+		axis lines=middle,
+		axis line style={-Stealth,thick},
+		xmin=-1,xmax=2.5,ymin=-0.625,ymax=1.5,
+		xtick={-0.5,0,0.5,1,1.5,2},xticklabels={,,$\mu-2\sigma$,$\mu$,$\mu+2\sigma$},
+		ytick={0,1},
+		extra y ticks={-0.5},
+		extra x tick style={xticklabel=\empty},
+		extra y tick style={yticklabel=\empty},
+		yticklabel=\empty,
+		xtick distance=1,
+		ytick distance=1,
+		xlabel=$t$,
+		ylabel=$f(t)$,
+		%title={Wonderful plot},
+		minor tick num= 1,
+		%grid=both,
+		grid style={thin,densely dotted,black!20}]
+		%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+		%\addplot [domain = -0.5:3] {exp(-(x-1)^2 / (2*0.2)) / (sqrt(2*pi*0.2))};
+%		\addplot [name path = B, domain = -2:3, color = blue, smooth] {gauss(1,0.45)};\addlegendentry{$\mu = 2, \sigma^2=\frac 1 2$};
+		\addplot [name path = A, domain = -2:3, color = blue, smooth] {gauss(1,0.3)};\addlegendentry{$\mathcal N (\mu,\sigma^2)$};
+
+		\addplot [name path = C, domain = -2:3, color = black, smooth] {0};
+		%\addlegendentry{$f$};
+%		\addlegendentry{\empty};
+	
+		\addplot [green, fill opacity=0.4] fill between [
+		of=A and C,
+		soft clip={domain=0.75:1.25},
+		]; 
+
+		\addplot [orange, fill opacity=0.4] fill between [
+		of=A and C,
+		soft clip={domain=0.25:0.5},
+		]; 
+
+		\addplot [orange, fill opacity=0.4] fill between [
+		of=A and C,
+		soft clip={domain=1.5:1.75},
+		]; 
+
+
+		\addplot [red, fill opacity=0.4] fill between [
+		of=A and C,
+		soft clip={domain=1.25:1.5},
+		]; 
+
+
+		\addplot [red, fill opacity=0.4] fill between [
+		of=A and C,
+		soft clip={domain=0.5:0.75},
+		]; 
+		
+				
+		
+
+	%	\addplot [red, fill opacity=0.4] fill between [
+	%	of=A and B,
+	%	soft clip={domain=1.75:2.5},
+	%	]; 
+%		\legend{,viel Masse,wenig Masse};
+		\end{axis}
+		\end{tikzpicture}
+		\end{center}
+Das bunte Bildchen visualisiert die sogenannte $1$-$2$-$3$-$\sigma$-Regel f\"ur $\mathcal N(\mu,\sigma^2)$. Die Regel besagt, dass
+\begin{itemize}
+	\item in $[\mu-\sigma,\mu+\sigma]$ ungef\"ahr 68 Prozent (also $0,68$) der Masse liegt,
+	\item in $[\mu-2\sigma,\mu+2\sigma]$ ungef\"ahr 95 Prozent (also $0,95$) der Masse liegt,
+	\item in $[\mu-3\sigma,\mu+3\sigma]$ ungef\"ahr 99,7 Prozent (also $0,997$) der Masse liegt.
+\end{itemize}
+Weil $\sigma$ auch Standardabweichung genannt wird, hei\ss t das in Worten: \enquote{Um zwei Standardabweichungen nach links und rechts von $\mu$ liegt 95 Prozent der Masse von $\mathcal N(\mu,\sigma^2)$}.
+\end{beispiel}
+Wir zeigen jetzt mit der Markov-Ungleichung unsere erste Integralabsch\"atzung und versuchen uns danach an einem Teil der $1$-$2$-$3$-$\sigma$-Regel.
+\begin{prop} \label{MarkovPoly}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=5233s} \textbf{[Markov-Ungleichung für Polynome]}
+	Sei $\mathbb{P}_F$ ein Wahrscheinlichkeitsmaß auf $\cB(\R)$, sodass für eine gerade nat\"urliche Zahl $2k$ das $2k$-te Moment existiert ist. Dann gilt f\"ur alle $a>0$
+	\[ \mathbb{P}_F\big([-a,a]\big) \geq 1 - \frac{\int_{\R} x^{2k} \dint \mathbb{P}_F(x) }{a^{2k}}. \]
+	Gleichbedeutend (Gegenereignis) gilt 
+	\[ \mathbb{P}_F\big([-a,a]^C\big) \leq  \frac{\int_{\R} x^{2k} \dint \mathbb{P}_F(x) }{a^{2k}}. \]
+\end{prop}
+
+\begin{proof} 
+	Der Beweis ist tats\"achlich sehr einfach und basiert auf dem kleinen Trick, den wir schon ein paar mal gesehen haben. Wir mogeln einen Indikator \"uber eine Menge in das Integral und sch\"atzen auf dem Indikator die Funktion ab. Das geht nat\"urlich nur, wenn der Indikator \"uber eine messbare Menge so gew\"ahlt wird, dass die Menge etwas mit dem Integranden zu tun hat. Wir nehmen dazu den Integranden $g(x)=x^{2k}$ und die Menge $[-a,a]^C$. F\"ur $x\in [-a,a]^C$ gilt nat\"urlich $|x|>a$ und damit, $2k$ ist gerade, $x^{2k}=|x|^{2k}\geq a^{2k}$. Dann m\"ussen wir nur noch die Monotonie vom Integral nutzen:
+	\begin{align*}
+		\int_{\R} x^{2k} \dint \mathbb{P}_F(x) \overset{\text{Mon.}}&{\geq} \int_{\R} x^{2k} \mathbf{1}_{[-a,a]^C}(x) \dint \mathbb{P}_F(x)\\
+		& \geq \int_{\R} \underbrace{a^{2k} \mathbf{1}_{[-a,a]^C}(x)}_{\text{einfach}} \dint \mathbb{P}_F(x)\\
+		 \overset{\text{Def.}}&{=} a^{2k}\mathbb{P}_F([-a,a]^C).
+	\end{align*}
+	Aufl\"osen gibt 
+	$$\mathbb{P}_F([-a,a]^C) \leq \frac{\int_{\R} x^{2k} \dint \mathbb{P}_F(x)}{a^{2k}}.$$ Die zweite Ungleichung ist die Gegenwahrscheinlichkeit, weil f\"ur Wahrscheinlichkeitsma\ss e $\mathbb P_F(B)=1-\mathbb P_F(B^C)$ gilt.
+\end{proof}
+Kommen wir zur\"uck zur Konzentration der Normalverteilung um $\mu$.
+\begin{beispiel}
+\link{https://www.youtube.com/watch?v=SuuVQteMtxo&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=14&t=5707s}
+	Aufgabe: Sei $\mathbb P$ normalverteilt mit Parametern $\mu=0$ und $\sigma^2>0$. Finde ein $a > 0$ mit $\mathbb{P}([-a,a]) \approx 0.997$. Damit uns die Markov-Ungleichung explizite Zahlen gibt, brauchen wir Formel f\"ur gerade Momente, wir nehmen einfach mal das 2.te und das 8.te. F\"ur 2.te und 8.te Momente der Normalverteilungen gelten, das sehen wir sp\"ater (oder ihr rechnet die Integrale von Hand aus),
+	\[ \int_{\R} x^2 \frac{1}{\sqrt{2 \pi \sigma^2}}  e^{-\frac{(x-\mu)^2}{2\sigma^2}} \dint x = \sigma^2\quad \text{ und }\quad \int_{\R} x^8 \frac{1}{\sqrt{2 \pi \sigma^2}}  e^{-\frac{(x-\mu)^2}{2\sigma^2}} \dint x = 105 \sigma^8. \]
+	Um die Konzentration der Normalverteilung in $[-a,a]$ abzusch\"atzen, verwenden wir Proposition \ref{MarkovPoly} einmal mit $2k=2$ und einmal mit $2k=8$:
+	\[ \mathbb{P}([-a,a]) \geq 1 - \frac{\sigma^2}{a^2}\quad \text{ sowie }\quad \mathbb{P}([-a,a]) \geq 1 - \frac{105\sigma^8}{a^8}. \]
+	Wir probieren jetzt mal aus, welche Absch\"atzung besser ist. Einsetzen, umformen und in Taschenrechner einsetzen, gibt beim zweiten Moment ungef\"ahr
+	\begin{align*}
+		1 - \frac{\sigma^2}{a^2} \geq  0.997\quad \Leftrightarrow \quad a \geq 18,26\cdot \sigma
+	\end{align*}
+	und beim 8.ten Moment ungef\"ahr
+	\begin{align*}
+		1 - \frac{105 \sigma^8}{a^8} \geq 0.997\quad \Leftrightarrow\quad  a \geq 3,69\cdot \sigma.
+	\end{align*}
+	Das ist jetzt zwar nicht ganz an an der richtigen L\"osung aus Beispiel \ref{NV}, aber f\"ur das achte Moment auch nicht ganz weit davon entfernt.
+\end{beispiel}
+
+\marginpar{\textcolor{red}{Vorlesung 14}}
+
+\section{Integralabsch\"atzungen und $L^p$-R\"aume}
+
+Sei jetzt wieder $(\Omega, \cA, \mu)$ ein beliebiger messbarer Raum und $f \colon \Omega \to \overline \R$ sei $(\cA, \cB(\overline{\R}))$-messbar. Wir werden in diesem Kapitel mehrfach nutzen, dass wegen Satz \ref{S7} folgende \"Aquivalenz gilt:
+\begin{align*}
+\int_{\Omega} |f| \dint \mu = 0 \quad \Leftrightarrow \quad  |f| = 0 \, \, \mu \text{-fast überall }\quad \Leftrightarrow\quad f = 0 \, \,\mu\text{-fast überall.}
+\end{align*}
+
+\begin{satz}\label{hoelder}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=240s} \textbf{[Hölder-Ungleichung]}
+	Seien $p,q > 1$ mit $ \frac{1}{p} + \frac{1}{q} = 1$. Dann gilt 
+	\[ \int_{\Omega} |fg| \dint \mu \leq \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{\frac{1}{p}} \Big( \int_{\Omega} |g|^q \dint \mu \Big)^{\frac{1}{q}}. \]
+\end{satz}
+
+\begin{proof}
+		 Alle auftretenden Integranden sind messbar und nicht-negativ, also sind alle Integrale definiert, $+\infty = +\infty$ ist aber möglich. Wir erinnern an die Young-Ungleichung aus Analysis 2 (das ist gerade die Konkavit\"at des Logarithmus): F\"ur $\alpha, \beta \geq 0$ gilt
+		\[ \alpha \beta \leq \frac{\alpha^p}{p} + \frac{\beta^q}{q}. \]
+		 Ist ein Faktor der rechten Seite der H\"older-Ungleichung $0$ oder $+ \infty$, so ist nichts zu zeigen. Das ist sofort klar für $+\infty$, aber auch der Fall $0$ ist nicht schwer: Wenn n\"amlich
+		$ (\int_{\Omega} |f|^p \dint \mu )^{1/p}= 0$ gilt, so muss $f = 0$ $\mu$-fast überall gelten. Also ist auch $|fg| = 0$ $\mu$-fast überall und damit ist auch die linke Seite $0$. Die Ungleichung ergibt dann also $0\leq 0$ und das ist richtig.
+		Also nehmen wir an, beide Faktoren sind positiv. Wir definieren \[ \sigma = \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{\frac{1}{p}} > 0\quad \text{ und } \quad \tau = \Big( \int_{\Omega} |g|^q \dint \mu \Big)^{\frac{1}{q}} > 0 \]
+		sowie die messbaren Abbildungen
+		\[ \alpha =  \frac{|f|}{\sigma} \quad \text{ und }\quad \beta =  \frac{|g|}{\tau}.\]
+		Mit Young folgt \[ \frac{|f(\omega) g(\omega)|}{\sigma \tau} \leq \frac{|f(\omega)|^p}{\sigma^p p} + \frac{|g(\omega)|^q}{\tau^q q},\quad \forall \omega\in \Omega. \]
+		Integrieren beider Seiten gibt wegen der Monotonie des Integrals
+		\[ \frac{1}{\sigma \tau} \int_{\Omega} |fg| \dint \mu \leq \frac{\int_{\Omega}|f|^p \dint \mu}{\sigma^p p} + \frac{\int_{\Omega}|g|^q \dint \mu}{\tau^q q} = \frac{1}{p} + \frac{1}{q} = 1. \]
+		Durchmultiplizieren gibt die H\"oldersche Ungleichung.
+\end{proof}
+		 Der Fall $p=q=2$ hei\ss t auch Cauchy-Schwarz:
+		\[ \left(\int_{\Omega} |fg| \dint\mu  \right)^2 \leq \int_{\Omega} |f|^2 \dint\mu \int_{\Omega} |g|^2 \dint\mu. \]
+
+
+\begin{korollar}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=1159s}
+		 Ist $\mathbb{P}$ ein Wahrscheinlichkeitsmaß auf $\mathcal A$, so gilt
+		 \begin{align*}
+			\Bigg(\int_{\Omega} |f| \dint\mathbb{P}\Bigg)^{p}  \leq  \int_{\Omega} |f|^p \dint \mathbb{P}
+		 \end{align*}
+		 f\"ur alle $p>1$.
+\end{korollar}
+\begin{proof}
+		Wegen $\mathbb{P}(\Omega) = 1$ gilt mit $q=\frac{1}{1-p}$ wegen der H\"older Ungleichung
+		\begin{align*}
+		\int_{\Omega} |f| \dint\mathbb{P} &= \int_{\Omega} |f \cdot 1| \dint\mathbb{P}
+		 \leq \Bigg( \int_{\Omega} |f|^p \dint \mathbb{P} \Bigg)^{\frac{1}{p}} \Bigg( \int_{\Omega} \underbrace{|1|^q}_{= 1 \cdot \mathbf{1}_{\Omega}} \dint \mathbb{P} \Bigg)^{\frac{1}{q}}
+		= \Bigg( \int_{\Omega} |f|^p \dint \mathbb{P} \Bigg)^{\frac{1}{p}} \cdot 1,
+		\end{align*}
+		also die Behauptung.
+\end{proof}
+
+\begin{satz}\label{minkowski}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=1414s} \textbf{[Minkowski-Ungleichung]}
+	Sei $p \geq 1$, so gilt
+	\[ \left( \int_{\Omega} |f+g|^{p} \dint \mu \right)^{1/p}\leq \left( \int_{\Omega} |f|^{p} \dint \mu \right)^{1/p} + \left( \int_{\Omega} |g|^p \dint \mu \right)^{1/p}. \]
+	Beide Seiten k\"onnen den Wert $+\infty$ annehmen.
+\end{satz}
+
+\begin{proof}
+	Wie in Analysis 2, folgt aus H\"older und der Young Ungleichung. Wir zeigen die st\"arkere Ungleichung
+	\begin{equation}\label{eqmink}
+	\left( \int_{\Omega} (|f|+|g|)^p \dint \mu \right)^{1/p} \leq \left( \int_{\Omega} |f|^p \dint \mu \right)^{1/p} + \left( \int_{\Omega} |g|^p \dint \mu \right)^{1/p}.
+	\end{equation}
+	Tats\"achlich impliziert \eqref{eqmink} Minkowski weil die linke Seite von Minkowski kleiner ist als die linke Seite von \eqref{eqmink}. Das folgt direkt aus der Monotonie des Integrals und weil $|f+g| \leq |f| + |g|$ gilt.
+	\begin{enumerate}[label=(\alph*)]
+		\item F\"ur $p=1$ gilt wegen der Linearit\"at des Integrals \eqref{eqmink} nat\"urlich mit Gleichheit.
+		\item Sei nun $p > 1$. Ist die rechte Seite $+\infty$, so gilt \eqref{eqmink}. Also nehmen wir an, dass beide Integrale der rechten Seite endlich sind. Dann ist aber auch die linke Seite wegen der elementaren Absch\"atzung 
+		\begin{align*}
+		\left(|f| + |g|\right)^p \leq \left(2 |f| \lor |g|\right)^p = 2^p( |f^p| \lor |g^p|)\leq 2^p (|f|^p+|g|^p)
+		\end{align*}
+		und der Monotonie des Integrals endlich. Damit nun zum Beweis von \eqref{eqmink}:
+		\begin{align*}	
+		\int_{\Omega} (|f|+|g|)^p \dint \mu &= 
+		\int_{\Omega} (|f|+|g|)^{p-1} (|f|+|g|) \dint \mu\\ 
+		\overset{\text{ausm., Lin.}}&{=}
+		\int_{\Omega} (|f|+|g|)^{p-1} |f| \dint \mu + \int_{\Omega} (|f|+|g|)^{p-1} |g| \dint \mu \\
+		\overset{2\times\text{ H\"older}}&{\leq}
+		\left( \int_{\Omega} |f|^{p} \dint \mu \right)^{\frac{1}{p}} \left( \int_{\Omega} (|f|+|g|)^{(p-1)q} \dint \mu \right)^{\frac{1}{q}} \\
+		&\qquad+\left( \int_{\Omega} |g|^{p} \dint \mu \right)^{\frac{1}{p}} \left( \int_{\Omega} (|f|+|g|)^{(p-1)q} \dint \mu \right)^{\frac{1}{q}}\\
+		\overset{\text{auskl.}}&{=}
+		\left(\left( \int_{\Omega} |f|^{p} \dint \mu \right)^{\frac{1}{p}} + \left( \int_{\Omega} |g|^{p} \dint \mu \right)^{\frac{1}{p}}\right) \left(\int_{\Omega} |f|+|g| \dint \mu \right)^{1 - \frac{1}{p}}.
+		\end{align*}
+		In der letzten Gleichung haben wir genutzt, dass $1-\frac{1}{p}=\frac{1}{q}$ und $(p-1)q=p$ aufgrund der Voraussetzung an $p$ und $q$ gelten. Rübermultiplizieren des zweiten Faktors gibt dann \eqref{eqmink}.
+	\end{enumerate}
+\end{proof}
+
+\begin{deff}\label{neueDef}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=2320s}
+	$f \colon \Omega \to \overline{\R}$ messbar heißt \textbf{$p$-fach integrierbar} (oder $p$-fach $\mu$-integrierbar), falls $ \int_{\Omega} |f|^p \dint \mu < \infty$. Statt $2$-fach integrierbar sagt man auch \textbf{quadratintegrierbar} (oder $\mu$-quadratintegrierbar), statt $1$-fach integrierbar sagt man \textbf{integrierbar} (oder $\mu$-integrierbar). 
+\end{deff}
+Das $\mu$ l\"asst man bei den Begrifflichkeiten oft aus Faulheit weg, die Abh\"angigkeit von $\mu$ ist aber essentiell wichtig. Da wir den Begriff der $\mu$-Integrierbarkeit in Definition \ref{nnn} schon definiert haben, w\"are es besser, wenn die Definition \ref{neueDef} mit der alten Definition \"ubereinstimmt. Das ist nat\"urlich der Fall:
+	\begin{gather*}
+	f\,\mu\text{-int. } \quad\overset{\text{alte}}{\underset{\text{Def.}}{\Leftrightarrow}} \quad\int_{\Omega} f^+ \dint \mu < \infty, \: \int_{\Omega} f^- \dint \mu < \infty \quad\overset{\text{\"Ubung}}{\underset{\text{siehe }  \eqref{Betrag}}{\Leftrightarrow}} \quad\int_{\Omega} |f| \dint \mu < \infty \quad \overset{\text{neue}}{\underset{\text{Def.}}{\Leftrightarrow}} \quad f\,\mu\text{-int. }
+	\end{gather*}
+
+Schauen wir uns ein ganz konkretes Beispiel f\"ur die neue Definition an. 
+\begin{beispiel} \link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=2549s} \abs
+
+	\begin{itemize}
+		\item Für $\Omega = [1, \infty)$, $\cA = \cB([1,\infty))$, $ \mu = \lambda_{|[1, \infty)}$ ist $ \int_{\Omega} f \dint \mu = \int_{1}^{\infty} f(x)\dint x$. Für $f(x) = \frac{1}{x^a}$ ist $f$ $p$-fach integrierbar genau dann, wenn $p > \frac{1}{a}$.
+		\item Für $\Omega = [0, 1]$, $\cA = \cB([0, 1])$, $ \mu = \lambda_{[0, 1]}$ ist $ \int_{\Omega} f \dint \mu = \int_{0}^{1} f(x)\dint x$. Für 
+		\[ f(x) = \begin{cases}
+		\frac{1}{x^a}&:x \in (0,1]\\
+		+ \infty&:x = 0
+		\end{cases} \]
+		ist $f$ $p$-fach integrierbar genau dann, wenn $p < \frac{1}{a}$. F\"ur das Integral ist der Funktionswert $+\infty$ unproblematisch, da die Menge $\{0\}$ eine $\mu$-Nullmenge ist.
+	\end{itemize}
+\end{beispiel}
+In der Mathematik wollen wir aus allen Objekten m\"oglichst n\"utzliche Strukturen schaffen, in diesem Fall einen Vektorraum.
+\begin{deff}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=3022s}
+	\[ \cL^p(\mu) := \Bigg\{ f \colon \Omega \to \overline{\R}\text{ messbar}\, \Big|\, \int_{\Omega} |f|^p \dint \mu < \infty \Bigg\}. \]
+	Manachmal schreibt man auch $\cL^p(\Omega, \cA, \mu)$ oder nur $\L^p$.
+\end{deff}
+
+\begin{lemma}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=3137s}
+	Mit punktweiser Addition und Skalarmultiplikation ist $\cL^p(\mu)$ ein reeller Vektorraum, sogar ein Untervektorraum der messbaren Funktionen, \mbox{d. h.} 
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{uvr2} $0 \in \cL^p(\mu)$, wobei $0$ die konstante Nullfunktion ist.
+		\item\label{uvr1} $f,g \in \cL^p(\mu) \Rightarrow f+g \in \cL^p(\mu)$,
+		\item $\alpha \in \R$, $f \in \cL^p(\mu) \Rightarrow \alpha f \in \cL^p(\mu)$,
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Messbare Funktionen mit punktweiser Addition und skalarer Multiplikation geben einen Vektorraum. Die Eigenschaften \ref{uvr1}-\ref{uvr2} bedeuten, dass $\cL^p(\mu)$ ein Untervektorraum ist. Wir prüfen also nur die dafür benötigten Eigenschaften:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\int_{\Omega} |0|^p \dint \mu = 0<\infty$
+		\item $\int_{\Omega} |\alpha f|^p \dint \mu \overset{\text{Lin.}}{=} |\alpha|^p \int_{\Omega} |f|^p \dint \mu < \infty$ weil $f \in \cL^p(\mu)$ angenommen wurde. Also gilt auch $\alpha f \in \cL^p(\mu)$.
+		\item Wegen Minkowski gilt
+		\[ \int_{\Omega} |f+g|^p \dint \mu \leq \Bigg( \Big( \underbrace{\int_{\Omega} |f|^p \dint \mu}_{< \infty} \Big)^{\frac{1}{p}} + \Big( \underbrace{\int_{\Omega} |g|^p \dint \mu}_{< \infty} \Big)^{\frac{1}{p}} \Bigg)^p < \infty. \]
+		Also ist $f+g \in \cL^p(\mu)$.
+	\end{enumerate}
+\end{proof}
+Aus der Analysis wisst ihr schon, das man aus einem Vektorraum immer gerne einen normierten Raum machen m\"ochte. Dann kann man \"uber Folgenkonvergenz und Stetigkeit sprechen. K\"onnen wir also aus $\mathcal L^p(\mu)$ einen normierten Raum machen? Nein!
+\begin{lemma}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=3605s}
+	\[ ||f||_p := \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{\frac{1}{p}} \] ist eine \textbf{Halbnorm} auf $\mathcal L^p(\mu)$, \mbox{d. h.} es gelten f\"ur $f,g\in \mathcal L^p(\mu)$ und $\alpha\in \R$
+	\begin{enumerate}[label=(\roman*)]
+		\item $0 \leq ||f||_p < \infty, ||0||_p=0\quad$ (Definitheit fehlt)
+		\item $ ||\alpha f ||_p = | \alpha | ||f||_p$
+		\item $|| f + g ||_p \leq ||f||_p + ||g||_p$ .
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Die ersten zwei Eigenschaften sind klar. Die Dreiecksungleichung in $\mathcal L^p(\mu)$ ist gerade die Minkowski Ungleichung!
+\end{proof}
+
+Warnung: $||\cdot ||_p$ ist \textit{keine} Norm! Jedes $f$ mit $\mu(\{f \neq 0\})=0$ erfüllt \[ || f ||_p = \Big( \int_{\Omega} |f|^p \dint \mu \Big)^{\frac{1}{p}} = 0. \] 
+Wenn $f$ auf einer $\mu$-Nullmenge ungleich $0$ ist, so ist aber $f\neq 0$. Also ist die Definitheit nicht erf\"ullt. Mit einem Trick kann man $\mathcal L^p(\mu)$ zu einem normierten Vektorraum \"andern, indem man das Problem der Definitheit wegdefiniert. Dazu betrachtet man den Quotientenraum bez\"uglich der  \"Aquivalenzrelation
+\begin{align*}
+f \sim g \quad :\Leftrightarrow\quad f = g \,\,\,\mu\text{-fast überall},
+\end{align*}
+der aus den \"Aquivalenzklassen 
+\begin{align*}
+[f]:=\big\{g\in \mathcal L^p(\mu)\,:\, f\sim g\big\}=\big\{g\in \mathcal L^p(\mu)\,:\, f=g\,\,\mu\text{-fast \"uberall} \big\}
+\end{align*}
+besteht. Die Operationen und die Norm werden durch beliebige Repr\"asentanten der \"Aquivalenzklassen definiert:
+\begin{align*}
+[f]+[g]:=[f+g], \quad \alpha [f]:=[\alpha f] \quad \text{ und }\quad ||[f]||_p:=||f||_p.
+\end{align*}
+Der Quotientenraum wird als  $L^p(\mu)=\{[f]: f\in \mathcal L^p(\mu)\}$ bezeichnet. Gemeinsam mit den Operationen und der Norm auf den Elementen (\"Aquivalenzklassen) ist $L^p(\mu)$ ein normierter Vektorraum:
+\begin{satz}
+\link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=4469s}
+	F\"ur $p\geq 1$ ist $L^p(\mu)$ mit den gerade definierten Operationen ein normierter Vektorraum und mit $||\cdot||_p$ ein vollst\"andiger normierter Raum (Banachraum).
+\end{satz}
+
+\begin{proof}
+	Wir zeigen, dass $L^p(\mu)$ mit den definierten Operationen ein normierter Vektorraum ist.
+	\begin{enumerate}[label=(\alph*)]
+		\item Vektorraum aus Lineare Algebra 1.
+		\item Die Eigenschaften der Halbnorm folgen direkt aus der Definition weil $||\cdot||_p$ eine Halbnorm auf $\mathcal L^p(\mu)$ ist. Es fehlt also nur noch die Definitheit. Sei dazu $f\in L^p(\mu)$, so gilt:
+		\begin{align*}
+		|| [f] ||_p = 0 \quad \overset{\text{Def.}}&{\Leftrightarrow} \quad ||f||_p = 0\\
+		 \overset{\text{Def.}}&{\Leftrightarrow}\quad \int_{\Omega} |f|^p \dint \mu = 0\\
+		\overset{\ref{S7}}&{\Leftrightarrow}\quad |f|^p = 0 \text{ $\mu$-fast überall}\\
+		& \Leftrightarrow \quad f = 0 \text{ $\mu$-fast überall}\\
+		\overset{\text{Def. }[0]}&{\Leftrightarrow}\quad [f] = [0]
+		\end{align*}
+		Damit ist $ ||\cdot ||_p $ eine Norm.
+	\end{enumerate}
+Was wir hier nicht zeigen werden, ist die Vollst\"andigkeit von $\mathcal L^p(\mu)$. Aber irgendwas sollten wir ja f\"ur die Funktionalanalysis \"ubrig lassen!
+\end{proof}
+
+
+\marginpar{\textcolor{red}{Vorlesung 15}}
+
+
+
+\section{Produktmaße und Satz von Fubini}
+Jetzt wird es noch einmal so richtig dreckig, bevor wir die wunderbare Welt der Stochastik erobern k\"onnen. Sobald wir uns durch die Konstruktion des Produktma\ss es und des Satzes von Fubini gequ\"alt haben, f\"allt uns alles andere aber sofort vor die F\"u\ss e.\smallskip
+
+Im Folgenden seien $(\Omega_1, \cA_1, \mu_1)$ und $(\Omega_2, \cA_2, \mu_2)$ Maßräume und $$\Omega = \Omega_1 \times \Omega_2 = \{ (\omega_1, \omega_2)\colon \omega_1 \in \Omega_1, \: \omega_2 \in \Omega_2 \}$$ das kartesische Produkt aus Analysis 1. Wir wollen auf $\Omega$ eine $\sigma$-Algebra und darauf ein Ma\ss{} mit einer sch\"onen Produkteigenschaft definieren (deshalb wird das Ma\ss{} Produktma\ss{} hei\ss en).
+\begin{deff}\link{https://www.youtube.com/watch?v=ke92ibDLjq0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=16&t=202s}
+	\begin{enumerate}[label=(\alph*)]
+		\item[(i)] Die $\sigma$-Algebra $$\cA_1 \otimes \cA_2 = \sigma(\{ A_1\times A_2 \colon A_1 \in \cA_1, \: A_2 \in \cA_2 \})$$ heißt \textbf{Produkt-$\sigma$-Algebra} auf $ \Omega_1 \times \Omega_2 $. 
+		\item[(ii)] Ein Maß auf $ \cA_1 \otimes \cA_2 $ heißt \textbf{Produktmaß}, falls 
+		\begin{align}\label{Produktformel}
+		 \mu(A_1\times A_2) = \mu_1(A_1) \cdot \mu_2(A_2)
+		 \end{align}
+		f\"ur alle Mengen $A_1\in \mathcal A_1, A_2\in \mathcal A_2$ gilt.
+	\end{enumerate}
+\end{deff}
+Nat\"urlich w\"are es sch\"on, wenn die Produkt-$\sigma$-Algebra einfach nur aus allen Mengen $A_1\times A_2$ bestehen w\"urde. Leider gibt das keine $\sigma$-Algebra (die Komplementbildung geht schief), die Mengen geben nur einen $\cap$-stabilen Erzeuger von $\mathcal A_1\otimes \mathcal A_2$. Die Eigenschaft des Produktma\ss es legt das Produktma\ss{} also nur auf einem $\cap$-stabilen Erzeuger fest. Mit unseren Kenntnissen der Ma\ss theorie, k\"onnten wir also reflexhaft sagen: Kein Problem, mit Carath\'eodory k\"onnen wir ein Produktma\ss{} aus den Werten auf dem Erzeuger konstruieren und wegen Dynkin-Systemen kann es nur ein Ma\ss{} mit der Produktma\ss eigenschaft bekommen. Genau richtig - das funktioniert! Wir qu\"alen uns im n\"achsten Satz aber gewaltig mehr. Wir konstruieren das Produktma\ss{} nicht mit Carath\'eodory, sondern schreiben eine Formel hin. Das ist in der Tat viel komplizierter, der Vorteil ist aber, dass wir damit den darauf folgenden Satz von Fubini schon fast bewiesen haben. W\"urden wir das Produktma\ss{} mit Carath\'eodory konstruieren, w\"urde der ganze Aufwand in den Beweis von Fubini verschoben.
+
+
+
+
+%\begin{beispiel1}
+%	$\Omega_1 = \Omega_2 = \R$, $\cA_1 = \cA_2 = \cB(\R)$, $\mu_1 = \mu_2 = \lambda$. Produktmaß: $\mu = \mu_1 \otimes \mu_2$ ist das $2$-dimensionale Lebesguemaß. Weil Quader $Q = (a_1,b_1] \times (a_2,b_2] \in \cA_1 \times \cA_2$ muss für $\mu$ gelten $\mu(Q) = \lambda((a_1,b_1]) \cdot \lambda((a_2,b_2]) = (b_1 - a_1)(b_1 - a_1) = \text{ \enquote{Fläche von Q}}$. 
+%\end{beispiel1}
+
+\begin{satz}\label{Produktmass}
+\link{https://www.youtube.com/watch?v=ke92ibDLjq0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=16&t=721s} \textbf{[Konstruktion Produktmaß]}
+	Sind $\mu_1,\mu_2$ $\sigma$-endliche Ma\ss e auf $\mathcal A_1, \mathcal A_2$, so existiert ein eindeutiges Maß $\mu_1 \otimes \mu_2$ auf $\cA_1 \otimes \cA_2$ mit $$ \mu_1\otimes \mu_2(A_1\times A_2) = \mu_1(A_1) \cdot \mu_2(A_2)$$
+		f\"ur alle Mengen $A_1\in \mathcal A_1, A_2\in \mathcal A_2$.
+\end{satz}
+\begin{proof}
+\textbf{Eindeutigkeit}: F\"ur die Eindeutigkeit nutzen wir wieder den Eindeutigkeitssatz \ref{folg}, der auf Dynkin-Systemen beruht. Sei
+$$ \cS = \{ A_1 \times A_2\colon A_1 \in \cA_1, \: A_2 \in \cA_2 \},$$ dann ist $\cS$ ein $\cap$-stabiler Erzeuger von $ \cA_1 \otimes \cA_2 $. Um den Eindeutigkeitssatz anzuwenden, m\"ussen wir noch zeigen, dass Produktma\ss e $\sigma$-endlich sein m\"ussen, wir brauchen also eine wachsende Folge in $\mathcal S$, die endliches Ma\ss{} hat und $\Omega$ ausf\"ullt. Weil $\mu_1, \mu_2$ $\sigma$-endliche Ma\ss e sind, existieren Folgen $(E_n^1)_{n \in \N} \subseteq \cA_1$, $(E_n^2)_{n \in \N} \subseteq \cA_2$ mit $E_n^1 \uparrow \Omega_1$, $E_n^2 \uparrow \Omega_2$ und $\mu_1(E_n^1) < \infty$, $\mu_2(E_n^2) < \infty$ f\"ur alle $n \in \N$. Sei nun $E_n := E_n^1 \times E_n^2$, dann gelten
+\begin{align*}
+	E_n \uparrow \Omega,\, n\to\infty,\quad \text{und}\quad \mu_1(E_n^1) \cdot \mu_2(E_n^2) < \infty,\quad \forall n\in\N.
+\end{align*}
+	Aus dem Eindeutigkeitssatz folgt also, dass zwei Ma\ss e $\mu$ und $\bar\mu$, die die Definition des Produktma\ss es erf\"ullen, gleich sind. Es kann also nur ein Produktma\ss{} auf $\mathcal A_1\otimes \mathcal A_2$ geben. Ob es so ein Ma\ss{} gibt, ist nat\"urlich noch nicht klar. \smallskip
+	
+			
+	\textbf{Existenz}: Anstatt das Produktma\ss{} mit Carath\'eodory zu konstruieren, schreiben wir es einfach hin. Hier ist es:	
+	\[ \mu(A) := \int_{\Omega_1} \mu_2(A_{\omega_1}) \dint \mu_1,\quad A\in \mathcal A_1\otimes \mathcal A_2, \]
+		wobei $A_{\omega_1} = \{ \omega_2 \in \Omega_2 \colon (\omega_1,\omega_2) \in A \}$.
+	 Wir machen sogar noch mehr, wir schreiben noch ein zweites Produktma\ss{} hin:
+	  \[ \overline{\mu}(A) := \int_{\Omega_2} \mu_1(A_{\omega_2}) \dint \mu_2,\quad A\in \mathcal A_1\otimes \mathcal A_2, \]
+	wobei jetzt $A_{\omega_2} = \{ \omega_1 \in \Omega_1 \colon (\omega_1,\omega_2) \in A \}$. Wir zeigen nun, dass $\mu$ ein Produktmaß auf $\cA_1 \otimes \cA_2$ ist. Mit exakt demselben Beweis zeigt man auch, dass $\overline{\mu}$ ein Produktma\ss{} ist, weshalb dann wegen der Eindeutigkeit auch $\mu=\overline{\mu}$ gilt. Zeigen wir also die Eigenschaften eines Ma\ss es sowie die definierende Eigenschaft des Produktma\ss es:
+			\begin{enumerate}[label=(\roman*)]
+		\item $\mu\colon \cA_1\otimes \mathcal A_2 \to [0, \infty]$ gilt, weil $\mu_2$ ein Maß ist (deshalb nicht-negativ) und Integrale über nicht-negative Funktionen nicht-negativ sind.
+		\item $\mu(\emptyset) = 0$ gilt, weil $\emptyset_{\omega_1}$ auch die leere Menge ist und Ma\ss e der leeren Menge $0$ sind. 
+		\item Nun zur $\sigma$-Additivität. Seien dazu $A^1,A^2,...\in \cA_1\otimes \cA_2$ paarweise disjunkt und sei
+		\[ A:= \bigcupdot_{k=1}^{\infty} A^k.\]
+		Dann gilt $A_{\omega_1} = \bigcupdot_{k=1}^{\infty} A_{\omega_1}^k$ und mit den Ma\ss eigenschaften sowie monotoner Konvergenz
+		\begin{align*}
+		\mu(A)\overset{\text{Def.}}&{=} \int_{\Omega_1} \mu_2\Big(\Big(\bigcupdot_{k=1}^{\infty} A^k\Big)_{\omega_1}\Big) \dint \mu_1(\omega_1)\\
+		& = \int_{\Omega_1} \mu_2\Big(\bigcupdot_{k=1}^{\infty} A_{\omega_1}^k\Big) \dint \mu_1(\omega_1)\\
+		\overset{\mu_2 \text{ $\sigma$-add.}}&{=} 
+		\int_{\Omega_1} \sum\limits_{k=1}^{\infty}\mu_2(A_{\omega_1}^k) \dint \mu_1(\omega_1)\\ 
+		\overset{\text{\ref{allgMonKonv}}}&{=} \sum\limits_{k=1}^{\infty} \int_{\Omega_1} \mu_2(A_{\omega_1}^k) \dint \mu_1(\omega_1)
+		 \overset{\text{Def.}}{=} \sum\limits_{k=1}^{\infty} \mu(A^k).
+		\end{align*}
+	\item	$\mu$ ist also ein Ma\ss{} auf $\mathcal A_1\otimes \mathcal A_2$. Wir m\"ussen noch die definierende Eigenschaft auf dem Erzeuger zeigen. Sei dazu $A = A_1 \times A_2$. Weil aufgrund der Definitionen	
+	\[ (A_1\times A_2)_{\omega_1} = \begin{cases}
+	\emptyset &:\omega_1 \notin A_1\\
+	A_2 &:\omega_1 \in A_1
+	\end{cases} \]
+	gilt, folgt aufgrund der Definition des Integrals f\"ur einfache Integranden
+	\begin{align*}
+	\mu(A_1\times A_2) &= \int_{\Omega_1} \mu_2((A_1\times A_2)_{\omega_1}) \dint\mu_1(\omega_1)\\
+	& = \int_{\Omega_1} \mu_2(A_2) \mathbf{1}_{A_1}(\omega_1) \dint\mu_1(\omega_1) \\
+	\overset{\text{Linear}}&{=} \mu_2(A_2) \int_{\Omega_1} \mathbf{1}_{A_1}(\omega_1) \dint\mu(\omega_1) =  \mu_2(A_2) \cdot \mu_1(A_1).
+	\end{align*}
+	Also ist $\mu$ ein Produktma\ss.
+	\end{enumerate}
+Eigentlich k\"onnte alles so sch\"on sein, und der Beweis ist hier zu Ende. Leider haben wir geschummelt. Warum ist $\mu$ \"uberhaupt sinnvoll definiert? Klingt bl\"od, ist aber gar nicht so klar. Warum ist der Integrand \"uberhaupt definiert, d. h. warum gilt $A_{\omega_1}\in \mathcal A_2$? Unklar. Warum ist $\omega_1\mapsto \mu_2(A_{\omega_1})$ \"uberhaupt $(\mathcal A_1,\mathcal B(\overline{\R}))$-messbar, warum macht das Integral also \"uberhaupt Sinn? Unklar. Wir sollten also beides noch checken.\smallskip
+
+Wir zeigen jetzt nacheinander
+	\begin{itemize}
+		\item[(a)] \label{sinnvA} $A_{\omega_1} \in \cA_2$ f\"ur alle $A \in \cA_1\otimes \cA_2$
+		\item[(b)] \label{sinnvB} $\omega_1 \mapsto \mu_2(A_{\omega_1})$ ist $(\mathcal A_1,\mathcal B(\overline{\R}))$-messbar.
+	\end{itemize}
+	Zu (a): Wir folgen dem Trick der guten Mengen. Seien dazu die guten Mengen $$\cF = \{ A \in \cA_1 \otimes \cA_2\colon A_{\omega_1} \in \cA_2 \}.$$ Wir zeigen: $\cF = \cA_1 \otimes \cA_2$. Dazu zeigen wir zun\"achst, dass $\mathcal F$ eine $\sigma$-Algebra ist:
+	\begin{itemize}
+		\item $\Omega \in \cF$ gilt, weil $\Omega_{\omega_1} = \Omega_2 \in \cF$ gilt.
+		\item Sei $A \in \cF$, dann ist $A^C \in \cF$ weil $(A^C)_{\omega_1} = (A_{\omega_1})^C \in \cA_2$, da $\mathcal A_2$ als $\sigma$-Algebra abgeschlossen unter Komplementbildung ist.
+		\item Genauso mit abzählbaren Vereinigungen: Wegen der Abgeschlossenheit der $\sigma$-Algebra $\mathcal A_2$ unter Bildung von abz\"ahlbaren Vereinigungen, gilt f\"ur $A^1, A^2, ... \in \mathcal F$
+		\[ \Big(\bigcup_{k=1}^{\infty} A^k\Big)_{\omega_1} = \bigcup_{k=1}^{\infty} \underbrace{A_{\omega_1}^k}_{\in \cA_2}\in \cA_2. \]
+		Damit ist $\bigcup_{k=1}^\infty A^k\in \mathcal F$.
+	\end{itemize}
+	Folglich ist $\mathcal F$ eine $\sigma$-Algebra. Weil $\cS \subseteq \cF$ und $\sigma(\cS) \overset{\text{Def.}}{=} \cA_1 \otimes \cA_2$ gilt, bekommen wir zusammen:
+	\begin{align*}
+		\cA_1 \otimes \cA_2 = \sigma(\cS)  \subseteq \sigma(\cF) = \cF \subseteq \cA_1 \otimes \cA_2
+	\end{align*}
+	Weil links und rechts das gleiche steht, bekommen wir \"uberall Gleichheiten, es gilt also $\mathcal F=\mathcal A_1\otimes \mathcal A_2$ und die Behauptung folgt. Das war wieder unser \glqq standard\grqq{} gute Mengen Trick in der einfacheren Situation mit $\sigma$-Algebren.	\smallskip
+		
+	Nun zu (b): Wir checken erst den Fall $\mu_2(\Omega_2) < \infty$ und schieben die Aussage dann mit der $\sigma$-Endlichkeit auf den allgemeinen Fall. Sei also erstmal $\mu_2(\Omega_2) < \infty$. 
+	 Wir zeigen, wieder mit dem gute Mengen Trick (aber in der Dynkin-System Variante), $\cA_1 \otimes \cA_2 = \cF$, mit der Menge  
+	 $$\cF := \{ A \in \cA_1 \otimes \cA_2\colon \omega_1 \mapsto \mu_2(A_{\omega_1}) \text{ messbar} \}$$ der guten Mengen. Es gilt $\cS \subseteq \cF$, da \[ \omega_1\mapsto \mu_2((A_1 \times A_2)_{\omega_1}) = \underbrace{\mu_2(A_2) {\mathbf{1}_{A_1}(\omega_1)}}_{\text{messbar}}\]  als Produkt messbarer Abbildungen messbar ist. Um wie in (a) zu argumentieren, zeigen wir nun, dass $\cF$ ein Dynkin-System ist:
+		\begin{itemize}
+			\item $\Omega \in \cF$ ist klar, weil $\omega_1 \mapsto \mu_2(\Omega_{\omega_1}) = \mu_2(\Omega_2)<\infty$ konstant und damit messbar ist.
+			\item Sei $A \in \cF$, dann gilt 
+			\begin{gather*}
+			\omega_1 \mapsto \mu_2((A^C)_{\omega_1}) = \mu_2(A_{\omega_1}^C) \overset{\text{endl. Maß}}{=} \underbrace{\underbrace{\mu_2(\Omega_2)}_{\text{messbar}}- \underbrace{\mu_2(A_{\omega_1})}_{\text{messbar}}}_{\text{messbar}}.
+			\end{gather*}
+	Also gilt $A^C\in \mathcal F$ und damit ist $\mathcal F$ abgeschlossen bez\"uglich Komplementbildung.
+			\item Seien nun $A^1, A^2,... \in \mathcal F$ paarweise disjunkt, dann gilt
+			\begin{align*}
+			\omega_1 &\mapsto \mu_2 \Big(\Big(\bigcupdot_{k=1}^{\infty} A^k\Big)_{\omega_1}\Big)\\
+			& = \mu_2 \Big(\bigcupdot_{k=1}^{\infty} A^k_{\omega_1}\Big)\\ 
+			\overset{\text{$\sigma$-add.}}&{=} \sum_{k=1}^{\infty} \underbrace{\mu(A^k_{\omega_1})}_{\text{messbar}}
+			= \underbrace{\lim\limits_{m \to \infty}\underbrace{\sum_{k=1}^{m} \mu(A^k_{\omega_1})}_{\text{messbar}}}_{\text{messbar}},
+		\end{align*}
+		weil Grenzwerte messbarer Abbildungen wieder messbar sind. 
+	\end{itemize}	
+	$\mathcal F$ ist also ein Dynkin-System. Nun folgt wie immer beim Trick der guten Mengen
+		\begin{align*}	
+			\cA_1 \otimes \cA_2 \overset{\text{Def.}}{=} \sigma(\cS) = d(\cS) \subseteq d(\cF) = \cF \subseteq \cA_1 \otimes \cA_2,
+		\end{align*}
+		wobei wir den Hauptsatz f\"ur Dynkin-Systeme (Satz \ref{Hauptsatz}) f\"ur $\cS$ genutzt haben. Also gilt wieder $\mathcal F=\cA_1 \otimes \cA_2$ und die Behauptung folgt.\smallskip
+		
+		Jetzt fehlt nur noch der Fall $\mu_2(\Omega_2)=\infty$. Sei dazu $(E^2_n)\subseteq \mathcal A_2$ mit $E^2_n\uparrow \Omega$ und $\mu_2(E^2_n)<\infty$ f\"ur alle $n\in\N$. Wir definieren 
+		\begin{align*}
+			\mu_2^n(A)=\mu_2(A\cap E^2_n), \quad n\in\N,
+		\end{align*}
+		wie wir schon mehrfach gemacht haben (siehe z. B. den Beweis von \ref{folg}). Dann sind die $\mu_2^n$ endliche Ma\ss e auf $(\Omega_2, \mathcal A_2)$. Aus dem ersten Schritt folgt, dass $\omega_1\mapsto \mu_2^n(A_{\omega_1})$ messbar ist. Weil wegen der Stetigkeit von Ma\ss en  $$\lim_{n\to\infty} \mu_2^n(A_{\omega_1})= \lim_{n\to\infty} \mu_2(A_{\omega_1}\cap E^2_n)=\mu_2(A_{\omega_1})$$ gilt, ist auch die Abbildung $\omega_1\mapsto \mu_2(A_{\omega_1})$ als punktweiser Grenzwert von messbaren Funktionen messbar. Das war's!
+\end{proof}
+Nat\"urlich kann man per Induktion von $n=2$ auf $n\in\N$ schlie\ss en:
+\begin{korollar}\label{MassraeumeExMass}
+\link{https://www.youtube.com/watch?v=ke92ibDLjq0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=16&t=5627s}
+	Sind $(\Omega_i, \cA_i, \mu_i)_{i=1,...,n}$ $\sigma$-endliche Maßräume, so existiert genau ein Maß $\mu_1 \otimes ... \otimes \mu_n$ auf der $n$-fachen Produkt-$\sigma$-Algebra $$\cA_1 \otimes ... \otimes \cA_n:=\sigma(\{ A_1\times ... \times A_n: A_i\in \mathcal A_i\})$$ auf $\Omega_1 \times ... \times\Omega_n $ mit $$\mu_1\otimes ... \otimes \mu_n(A_1\times ... \times A_n) = \mu_1 (A_1) \cdot ... \cdot \mu_n(A_n)$$
+f\"ur alle Mengen $A_1\in \mathcal A_1,..., A_n\in \mathcal A_n$.
+\end{korollar}
+
+\begin{proof}
+	Induktion.
+\end{proof}
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=ke92ibDLjq0&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=16&t=5784s}
+	Sind alle $(\Omega_i, \cA_i, \mu_i)$ identisch, so schreibt man $\mu^{\otimes n}$ statt $\mu \otimes ... \otimes \mu$. $\mu^{\otimes n}$ heißt dann \textbf{$n$-faches Produktmaß} von $\mu$.
+\end{deff}
+\marginpar{\textcolor{red}{Vorlesung 16}}
+
+
+\begin{satz}\label{SatzFubini}
+\link{https://www.youtube.com/watch?v=7genugORczE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=17&t=33s} \textbf{[Satz von Fubini f\"ur $f\geq0$]}
+	Seien $(\Omega_1, \cA_1, \mu_1)$, $(\Omega_2, \cA_2, \mu_2)$ $\sigma$-endliche Maßräume und $f\colon \Omega_1 \times \Omega_2 \to [0,+\infty]$ sei $(\cA_1 \otimes \cA_2, \cB(\overline{\R}))$-messbar. Dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{FubOne} Die Integranden nach einer Variablen sind messbar, d. h.
+		\begin{align*}
+			\omega_2&\mapsto f_{\omega_1}(\omega_2) := f(\omega_1, \omega_2)\text{ ist }(\cA_2, \cB(\overline{\R}))\text{-messbar f\"ur alle }\omega_1\in \Omega_1\text{ fest,}\\
+			\omega_1&\mapsto f_{\omega_2}(\omega_1) := f(\omega_1, \omega_2)\text{ ist }(\cA_1, \cB(\overline{\R}))\text{-messbar f\"ur alle }\omega_2\in \Omega_2\text{ fest.}
+		\end{align*}
+		\item Die Integralfunktionen nach einer Variablen sind messbar, d. h.
+		 \begin{align*}
+		 	\omega_2& \mapsto \int_{\Omega_1} f_{\omega_2}(\omega_1) \dint \mu_1(\omega_1) \text{ ist } (\cA_2, \cB(\overline{\R}))\text{-messbar,}\\
+			\omega_1 &\mapsto \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2) \text{ ist } (\cA_1, \cB(\overline{\R}))\text{-messbar}.
+		\end{align*}
+		\item Es gilt Fubini und der Fubini-Flip:
+		\begin{align*}
+			\int_{\Omega_1 \times \Omega_2} f \dint \mu_1 \otimes \mu_2
+			\overset{\text{Fubini}}&{=} \int_{\Omega_1}\Big( \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1) \\
+			\overset{\text{Fubini-Flip}}&{=} \int_{\Omega_2}\Big( \int_{\Omega_1} f_{\omega_2}(\omega_1) \dint \mu_1(\omega_1) \Big) \dint \mu_2(\omega_2) 
+		\end{align*}
+	\end{enumerate}
+	Ganz wichtig: (i) und (ii) besagen lediglich, dass alle Integrale in der wesentlichen Aussage (iii) Sinn machen. In (iii) kann auch auf allen Seiten der Gleichheiten $+\infty$ stehen.
+\end{satz}
+
+\begin{proof}
+	Weil $f$ messbar ist, existiert eine Folge $(f^n)_{n\in\N}$ einfacher Funktionen, die punktweise (also f\"ur alle $(\omega_1,\omega_2))$, gegen $f$ wachsen. Dann gilt  auch punktweise $f_{\omega_1}^n \uparrow f_{\omega_1}$, $f_{\omega_2}^n \uparrow f_{\omega_2}$, $n\to\infty$, weil dort einfach eine Variable festgehalten wird. Da $(f_{\omega_1}^n)_{n\in\N}$, $(f_{\omega_2}^n)_{n\in\N}$ Folgen einfacher Funktionen (in jeweils einer Koordinate) sind, sind $f_{\omega_1}$, $f_{\omega_2}$ als punkteweise Grenzwerte messbarer Funktionen auch messbar. Also gilt \ref{FubOne}. Weil mit monotoner Konvergenz f\"ur alle $\omega_1\in \Omega_1$
+	 \[\lim_{n\to\infty} \int_{\Omega_2} f_{\omega_1}^n(\omega_2) \dint \mu_2(\omega_2) \overset{\text{\ref{allgMonKonv}}}{=} \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2)\]
+	gilt, ist \[ \omega_1 \mapsto \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2)  \] als punktweiser Grenzwert messbarer Funktionen auch messbar. Man beachte dabei, dass
+		\[ \omega_1\mapsto \int_{\Omega_2} f_{\omega_1}^n(\omega_2) \dint \mu_2(\omega_2) \] eine endliche Linearkombination von Funktionen der Form $\omega_1 \mapsto \mu_2(A_{\omega_1})$ ist. Diese Abbildungen sind, wie im Beweis von \ref{MassraeumeExMass} gezeigt, messbar. Damit gilt also auch (ii).\smallskip
+	
+	Nun zur eigentlichen Aussage, (iii). Nicht \"uberraschend, erst f\"ur Indikatoren, dann die Gebetsm\"uhle. Sei also zun\"achst $f = \mathbf{1}_A$ f\"ur ein $A \in \cA_1 \otimes \cA_2$. Dann gilt aufgrund der expliziten Konstruktion des Produktma\ss es
+		\begin{align*}
+			\int_{\Omega_1 \times \Omega_2} f \dint \mu_1\otimes \mu_2 
+			 \overset{\text{Def. Int.}}&{=} \mu_1\otimes \mu_2(A)\\
+			 \overset{\text{Produktma\ss}}&{=} \int_{\Omega_1} \mu_2(A_{\omega_1}) \dint \mu_1(\omega_1)\\
+			& =\int_{\Omega_1} \Big( \int_{\Omega_2} f_{\omega_1}(\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1),
+		\end{align*}
+		weil $f_{\omega_1}=\mathbf{1}_{A_{\omega_1}}$ gilt. Genau analog ergibt sich
+		\begin{align*}
+			\int_{\Omega_1 \times \Omega_2} f \dint \mu_1\otimes \mu_2
+			& = 	\int_{\Omega_2} \Big( \int_{\Omega_1} f(\omega_1,\omega_2) \dint \mu_1(\omega_1) \Big) \dint \mu_2(\omega_2),
+		\end{align*}
+	weil wir am Anfang der Konstruktion des Produktma\ss es auch schon die Identit\"at gesehen haben:
+	\begin{align*}
+		\mu_1\otimes \mu_2(A)=  \int_{\Omega_2} \mu_1(A_{\omega_2}) \dint \mu_2(\omega_2).
+	\end{align*}
+	Das hatten wir in dem Beweis $\bar \mu$ genannt. Damit haben wir beide Gleichheiten in (iii) f\"ur Indikatorfunktionen $f = \mathbf{1}_A$ bewiesen. Nun noch durch die Gebetsm\"uhle der Integrationstheorie: F\"ur einfache Funktionen folgt (iii) durch Linearit\"at des Integrals und monotone Konvergenz folgt die Aussage auch f\"ur alle messbaren $f\geq 0$.
+\end{proof}
+
+	\begin{warnung}
+	\link{https://www.youtube.com/watch?v=7genugORczE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=17&t=796s}
+		Meistens wird nur der \enquote{Fubini-flip} genutzt, also die zweite Gleichheit. Die gemeinsame $(\cA_1 \otimes \cA_2, \cB(\bar \R))$-Messbarkeit in \textbf{beiden} Variablen muss f\"ur $f$ trotzdem gecheckt werden, auch wenn es in vielen B\"uchern und Skripten ignoriert wird. Messbarkeit in jeweils einer Koordinate reicht nicht aus! Das ist wie in Analysis 2, dort war partielle Stetigkeit und Stetigkeit einer Abbildung $f:\R^2\to \R$ nicht \"aquivalent. Wer mal ausprobieren will was schief gehen kann, sollte sich folgendes Beispiel $f:\R\times \R\to \R$ anschauen: Sei $E\notin \mathcal B(\R)$ und
+		\begin{align*}
+			f(x,y)=
+			\begin{cases}
+				1&:x=y, x\in E\\
+				0&:\text{sonst}
+			\end{cases}.
+		\end{align*}
+		Dann ist $f$ zwar partiell messbar (also messbar in einer Variablen f\"ur feste andere Variable), jedoch nicht messbar als Funktion in zwei Variablen. 
+	\end{warnung}
+Merkt euch trotzdem folgende ganz grobe Behauptung: \glqq Fubini funktioniert immer\grqq. Mathematisch ist das nat\"urlich nicht korrekt, man muss schlie\ss lich Voraussetzungen pr\"ufen. Im Gegensatz zu monotoner oder dominierter Konvergenz ist das aber eigentlich nie ein Problem. Integrale vertauschen ist selten ein Problem, Grenzwerte und Integrale zu vertauschen ist dagegen oft schwierig!
+
+\begin{beispiel}\label{lab} \link{https://www.youtube.com/watch?v=7genugORczE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=17&t=2376s} \abs
+
+	\begin{enumerate}[label=(\roman*)]
+		\item Der Satz von Fubini aus Analysis 2 ist gerade der Spezialfall f\"ur $\mu_1=\mu_2=\lambda$ und liest sich als
+		\begin{align*}
+			\int_{\R^2} f(x_1,x_2) \dint(x_1,x_2)=\int_\R \Big(\int_\R f(x_1,x_2) \dint x_1 \Big)\dint x_2=\int_\R \Big(\int_\R f(x_1,x_2) \dint x_2 \Big)\dint x_1
+		\end{align*}
+		weil das zweidimensionale Lebesgue-Ma\ss{} gerade das Produktma\ss{} $\lambda\otimes \lambda$ ist. Wie immer schreiben wir lieber $\dint x$ (bzw. $\dint (x_1,x_2)$) statt $\dint \lambda$, das ist aber nur eine Notationsfrage!
+		\item
+			Als \"Ubungsaufgabe zeigt ihr, dass wir bei Doppelreihen die Reihenfolge immer \"andern d\"urfen, wenn alle Koeffizienten nicht-negativ sind:
+		 \[ \sum\limits_{k = 1}^{\infty} \sum\limits_{n = 1}^{\infty} a_{k,n} = \sum\limits_{n = 1}^{\infty} \sum\limits_{k = 1}^{\infty} a_{k,n}. \] 
+		 Das ist tats\"achlich nur Fubini weil Reihen gerade Integrale mit Z\"ahlma\ss en sind, vergleiche Beispiel \ref{bsp7}. Vermutlich kennt ihr das Drehen von Reihen schon aus der Analysis 1, jetzt nochmal mit Fubini.
+		 %wenn $a_{k,n} \geq 0 \: \forall n,k \in \N$.
+%		$ \mu_1 = \mu_2 = \sum_{k=0}^{\infty} \delta_k =$ Zählmaß, $ \Omega_1 = \N$, $ \cP(\Omega) = \cA_1 = \cA_2$. $ \Omega_1 \times \Omega_2 = \N \times \N$, $ \cA_1 \otimes \cA_2 = \cP(\N \times \N)$, $f(n,k) = a_{n,k}$. $f$ messbar, weil jede Abbildung messbar ist, sind wir fertig. 
+		
+			\end{enumerate}
+\end{beispiel}
+
+In den meisten Anwendungen reicht Fubini f\"ur nicht-negative messbare Funktionen, darum haben wir folgende Verallgemeinerung in der Vorlesung weggelassen. Zur Vollst\"andigkeit wollen wir aber wieder durch Zerlegung in Positiv- und Negativteil eine Variante von Fubini f\"ur reell-wertige Integranden formulieren:
+\begin{satz}[Fubini f\"ur allgemeines integrierbares $f$]\label{fubini}
+Unter den selben Voraussetzungen von Satz \ref{SatzFubini} sei nun $f:\Omega_1\times \Omega_2\to \overline \R$ integrierbar. Dann gelten die Aussagen (i), (ii) und (iii). 
+\end{satz}
+\begin{proof}
+	Wir schreiben $f=f^+-f^-$, und wenden auf $f^+\geq 0$ und $f^-\geq 0$ Satz \ref{SatzFubini} an. Die Messbarkeitsaussagen folgen direkt aus der Messbarkeit von Differenzen messbarer Abbildungen, Aussage (iii) folgt durch Zerlegung der Integrale. Die erste Gleichheit von (iii) zeigen wir wie folgt:
+	\begin{align*}
+			\int_{\Omega_1 \times \Omega_2} f(\omega_1,\omega_2) \dint \mu_1 \otimes \mu_2(\omega_1,\omega_2)
+			\overset{\text{Def.}}&{=} \int_{\Omega_1 \times \Omega_2} f^+(\omega_1,\omega_2) \dint \mu_1 \otimes \mu_2(\omega_1,\omega_2)\\
+			&\quad-\int_{\Omega_1 \times \Omega_2} f^-(\omega_1,\omega_2) \dint \mu_1 \otimes \mu_2(\omega_1,\omega_2)\\
+			\overset{\text{2x Fubini}}&{=} \int_{\Omega_1}\Big( \int_{\Omega_2} f^+(\omega_1,\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1) \\
+			&\quad- \int_{\Omega_1}\Big( \int_{\Omega_2} f^-(\omega_1,\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1) \\
+			\overset{\text{2x Lin.}}&{=}  \int_{\Omega_1}\Big( \int_{\Omega_2} (f^+-f^-)(\omega_1,\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1) \\
+			&= \int_{\Omega_1}\Big( \int_{\Omega_2} f(\omega_1,\omega_2) \dint \mu_2(\omega_2) \Big) \dint \mu_1(\omega_1).
+		\end{align*}
+		Die zweite Gleichheit von (iii) folgt genauso aus Satz \ref{SatzFubini}.
+\end{proof}
+\chapter{Stochastik}
+
+An dieser Stelle beenden wir die allgemeine Ma\ss- und Integrationstheorie und wenden uns endlich vollst\"andig der Stochastik zu. Wir haben bereits zuf\"allige Experimente durch Wahrscheinlichkeitsr\"aume modelliert, die Verteilung \glqq einer Masse Zufall\grqq{} auf die reellen Zahlen durch Verteilungsfunktionen diskutiert und die Konzentration des Zufalls unter $\mathbb{P}_F$ abgesch\"atzt. Jetzt kommt noch ein letzter Modellierungsschritt, wir wenden uns sogenannten Zufallsvariablen zu.
+
+\section{Zufallsvariablen}
+
+
+\begin{disc}\link{https://www.youtube.com/watch?v=7genugORczE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=17&t=3688s}
+	Schauen wir uns nochmal die Modellierung sehr einfacher zuf\"alliger Experimente an. Beispielsweise f\"ur den M\"unzwurf haben wir zwei Modellierungsvarianten diskutiert:\smallskip
+	
+	Variante 1: $\Omega= \{ \text{Kopf}, \text{ Zahl} \}$, $\cA = \cP(\Omega)$ und das Ma\ss{} 
+	\begin{align*}
+				 \mathbb{P}(\{ \text{Kopf} \}) &= \mathbb{P}(\{ \text{Zahl} \}) = \frac{1}{2}, \quad \mathbb{P}(\Omega) = 1, \quad \mathbb{P}(\emptyset) = 0.
+	\end{align*}
+	Variante 2: $\Omega=\R$, $\cA = \cB(\R)$, $\mathbb P=\mathbb{P}_F$, wobei $\mathbb P_F$ das Wahrscheinlichkeitsma\ss{} mit diskreter Verteilungsfunktion $F$ ist:
+\begin{center}		
+	\begin{tikzpicture}[]
+	\begin{axis}[
+	x = 1cm,
+	y = 1cm,
+	axis lines=middle,
+	axis line style={-Stealth,thick},
+	xmin=-2.2,xmax=2.5,ymin=-0.625,ymax=1.5,
+	xtick={-2,-1,0,1,2,3,4},
+	ytick={0,1},
+	extra x ticks={-0.5},
+	extra y ticks={-0.5},
+	extra x tick style={xticklabel=\empty},
+	extra y tick style={yticklabel=\empty},
+	xtick distance=1,
+	ytick distance=1,
+%	xlabel=$t$,
+%	ylabel=$F(t)$,
+	%title={Wonderful plot},
+	minor tick num= 1,
+	%grid=both,
+	grid style={thin,densely dotted,black!20}]
+	%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+	\addplot [domain = 0:1] {0.5};
+	\addplot [domain = 1:2.5] {1};	 
+	\addplot [only marks] coordinates{(0,0.5)(1,1)};
+	\addplot [dotted] coordinates{(1,0.5) (1,1)};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}	
+Beide Modelle modellieren ein Experiment, bei dem zwei Elementarereignisse jeweils mit Wahrscheinlichkeit $\frac{1}{2}$ auftreten. Das zweite Modell ist nat\"urlich viel zu kompliziert, hat aber den Vorteil, dass wir reelle Zahlen bekommen. Der Vorteil ist, dass wir so zum Beispiel so etwas wie einen Mittelwert (hei\ss t sp\"ater Erwartungswert) definieren k\"onnen. Da wir den Ereignissen die Werte $0$ und $1$ geben, h\"attet ihr ohne viel nachzudenken sicherlich als umgangssprachlichen Erwartungswert $\frac 1 2$ vorgeschlagen.
+
+Was unterscheidet Variante 1 von Variante 2? In der ersten Variante haben wir nur das zuf\"allige Experiment W\"urfeln modelliert in der zweiten Variante haben wir zwei Dinge auf einmal modelliert:
+	\begin{itemize}
+		\item Was passiert? (Welches zuf\"allige Ereigniss passiert beim W\"urfeln)
+		\item Was wird ausgezahlt? (Was wird f\"ur Kopf bzw. Zahl ausgezahlt)
+	\end{itemize}
+Wenn wir bei Variante 1 auch \"uber Auszahlungen sprechen wollen, m\"ussen wir die m\"oglichen Elementarereignisse noch in Auszahlungen \"ubersetzen. Daf\"ur kommen messbare Abbildungen $X:\Omega \to \R$ ins Spiel.\smallskip	
+	
+ \textit{Ab jetzt:} Trenne in der Modellierung \enquote{Was passiert?} (also Ereignisse und Wahrscheinlichkeiten) von \enquote{Was wird beobachtet/ausgezahlt?}.
+\end{disc}
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=7genugORczE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=17&t=4105s}
+	Ein \textbf{stochastisches Modell} besteht aus
+	\begin{enumerate}[label=(\roman*)]
+		\item einem Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$,
+		\item einer $(\cA, \cB(\R))$-messbaren Abbildung $X\colon \Omega \to \R$.
+	\end{enumerate}
+	Dabei beschreibt (i) das zuf\"allige Experiment, (ii) beschreibt die \enquote{Beobachtung/Auszahlung}. $X$ wird auch \textbf{Zufallsvariable (ZV)} genannt. Eine konkrete Ausf\"uhrung $X(\omega)$ nennt man auch \textbf{Realisierung} der Zufallsvariablen. 
+\end{deff}
+Die \"Ubersetztung des Elementarereignisses $\omega$ in die Beobachtung $X(\omega)$ ist dabei deterministisch (nicht zuf\"allig), der Zufall steckt ausschlie\ss lich in dem Auftreten von $\omega$. Irgendjemand unbekanntes (die Physik, ein Computer, ein Gott, etc.) entscheidet \"uber die Wahl des zuf\"alligen $\omega$, das wird dann in die Zufallsvariable $X$ eingesetzt und wir beobachten den Wert $X(\omega)$. In dieser Vorlesung sprechen wir nicht weiter \"uber die \enquote{Ausf\"uhrung von Zufall}, wir modellieren Wahrscheinlichkeiten. F\"ur die Ausf\"uhrung von Zufall (wir sagen die Realisierung der Zufallsvariablen) verweisen wir auf Vorlesungen \"uber Monte Carlo Methoden oder Philosophie.
+\begin{deff}\label{df}
+\link{https://www.youtube.com/watch?v=7genugORczE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=17&t=4813s}
+Sei $X$ eine Zufallsvariable auf einem Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$.
+	\begin{enumerate}[label=(\roman*)]
+		\item Die \textbf{Verteilung der Zufallsvariablen $X$} ist definiert als
+		\begin{gather*}
+			\mathbb{P}_X (B) := \mathbb{P} (X \in B) \overset{\text{Notation}}{=} \mathbb{P}(\{ \omega \in \Omega \colon X(\omega) \in B \}) =\mathbb{P}(X^{-1}(B)), \quad B \in \cB(\R).
+		\end{gather*}
+		Unabh\"angig von dem zugrundeliegenden Wahrscheinlichkeitsraums ist $ \mathbb{P}_X $ also ein Maß auf $ \cB(\R) $ und zwar der push-forward von $\mathbb P$ unter $X$.
+		\item Die \textbf{Verteilungsfunktion der Zufallsvariablen $X$} ist definiert als
+		\[ F_X(t) := \mathbb{P}_X((-\infty,t]) \overset{\text{Def.}}{=} \mathbb{P}(X \leq t), \quad t \in \R. \]
+		Wir schreiben $X \sim F_X$ und $X \sim \mathbb{P}_X$ und sagen \enquote{$X$ ist verteilt gemäß $F_X$ bzw. $X$ ist verteilt gem\"a\ss{} $\mathbb P_X$}.
+	\end{enumerate}
+	 Weil so viele Indizes nat\"urlich nerven, werden wir immer $X\sim F$ schreiben, wenn wir meinen, dass $X$ gem\"a\ss{} $F$ verteilt ist.  Wir sagen dann auch kurz \enquote{$X$ hat Verteilungsfunktion $F$}.
+	 Beachte: Aufgrund der Definition ist nat\"urlich $\mathbb P_X=\mathbb P_{F_X}$, das werden wir immer mal wieder nutzen.
+\end{deff}
+
+Wir haben uns schon in der Ma\ss theorie langsam an den Begriff $\mu(\{f\leq t\})$ als Abk\"urzung f\"ur $\mu(\{\omega: f(\omega)\leq t\})$ gew\"ohnen m\"ussen. In der Stochastik gehen wir noch einen Schritt weiter und lassen die Klammern auch noch weg. Wir schreiben daher immer abk\"urzend
+\begin{align*}
+	\mathbb P(X< t),\quad \mathbb P(X\in (a,b]),\quad \mathbb P(X=a)
+\end{align*}
+und so weiter. Das liest sich als \glqq Wahrscheinlichkeit, dass $X$ kleiner als $t$ ist\grqq{} auch ziemlich nat\"urlich.
+
+
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=7genugORczE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=17&t=5401s}
+	Zufallsvariablen $X$ und $Y$, m\"oglicherweise auf verschiedenen Wahrschein-lichkeitsr\"aumen, heißen \textbf{identisch verteilt}, falls $F_X = F_Y$ bzw. $\mathbb P_X=\mathbb P_Y$. Man schreibt dann $X\sim Y$. Haben zwei Zufallsvariablen die gleiche Verteilungsfunktion, so sehen wir sie als gleichwertig an.
+\end{deff}
+
+	Zurück zum Münzwurf mit Auszahlung $1$ f\"ur Zahl und $0$ f\"ur Kopf. Wir schreiben dazu wieder zwei stochastische Modelle hin. Zum einen sei $\Omega = \{ \text{Kopf}, \text{ Zahl} \}$, $\cA = \cP(\Omega)$ und 
+	\begin{align*}
+		 \mathbb{P}(\{ \text{Kopf} \}) &= \mathbb{P}(\{ \text{Zahl} \}) = \frac{1}{2},\quad \mathbb{P}(\Omega) = 1, \quad \mathbb{P}(\emptyset) = 0,
+	\end{align*}
+	mit Zufallsvariable (Auszahlungsfunktion) definiert als
+	\begin{align*}
+		X(\text{Kopf})=0,\quad X(\text{Zahl})=1.
+	\end{align*}
+	Zum anderen sei $\Omega=\R$, $\cA = \cB(\R)$ und $\mathbb P=\mathbb{P}_F$ mit der Verteilungsfunktion
+\begin{center}		
+	\begin{tikzpicture}[]
+	\begin{axis}[
+	x = 1cm,
+	y = 1cm,
+	axis lines=middle,
+	axis line style={-Stealth,thick},
+	xmin=-2.2,xmax=2.5,ymin=-0.625,ymax=1.5,
+	xtick={-2,-1,0,1,2,3,4},
+	ytick={0,1},
+	extra x ticks={-0.5},
+	extra y ticks={-0.5},
+	extra x tick style={xticklabel=\empty},
+	extra y tick style={yticklabel=\empty},
+	xtick distance=1,
+	ytick distance=1,
+%	xlabel=$t$,
+%	ylabel=$F(t)$,
+	%title={Wonderful plot},
+	minor tick num= 1,
+	%grid=both,
+	grid style={thin,densely dotted,black!20}]
+	%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+	\addplot [domain = 0:1] {0.5};
+	\addplot [domain = 1:2.5] {1};	 
+	\addplot [only marks] coordinates{(0,0.5)(1,1)};
+	\addplot [dotted] coordinates{(1,0.5) (1,1)};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}		
+	 Da wir diesmal die Auszahlung schon direkt im Modell modelliert haben, zahlen wir genau den Betrag aus, der zuf\"allig gezogen wird. Das machen wir mit der Zufallsvariablen $Y(\omega)=\omega$. Berechnen wir nun die Verteilungen der Zufallsvariablen $X$ und $Y$:
+	\begin{align*}
+		\mathbb P_X(B)&\overset{\text{Def.}}{=}\mathbb P(X\in B)=\begin{cases}
+			\frac 1 2 &: 0\in B, 1\notin B\text{ oder } 1 \in B, 0\notin B\\
+			1&: 0,1\in B\\
+			0&: 0\notin B, 1\notin B
+		\end{cases}\\
+		&=\frac{1}{2} \delta_0(B)+\frac{1}{2}\delta_1(B)
+	\end{align*}
+	sowie
+	\begin{align*}
+		\mathbb P_Y(B)\overset{\text{Def.}}{=}\mathbb P(Y\in B)=\mathbb P(\{\omega \in \R: Y(\omega)\in B\})=\mathbb P(\{\omega \in \R: \omega \in B\})=\mathbb P(B)\overset{\text{Def.}}{=} \mathbb P_F(B).
+	\end{align*}
+	Weil $\mathbb P_F=\frac 1 2 \delta_0+\frac 1 2 \delta_1$, gilt also $\mathbb P_X=\mathbb P_Y$ bzw. $F_X=F_Y$. Damit sind $X$ und $Y$ identische verteilte Zufallsvariablen und wir sehen die beiden stochastischen Modelle als gleichwertige Modelle f\"ur den M\"unzwurf an.	
+\marginpar{\textcolor{red}{Vorlesung 17}}
+
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=142s}
+	\begin{enumerate}[label=(\roman*)]
+		\item Eine Zufallsvariable $X$ heißt \textbf{absolutstetig} mit Dichte $f$, falls die Verteilungsfunktion $F_X$ von $X$ die Dichte $f$ hat, es gilt also
+		\[ \mathbb{P}(X \in (a,b] ) =\mathbb P_X((a,b])= F_X(b) - F_X(a) = \int_{a}^{b} f(x) \dint x, \quad a<b. \]
+		\item Eine Zufallsvariable $X$ heißt \textbf{diskret}, falls $F_X$ eine diskrete Verteilungsfunktion ist (oder $\mathbb P_X$ ein diskretes Ma\ss{} ist). In anderen Worten: $X$ nimmt nur abz\"ahlbar viele Werte $a_1,...,a_N$ mit Wahrscheinlichkeiten $p_1,...,p_N$ an:
+			\begin{align*}
+		 \mathbb{P}( X = a_k )=\mathbb P_X(\{a_k\})= p_k,\quad k=1,...,N.
+		\end{align*}
+	\end{enumerate}
+\end{deff}
+Ihr merkt euch am besten folgende Rechenformeln:
+\begin{align*}
+	\mathbb P(X\in A)=\begin{cases}
+		\int_A f(x)\dint x&: X\text{ absolut stetig}\\
+		\sum_{a_k\in A} p_k&: X\text{ diskret}
+	\end{cases},
+\end{align*}
+man integriert oder summiert \"uber die Werte, die $X$ annehmen soll. Dumm ist nur, wenn wir nicht wissen, dass $X$ absolutstetig oder diskret ist. Dann ist eine Zufallsvariable halt irgendeine reellwertige messbare Abbildung auf irgendeinem Wahrscheinlichkeitsraum mit irgendeiner Verteilungsfunktion $F$.
+
+\begin{beispiel}\label{link}
+\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=1197s}
+	Wir kennen die meisten wichtigen Beispiele schon, manche kommen noch dazu:
+	\begin{center}
+	\begin{tabular}{l|l}
+		Diskrete Zufallsvariablen& Absolutstetige Zufallsvariablen\\ %[0.05cm] 
+		\hline
+		$X \sim \operatorname{Poi}(\lambda)$& $X \sim \cN(\mu, \sigma^2)$\\
+		$X \sim \operatorname{Bin}(n,p)$& $X \sim \operatorname{Cauchy}(s,t)$\\ 
+		$X \sim \operatorname{Ber}(p)$& $X \sim \operatorname{Exp}(\lambda)$\\
+		$X \sim \operatorname{Geo}(\lambda)$& $X \sim \cU([a,b])$\\
+		$X \sim$ Gleichverteilt auf endlichem $\Omega$ & $X\sim\Gamma(\alpha,\beta)$\\
+		&$X\sim \text{Pareto}(k,a)$
+	\end{tabular}
+	\end{center}
+	Im Appendix gibt es eine \"Ubersicht \"uber die wichtigsten Verteilungen.
+\end{beispiel}
+Um die Begriffe auszuprobieren, schauen wir uns eine kleine Rechnung an. Wir behaupten, dass $Y\sim \operatorname{Exp}(1)$, wenn $Y=-\ln(U)$ mit $U\sim \mathcal U([0,1])$. Probieren wir die Begriffe aus und berechnen definitionsgem\"a\ss{} die Verteilungsfunktion von $Y$ durch Aufl\"osen:
+\begin{align*}
+	F_Y(t)=\mathbb P(Y\leq t) \overset{\text{Def.}}{=} \mathbb P(-\ln(U)\leq t)=\mathbb P(U\geq \exp(-t))=1-\mathbb P(U\leq \exp(-t)).
+\end{align*}
+Wenn wir jetzt die Verteilungsfunktion  von $\mathcal U([0,1])$ einsetzen, bekommen wir $F_Y(t)= (1-e^{-t})\mathbf 1_{[0,\infty)}(t)$ und das ist die Verteilungsfunktion der Exponentialverteilung.\smallskip 
+
+ Wir waren ein klein wenig ungenau weil $Y$ den Wert $+\infty$ annehmen kann, eine Zufallsvariable per Definition aber nur reelle Werte annimmt. Das kann man einfach reparieren, indem man zum Beispiel $\log(0)=0$ umdefiniert. Alternativ nimmt man $U\sim \mathcal U((0,1))$ statt $U\sim \mathcal U([0,1])$, das diskutieren wir ausf\"uhrlich in Abschnitt \ref{sectrafo}.\smallskip
+
+
+Es ist jetzt hoffentlich klar, was ein stochastisches Modell sein soll. Aber gibt es f\"ur jede Verteilungsfunktion \"uberhaupt solch Modell? Ja! Die in folgendem Beweis auftauchende Konstruk-tion hei\ss t \glqq kanonische Konstruktion\grqq{} und wird in der Stochastik in diversen Kontexten immer wieder benutzt.
+\begin{satz}\label{existenz}
+\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=2131s} \textbf{[Existenz stochastischer Modelle]}
+	Für jede Verteilungsfunktion $F$ existiert eine Zufallsvariable $X$ mit $X\sim F$. Genauer: Es existiert ein stochastisches Modell, \mbox{d. h.} ein Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ und eine Zufallsvariable $X$ auf $(\Omega, \mathcal A, \mathbb P)$, mit $X \sim F$.
+\end{satz}
+
+\begin{proof}
+	Als Wahrscheinlichkeitsraum definieren wir $\Omega=\R$, $\cA = \cB(\R)$, $\mathbb{P} = \mathbb{P}_F$ und darauf die Zufallsvariable $X(\omega) = \omega$. Beachte: $X(\omega)=\omega$ ist eine stetige Abbildung von $\R$ nach $\R$ und damit auch Borel-messbar. Berechnen wir die Verteilungsfunktion dieser konkreten Zufallsvariablen auf dem konkreten Wahrscheinlichkeitsraum:
+		\begin{align*}
+		F_X(t)=\mathbb P(X\leq t)=\mathbb P_F(\{\omega: X(\omega)\leq t\})=\mathbb P_F(\{\omega: \omega\leq t\})=\mathbb P_F((-\infty,t])=F(t),\quad t\in\R.
+	\end{align*}
+%	
+%	\[ \mathbb{P}_X(B) = \mathbb{P}(X \in B) = \mathbb{P}_F(X \in B) = \mathbb{P}_F(\{ \omega \colon X(\omega) \in B \}) \overset{\text{Def. }X}{=} \mathbb{P}_F(B). \] 
+	Also gilt $X\sim F$, das war es schon! Zu beachten ist, dass die Konstruktion weit von trivial ist. Die Existenz von $\mathbb P_F$ ben\"otigt den Satz von Carath\'eodory und damit die komplette Ma\ss theorie. 
+\end{proof}
+
+\begin{bem}
+\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=2625s}
+	Wenn wir uns nur f\"ur diskrete Zufallsvariablen interessieren w\"urden, k\"amen wir komplett \textit{ohne} Maßtheorie aus! Hier ist eine viel einfachere Konstruktion, die f\"ur alle diskrete Zufallsvariablen funktioniert. Sei dazu $F$ eine diskrete Verteilungsfunktion, die an $N$-vielen Stellen $a_k$ um $p_k$ nach oben springt. Sei nun $\Omega=\{\omega_1,...,\omega_N\}$ eine beliebige Menge mit $N$ Elementen (z.B. $\Omega=\{\text{Kopf}, \text{Zahl}\}$ beim W\"urfeln). Auf $\Omega$ w\"ahlen wir als $\sigma$-Algebra $\mathcal A=\mathcal P(\Omega)$. Das Ma\ss{} definieren wir, indem wir es auf den Elementarereignissen als $\mathbb P(\{\omega_k\})=p_k$ definieren und mit der $\sigma$-Additivit\"at f\"ur beliebiges $A\in \mathcal A$ fortsetzen, d. h. $\mathbb P(A)=\sum_{\omega_k\in A} \mathbb P(\{\omega_k\})=\sum_{\omega_k\in A}p_k.$ An dieser Stelle nutzen wir die Abz\"ahlbarkeit. Als Zufallsvariable w\"ahlen wir die Abbildung $X(\omega_k):=a_k$. Weil auf dem Urbildraum die Potenzmenge gew\"ahlt wurde, ist nat\"urlich jede Abbildung nach $\R$ auch $(\mathcal A, \mathcal B(\R))$-messbar. Damit gilt $\mathbb{P}(X = a_k) = p_k$, also ist $X$ gem\"a\ss{} $F$ verteilt. Diese Konstruktion funktioniert nur f\"ur diskrete Verteilungsfunktionen so einfach (probiert es einfach mal f\"ur absolutstetige Verteilungsfunktionen aus, ihr werdet schnell den Fortsetzungssatz von Carath\'eodory brauchen). Im Allgemeinen kommen wir nicht umher, die Ma\ss theorie wie im Beweises von Satz \ref{existenz} zu nutzen weil man Ma\ss e auf \"uberabz\"ahlbaren Mengen nicht einfach auf den Elementarereignissen definieren kann.
+\end{bem}
+Hier sind zwei konkrete Beispiele: Wenn jemand von euch ein stochastisches Modell f\"ur eine $\mathcal N(0,1)$-verteilte Zufallsvariable verlangt, so entgegnet ihr
+\begin{align*}
+	\Omega=\R,\quad \mathcal A=\mathcal B(\R),\quad \mathbb P=\mathbb P_F,\quad X(\omega)=\omega,
+\end{align*}
+wobei $\mathbb P_F$ das eindeutige Ma\ss{} auf $\mathcal B(\R)$ mit Verteilungsfunktion $F\sim \mathcal N(0,1)$ aus Carath\'eodory ist. Will jemand das gleiche f\"ur eine $\text{Poi}(\lambda)$-verteilte Zufallsvariable haben, so entgegnet ihr entweder das gleiche, oder 
+\begin{align*}
+	\Omega=\mathbb N,\quad \mathcal A=\mathcal P(\mathbb N),\quad \mathbb P(\{k\})=e^{-\lambda} \frac{\lambda^k}{k!},\quad X(\omega)=\omega.
+\end{align*}
+Um ganz deutlich zu sein: Diskret ist einfach, weil die Potenzmenge von abz\"ahlbaren Mengen noch klein genug ist und Ma\ss e durch die abz\"ahlbare $\sigma$-Additivit\"at von Ma\ss en nur auf einpunktigen Mengen definiert werden m\"ussen! Weil all das f\"ur \"uberabz\"ahlbare Mengen wie $\R$ schief geht, haben wir Ma\ss theorie gemacht. Auf die Normalverteilung k\"onnen wir einfach nicht verzichten!
+\begin{deff}
+\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=3524s}
+	Ist $X$ eine Zufallsvariable auf $(\Omega, \cA, \mathbb{P})$, so heißen, falls die Integrale wohldefiniert sind,
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \mathbb{E}[X] := \int_{\Omega} X(\omega) \dint \mathbb{P}(\omega) \qquad \text{\textbf{Erwartungswert} von X}, \] 
+		\item \[ \mathbb{E}[X^k] := \int_{\Omega} X^k(\omega) \dint \mathbb{P}(\omega) \qquad \text{\textbf{$k$-tes Moment} von X f\"ur }k\in\N, \]
+		\item \[ \mathbb{V}[X] := \mathbb{E}[(X - \mathbb{E}[X])^2] \qquad \text{\textbf{Varianz} von X}, \]
+		\item \[ \mathbb{E}[e^{\lambda X}] := \int_{\Omega} e^{\lambda X(\omega)} \dint \mathbb{P}(\omega) \qquad \text{\textbf{exponentielles Moment} von X f\"ur }\lambda\in\R. \]
+	\end{enumerate}
+	Allgemein betrachten wir f\"ur $g:\R\to\overline \R$ messbar die Erwartungswerte 
+		\[ \mathbb{E}[g(X)] := \int_{\Omega} g(X(\omega)) \dint \mathbb{P}(\omega), \]
+	falls das Integral wohldefiniert ist. Wir sagen die Erwartungswerte existieren, falls die Integrale existieren (also endlich sind).
+\end{deff}
+Wir erinnern daran, dass ein wohldefiniertes Integral auch die Werte $+\infty$ oder $-\infty$ annehmen darf. Meistens werden wir aber davon sprechen, dass die Integrale existieren, also endlich sind. Wegen der allgemeinen \"Aquivalenzen 
+\begin{align*}
+	\int f \dint \mu \text{ existiert } \quad\overset{\text{Def.}}&{\Leftrightarrow}\quad \int f^+ \dint \mu < \infty, \: \int f^- \dint \mu < \infty
+	\quad{\Leftrightarrow}\quad \int |f| \dint \mu < \infty,
+\end{align*}
+schreiben wir meistens bequemer \enquote{$\mathbb{E}[|g(X)|] < \infty$} anstelle von \enquote{$\mathbb{E}[g(X)]$ existiert}. Bei Erwartungs-werten sagen wir also \enquote{der Erwartungswert von $X$ existiert}, wenn der Erwartungswert wohldefiniert und endlich ist. Das wird oft in der Literatur genauso gehandhabt, manchmal aber auch anders. Manche sagen, der Erwartungswert existiert, wenn $\E[X]$ wohldefiniert ist (aber vielleicht unendlich) ist.
+
+\begin{bem1}
+	Die Notation $\mathbb{E}[g(X)]$ ist etwas unglücklich weil das Integral nicht nur von $g$ und $X$ abh\"angt, sondern auch von $\mathbb P$. Daher sollte man eher  $\mathbb{E}_{\mathbb{P}}[g(X)]$ schreiben, man l\"asst aber \"ublicherweise das $\mathbb{P}$ aus Faulheit weg.
+\end{bem1}
+
+\begin{lemma}\label{ewTrafo}
+\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=4108s}
+	Ist die Zufallsvariable $X$ gem\"a\ss{} $F$ verteilt, d. h. $X\sim F$, so gilt unabhängig von dem Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ auf dem $X$ definiert ist,
+	\[ \mathbb{E}[g(X)] = \int_{\R} g(x) \dint \mathbb{P}_F(x) \]
+	für messbare numerische Abbildungen $g \colon \R \to \overline{\R}$. Wie immer gilt die Gleichheit, wenn eine Seite (und damit die die andere Seite) wohldefiniert ist.
+\end{lemma}
+
+\begin{proof}
+	Mit dem Transformationssatz \ref{trafo} (bzw. Korollar (\ref{korTrafo}) gilt in einem Schaubild 
+\begin{center}		
+	\begin{tikzcd}
+		{}&{}&{}\\
+		(\Omega, \mathcal A, \mathbb P) \arrow[r, "{X}"] \arrow[rd, "{g \circ X}"']
+		& (\R, \mathcal B(\mathbb{R}),\mathbb P_X) \arrow[d, "{g}"] \arrow[ur, phantom, "", near start] \\
+		& (\overline{\R},\mathcal B(\overline{\R}))\\
+	\end{tikzcd}
+\end{center}
+wobei $\mathbb P_X$ der push-forward von $X$ ist. Weil definitionsgem\"a\ss{} $\mathbb P_X=\mathbb P_F$ ist, gibt das sauber ausgeschrieben
+\begin{align*}
+	\E[g(X)] &\overset{\text{Def.}}{=} \int_{\Omega} g(X(\omega)) \dint \mathbb{P}(\omega)
+	 \overset{\text{\ref{trafo}}}{=} \int_{\R} g(x) \dint \mathbb{P}_X(x)
+	 \overset{\mathbb P_X=\mathbb P_F}{=} \int_{\R} g(x) \dint \mathbb{P}_F(x).
+\end{align*}
+\end{proof}
+Die Konsequenz ist nat\"urlich, dass f\"ur beliebiges $g$, $\E[g(X)]$ gar nicht von dem kompletten Modell $(\Omega, \mathcal A, \mathbb P,X)$ abh\"angt, $\E[g(X)]$ h\"angt einfach nur von der Verteilung von $X$ ab. Das ist der Grund, warum man sich \"ublicherweise nur f\"ur die Verteilungsfunktion von $X$, jedoch nicht f\"ur $(\Omega, \mathcal A, \mathbb P)$ interessiert. Fassen wir die Beobachtung zusammen:
+\begin{bem1}
+	Sind $X, Y$ identisch verteilte Zufallsvariablen, die auf irgendwelchen Wahrscheinlich-keitsräumen definiert sind, so gilt
+		\[ \mathbb{E}[g(X)] = \mathbb{E}[g(Y)] \] für alle $g \colon \R \to \overline{\R}$ messbar.
+\end{bem1}
+Jetzt wissen wir auch schon, wie wir $\E[g(X)]$ berechnen k\"onnen, das haben wir n\"amlich schon gemacht. Vieles was jetzt kommt sind Wiederholungen, indem wir S\"atze f\"ur allgemeine Integrale nochmal f\"ur Erwartungswerte hinschreiben.
+\begin{satz}\label{regeln}
+\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=4583s} \textbf{[Berechnungsregeln]}
+	Sei $X$ eine Zufallsvariable auf einem Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$ und $g:\R\to \overline{\R}$ messbar, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{(i)} Ist $X$ absolutstetig mit Dichte $f$, so gilt \[ \mathbb{E}[g(X)] = \int_{\R} g(x) f(x) \dint x. \]
+		\item\label{ii} Ist $X$ diskret und nimmt die Werte $a_1, ..., a_N\in\R$ mit Wahrscheinlichkeiten $p_1, ..., p_N$ an, so gilt
+		 \[ \mathbb{E}[g(X)] = \sum\limits_{k=1}^{N} p_k\, g(a_k)=  \sum\limits_{k=1}^{N}  \mathbb{P}(X=a_k)g(a_k). \]
+	\end{enumerate}
+	 Dabei ist wieder eine Seite genau dann wohldefiniert, wenn es die andere Seite ist.
+\end{satz}
+\begin{proof}
+	Dazu kombinieren wir nur die Formel aus Satz	\ref{ewTrafo} mit den Formeln aus Satz \ref{IntDichten} und Satz \ref{IntDiskr}.
+\end{proof}
+
+\begin{beispiel}\link{https://www.youtube.com/watch?v=rm2_f1MRGoc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=18&t=4924s} \abs
+
+	\begin{itemize}
+		\item F\"ur $X \sim \cN(\mu, \sigma^2)$ gilt $ \mathbb{E}[X] = \int_{\R} x \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2 \sigma^2}}\dint x = \mu$.
+		\item F\"ur $X \sim \operatorname{Ber}(p)$ gilt $ \mathbb{E}[X] = 1 \cdot \mathbb{P}(X = 1) + 0 \cdot \mathbb{P}(X = 0) = p$.
+		\item F\"ur $X \sim \operatorname{Poi}(\lambda)$ gilt $ \mathbb{E}[X] = \sum_{k = 0}^{\infty} k \cdot \mathbb{P}(X = k) = \sum_{k = 0}^{\infty} k e^{-\lambda} \frac{\lambda^k}{k!} = \lambda$.
+	\end{itemize}
+	Wir sehen also: Ein gro\ss er Teil der Stochastik besteht aus dem Berechnen von Integralen und Summen bzw. Reihen.
+\end{beispiel}
+\marginpar{\textcolor{red}{Vorlesung 18}}
+
+\begin{beispiel}
+\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=113s}
+	Eine Webseite wird im Mittel pro Stunde zweimal geklickt. Wie groß ist die Wahrscheinlichkeit, dass die Webseite in einer Stunde mindestens fünfmal geklickt wird?\smallskip
+	
+	Um das Beispiel stochastisch zu behandeln, m\"ussen wir zun\"achst ein Modell annehmen. Welche uns bekannte Zufallsvariable k\"onnte die Anzahl der Klicks pro Stunde modellieren? Da die Ergebnisse der Zufallszahlen nat\"urliche Zahlen sind, muss die Verteilung diskret sein. Nun ist die Anzahl nicht beschr\"ankt, es sollte also eine Zufallsvariable sein, die alle Werte in $\N$ annehmen kann. Dazu kennen wir bisher nur die geometrische- oder die Poissonverteilung. An der jetzigen Stelle k\"onnen wir ohne weitere Annahmen keine von beiden ausschlie\ss en. Nehmen wir einfach mal an, dass $X\sim \operatorname{Poi}(\lambda)$ ein gutes Modell ist. Aber was ist $\lambda$? Weil wir wissen, dass $\E[X]=\lambda$ ist, schlie\ss en wir $\lambda=2$ aus der Vorinformation (Das Gesetz der gro\ss en Zahlen wird uns in Satz \ref{sGGZ} des letzten Kapitel die Rechtfertigung geben, warum wir aus dem Mittel auf den Erwartungswert schlie\ss en.) Um nun die Aufgabe zu l\"osen, m\"ussen wir f\"ur eine $\operatorname{Poi}(2)$-verteilte Zufallsvariable $\mathbb P(X\geq 5)$ berechnen. Das geht ganz einfach:
+	\begin{align*}
+	\mathbb{P}(X \geq 5) &= 1 - \mathbb{P}(X \leq 4)\\
+	& = 1 - \sum\limits_{k=0}^{4} \mathbb{P}(X = k)\\ 
+	&= 1 - e^{-2} \left(\frac{1}{1} + \frac{2}{1} + \frac{4}{2} + \frac{8}{6} + \frac{16}{24}\right) \approx 0,053.
+	\end{align*} 
+	Hierbei haben wir genutzt, dass f\"ur eine diskrete Zufallsvariable immer $$\mathbb P(X\in A)=\sum_{a_k\in A} \mathbb P(X=a_k)$$ gilt. Das folgt nat\"urlich aus der $\sigma$-Additivit\"at von Ma\ss en weil $A\mapsto \mathbb P(X\in A)$ ein Ma\ss{} ist (die Verteilung von $X$).
+	\end{beispiel}
+
+
+\begin{prop}\label{rechenregeln}
+\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=1157s} \textbf{[Rechenregeln f\"ur den Erwartungswert]}
+	Seien $X,Y$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ mit $\mathbb{E}[|X|],\mathbb{E}[|Y|] < \infty$ und $\alpha,\beta\in\R$, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $\mathbb{E}[\alpha X + \beta Y] = \alpha \mathbb{E}[X] + \beta \mathbb{E}[Y]$
+		\item $X \geq 0$ $\mathbb P$-f.s. $\Rightarrow \mathbb{E}[X] \geq 0$ und  $X \geq Y$ $\mathbb P$-f.s. $\Rightarrow \mathbb{E}[X] \geq \mathbb{E}[Y]$
+		\item Ist $X = \alpha$  $\mathbb{P}$-f.s., so ist $\mathbb{E}[X] = \alpha$.
+		\item $\mathbb{P}(X \in A) = \mathbb{E}[\mathbf{1}_A(X)]$, insbesondere gilt $F_X(t)=\E[\mathbf 1_{(-\infty,t]}(X)]$, $t\in\R$.
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	Wir m\"ussen nur beachten, dass Erwartungswerte per Definition Integrale sind. Dann k\"onnen wir die Rechenregeln f\"ur Integrale direkt anwerden. Zu beachten ist, dass wegen Satz \ref{S7} \"Anderungen auf Nullmengen Integrale nicht \"andern.
+	\begin{enumerate}[label=(\roman*)]
+	\item Linearität von Integralen
+	\item Monotonie von Integralen (die Nullmengen spielen keine Rolle)
+	\item Nach Annahme gilt $X = \alpha \mathbf{1}_{\Omega}$ $\mathbb{P}$-f.s. Wegen Satz \ref{S7} k\"onnen wir sofort die Definition des Integrals einsetzen:
+	\[ \mathbb{E}[X] = \int_{\Omega} X(\omega) \dint \mathbb{P}(\omega) = \int_{\Omega} \underbrace{\alpha \mathbf{1}_{\Omega}}_{\text{einfach}} \dint \mathbb{P} \overset{\text{Def.}}{=} \alpha \mathbb{P}(\Omega) = \alpha  \]
+	\item Hier m\"ussen wir nur die Definitionen im Kopf klar bekommen:
+	\begin{gather*}
+		\mathbb{E}[\mathbf{1}_A(X)] = \int_{\Omega} \mathbf{1}_A(X(\omega)) \dint \mathbb{P}(\omega) \overset{\text{Trafo}}{=} \int_{\R} \underbrace{\mathbf{1}_A(x)}_{\text{einfach}} \dint \mathbb{P}_X(x) = \mathbb{P}_X(A) \overset{\text{Def.}}{=} \mathbb{P}(X \in A)
+	\end{gather*}
+\end{enumerate}
+\end{proof}
+Nat\"urlich ist eine Zufallsvariable, die fast sicher den selben Wert annimmt, gar keine interessante Zufallsvariable! Das modellierte Zufallsexperiment ist gar nicht zuf\"allig, es passiert immer das gleiche! Beispiel: Jeden Tag um 7 Uhr wird die Zeit (Stunde) angeschaut. Es kommt immer $7$ dabei raus, die beschreibende Zufallsvariable erf\"ullt also $\mathbb P(X=7)=1$, also $X=7$ $\mathbb P$-fast sicher. Viel interessanter w\"are zum Beispiel, jeden Tag um 7 Uhr die Temperatur zu messen. Die entsprechende Zufallsvariable w\"are nicht fast sicher konstant.
+\begin{korollar}\label{vari}
+\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=2008s} \textbf{[Rechenregeln f\"ur die Varianz]}
+	Sei $X$ eine Zufallsvariable mit $ \mathbb{E}[X^2] < \infty$ (wir sagen auch, $X$ ist quadratintegrierbar), so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item Es gilt $ \mathbb{V}[X] < \infty$ und \[ \mathbb{V}[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2. \]
+		\item	Es gilt $ \mathbb{V}[X]= 0$ genau dann, wenn $X$ fast sicher den gleichen Wert annimmt, dieser ist dann $\E[X]$.
+		\item F\"ur $a\in \R$ gilt $\V[aX]=a^2 \V[X]$ und $\V[a+X]=\V[X]$.	
+\end{enumerate}
+\end{korollar}
+
+\begin{proof}
+	Übung. Beachte dazu: Ist $Y \geq 0$ $\mathbb{P}$-fast sicher und $ \mathbb{E}[Y] = 0$, so ist $ Y \equiv 0$ $\mathbb P$-fast sicher. Das gilt wegen Satz \ref{S7}, der Erwartungswert ist schlie\ss lich ein Integral!
+\end{proof}
+Die Varianz misst als Kenngr\"o\ss e die Variabilit\"at von Zufallsvariablen. Ist die Varianz null, so gibt es gar keine Variabilit\"at, ist die Varianz gro\ss, so nimmt $X$ auch Werte an, die weit von dem Erwartungswert entfernt sind. Das ist mathematisch nat\"urlich keine saubere Formulierung (daf\"ur gibt es schlie\ss lich die Varianz), gibt aber das richtige Gef\"uhl. Daher ist auch einleuchtend, dass sich die Variabilit\"at beim Verschieben um einen festen Wert sich nicht \"andert.
+
+
+
+\begin{satz}
+\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=2482s} \textbf{[Konvergenzsätze für Zufallsvariablen]}
+	Seien $Y,X,X_1,X_2,...$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ mit $\lim_{n\to\infty} X_n=X$ $\mathbb{P}$-fast sicher.
+	\begin{enumerate}[label=(\roman*)]
+		\item MCT: Gilt $0 \leq X_1\leq X_2\leq ...\leq X$ $\mathbb{P}$-fast sicher, so gilt 
+		\[ \lim\limits_{n \to \infty} \mathbb{E}[X_n] = \mathbb{E}[X]. \]
+				\item DCT: Gilt $|X_n| \leq Y$ $\mathbb{P}$-fast sicher für alle $n \in \N$ mit $\E[|Y|]<\infty$, so gilt
+		\[ \lim\limits_{n \to \infty} \mathbb{E}[X_n] = \mathbb{E}[X]. \]
+		\item Gilt $|X_n| \leq C$ $\mathbb{P}$-fast sicher für alle $n \in \N$ f\"ur ein $C>0$, so gilt
+		\[ \lim\limits_{n \to \infty} \mathbb{E}[X_n] = \mathbb{E}[X]. \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	Wegen $\mathbb{E}[X_n] \overset{\text{Def.}}{=} \int_{\Omega} X_n \dint \mathbb{P}$ und $\mathbb{E}[X] \overset{\text{Def.}}{=} \int_{\Omega} X \dint \mathbb{P}$ ist das gerade Satz \ref{allgMonKonv}, Satz \ref{DCT} und Korollar \ref{K7}. 
+\end{proof}
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=2922s}
+	F\"ur eine Zufallsvariable $X$ heißt $$\cM_X(t) := \mathbb{E}[e^{tX}], \quad t\in\R,$$ die \textbf{momenterzeugende Funktion}. $\cM_X$ ist nur für die $t$ definiert, für die $\mathbb{E}[e^{tX}] < \infty$ gilt.
+\end{deff}
+
+Die momenterzeugenden Funktionen sind auf ihrem Definitionsbereich ganz normale Funktionen von $\R$ nach $\R$. Wir k\"onnen also \"uber Ableitungen sprechen, Monotonie, und so weiter. In vielen Beispielen ist $M_X$ eine ganz harmlose Funktion, manchmal ist $\cM_X$ aber auch gar nicht definiert.
+\begin{beispiel}\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=3284s} \abs
+
+\begin{itemize}
+	\item Sei $ X \sim \operatorname{Cauchy}(s,t)$, so ist $\cM_X$ nirgends definiert!
+	\item Sei $X \sim \cN(\mu, \sigma^2)$, so ist $\cM_X(t) = \exp\big(\mu t + \frac{\sigma^2 t^2}{2}\big)$ f\"ur $t\in\R$, siehe \"Ubungsaufgabe.
+	\item Sei $X\sim \operatorname{Poi}(\lambda)$, so ist $$\cM_X(t) = \mathbb{E}[e^{tX}] = \sum\limits_{k=0}^{\infty} e^{tX} \mathbb{P}(X = k) = \sum\limits_{k=0}^{\infty} e^{tk} e^{-\lambda} \frac{\lambda^k}{k!} = e^{\lambda(e^t - 1)}$$ f\"ur alle $t\in\R$.
+	\end{itemize}
+Noch viel mehr explizite Beispiele sind im Appendix gesammelt.
+\end{beispiel}
+
+Das ganze ist ein so n\"utzliches Konzept, weil wir viele Beispiele explizit ausrechnen k\"onnen und mit dem n\"achsten Satz gleich noch alle Momente durch Ableiten ausrechnen k\"onnen:
+
+\begin{satz}\label{erzeugende}
+\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=3545s}
+	Sei $X$ eine Zufallsvariable, f\"ur die f\"ur irgendein $\varepsilon>0$ die Momenterzeugende Funktion $\cM_X$ auf $(-\varepsilon, \varepsilon)$ definiert ist. Dann ist $\cM_X$ an der Stelle $0$ unendlich oft differenzierbar und es gilt f\"ur alle $n\in\mathbb N$ $$\mathbb{E}[X^n] = \cM_X^{(n)}(0),$$ wobei $\cM_X^{(n)}(0)$ die $n$-te Ableitung an der Stelle $0$ ist.
+\end{satz}
+
+
+
+
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\alph*)]
+		\item Wir zeigen zun\"achst, dass $\cM_X$ in $(-\varepsilon,\varepsilon)$ eine Potenzreihe ist. Nach Analysis 1 gilt punktweise (also f\"ur jedes $\omega\in \Omega$)
+		\[ e^{tX(\omega)} = \sum\limits_{k=0}^{\infty} \frac{(tX(\omega))^k}{k!} = \lim\limits_{m \to \infty} \sum\limits_{k=0}^{m} \frac{(tX(\omega))^k}{k!} =: \lim\limits_{m \to \infty} S_m (\omega). \]
+		Die Zufallsvariable $e^{tX}$ kann also als punktweiser Grenzwert der Folge $(S_m)_{m\in\N}$ von Zufallsvariablen geschrieben werden. Um gleich dominierte Konvergenz zu nutzen, brauchen wir eine integrierbare Majorante $S$ f\"ur die Folge $(S_m)$. Das ist gar nicht so schwer: \[ |S_m| \overset{\text{Def.}}{=} \Big|\sum\limits_{k=0}^{m} \frac{(tX)^k}{k!} \Big| \overset{\triangle}{\leq} 
+		\sum\limits_{k=0}^{m} \Big| \frac{(tX)^k}{k!} \Big| \leq \sum\limits_{k=0}^{\infty} \Big| \frac{(tX)^k}{k!} \Big| =: S.
+		\]
+		Wegen $S=e^{|tX|} \leq e^{tX} + e^{-tX}$ ist $S$ eine integrierbare Majorante:
+		\[ \mathbb{E}[|S|] = \mathbb{E}[e^{|tX|}] \overset{\text{Mon.}}{\underset{\text{Lin.}}{\leq}} \mathbb{E}[e^{tX}] + \mathbb{E}[e^{-tX}] \overset{\text{Def.}}{=} \cM_X(t) + \cM_X(-t) < \infty
+		\]
+		f\"ur $t\in (-\varepsilon,\varepsilon)$ nach Annahme. Jetzt kann also dominierte Konvergenz angewandt werden. Es gilt damit f\"ur $t\in (-\varepsilon,\varepsilon)$, dass
+		\begin{align*}
+		M_X(t)=\E[\lim_{m\to\infty} S_m] \overset{\text{DCT}}{=} \lim_{m\to\infty} \E[S_m]\overset {\text{Lin.}}{=} \lim_{m\to\infty} \sum_{k=0}^m\frac{t^k \E[X^k]}{k!}=\sum_{k=0}^\infty\frac{t^k \E[X^k]}{k!}.
+		\end{align*}
+		Damit ist $M_X$ in $(-\varepsilon,\varepsilon)$ eine Potenzreihe mit Koeffizienten $a_k=\frac{\E[X^k]}{k!}$ und Entwicklungspunkt $x_0=0$.
+		\item	Aus Analysis 1 wisst ihr (so habt ihr die Taylor-Koeffizienten bestimmt!), dass $M_X$ in $(-\varepsilon, \varepsilon)$ unendlich oft differenzierbar ist und die Reihe gliedweise differenziert werden kann. $n$-faches Ableiten und den Entwicklungspunkt $x_0=0$, einsetzen gibt dann $M_X^{(n)}(0)=\E[X^n]$.
+	\end{enumerate}
+\end{proof}
+
+\begin{beispiel} \link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=4776s} \abs
+
+	\begin{itemize}
+		\item F\"ur die Normalverteilungen $X \sim \cN(\mu, \sigma^2)$ ergibt die explizite Formel der momenterzeugenden Funktion mit dem Satz
+		\begin{align*}
+		\mathbb{E}[X] &= \cM_X'(0) = \exp\Big(\mu\cdot0 + \frac{\sigma^2 t^2}{2}\Big)\cdot (\mu + \sigma^2 \cdot 0) = \mu, \\
+		\mathbb{E}[X^2] &= \cM_X''(0) = \mu^2 + \sigma^2.
+		\end{align*}
+		Beides zusammen ergibt $\mathbb{V}[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2 = \mu^2 + \sigma^2 - \mu^2 = \sigma^2$. Die zwei Parameter der Normalverteilung sind also gerade Erwartungswert $\mu$ und Varianz $\sigma^2$.
+		\item F\"ur $X \sim \operatorname{Poi}(\lambda)$ ergibt die explizite Formel der momenterzeugenden Funktion mit dem Satz
+		\begin{align*}
+		\mathbb{E}[X] = \cM_X'(0) = \lambda \quad \text{ und }\quad  \mathbb{E}[X^2] = \cM_X''(0) = \lambda^2 + \lambda.
+		\end{align*}
+		Beides zusammen ergibt $\mathbb{V}[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2 =\lambda$.
+	\end{itemize}
+\end{beispiel}
+
+
+\begin{prop}\label{jensen}
+\link{https://www.youtube.com/watch?v=JbjvBFpbsho&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=19&t=5002s} \textbf{[H\"older und Jensen’sche Ungleichung]}
+
+
+\begin{itemize}
+\item[(i)] F\"ur $p,q>1$ mit $\frac{1}{p}+\frac{1}{q}=1$ und Zufallsvariablen $X,Y$ auf $(\Omega, \mathcal A, \mathbb P)$ gilt
+\begin{align*}
+	\mathbb E[|XY|]\leq \big(\mathbb E[|X|^p]\big)^{1/p} \big(\mathbb E[|Y|^q]\big)^{1/q}.
+\end{align*}
+\item[(ii)]
+	Ist $X$ eine Zufallsvariable mit $\mathbb{E}[|X|] < \infty$ und $\varphi \colon \R \to \R $ \textit{konvex} mit $\mathbb{E}[|\varphi(X)|] < \infty$, so gilt
+	\[ \varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]. \]
+\end{itemize}
+\end{prop}
+
+
+\begin{proof}
+(i) Weil Erwartungswerte Integrale sind, ist das nur ein Spezialfall von Satz \ref{hoelder}.\smallskip
+
+(ii) Wir geben den Beweis nur f\"ur differenzierbares $\varphi$. Wegen der Konvexität gibt es f\"ur jedes feste $x_0 \in \R$ ein $b\in\R$ mit
+	\begin{itemize}
+		\item $ \varphi'(x_0) x + b \leq \varphi(x)$ f\"ur alle $x\in\R$,
+		\item $ \varphi'(x_0) x_0 + b = \varphi(x_0)$.
+	\end{itemize}
+	Wir w\"ahlen $x_0 = \E[X]$. Mit der zweiten Eigenschaft schreiben wir $\varphi(\E[X])$ wie folgt um:
+	\begin{align*}
+	\varphi(\E[X]) = \varphi(x_0) = \varphi'(x_0) x_0 + b = \varphi'(x_0) \E[X] + b.
+	\end{align*}
+	Weil der Erwartungswert linear und monoton ist, sowie der Erwartungswert einer konstanten Zufallsvariable gerade die Konstante ist, k\"onnen wir die rechte Seite wie folgt behandeln:
+	\begin{align*}	
+	\varphi'(x_0) \E[X] + b= \E[\varphi'(x_0) X] + \E[b] = \E[\varphi'(x_0) X + b] \overset{\text{Mon.}}{\leq} \E[\varphi(x)].
+	\end{align*}
+	Zusammen folgt die Behauptung.
+\end{proof}
+
+\begin{beispiel1}
+	Als Merkregel für das \enquote{$\leq$} in Proposition \ref{jensen} nimmt man $\varphi(x)=x^2$. Weil
+	\[ 0 \leq \V(X) = \E[(X - \E[X])^2] \overset{\text{Üb.}}{=} \E[X^2] - \E[X]^2,
+	\]
+	muss $\E[X]^2\leq \E[X^2]$ gelten. Also muss in \ref{jensen} \enquote{$\leq$} und nicht \enquote{$\geq$} stehen.
+\end{beispiel1}
+\marginpar{\textcolor{red}{Vorlesung 19}}
+Zum Abschluss nochmal die Markov- und Tschebyscheff-Ungleichungen, die wir f\"ur Integrale \"uber beliebige Ma\ss e schon angeschaut haben. Weil Erwartungswerte Integrale sind, geht das in diesem Spezialfall nat\"urlich genauso:
+\begin{satz}\label{Markov}
+\link{https://www.youtube.com/watch?v=T4qzzuYLcUc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=20&t=415s} \textbf{[Markov- und Tschebyscheff-Ungleichung]}
+	Sei $X$ eine Zufallsvariable, dann gelten für alle $a > 0$ folgende Ungleichungen:
+	\begin{enumerate}[label=(\roman*)]
+		\item F\"ur $h \colon \R \to (0, \infty)$ wachsend gilt
+		 \[ \mathbb{P}(X\geq a) \leq \frac{\E[h(X)]}{h(a)} \quad\quad \text{(Markov-Ungleichung)} \]
+		\item F\"ur $h \colon [0,\infty) \to (0, \infty)$ wachsend gilt		
+		 \[ \mathbb{P}(|X|\geq a) \leq \frac{\E[h(|X|)]}{h(a)} \quad\quad \text{(Markov-Ungleichung)} \]
+		\item \[ \mathbb{P}(|X - \E[X]| \geq  a) \leq \frac{\V[X]}{a^2} \quad\quad \text{(Tschebyscheff-Ungleichung)} \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{itscheby} Definiere $A = [a, \infty)$, dann gilt weil $h$ wachsend ist
+		\begin{align*}
+		\E[h(X)] \overset{\text{Mon.}}&{\geq} \E[h(X) \cdot \mathbf{1}_A(X)] \\
+		&\geq \E[h(a) \cdot \mathbf{1}_A(X)]\\
+		 \overset{\text{Lin.}}&{=} h(a) \cdot \E[\mathbf{1}_A(X)]\\
+		\overset{\ref{rechenregeln}, (iv)}&{=} h(a) \cdot \mathbb{P}(X\geq a).
+		\end{align*}
+		Durchteilen gibt die Absch\"atzung. Hier haben wir den kleinen Trick genutzt, dass $1\equiv \mathbf 1_{\Omega}\equiv \mathbf 1_A+\mathbf 1_{A^C}\geq \mathbf 1_A$ gilt. Der Trick wird jetzt immer wieder kommen!
+		\item Genau wie (i).
+		\item Benutze die Markov Ungleichung mit $h(x) = x^2$ und der \enquote{zentrierten} Zufallsvariablen $X - \E[X]$.
+	\end{enumerate}
+\end{proof}
+Wie bei den Konzentrationsungleichungen f\"ur Ma\ss e, k\"onnen wir durch Bildung von Gegenwahr-scheinlichkeiten sofort Ungleichungen f\"ur $\mathbb{P}(X<a)$ oder $\mathbb P(|X|<a)$ bekommen. Hier ein konkretes Beispiel: Ist $ X \sim \cN(\mu, \sigma^2)$, so gilt $ \mathbb{P}(|X - \mu| \geq a) \leq \frac{\sigma^2}{a^2}$.
+
+
+\section{Zufallsvektoren}
+Nachdem Zufallsvariablen jetzt hoffentlich einigerma\ss en klar geworden sind, gehen wir jetzt weiter zu Zufallsvektoren. Das sind Zufallsvariablen, deren Werte nicht reell, sondern aus dem $\R^d$ sind. Weil wir den Namen Zufallsvariablen nur f\"ur den Fall $d=1$ definiert haben, sprechen wir nun von Zufallsvektoren. Das Kapitel ist in gro\ss en Teilen eine Wiederholung, wir gehen durch die gleichen Schritte, die Notationen werden nur einen Tick aufwendiger. Das Vorgehen ist genau wie f\"ur reelle (eindimensionale) Zufallsvariablen: 
+\begin{itemize}
+	\item Lege $\sigma$-Algebra auf $\R^d$ fest und zeige wichtige Eigenschaften f\"ur sp\"ater.
+	\item Charakterisiere Maße auf $\R^d$ durch Verteilungsfunktionen.
+	\item Definiere Zufallsvektoren als messbare Abbildungen und verbinde diese zu Ma\ss en und Verteilungsfunktionen. 
+	\item Definiere Erwartungswerte und zeige Rechnenregeln f\"ur diskrete und absolutstetige Zufallsvektoren.
+	\item Rechnen, rechnen, rechnen.
+\end{itemize}
+
+\subsection*{(A) Borel-$\sigma$-Algebra auf $\R^d$}
+
+\begin{deff}
+\link{https://www.youtube.com/watch?v=T4qzzuYLcUc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=20&t=1977s}
+	Wir w\"ahlen die Produkt-$\sigma$-Algebra auf dem $\R^d$, die aus $d$ Kopien der Borel-$\sigma$-Algebra besteht:
+	\[ \cB(\R^d) := \underbrace{\cB(\R) \otimes ... \otimes \cB(\R)}_{d\text{-viele}} \overset{\text{Def.}}{=} \sigma(\{ B_1 \times ... \times B_d \colon B_i \in \cB(\R) \}) \]
+\end{deff}
+Wir hatten im ersten Kapitel schon erw\"ahnt, dass die Definition der Borel-$\sigma$-Algebra als kleinste $\sigma$-Algebra erzeugt durch offene Mengen auch im $\R^d$ funktioniert. Das ist in der Tat das selbe wie die gerade definierte Produkt-$\sigma$-Algebra $\mathcal B(\R^d)$. 
+\begin{lemma}
+\link{https://www.youtube.com/watch?v=T4qzzuYLcUc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=20&t=2103s}
+	Es gilt 
+	\begin{align*}
+		\cB(\R^d) &= \sigma(\{ O \subseteq \R^d\colon O \text{ offen} \})\\
+		& = \sigma(\{ (-\infty,t_1] \times ... \times (-\infty,t_d] \colon t_i \in \R \})\\
+		& = \sigma(\{ (a_1,b_1]\times ... \times (a_d,b_d] \colon a_i,b_i \in \R \})\\
+		& = \sigma(\{ (a_1,b_1) \times ... \times (a_d,b_d) \colon a_i,b_i \in \R \})\\
+		&=...,
+	\end{align*}
+	wobei ... bedeutet, dass ihr wie f\"ur $d=1$ alle vorstellbaren Kombinationen von Intervallen nutzen k\"onnt.	
+\end{lemma}
+
+\begin{proof}
+	Übungsaufgabe.
+\end{proof}
+\begin{bem} \link{https://www.youtube.com/watch?v=T4qzzuYLcUc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=20&t=2340s}
+	Wie in Dimension $1$ gilt auch jetzt wieder, dass jede stetige Abbildung $f\colon \R^n \to \R^m$  $(\cB(\R^n), \cB(\R^m))$-messbar ist. Das gilt wieder weil wegen Proposition \ref{S2} Messbarkeit nur auf einem beliebigen Erzeuger getestet werden muss und f\"ur stetige Abbildungen Urbilder offener Mengen offen sind.
+\end{bem}
+
+\subsection*{(B) Maße auf $\mathcal B(\R^d)$ und multivariate Verteilungsfunktionen}
+Wie f\"ur $d=1$ definieren wir f\"ur Ma\ss e auf $\mathcal B(\R^d)$ Verteilungsfunktionen, der Unterschied ist nur die Anzahl der Variablen, $d$ viele statt einer:
+\begin{deff}
+\link{https://www.youtube.com/watch?v=T4qzzuYLcUc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=20&t=2573s}
+	Ist $\mathbb{P}$ ein Wahrscheinlichkeitsmaß auf $ \cB(\R^d) $, so heißt $$F_{\mathbb{P}}(t_1,...,t_d) = \mathbb{P}((-\infty, t_1] \times \dots \times (-\infty, t_d]),\quad t_1,...,t_d\in\R,$$ \textbf{(multivariate) Verteilungsfunktion} von $\mathbb{P}$.
+\end{deff}
+F\"ur die Vorstellung nehmen wir immer den Fall $d=2$. Dann ist $F(t_1,t_2)$ gerade das Ma\ss{} des \enquote{unendlichen Rechtecks unten links} unter dem Punkt $(t_1,t_2)$, also das Ma\ss{} von $(\infty, t_1]\times (-\infty,t_2].$\smallskip
+
+Wie f\"ur $d=1$ (nichtfallend, rechtsstetig, Grenzwerte $1$ und $0$ bei unendlich) k\"onnen wir aus den Eigenschaften des Ma\ss es Eigenschaften der Verteilungsfunktion ableiten:
+\begin{prop}\label{p9}
+\link{https://www.youtube.com/watch?v=T4qzzuYLcUc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=20&t=3113s}
+	Ist $F$ die Verteilungsfunktion eines Wahrscheinlichkeitsmaßes auf $\cB(\R^d)$, so gelten
+	\begin{enumerate}[label=(\roman*)]
+	\item $F:\R^d\to [0,1]$
+	\item $F$ konvergiert gegen $0$, wenn \underline{eine} Koordinate nach $-\infty$ l\"auft:
+	\[ \lim\limits_{t_1 \to -\infty} F(t_1,...,t_d) = ... = \lim\limits_{t_d \to -\infty} F(t_1,...,t_d) = 0. \]
+	\item $F$ konvergiert gegen $1$, wenn \underline{alle} Koordinaten gemeinsam nach $+\infty$ laufen: 
+	 \[ \lim\limits_{t_i \to -\infty, i=1,...,d} F(t_1,...,t_d) = 1. \]
+	\item $F$ ist \textbf{rechtsstetig} in jeder Koordinate.
+	\item $F$ ist \textbf{rechtecksmonoton}, \mbox{d. h.} für alle $a^1, a^2\in \R^d$ mit $a^1 \leq a^2$ (\mbox{d. h.} $a_1^1 \leq a_1^2,..., a_d^1 \leq a_d^2$) gilt \[ \Delta_{a^1}^{a^2}F := \sum\limits_{i_1,...,i_d \in \{ 1,2 \}} (-1)^{i_1+...+i_d} F(a_1^{i_1},...,a_d^{i_d}) \geq 0. \]
+	\end{enumerate}
+	Eine Funktion mit den Eigenschaften (i)-(v) nennt man (multivariate) Verteilungsfunktion.
+\end{prop}
+
+\begin{proof}
+	Sei $\mathbb P$ ein Wahrscheinlichkeitsma\ss{} auf $\mathcal B(\R^d)$ und $F=F_{\mathbb P}$ die zugeh\"orige Verteilungsfunktion. Die erste Eigenschaften von $F$ ist klar, die weiteren drei Eigenschaften folgen aus der Stetigkeit von Maßen, genau wie f\"ur $d=1$. Interessanter ist die Rechtecksmonotonie, die wir uns nur f\"ur $d=1$ und $d=2$ veranschaulichen. \smallskip
+	
+	$d = 1$: Einsetzen gibt hier $F(a^2) - F(a^1) \geq 0$ f\"ur $a^2\geq a^1$, und das ist gerade die Monotonie, die wir f\"ur schon kennen aus der Diskussion von Verteilungsfunktionen in einer Variablen.\smallskip
+	
+	$d = 2$: Einsetzen in die Formel (es gibt $2^d=4$ Summanden) ergibt $$F(a_1^2,a_2^2) - F(a_1^2,a_2^1) - F(a_1^1,a_2^2) +  F(a_1^1,a_2^1) \geq 0.$$ Doch was soll das bedeuten? Dazu ist zu beachten, dass die zwei Punkte $a^1\leq a^2$ ein Rechteck $R$ \enquote{aufspannen}. Die Eckpunkte von $R$ sind gerade (siehe Bildchen)
+	\begin{itemize}
+	\item $(a_1^1,a_2^1)$, unten links
+	\item $(a_1^2,a_2^1)$, unten rechts
+	\item $(a_1^2,a_2^2)$, oben rechts
+	\item $(a^1_1,a_2^2)$, oben links
+\end{itemize}	
+	 Weil $\mathbb P$ ein Ma\ss{} ist, gilt $\mathbb P(R)\geq 0$. Jetzt schreiben wir durch Zerlegung von $R$ in \enquote{unendliche Rechtecke unten links}, unter Ber\"ucksichtigung der $\sigma$-Additivit\"at von $\mathbb P$, $\mathbb P(R)$ als 
+	\begin{align*}
+		\mathbb P(R)&=\mathbb P((-\infty,a_1^2]\times (-\infty, a_2^2])-\mathbb P((-\infty,a_1^1]\times (-\infty, a_2^2])\\
+		&\quad-\mathbb P((-\infty,a_1^2]\times (-\infty, a_2^1])+\mathbb P((-\infty,a_1^1]\times (-\infty, a_2^1])\\
+		\overset{\text{Def. }F}&{=}F(a_1^2,a_2^2)  - F(a_1^1,a_2^2) - F(a_1^2,a_2^1)+  F(a_1^1,a_2^1).
+	\end{align*}
+	Die Bedingung $\Delta_{a_1}^{a_2}F\geq 0$ gilt also weil $\Delta_{a_1}^{a_2}F$ nur ein komplizierter Ausdruck f\"ur die Wahrscheinlichkeit des von $a^1$ und $a^2$ aufgespannten Rechtecks ist!	
+	%\begin{center}	
+	%	\begin{tikzpicture}[]
+	%	\begin{axis}[
+	%	y = 2cm,
+	%	axis lines=middle,
+	%	axis line style={-Stealth,thick},
+	%	xmin=-1.25,xmax=1.25,ymin=-1.25,ymax=1.25,
+	%	xtick={},
+	%	ytick={},
+	%	\addplot [only marks] coordinates{(1,1) (-1,-1), (-1,1) (1,-1)};
+	%	\end{axis}
+	%	\end{tikzpicture}
+	%\end{center}
+\end{proof}

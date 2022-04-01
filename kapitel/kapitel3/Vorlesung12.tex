@@ -1,0 +1,116 @@
+\marginpar{\textcolor{red}{Vorlesung 12}}
+
+\begin{satz}[Lemma von Fatou]\label{fatou}
+	Sei $(f_n)$ ein Folge \textit{nichtnegativer} messbarer numerischer Funktionen auf $(\Omega, \cA)$, $(f_n)$ muss dabei nicht konvergieren. Dann gilt \[ \int_{\Omega} \liminf\limits_{n \to \infty} f_n \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu,\]
+	$+\infty\leq +\infty$ ist dabei m\"oglich.
+	
+\end{satz}
+	Wenn sogar $(f_n)$ fast \"uberall konvergiert und $(\int_{\Omega} f_n \dint \mu)$ konvergiert, gilt damit
+	\[ \int_{\Omega} \lim\limits_{n \to \infty} f_n \dint \mu \leq \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu. \]
+	Die Ungleichung \enquote{$\leq$} gilt in den Konvergenzs\"atzen also mit weniger Annahmen als \ref{allgMonKonv} und gleich in \ref{DCT}.
+
+\begin{proof}
+	Definiere $g_n := \inf\limits_{k\geq n} f_k$, $g_n$ ist messbar für alle $n \in \N$, $g_n \leq f_n$ für alle $k \geq n$ und $ \lim\limits_{k \to \infty} g_k = \liminf\limits_{n \to \infty} f_n$.
+	\ref{allgMonKonv} gibt 
+	\begin{gather*}
+		\int_{\Omega} \liminf\limits_{n \to \infty} f_n \dint \mu = \int_{\Omega} \lim\limits_{k \to \infty} g_k \dint \mu \overset{\text{\ref{allgMonKonv}}}{=} \lim\limits_{k \to \infty} \int_{\Omega} g_k \dint \mu\\ 
+		= \liminf\limits_{k \to \infty} \int_{\Omega} g_k \dint \mu \overset{\text{Mon.}}{\leq} \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu.
+	\end{gather*} 
+\end{proof}
+
+\begin{satz}[Dominierte Konvergenz Theorem (DCT)]\label{DCT}
+	Seien $f,f_1,f_2,...\colon \Omega \to \overline{\R}$ messbar. Es sollen gelten 
+	\begin{enumerate}[label=(\alph*)]
+		\item\label{DCA} $\lim\limits_{n \to \infty} f_n = f$ $\mu$-fast \"uberall,
+		\item\label{DCB} $|f_n| \leq g$ $\mu$-fast überall f\"ur alle $n\in\N$,
+	\end{enumerate}
+	für eine beliebige $\mu$-integrierbare nichtnegative messbare numerische Funktion $g$. Dann sind $f,f_1,f_2,...$ $\mu$-integrierbar und \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu = \int_{\Omega} f \dint \mu. \]
+\end{satz}
+
+
+\begin{proof}
+	Wie beim Beweis der monotonen Konvergenz nehmen wir zun\"achst an, dass die Konvergenz sogar für alle $\omega \in \Omega$ gilt. In einem zweiten Schritt kann man dann wieder mit der Hilfsfolge $(f_n \mathbf{1}_N)$ f\"ur die Nullmenge $N=\{(f_n)\text{ konvergiert nicht}\}$ den Fall der $\mu$-f.\"u. Konvergenz zeigen.\smallskip
+	
+	Der Beweis beruht auf einer elementaren Erkenntniss: Wenn $|f_n| \leq g$ gilt, so gilt auch $f_n \leq g$ und $-f_n \leq g$ oder umgeformt auch $0 \leq f_n + g$ und $0 \leq g - f_n$. In anderen Worten: Wir k\"onnen die $f_n$ so geschickt verschieben, dass wir nichtnegative Funktionen bekommen und Fatou anwenden k\"onnen.
+	
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+		\begin{align*}
+			\int_{\Omega} f \dint \mu + \int_{\Omega} g \dint \mu &\overset{\text{Lin.}}{=} \int_{\Omega} (f+g) \dint \mu\\
+			& \overset{\text{Ann.}}{=} \int_{\Omega} \big(\lim\limits_{n \to \infty} f_n + g\big) \dint \mu\\ 
+			&= \int_{\Omega} \big(\liminf\limits_{n \to \infty} f_n+g\big) \dint \mu\\
+			& \overset{\text{\ref{fatou}}}{\leq} \liminf\limits_{n \to \infty} \int_{\Omega} (f_n+g) \dint \mu\\
+			& \overset{\text{Lin.}}{=} \liminf\limits_{n \to \infty} \Big(\int_{\Omega} f_n \dint \mu + \int_{\Omega} g \dint \mu \Big)\\ 
+			&= \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu  + \int_{\Omega} g \dint \mu.
+		\end{align*}
+		Wenn wir nun auf beiden Seiten das Integral \"uber $g$ abziehen, dann bekommen wir
+		 \[ \int_{\Omega} f \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu. \]
+		\item Das selbe Argument wenden wir auf $0 \leq g - f_n$ an. Dieselbe Rechnung gibt
+		\begin{gather*}
+			 \int_{\Omega} -f \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} -f_n \dint \mu
+			\overset{\text{Lin.}}{=} \liminf\limits_{n \to \infty} -\int_{\Omega} f_n \dint \mu = - \limsup\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu,
+		\end{gather*}
+		also \[ \limsup\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu \leq \int_{\Omega} f \dint \mu. \]
+	\end{enumerate}
+		Beide Schritte zusammen ergeben \[ \int_{\Omega} f \dint \mu \leq \liminf\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu \leq \limsup\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu \leq \int_{\Omega} f \dint \mu. \]
+		Also stimmen $\liminf$ und $\limsup$ \"uberein und geben nach Analysis 1 den Grenzwert		
+		\[  \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu=\int_{\Omega} f \dint \mu . \]
+\end{proof}
+Eine ganz wichtige Folgerung f\"ur die sp\"atere Stochastik ist der Spezialfall, wenn $\mu$ ein endliches Ma\ss{} (insbesondere ein Wahrscheinlichkeitsma\ss ) ist:
+\begin{korollar}\label{K7}
+	Ist $\mu$ ein endliches Maß (\mbox{z. B.} ein Wahrscheinlichkeitsmaß) und $|f_n| \leq C$ für alle $n \in \N$ $\mu$-f.\"u., \mbox{d. h.} alle $f_n$ sind \textit{beschränkt} durch $C$, und $f_n \to f$, $n\to \infty$, $\mu$-f.\"u., so gilt \[ \lim\limits_{n \to \infty} \int_{\Omega} f_n \dint \mu = \int_{\Omega} f \dint \mu. \]
+\end{korollar}
+
+\begin{proof}
+	Das ist dominierte Konvergenz mit der Majorante $ g \equiv C$. Als Indikatorfunktion ist die Majorante integrierbar, weil \[ \int_{\Omega} g \dint \mu = \int_{\Omega} C \mathbf{1}_{\Omega} \dint \mu \overset{\text{Def.}}{=} C \mu(\Omega) < \infty. \]
+\end{proof}
+\section{Zufallsvariablen und Erwartungswerte}
+Damit wir genug Zeit haben, das Rechnen in der Stochastik in den \"Ubungen zu \"uben, schieben wir einen ersten Blick in die Stochastik rein. Mit unserem bisherigen Wissen der Ma\ss- und Integrationstheorie k\"onnen wir \"uber reelwertige Zufallsexperimente und Erwartungswerte sprechen und etliches ausrechnen.\smallskip
+
+Zur Erinnerung: Ein Wahrscheinlichkeitsmaß $\mathbb{P}_F$ auf $\cB(\R)$ mit Verteilungsfunktion $F$ beschreibt ein reellwertiges Zufallsexperiment, bei dem die \enquote{gezogene Zahl} in $(a,b]$ liegt mit Wahrscheinlichkeit $\mathbb{P}_F((a,b]) = F(b) - F(a)$. Hat $F$ eine Dichte $f$, so ist $\mathbb{P}_F((a,b]) =\int_a^b f(x)dx$. Ist $F$ diskret, so gilt $\mathbb P_F((a,b])=\sum_{a_k\in (a,b]} p_k$. Ein paar Integralen geben wir jetzt Namen und \"uberlegen uns anschlie\ss end, wie man die Integrale in vielen Beispielen berechnen kann.
+\begin{deff}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \int_{\R} x \dint \mathbb{P}_F(x) \] heißt \textbf{Erwartungswert (EW)} von $ \mathbb{P}_F $ oder Erwartungswert der Verteilungsfunktion $F$, wenn das Integral wohldefiniert ist.
+		\item \[ \int_{\R} x^k \dint \mathbb{P}_F(x) \] heißt \textbf{k-tes Moment} von $ \mathbb{P}_F $ oder k-tes Moment der Verteilungsfunktion $F$, wenn das Integral wohldefiniert ist.
+		\item \[ \int_{\R} e^{\lambda x} \dint \mathbb{P}_F(x) \] heißt \textbf{exponentielles Moment} von $ \mathbb{P}_F $ oder exponentielles Moment der Verteilungsfunktion $F$.
+		\item Allgemein betrachten wir f\"ur messbare Abbildungen $g:\R\to \overline \R$ auch die Integrale 
+		\[ \int_{\R} g(x) \dint \mathbb{P}_F(x), \] 
+		jedoch ohne ihnen extra einen Namen zu geben.
+	\end{enumerate}
+	Beachte: Alle Integrale \"uber nichtnegative Integranden sind wohldefiniert, das Integral k\"onnte aber $+\infty$ sein. Damit sind exponentielle Momente und gerade Momente immer in $[0,+\infty]$ definiert, existieren nach unserer Konvention aber nur, wenn sie endlich sind.
+\end{deff}
+
+\begin{satz}[Integrale von Dichten]\label{IntDichten}
+	Sei $\mathbb{P}_F$ ein Wahrscheinlichkeitsmaß auf $(\R, \cB(\R))$ und $F$ habe Dichte $f$, \mbox{d. h.} \[ F(t) = \int\limits_{-\infty}^{t} f(x) \dint x,\quad t\in\R. \]
+	Dann gilt für $g\colon \R \to \overline{\R}$ messbar \[ \int_{\Omega} g \dint \mathbb{P}_F \text{ ist wohldefiniert }\quad \Leftrightarrow\quad \int_{\R} g(x) f(x) \dint x \text{ ist wohldefiniert } \]
+	und wenn die Integrale wohldefiniert sind ist \[ \int_{\R} g \dint \mathbb{P}_F(x) = \int_{\R} g(x) f(x) \dint x. \]
+\end{satz}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item F\"ur $g\geq 0$ starten wir die Gebetsm\"uhle der Integrationstheorie:
+		\begin{itemize}
+			\item  Sei zun\"achst $g = \mathbf{1}_A$ für $A \in \cB(\R)$. Es gilt
+			\begin{align*}
+				\int_{\R} g \dint \mathbb{P}_F\overset{\text{Def.}}{ =} 1 \cdot \mathbb{P}_F(A) \overset{\text{\hypertarget{stern}{($\ast$)}}}{=} \int_{A} f(x) \dint x = \int_{\R} \mathbf{1}_A (x) f(x)\,dx = \int_{\R} g(x) f(x) \dint x.
+			\end{align*}
+			Warum gilt \hyperlink{stern}{($\ast$)}, also $ \mathbb{P}_F(A) = \int_{A} f(x) \dint x$? Ist $A = (a,b]$, so gilt $\mathbb{P}_F((a,b)) = \int_{a}^{b} f(x) \dint x$ weil $F$ Dichte $f$ hat. In \ref{ccd} haben wir gezeigt, dass $\nu(A) = \int_{A} f(x) \dint x$ ein Maß auf $\cB(\R)$ ist. Es gilt also $\mathbb{P}_F = \nu$ auf einem $\cap$-stabilen Erzeuger von $\mathcal B(\R)$ und damit aufgrund von Korollar \ref{Dynkin-Folgerung} auch auf $\mathcal B(\R)$. Also gilt  ($\ast$) f\"ur alle $A\in \mathcal B(A)$.
+			\item Ist $g$ eine einfache Funktion, so folgt \[ \int_{\R}g \dint \mathbb{P}_F = \int_{\R} g(x)f(x) \dint x\] aufgrund der Linearit\"at des Integrals.
+			\item Ist $g \geq 0$, wählen wir eine Folge $(g_n) \subseteq \cE^+$ mit $g_n \uparrow g$, $n \to \infty$. Die Folge existiert weil $g$ messbar ist. Mit dem Monotone Konvergenz Theorem und dem Gezeigen f\"ur einfache Funktionen folgt \[ \int_{\R}g \dint \mathbb{P}_F \overset{\text{\ref{allgMonKonv}}}{=} \lim\limits_{n \to \infty} \int_{\R} g_n \dint \mathbb{P}_F = \lim\limits_{n \to \infty} \int_{\R} g_n(x) f(x) \dint x \overset{\text{\ref{allgMonKonv}}}{=} \int_{\R} g(x) f(x) \dint x. \]
+		\end{itemize}		
+		\item Für $g$ beliebig zerlegt man $g$ in $g^+ - g^-$ und wende (i) auf die Integrale der Positiv- und Negativteile an.
+	\end{enumerate}
+\end{proof}
+
+Hier ist eine kleine aber wichtige Bemerkung: Warum ist der erste Teil des Satzes wichtig? Nat\"urlich ist das Integral \"uber die Dichte besser zu handeln, das k\"onnen wir mit einfacher Analysis ausrechnen. Wenn wir den Satz nicht h\"atten, wie w\"urden wir zeigen, dass $\int_\R g(x) \dint \mathbb P_F$ wohldefiniert ist? Unklar. Mit dem Satz betrachten wir einfach nur das Integral $\int_\R g(x) f(x)\dint x$. Wenn dabei was schief geht, dann geht es auch f\"ur $\int_\R g \dint \mathbb P_F$ schief und wir m\"ussen nichts mehr tun (das sehen wir sp\"ater zum Beispiel beim Erwartungswert der Cauchy-Verteilung). Wenn jedoch das Integral $\int_\R g(x)f(x)\dint x$ wohldefiniert ist, dann ist das gerade $\int_\R g \dint \mathbb P_F$.
+
+
+
+
+\begin{satz}[Integrale bei diskreten Verteilungen]\label{IntDiskr}
+	Sei $ \mathbb{P}_F $ ein Maß auf $(\R, \cB(\R))$ und $F$ sei diskret, d. h.
+	\[ F(t) = \sum\limits_{k = 1}^{N} p_k \mathbf{1}_{[a_k,\infty)}(t), \quad t\in\R, \]
+	mit $N \in \N \cup \{ + \infty \}$, $a_1, ..., a_N \in \R$ und $\sum_{k = 1}^{N} p_k = 1$. Dann gilt f\"ur $g:\R\to\overline\R$ messbar
+	\[ \int_{\R} g \dint \mathbb{P}_F \text{ existiert }\quad  \Leftrightarrow \quad \sum\limits_{k = 1}^{N} p_k|g(a_k)|<\infty \] und wenn das Integral existiert, gilt  \[ \int_{\R} g \dint \mathbb{P}_F = \sum\limits_{k = 1}^{N} p_kg(a_k) . \]
+	Zu beachten ist, dass in vielen diskreten Modellen $N$ endlich ist und $g$ die Werte $+\infty$ und $-\infty$ nicht annimmt, dann ist das Integral $\int_{\R} g\, \dint \mathbb P_F$ nat\"urlich definiert und gleich $\sum\limits_{k = 1}^{N} p_kg(a_k)$.
+\end{satz}

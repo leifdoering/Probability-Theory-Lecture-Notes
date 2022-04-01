@@ -1,0 +1,77 @@
+%% copyleft by Martin Schlather 2015
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% the command \fverbatim{filename} is able to plot most files without
+%%% interpreting potential LaTeX-commands, so \fverbatim is the file
+%%% version of \verbatim.
+%%% Options: line numbering, just put the command \numbering in front.
+%%%          the style used in the numbering can be redefined, using
+%%%              \def\numstyle{\tt } e.g.            
+%%%          the style for the text can be redefined using
+%%%              \def\vstyle{\small }, e.g..              
+%%%          the space between the numbers and the text can be
+%%%              redefined using \def\vspaces{\ \ e.g.}.
+%%% Good luck, Martin
+\def\makeatletter{\catcode`\@=11\relax}
+\def\makeatother{\catcode`\@=12\relax}
+\makeatletter
+
+%%%%% end notes, see LaTex-Tips, J.K. Shultis,
+%%%%% \endnote,\printnotes
+\newbox\endnotebox %author Erica M. S. Harris (modified by J. K. Shultis
+\def\endnotesize{\footnotesize}
+\newcounter{endnotecount}
+\def\endnote{\stepcounter{endnotecount}%
+          \xdef\@theenmark{[\theendnotecount]}\@endnotemark\@endnotetext}%
+\def\@endnotemark{\leavevmode\ifhmode\edef\@x@sf{\the\spacefactor}\fi%
+                  \hbox{$^{\@theenmark}$}%
+          \ifhmode\spacefactor\@x@sf\fi\relax}%
+\long\def\@endnotetext#1{\global\setbox\endnotebox=%
+   \vbox{\hsize\columnwidth\@parboxrestore%
+   \def\baselinestretch{1}\@normalsize%
+   \unvbox\endnotebox\@makeentext{\ignorespaces#1\strut\par}}}%
+\long\def\@makeentext#1{\parindent 1em \noindent%
+% \hbox to 1.8em{\hss\@theenmark.~}#1}  %% -- use for normalsize
+  \hbox to 1.8em{\hss\small\@theenmark.~}\small#1}  %% -- use for normalsize
+% \hbox to 1.8em{\hss\endnotesize\@theenmark.~}\endnotesize#1} %<<<
+\def\printnotes{%
+\ifvoid\endnotebox\else\bigskip\bigskip{\Large\bf Endnotes}\\
+\unvbox\endnotebox\par\fi%
+\setcounter{endnotecount}{0}}
+
+
+% Definition of  \fverbatim{filename}
+\newread\ps@stream\newif\ifnot@eof
+\newwrite\@unused
+\def\xps@typeout#1{{\let\protect\string\immediate\write\@unused{#1}}}
+\newif\if@num\@numfalse\countdef\num@z=230\dimendef\num@b=230\dimendef\@breite=231
+\long\def\xepsf@aux#1:.:{\if@num\hbox to \num@b{\hfill\numstyle\the\num@z\vspaces\hss}\advance\num@z by 1\fi\hbox to \@breite{\vstyle #1\hss}\\}
+
+\def\numstyle{\it}
+\def\vstyle{\tt}
+\def\numbering{\@numtrue}
+\def\vspaces{\/\ \ }
+\newbox\num@box
+\def\fverbatim#1{\mbox{}\openin\ps@stream=#1
+\ifeof\ps@stream\xps@typeout{Fehler, Datei #1 nicht gefunden}\else
+   {\not@eoftrue \chardef\other=12
+    \def\do##1{\catcode`##1=\other}\dospecials \catcode`\ =10
+    \if@num\num@z1
+       \loop
+          {\obeyspaces\read\ps@stream to \epsf@tmp}\ifeof\ps@stream\not@eoffalse\fi
+          \advance\num@z by 1
+       \ifnot@eof\repeat
+       \closein\ps@stream
+       \setbox\num@box=\hbox{\numstyle\the\num@z\vspaces}
+       \num@b\wd\num@box\num@z1
+       \@breite\textwidth\advance\@breite by -\num@b
+    \fi\not@eoftrue\openin\ps@stream=#1
+    \loop
+       {\obeyspaces
+        \read\ps@stream to \epsf@tmp\global\let\epsf@fileline\epsf@tmp}%
+       \ifeof\ps@stream\not@eoffalse\else
+       \expandafter\xepsf@aux\epsf@fileline:.:%
+       \fi
+   \ifnot@eof\repeat
+   }\closein\ps@stream\fi}%
+\makeatother

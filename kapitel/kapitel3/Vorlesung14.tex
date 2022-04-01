@@ -1,0 +1,219 @@
+\marginpar{\textcolor{red}{Vorlesung 14}}
+
+\begin{disc}
+	So weit so gut, aber was machen wir mit sehr einfachen zufälligen Experimenten, die wie Würfeln nur endlich viele \enquote{Werte} zulassen?
+	Das mit Maßen auf $\cB(\R)$ zu modellieren, ist natürlich v\"ollig übertrieben! Beispielsweise f\"ur den M\"unzwurf haben wir zwei Modellierungsvarianten diskutiert:\smallskip
+	
+	Variante 1:
+	\begin{align*}
+		\Omega &= \{ \text{Kopf}, \text{ Zahl} \}, \\
+		\cA &= \cP(\Omega),\\
+		 \mathbb{P}(\{ \text{Kopf} \}) &= \mathbb{P}(\{ \text{Zahl} \}) = \frac{1}{2}, \quad \mathbb{P}(\Omega) = 1, \quad \mathbb{P}(\emptyset) = 0.
+	\end{align*}
+	Variante 2: $\Omega'=\R$, $\cA' = \cB(\R)$, $\mathbb P'=\mathbb{P}_F$, wobei $\mathbb P_F$ das Ma\ss{} mit diskreter Verteilungsfunktion $F$ ist:
+\begin{center}		
+	\begin{tikzpicture}[]
+	\begin{axis}[
+	x = 1cm,
+	y = 1cm,
+	axis lines=middle,
+	axis line style={-Stealth,thick},
+	xmin=-0.625,xmax=2.5,ymin=-0.625,ymax=1.5,
+	xtick={0,1,2,3,4},
+	ytick={0,1},
+	extra x ticks={-0.5},
+	extra y ticks={-0.5},
+	extra x tick style={xticklabel=\empty},
+	extra y tick style={yticklabel=\empty},
+	xtick distance=1,
+	ytick distance=1,
+%	xlabel=$t$,
+%	ylabel=$F(t)$,
+	%title={Wonderful plot},
+	minor tick num= 1,
+	%grid=both,
+	grid style={thin,densely dotted,black!20}]
+	%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+	\addplot [domain = 0:1] {0.5};
+	\addplot [domain = 1:2.5] {1};	 
+	\addplot [only marks] coordinates{(0,0.5)(1,1)};
+	\addplot [dotted] coordinates{(1,0.5) (1,1)};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}	
+Beide Modelle modellieren ein Experiment, bei dem zwei Ereignisse jeweils mit Wahrscheinlichkeit $\frac{1}{2}$ auftreten. Der Vorteil des zweiten Modells ist, dass wir reelle Zahlen bekommen, wir k\"onnen damit also einen Erwartungswert definieren. Da wir den Ereignissen die Werte $0$ und $1$ geben, ist der Erwartungswert $\frac 1 2$. In der zweiten Variante haben wir zwei Dinge auf einmal modelliert:
+	\begin{itemize}
+		\item Was passiert? (Welches zuf\"allige Ereigniss passiert beim W\"urfeln)
+		\item Was wird ausgezahlt? (Was wird f\"ur Kopf bzw. Zahl ausgezahlt)
+	\end{itemize}
+Normalerweise haben wir nat\"urlich viel Freude an viel zu komplizierten mathematischen Modellen. In diesem Fall, werden wir aber Variante 1 weiterverfolgen. Wir m\"ussen uns aber noch Gedanken \"uber \"Ubersetzung der Ereignisse in Auszahlungen machen. Daf\"ur kommen messbare Abbildungen $X:\Omega \to \R$ ins Spiel.\smallskip	
+	
+ \textit{Ab jetzt:} Trenne in der Modellierung von \enquote{Was passiert?} (also Ereignisse und Wahrscheinlichkeiten) und \enquote{Was wird ausgezahlt?}.
+\end{disc}
+
+\begin{deff}
+	Ein \textbf{stochastisches Modell} besteht aus
+	\begin{enumerate}[label=(\roman*)]
+		\item einem Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$,
+		\item einer $(\cA, \cB(\R))$-messbaren Abbildung $X\colon \Omega \to \R$.
+	\end{enumerate}
+	(i) beschreibt die zufälligen Ereignisse, (ii) beschreibt die \enquote{Auszahlung}. $X$ wird auch \textbf{Zufallsvariable (ZV)} genannt.
+\end{deff}
+
+\begin{deff}
+Sei $X$ eine Zufallsvariable auf einem Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$.
+	\begin{enumerate}[label=(\roman*)]
+		\item Die \textbf{Verteilung der Zufallsvariablen $X$} ist definiert als
+		\begin{gather*}
+			\mathbb{P}_X (B) := \mathbb{P} (X \in B) \overset{\text{Not.}}{=} \mathbb{P}(\{ \omega \in \Omega \colon X(\omega) \in B \}) \overset{\text{Not.}}{=} \mathbb{P}(X^{-1}(B)), \quad B \in \cB(\R).
+		\end{gather*}
+		Unabh\"angig von dem zugrundeliegenden Wahrscheinlichkeitsraums ist $ \mathbb{P}_X $ ist ein Maß auf $ \cB(\R) $ und zwar der push-forward von $X$.
+		\item Die \textbf{Verteilungsfunktion der Zufallsvariablen $X$} ist definiert als
+		\[ F_X(t) := \mathbb{P}_X((-\infty,t]) \overset{\text{Def.}}{=} \mathbb{P}(X \leq t), \quad t \in \R. \]
+	\end{enumerate}
+	Wir schreiben $X \sim F_X$ und $X \sim \mathbb{P}_X$ und sagen \enquote{$X$ ist verteilt gemäß $F_X$ bzw. $X$ ist verteilt gem\"a\ss{} $\mathbb P_X$}. $F_X$ hei\ss t auch die \enquote{Verteilungsfunktion von $X$}. Weil so viele Indizes nat\"urlich nerven, werden wir immer $X\sim F$ schreiben, wenn wir meinen, dass $X$ gem\"a\ss{} $F$ verteilt ist. Beachte: Aufgrund der Definition ist nat\"urlich $\mathbb P_X=\mathbb P_{F_X}$, das werden wir immer mal wieder nutzen.
+\end{deff}
+
+Wir haben uns schon in der Ma\ss theorie langsam an den Begriff $\mu(\{f\leq t\})$ als Abk\"urzung f\"ur $\mu(\{\omega: f(\omega)\leq t\})$ gew\"ohnen m\"ussen. In der Stochastik gehen wir noch einen Schritt weiter und lassen die Klammern auch noch weg. Wir schreiben daher immer 
+\begin{align*}
+	\mathbb P(X< t),\quad \mathbb P(X\in (a,b]),\quad \mathbb P(X=a)
+\end{align*}
+und so weiter. Das liest sich als \glqq Wahrscheinlichkeit, dass $X$ kleiner als $t$ ist\grqq{} auch ziemlich nat\"urlich.
+
+
+
+\begin{deff}
+	Zwei Zufallsvariablen $X$ und $Y$ heißen \textbf{identisch verteilt}, falls $F_X = F_Y$ bzw. $\mathbb P_X=\mathbb P_Y$. Man schreibt dann $X\sim Y$. Haben zwei Zufallsvariablen die gleiche Verteilungsfunktion, so sehen wir sie als gleichwertig an, \mbox{d. h.} die Zufallsvariablen zusammen mit den zugrunde liegenden Wahrscheinlichkeitsräumen beschreiben das gleiche Experiment.
+\end{deff}
+
+\begin{beispiel1}
+	Zurück zum Münzwurf mit Auszahlung $1$ f\"ur Zahl und $0$ f\"ur Kopf. Wir schreiben dazu zwei stochatische Modelle hin. Zum einen sei
+	\begin{align*}
+		\Omega &= \{ \text{Kopf}, \text{ Zahl} \}, \\
+		\cA &= \cP(\Omega),\\
+		 \mathbb{P}(\{ \text{Kopf} \}) &= \mathbb{P}(\{ \text{Zahl} \}) = \frac{1}{2}, \mathbb{P}(\Omega) = 1,  \mathbb{P}(\emptyset) = 0,
+	\end{align*}
+	mit Zufallsvariablen (Auszahlungsfunktion) definiert als
+	\begin{align*}
+		X(\text{Kopf})=0,\quad X(\text{Zahl})=1.
+	\end{align*}
+	Zum anderen sei wieder $\Omega'=\R$, $\cA' = \cB(\R)$ und $\mathbb P'=\mathbb{P}_F$ mit der Verteilungsfunktion
+	\begin{center}		
+	\begin{tikzpicture}[]
+	\begin{axis}[
+	x = 1cm,
+	y = 1cm,
+	axis lines=middle,
+	axis line style={-Stealth,thick},
+	xmin=-0.625,xmax=2.5,ymin=-0.625,ymax=1.5,
+	xtick={0,1,2,3,4},
+	ytick={0,1},
+	extra x ticks={-0.5},
+	extra y ticks={-0.5},
+	extra x tick style={xticklabel=\empty},
+	extra y tick style={yticklabel=\empty},
+	xtick distance=1,
+	ytick distance=1,
+%	xlabel=$t$,
+%	ylabel=$F(t)$,
+	%title={Wonderful plot},
+	minor tick num= 1,
+	%grid=both,
+	grid style={thin,densely dotted,black!20}]
+	%\addplot [Latex-Latex,domain=-5:3,samples=2] {x*2/3} node[right]{$a$};
+	\addplot [domain = 0:1] {0.5};
+	\addplot [domain = 1:2.5] {1};	 
+	\addplot [only marks] coordinates{(0,0.5)(1,1)};
+	\addplot [dotted] coordinates{(1,0.5) (1,1)};
+	\end{axis}
+	\end{tikzpicture}
+\end{center}	
+	Wie wir schon lange wissen, ist $\mathbb P_F$ eine Summe von Dirac-Ma\ss en, n\"amlich $\frac 1 2 \delta_0+\frac 1 2 \delta_1$.	 Da wir die Auszahlung schon direkt im Modell modelliert haben, zahlen wir genau den Betrag aus, der gezogen wird. Das machen wir mit der Zufallsvariablen $Y(\omega)=\omega$. Berechnen wir nun die Verteilungen der Zufallsvariablen $X$ und $Y$:
+	\begin{align*}
+		\mathbb P_X(B)&\overset{\text{Def.}}{=}\mathbb P'(X\in B)=\begin{cases}
+			\frac 1 2 &: 0\in B, 1\notin B\text{ oder } 1 \in B, 0\notin B\\
+			1&: 0,1\in B\\
+			0&: 0\notin B, 1\notin B
+		\end{cases}\\
+		&=\frac{1}{2} \delta_0(B)+\frac{1}{2}\delta_1(B)
+	\end{align*}
+	sowie
+	\begin{align*}
+		\mathbb P_Y(B)\overset{\text{Def.}}{=}\mathbb P(Y\in B)=\mathbb P(\{\omega \in \R: Y(\omega)\in B)=\mathbb P(\{\omega \in \R: \omega \in B)\overset{\text{Def.}}{=} \mathbb P_F(B).
+	\end{align*}
+	Weil $\mathbb P_F=\frac 1 2 \delta_0+\frac 1 2 \delta_1$, gilt also $\mathbb P_X=\mathbb P_Y$ und damit auch $F_X=F_Y$. Damit sind $X$ und $Y$ identische verteilte Zufallsvariablen und wir sehen die beiden stochastischen Modelle als gleichwertige Modelle f\"ur den M\"unzwurf an.	
+\end{beispiel1}
+
+\begin{deff}
+	\begin{enumerate}[label=(\roman*)]
+		\item Eine Zufallsvariable heißt \textbf{absolutstetig} (oder nur stetig) mit Dichte $f$, falls die Verteilungsfunktion $F_X$ von $X$ die Dichte $f$ hat, es gilt also
+		\[ \mathbb{P}(X \in (a,b] ) = \mathbb{P}( X \leq b ) - \mathbb{P}( X \leq a ) = F(b) - F(a) = \int_{a}^{b} f(x) dx.  \]
+		\item Eine Zufallsvariable $X$ heißt \textbf{diskret}, falls $F_X$ eine diskrete Verteilungsfunktion ist. Dann heißen die Sprungstellen $a_1,...,a_N$ \enquote{Werte, die $X$ annimmt} und $p_1,...,p_N$ \enquote{Wahrscheinlichkeiten, dass $X$ den entsprechenden Wert annimmt}. Die Formulierung rechtfertigt sich aus folgender kleiner Rechnung:
+		\begin{align*}
+		 \mathbb{P}( X = a_k )& \overset{\text{Ma\ss}}{=}\mathbb{P}(X \leq a_k ) -  \mathbb{P}(X <a_k) \\
+		 &= \mathbb{P}(X \leq a_k) - \lim_{s\uparrow a_k} \mathbb{P}( X \leq s ) \\
+		&= F_X(a_k) - F_X(a_k-) = p_k.
+		\end{align*}
+	\end{enumerate}
+\end{deff}
+Um uns das Leben leicht zu machen, sollten wir im Kopf immer wie folgt denken: Wenn $X$ gem\"a\ss{} $F$ verteilt ist und $F$ absolut stetig ist, so gilt $\mathbb P(X\in (a,b])=\int_a^b f(x)\dint x$. Ist $F$ diskret, so gilt $\mathbb P(X=a_k)=p_k$ f\"ur irgendwelche $a_1,...$ und Wahrscheinlichkeiten $p_k$, die sich auf $1$ summieren. Dumm ist nur, wenn wir nicht wissen, dass $X$ absolutstetig oder diskret ist. Dann ist eine Zufallsvariable halt irgendeine reellwertige messbare Abbildung auf irgendeinem Wahrscheinlichkeitsraum.
+
+\begin{beispiel}
+	Wir kennen die meisten Beispiele schon:
+	\begin{center}
+	\begin{tabular}{l|l}
+		Diskrete Zufallsvariablen& Stetige Zufallsvariablen\\ %[0.05cm] 
+		\hline
+		$X \sim \operatorname{Poi}(\lambda)$& $X \sim \cN(\mu, \sigma^2)$\\
+		$X \sim \operatorname{Bin}(n,p)$& $X \sim \operatorname{Cauchy}(s,t)$\\ 
+		$X \sim \operatorname{Ber}(p)$& $X \sim \operatorname{Exp}(\lambda)$\\
+		$X \sim \operatorname{Geo}(\lambda)$& $X \sim \cU([a,b])$\\
+		$X \sim$ Gleichv. auf endl. $\Omega$ &\\
+	\end{tabular}
+	\end{center}
+	Im Appendix gibt es eine \"Ubersicht \"uber die Verteilungen und ein paar Animationen zum Rumspielen.
+\end{beispiel}
+
+
+\begin{satz}[Existenz stochastischer Modelle - der \glqq kanonische\grqq{} Wahrscheinlichkeitsraum]\label{existenz}
+	Für jede Verteilungsfunktion $F$ existiert eine Zufallsvariable $X$ mit $X\sim F$. Genauer: Es existiert ein stochastisches Modell, \mbox{d. h.} ein Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ und eine Zufallsvariable $X$ auf $(\Omega, \mathcal A, \mathbb P)$, mit $X \sim F$.
+\end{satz}
+
+\begin{proof}
+	Als Wahrscheinlichkeitsraum definieren wir $\Omega=\R$, $\cA = \cB(\R)$, $\mathbb{P} = \mathbb{P}_F$ und darauf die Zufallsvariable $X(\omega) = \omega$. Beachte: $X(\omega)=\omega$ ist eine stetige Abbildung von $\R$ nach $\R$ und damit auch messbar. Berechnen wir die Verteilungsfunktion dieser Zufallsvariablen:
+		\begin{align*}
+		F_X(t)=\mathbb P(X\leq t)=\mathbb P_F(\{\omega: X(\omega)\leq t\})=\mathbb P_F(\{\omega: \omega\leq t\})=\mathbb P_F((-\infty,t])=F(t).
+	\end{align*}
+%	
+%	\[ \mathbb{P}_X(B) = \mathbb{P}(X \in B) = \mathbb{P}_F(X \in B) = \mathbb{P}_F(\{ \omega \colon X(\omega) \in B \}) \overset{\text{Def. }X}{=} \mathbb{P}_F(B). \] 
+	Also gilt $X\sim F$, das war es schon! Zu beachten ist, dass die Konstruktion weit von trivial ist. Die Existenz von $\mathbb P_F$ ben\"otigt den Satz von Carath\'eodory und damit die komplette Ma\ss theorie. 
+\end{proof}
+
+\begin{bem}
+	Alle diskreten Zufallsvariablen hätten auch \textit{ohne} Maßtheorie konstruiert werden können! Sei dazu $F$ eine diskrete Verteilungsfunktion, die an $N$-vielen Stellen $a_i$ um $p_i$ nach oben springt. Sei nun $\Omega=\{\omega_1,...,\omega_N\}$ eine beliebige Menge mit $N$ Elementen. Auf $\Omega$ w\"ahlen wir als $\sigma$-Algebra $\mathcal A=\mathcal P(\Omega)$. Das Ma\ss{} definieren wir, indem wir es auf den Elementarereignissen als $\mathbb P(\omega_i)=p_i$ definieren und mit der $\sigma$-Additivit\"at f\"ur beliebiges $A\in \mathcal A$ fortsetzen, d. h. $\mathbb P(A)=\sum_{\omega_k\in A} \mathbb P(\{\omega_k\}).$ Als Zufallsvariable w\"ahlen wir die Abbildung $X(\omega_i):=a_i$. Weil auf dem Urbildraum die Potenzmenge gew\"ahlt wurde, ist nat\"urlich jede Abbildung nach $\R$ auch $(\mathcal A, \mathcal B(\R))$-messbar. Damit gilt $\mathbb{P}(X = a_i ) = p_i$, also ist $X$ gem\"a\ss{} $F$ verteilt. Dieser direkte Beweis funktioniert nur f\"ur diskrete Verteilungsfunktionen so einfach (probiert es einfach mal f\"ur absolutstetige Verteilungsfunktionen aus, ihr werdet schnell den Fortsetzungssatz von Carath\'eodory brauchen). Im Allgemeinen kommen wir nicht umher, die Ma\ss theorie wie im Beweises von Satz \ref{existenz} zu nutzen.
+\end{bem}
+
+Um die Begriffe zu \"uben, schauen wir uns eine kleine Rechnung an. Wir behaupten, dass $Y\sim \operatorname{Exp}(1)$, wenn $Y=-\ln(U)$ und $U\sim \mathcal U([0,1]$. Probieren wir die Begriffe aus und berechnen definitionsgem\"a\ss{} die Verteilungsfunktion von $Y$ durch Aufl\"osen:
+\begin{align*}
+	F_Y(t)=\mathbb P(Y\leq t) \overset{\text{Def.}}{=} \mathbb P(-\ln(U)\leq t)=\mathbb P(U\geq \exp(-t))=1-\mathbb P(U\leq \exp(-t)).
+\end{align*}
+Wenn wir jetzt die Verteilungsfunktion $F_U(t)= t \mathbf 1_{[0,1]}(t)$ von $\mathcal U([0,1])$ einsetzen, bekommen wir $F_Y(t)= (1-e^{-t})\mathbf 1_{[0,\infty)}(t)$ und das ist die Verteilungsfunktion der Exponentialverteilung.
+
+\begin{deff}
+	Ist $X$ eine Zufallsvariable auf $(\Omega, \cA, \mathbb{P})$, so heißen, falls die Integrale wohldefiniert sind,
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \mathbb{E}[X] := \int_{\Omega} X(\omega) \dint \mathbb{P}(\omega) \qquad \text{\textbf{Erwartungswert} von X}, \] 
+		\item \[ \mathbb{E}[X^k] := \int_{\Omega} X^k(\omega) \dint \mathbb{P}(\omega) \qquad \text{\textbf{$k$-tes Moment} von X}, \]
+		\item \[ \mathbb{V}[X] := \mathbb{E}[(X - \mathbb{E}[X])^2] \qquad \text{\textbf{Varianz} von X}, \]
+		\item \[ \mathbb{E}[e^{\lambda X}] := \int_{\Omega} e^{\lambda X(\omega)} \dint \mathbb{P}(\omega) \qquad \text{\textbf{exponentielles Moment} von X.} \]
+	\end{enumerate}
+	Allgemein definiert man f\"ur $g:\R\to\overline \R$ messbar
+		\[ \mathbb{E}[g(X)] := \int_{\Omega} g(X(\omega)) \dint \mathbb{P}(\omega), \]
+	falls das Integral wohldefiniert ist. 
+\end{deff}
+Wir erinnern daran, dass ein wohldefiniertes Integral auch die Werte $+\infty$ oder $-\infty$ annehmen darf. Meistens werden wir aber davon sprechen, dass die Integrale existieren, also endlich sind. Wegen der allgemeinen \"Aquivalenzen 
+\begin{align*}
+	\int f \dint \mu \text{ existiert } \quad&\overset{\text{Def.}}{\Leftrightarrow}\quad \int f^+ \dint \mu < \infty, \: \int f^- \dint \mu < \infty\\
+	&\overset{\text{\"Ubung}}{\Leftrightarrow}\quad \int |f| \dint \mu < \infty,
+\end{align*}
+schreiben wir meistens bequemer \enquote{$\mathbb{E}[|g(X)|] < \infty$} anstelle von \enquote{$\mathbb{E}[g(X)]$ existiert}. Bei Erwartungswerten sagen wir also \enquote{der Erwartungswert von $X$ existiert}, wenn der Erwartungswert wohldefiniert und endlich ist. Das wird oft in der Literatur genauso gehandhabt, manchmal aber auch anders. Manche sagen, der Erwartungswert existiert, wenn $\E[X]$ wohldefiniert ist (aber vielleicht unendlich) ist.

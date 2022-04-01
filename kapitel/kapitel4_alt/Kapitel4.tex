@@ -1,0 +1,1310 @@
+\marginpar{\textcolor{red}{Vorlesung 20}}
+In Analogie zum eindimensionalen Fall fragen wir nun, ob die Umkehrung auch gilt. Gibt es also f\"ur jede multivariate Verteilungsfunktion $F$ ein Wahrscheinlichkeitsma\ss{} $\mathbb P_F$ auf $(\R^d, \mathcal B(\R^d))$, dessen Verteilungsfunktion $F$ ist. In anderen Worten, gibt es eine bijektive Abbildung zwischen den multivariaten Verteilungsfunktionen und den Wahrscheinlichkeitsma\ss en auf $(\R^d, \mathcal B(\R^d))$?
+\begin{satz}[Analogie zu \ref{EindVert}]
+	Für jede multivariate Verteilungsfunktion $F$ auf $\R^d$ gibt es genau ein Maß $\mathbb P_F$ auf $(\R^d,\cB(\R^d))$ mit 
+	\begin{equation}\label{schnittstabil}
+		\mathbb{P}_F((-\infty,t_1]) \times ... \times \mathbb{P}((-\infty\,t_d]) = F(t_1,...,t_d),\quad t_i\in\R.
+	\end{equation} Man sagt wieder \enquote{$\mathbb{P}$ ist gemäß $F$ verteilt.}
+\end{satz}
+
+\begin{proof}
+	Wir f\"uhren den Beweis nicht vollst\"andig aus, die Argumente gehen im Prinzip wie f\"ur $d=1$.\smallskip
+	
+	\textbf{Eindeutigkeit:} Wie immer nutzten wir f\"ur die Eindeutigkeit Dynkin-Systeme. Weil \eqref{schnittstabil} das Maß auf $\cap$-stabilem Erzeuger festlegt, kann es aufgrund von Korollar \ref{folg} nur ein Ma\ss{} mit der Eigenschaft \eqref{schnittstabil} geben.\smallskip
+	
+	\textbf{Existenz:} Zur Konstruktion haben wir den Fortsetzungssatz von Carath\'eodory, Satz \ref{KarlTheodor}. Hier nur eine Skizze, die f\"ur das Verst\"andnis der komischen Rechtecksmonotonie hilfreich ist, formuliert f\"ur $d=2$. Zun\"achst muss eine $\sigma$-additive Mengenfunktion auf einem Erzeuger definiert werden. Dazu nehmen wir die Rechtecke der Form $(a_1^1,a_1^2] \times (a_2^1, a_2^2]$ und definieren	
+	$$\mu((a_1^1,a_1^2] \times (a_2^1, a_2^2]) :=\Delta_{a^1}^{a^2} F \geq 0.$$ 
+	Die Definition ist motiviert durch den Beweis von Proposition \ref{p9}, $\Delta_{a^1}^{a^2} F$ war dort ja gerade die Wahrscheinlichkeit des Rechtecks $(a_1^1,a_1^2] \times (a_2^1, a_2^2]$. Nun muss man wie f\"ur $d=1$ zeigen, dass $\mu$ eine $\sigma$-additive Mengenfunktion auf den Rechtecken ist. Das ist wieder etwas h\"asslich, vergleiche den Beweis von Satz \ref{EindVert}. Hat man das geschafft, so existiert eine Fortsetzung von $\mu$ auf $\mathcal B(\R^d)$ und die tut es.
+	\end{proof}
+
+\begin{prop}[Spezialfall Produktmaß]\label{id}
+	Sind $F_1,...,F_d$ reelle Verteilungsfunktionen, so ist $$ F(t_1,...,t_d) := F_1(t_1)\cdot ... \cdot F_d(t_d),\quad t_i \in \R,$$ eine Verteilungsfunktion. Es gilt: $\mathbb{P}_F = \mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}$.
+\end{prop}
+
+\begin{proof}
+Variante 1: $F$ ist eine multivariate Verteilungsfunktion $\rightsquigarrow$ Große Übung. Dann nutze den Satz \ref{EindVert}.\smallskip
+
+Variante 2: Das Produktmaß $\mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}$ existiert auf $ \cB(\R^d)$ nach Korollar \ref{MassraeumeExMass}.
+		
+		Behauptung: $F$ ist multivariate Verteilungsfunktion von $\mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}$. Checken wir also, dass das Produktma\ss{} die richtige Verteilungsfunktion hat:
+		\begin{align*}
+			\mathbb{P}_{F_1} \otimes ... \otimes \mathbb{P}_{F_d}((-\infty,t_1] \times ... \times (-\infty,t_d]) &\overset{\text{Def.}}{=} \mathbb{P}_{F_1}((-\infty,t_1]) \cdot ... \cdot \mathbb{P}_{F_d}((-\infty,t_d]) \\
+			&= F_1(t_1) \cdot ... \cdot F_d(t_d) \\
+			&= F(t_1,...,t_d).
+		\end{align*}
+\end{proof}
+Genau wie f\"ur reellwertige Zufallsvariablen gibt es absolutstetige und diskrete Wahrscheinlichkeitsma\ss e auf $(\R^d, \mathcal B(\R^d))$:
+\begin{deff}
+	\begin{enumerate}[label=(\roman*)]
+		\item Ein Maß $\mathbb{P}$ auf $(\R^d,\cB(\R^d))$ heißt \textbf{absolutstetig} mit Dichte $f\colon \R^d \to [0, \infty]$, falls $f$ messbar ist mit \[ F(t_1,...,t_d) = \int_{(-\infty,t_1]\times ...\times (-\infty,t_d]}f(x)\dint x. \]
+		\item Ein Maß auf $(\R^d,\cB(\R^d))$ heißt \textbf{diskret}, falls f\"ur ein $N\in \N\cup \{+\infty\}$ Vektoren $a_1,...,a_N \in \R^d$ und Wahrscheinlichkeitsgewichte $p_1,...,p_N \geq 0$ existieren, sodass \[ \mathbb{P} = \sum\limits_{k=1}^{N} p_k \delta_{a_k}. \] $\mathbb{P}$ hat also nur Masse in $\{ a_1,...,a_N\}$ und es gilt $\mathbb{P}(\{ a_k \}) = p_k$.
+	\end{enumerate}
+\end{deff}
+Aufgrund von Fubini gilt f\"ur absolutstetige Ma\ss e immer auch
+ \[ F(t_1,...,t_d) = \int_{-\infty}^{t_1}...\int_{-\infty}^{t_d}f(x_1,...,x_d)\dint x_d... \dint x_1,\]
+und das werden wir zum Rechnen auch meistens benutzen. Das einfachste Beispiel solche iterierten Integrale zu berechnen tritt auf, wenn $f$ faktorisiert, d. h. die einzelnen Koordinaten sich nur durch Produkte bedingen. In dem Fall wird die Verteilungsfunktion auch faktorisiert:
+\begin{beispiel}\label{dichte}
+	Sind $f_1,...,f_d$ Dichten von reellen Verteilungsfunktionen $F_1,...,F_d$. Dann ist $f(x)= f(x_1,...,x_d) := f_1(x_1)\cdot ... \cdot f_d(x_d)$ eine Dichte von $F=F_1\cdot ... \cdot F_d$ aus Proposition \ref{id}. Das k\"onnen wir sofort mit Fubini zeigen:
+	\begin{align*}
+		F(t_1,...,t_d) &\overset{\text{Def.}}{=} F_1(t_1)\cdot ... \cdot F_d(t_d)\\
+		& = \int_{-\infty}^{t_1} f_1(x_1) \dint x_1 \cdot ... \cdot \int_{-\infty}^{t_d} f_d(x_d) \dint x_d \\
+		&\overset{\text{Lin.}}{=} \int_{-\infty}^{t_1} ... \Big(\int_{-\infty}^{t_d} f_1(x_1)\cdot ... \cdot f_d(x_d) \dint x_d\Big) ... \dint x_1 \\
+		&\overset{\text{\ref{fubini}}}{=} \int_{(-\infty,t_1] \times ... \times (-\infty,t_d]} f_1(x_1)\cdot ... \cdot f_d(x_d) \dint x\\
+		&= \int_{(-\infty,t_1]\times ...\times (-\infty,t_d]}f(x)\dint x.
+	\end{align*}
+\end{beispiel}
+
+\subsection*{(C) Zufallsvektoren}
+Nachdem wir die Ma\ss e auf $(\R^d, \mathcal B(\R^d)$ verstanden haben, kommen wir jetzt analog zum reellen Fall zu den Zufallsvektoren.
+\begin{deff}
+	Ist $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum, so heißt $X \colon \Omega \to \R^d$ \textbf{Zufallsvektor}, wenn $X$ $(\cA, \cB(\R^d))$-messbar ist.
+\end{deff}
+
+\begin{prop}\label{zweiInterpr}
+	\[ X =\left(\begin{array}{c} X_1 \\ \vdots \\ X_d\end{array}\right)\colon \Omega \to \R^d \] ist ein Zufallsvektor genau dann, wenn $X_1,...,X_d \colon \Omega \to \R$ Zufallsvariablen sind.
+\end{prop}
+Die Proposition ist eine reine Messbarkeitseigenschaft. Sie besagt nur, dass eine vektorwertige Abbildung messbar ist, genau dann, wenn jede Koordinatenabbildung messbar ist. Das ist ein wenig wie in Analysis 2 als wir immer $f:\R^n\to \R^m$ auf die Koordinatenabbildungen $f_i:\R^n\to \R$ reduziert haben.
+\begin{proof}
+	\begin{itemize}
+		\item[\enquote{$\Rightarrow$}:] 	Für $B \in \cB(\R)$ gilt 
+\[ X_i^{-1} (B) = X^{-1}(\underbrace{\R \times ... \times \R \times B \times \R \times ... \times \R}_{i\text{-te Stelle}}) \in \mathcal A. \]
+		\item[\enquote{$\Leftarrow$}:] Messbarkeit muss nur auf einem Erzeuger gezeigt werden, wir wählen dazu $\cS = \{ B_1 \times ... \times B_d\colon B_i \in \cB(\R) \}$.
+		\begin{align*}
+			X^{-1}(B_1 \times ... \times B_d) &= \left\{ \omega\in \Omega\colon 
+			\left(\begin{array}{c} X_1(\omega)\\\vdots\\ X_d(\omega)\end{array}\right) \in B_1 \times ... \times B_d \right\} \\
+			&= \bigcap_{i=1}^{d} \{ \omega \colon X_i(\omega) \in B \} \in \cA 
+		\end{align*}
+	\end{itemize}
+\end{proof}
+
+\begin{disc}
+	Wegen Proposition \ref{zweiInterpr} gibt es jetzt zwei Interpretationen von Zufallsvektoren:
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{ersteInterpr} Ein Zufallsvektor beschreibt $d$-viele Eigenschaften in \textbf{einem} zuf\"alligen Experiment.
+		\item\label{zweiteInterpr} $X$ beschreibt ein eindimensionales Experiment, das \textbf{$d$-mal ausgeführt} wird.
+	\end{enumerate}
+	Wir verbalisieren \ref{ersteInterpr} und \ref{zweiteInterpr} unterschiedlich, mathematisch handelt es sich um das gleiche Objekt:
+	\begin{enumerate}[label=(\roman*)]
+		\item \enquote{Sei $X = \left(\begin{array}{c} X_1\\\vdots\\ X_d\end{array}\right)$ ein Zufallsvektor auf $(\Omega, \mathcal A, \mathbb P)$.}
+		\item \enquote{Seien $X_1,...,X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$.}
+	\end{enumerate}
+\end{disc}
+Weiter geht's mit der Verallgemeinerung von Verteilungsfunktionen von Zufallsvariablen auf Zufallsvektoren. Analog zum eindimensionalen Fall definieren wir die gleichen Begriffe:
+\begin{deff}
+	\begin{enumerate}[label=(\roman*)]
+		\item Für einen Zufallsvektor $X$ auf $(\Omega, \cA, \mathbb{P})$ heißt
+		\begin{align*}
+			F_X(t_1,...,t_d) = \mathbb{P}(X_1 \leq t_1,...,X_d \leq t_d)
+		\end{align*}	
+		  Verteilungsfunktion von $X$. Dabei steht das Komma f\"ur \enquote{und}, formell steht da also $\mathbb P(\cap_{i=1}^d \{X_i\leq t_i\})$. $F$ heißt auch \textbf{gemeinsame Verteilungsfunktion} der Zufallsvariablen $X_1,...,X_d$. Wir nutzen wieder die Schreibweise $X\sim F$, wenn $F$ die Verteilungsfunktion von $X$ ist.
+ 		\item Zwei Zufallsvektoren heißen \textbf{identisch verteilt}, falls $F_X = F_Y$.
+		\item Das Bildma\ss{} $\mathbb{P}_X(B) := \mathbb{P}(X \in B)$ heißt Verteilung von $X$ oder die  \textbf{gemeinsame Verteilung} der Zufallsvariablen $X_1,...,X_d$. $\mathbb{P}_X$ ist ein Maß auf $(\R^d, \cB(\R^d))$.
+		Für $X \sim F$ gilt wieder $\mathbb{P}_X = \mathbb{P}_F$
+		\item F\"ur $i=1,...,d$ hei\ss t $$\mathbb{P}_{X_i}(B) = \mathbb{P}(X_i \in B) = \mathbb{P}(\{ \omega \colon X_i \in B \})$$ die \textbf{Randverteilung} von $X_i$ und 	
+		  \[ F_{X_i}(t) = \mathbb P(X_i\leq t)  \]
+		die \textbf{eindimensionale Randverteilungsfunktion} von $X_i$.
+	\end{enumerate}
+\end{deff}
+Die Notationen werden hier etwas un\"ubersichtlich, diskutieren wir sie also ein wenig. Weil $\mathbb P(X_i\leq t)=\mathbb P(X_1\in \R, ..., X_i\leq t, ..., X_d\in \R)$ folgt aus der Stetigkeit von Ma\ss en
+\begin{align*}
+	F_{X_i}(t) =\lim\limits_{\substack{t_k \to \infty,\\ \forall k\neq i}} F(t)=: F_X(+\infty,..., t, ...,+\infty).
+\end{align*}
+Mit dieser Formel ist klar, wie aus der gemeinsamen Verteilung aller $X_i$ die Verteilung eines einzelnen $X_i$ berechnet werden kann: Man schickt einfach alle anderen $t_k$ nach $+\infty$ und nimmt den Grenzwert. \smallskip
+
+Analog zum eindimensionalen Fall jetzt auch noch die kanonische Konstruktion von Zufallsvektoren, die funktioniert fast w\"ortlich wie die Konstruktion im Beweis von Satz \ref{existenz}.
+\begin{satz}[Kanonische Konstruktion von Zufallsvektoren]\label{kan}
+	Für jede multivariate Verteilungsfunktion gibt es einen Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ und einen Zufallsvektor $X \colon \Omega \to \R^d$ mit $X \sim F$.
+\end{satz}
+\begin{proof}
+	Als Wahrscheinlichkeitsraum definieren wir $\Omega=\R^d$, $\cA = \cB(\R^d)$, $\mathbb{P} = \mathbb{P}_F$ und darauf den Zufallsvektor $X(\omega) = \omega$, also $X_i(\omega)=\omega_i$. Beachte: Die Identit\"atsabbildung $X(\omega)=\omega$ ist eine stetige Abbildung von $\R^d$ nach $\R^d$ und damit auch messbar. Berechnen wir die Verteilungsfunktion:
+	\begin{align*} 
+		\mathbb{P}(X_1\leq t_1, ..., X_d\leq t_d) 
+		&=	\mathbb{P}_F(\{\omega \in \R^d: X_1(\omega) \leq t_1, ..., X_d(\omega)\leq t_d\})\\
+		&=\mathbb{P}_F(\{\omega \in \R^d: \omega_1\leq t_1, ..., \omega_d\leq t_d\})\\
+		&=F(t_1,...,t_d).
+ \end{align*} 
+	Das war es schon! Zu beachten ist, dass die Konstruktion weit von trivial ist. Die Existenz von $\mathbb P_F$ ben\"otigt den Satz von Carath\'eodory und damit die komplette Ma\ss theorie. 
+\end{proof}
+Ab jetzt werden wir immer die Interpretation von $d$ Zufallsvariablen nutzen, damit wir uns langsam an Folgen von Zufallsvariablen gew\"ohnen. 
+\begin{deff}
+	Seien $X_1,...,X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$.
+	\begin{enumerate}[label=(\roman*)]
+		\item $X_1,...,X_d$ haben die \textbf{gemeinsame Dichte} $f$, falls die gemeinsame Verteilungsfunktion $F$ Dichte $f$ hat.
+		\item $X_1,...,X_d$ heißen \textbf{diskret}, falls $a_1,...,a_N \in \R^d$ existieren mit $$\mathbb{P}(X=a_k) = \mathbb{P}(X_1=a_{k,1},..., X_d = a_{k,d}) = p_k$$ und $ \sum_{k=1}^{N} p_k = 1$ f\"ur ein $N \in \N \cup \{ +\infty \}  $.
+	\end{enumerate}
+\end{deff}
+Aus der Definition folgt sofort, dass eine gemeinsame Dichte nicht-negativ und messbar ist, sowie $\int_{\R^d} f(x)\dint x=1$ erf\"ullt. Andersrum zeigt ihr in den \"Ubungsaufgaben, dass f\"ur solch eine Funktion $F(t_1,..,,t_d):=\int_{(-\infty, t_1]\times ... \times(-\infty, t_d]} f(x)\dint x$ die Eigenschaften einer multivariaten Verteilungsfunktion erf\"ullt.\smallskip
+
+Bisher ist in diesem Kapitel kaum neues passiert. Nur die Rechtecksmonotonie einer multivariaten Verteilungsfunktion ist als neue Idee hinzugekommen. Das \"andert sich jetzt allerdings mit dem Konzept der Unabh\"angigkeit. Hier verlassen wir die Ma\ss - und Integrationstheorie, das ist ein rein stochastisches Konzept. Wer m\"ochte, darf Wahrscheinlichkeitstheorie gerne als \enquote{Ma\ss - und Integrationstheorie plus Unabh\"angigkeit} definieren.
+\begin{deff}
+	Seien $X_1,...,X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$. 
+	\begin{enumerate}[label=(\roman*)]
+		\item $X_1,...,X_d$ hei\ss en \textbf{unabhängig}, falls die gemeinsame Verteilungsfunktion in die Randverteilungsfunktionen faktorisiert, \mbox{d. h.}
+		\begin{align*}
+			F_X(t_1,...,t_d) = F_{X_1}(t_1) \cdot ... \cdot F_{X_d}(t_d), \quad t_i \in \R 
+		\end{align*}
+		oder mit Wahrscheinlichkeiten geschrieben
+		\begin{align*}
+			 \mathbb{P}(X_1 \leq t_1,...,X_d \leq t_d) = \mathbb{P}(X_1 \leq t_1) \cdot ... \cdot \mathbb{P}(X_d \leq t_d), \quad t_i \in \R.
+		\end{align*}
+		\item $X_1,...,X_d$ hei\ss en \textbf{abhängig}, falls sie nicht unabhängig sind.
+		\item $X_1,...,X_d$ hei\ss en \textbf{identisch verteilt}, falls  $F_{X_1} = ... = F_{X_d}$. Die Zufallsvariablen $X_1, ..., X_d$ sollen also die gleiche Verteilung haben.
+		\item $X_1,...,X_d$ hei\ss en \textbf{unabh\"angig und identisch verteilt} (\textbf{u.i.v.}), falls sie unabh\"angig und identisch verteilt sind. Weil die gemeinsame Verteilungsfunktion $F$ bei u.i.v. Zufallsvariablen schon eindeutig durch jede Randverteilungsfunktion festgelegt ist, gibt man oft nur die Verteilung von $X_1$ an.
+	\end{enumerate}
+\end{deff}
+Vergleichen wir die Definition der Unabh\"angigkeit mit Proposition \ref{id}, so k\"onnen wir auch formulieren: $X_1,...,X_d$ hei\ss en unabh\"angig, falls die Verteilung $\mathbb P_X$ das Produktma\ss{} der Randverteilungen ist.
+\begin{bem1}
+	Was soll das abstrakte Konzept der Unabh\"angigkeit eigentlich bedeuten? Unabh\"angigkeit ist die mathematische Formulierung der Idee, dass der Wert von einer Zufallsvariablen keinen Einfluss auf den Wert der anderen Zufallsvariablen hat. Die Temperaturen in Heidelberg und Mannheim morgen um 12 Uhr sind vermutlich nicht unabh\"angig (ist es in Heidelberg kalt, so ist es vermutlich auch in Mannheim kalt). Andererseits hat die Temperatur morgen in Peking vermutlich keinen Einfluss darauf, wie gro\ss{} der Kaffeefleck auf meiner Hose \"ubermorgen ist.
+\end{bem1}
+
+
+\marginpar{\textcolor{red}{Vorlesung 21}}
+
+\begin{beispiel}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Nehmt eure Lieblingsverteilungsfunktion $F$, so gibt es $X_1,...,X_d$ u.i.v. mit $X_1 \sim F$. Die $X_1,...,X_d$ gibt es nach Satz \ref{kan} mit der gemeinsamen Verteilungsfunktion $F$ aus Proposition \ref{id}. Die gemeinsame Verteilung ist dann das Produktma\ss{}:
+		 \[ \mathbb{P}_X = \underbrace{\mathbb{P}_F \otimes ... \otimes \mathbb{P}_F}_{d\text{-viele}}. \]
+		\item Sei $X_1 \sim \cN(0,1)$ und $X_2 := -X_1$. Dann sind $X_1$, $X_2$ identisch verteilt, jedoch nicht unabh\"angig. Bestimmen wir dazu zun\"achst die Verteilungsfunktionen:
+		\begin{align*}
+			F_{X_1}(t) &= \int_{-\infty}^{t} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x,\\
+			F_{X_2}(t)& \overset{\text{Def.}}{=} \mathbb{P}(X_2 \leq t) = \mathbb{P}(-X_1 \leq t) = \int_{-t}^{+\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x 
+			 \overset{\text{subst.}}{=} \int_{-\infty}^{t} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x.
+		\end{align*}
+		Die letzte Gleichheit gilt nat\"urlich weil $\int_{-\infty}^t f(x)\dint x=\int_{-t}^{+\infty} f(x)\dint x$ f\"ur jede symmetrische integrierbare Funktion gilt.
+		Also gilt $X_1 \sim \cN(0,1)$, $X_2 \sim \cN(0,1)$ und damit sind $X_1, X_2$ identisch verteilt. Um zu zeigen, dass sie nicht unabh\"angig sind, berechnen wir die gemeinsame Verteilungsfunktion an einer Stelle und zeigen, dass diese nicht faktorisiert. Es gelten
+		\[ F_X(0,0) = \mathbb{P}(X_1 \leq 0, X_2 \leq 0) = \mathbb{P}(X_1 \leq 0, X_1 \geq 0) = \mathbb{P}(X_1 = 0) \overset{\text{abs. st.}}{=} 0 \] und
+		\[ F_{X_1}(0) = F_{X_2}(0) = \mathbb{P}(X_1 \leq 0) = \int_{-\infty}^{0} \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \dint x = \frac{1}{2}, \]
+		also gilt $$ F_X(0,0) = 0 \neq \frac{1}{4} = F_{X_1}(0) \cdot F_{X_2}(0)$$ und damit sind $X_1,X_2$ abhängig. Nat\"urlich war intuitiv sowieso klar, dass $X_1, X_2$ nicht unabh\"angig sind. Unabh\"angig bedeutet schlie\ss lich, dass $X_1$ keinen Einfluss auf $X_2$ hat. Bei der Beziehung $X_1=-X_2$ haben wir nat\"urlich eine extreme Abh\"angigkeit: Kennen wir den Wert von $X_1$, so kennen wir auch den Wert von $X_2$.		
+	\end{enumerate}
+\end{beispiel}
+
+\begin{prop}\label{p4}
+	Seien $X_1,...,X_d$ Zufallsvariablen mit gemeinsamer Dichte $f$, es gilt also $ F(t_1,...,t_d) = \int_{(-\infty,t_1]\times ... \times (-\infty, t_d]} f(x)\dint x$, so haben $X_1,...,X_d$ Dichten $f_1,...,f_d$ und es gilt \[ f_i(x) = \underbrace{\int_{-\infty}^{\infty} ... \int_{-\infty}^{\infty}}_{(d-1)\text{-viele}} \underbrace{f(x_1,...,x_d)}_{x_i \text{ fest}} \underbrace{\dint x_1 ... \dint x_d}_{\text{ohne } x_i} \] ist eine Dichte von $X_i$ für $i=1,...,d$. In Worten: Ist $X$ absolutstetig, so sind alle $X_i$ absolutstetig und die Dichten der $X_i$ entstehen durch Ausintegrieren aller anderen Variablen.
+\end{prop}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item $f_i \geq 0$ $\checkmark$ 
+		\item Die Messbarkeit $f_i$ ist Teil der Aussage von Fubini.
+		\item Es gilt  \[ \int_{\R} f_i(x) \dint x = 1 \] weil
+		\[\int_{\R} f_i(x) \dint x = \underbrace{\int_{-\infty}^{\infty} ... \int_{-\infty}^{\infty}}_{d\text{-mal}} f(x_1,...,x_d) \dint x_1 ... \dint x_d \overset{\text{Fubini}}{=} \int_{\R^d} f(x) \dint x \overset{\text{Dichte}}{=} 1.  \]
+		\item Rechnen wir noch die Verteilungsfunktion nach, hierbei nutzen wir zum ersten Mal einen kleinen, jedoch wichtigen, Trick:		
+		\begin{align*}
+			F_{X_i}(t_i) &\overset{\text{Def.}}{=} \mathbb{P}(X_i \leq t_i)\\
+			& \overset{\text{Trick}}{=} \mathbb{P}(X_1 \in \R, ... , X_i \leq t_i, ..., X_d \in \R) \\
+			&\overset{\text{Stetigkeit}}{\underset{\text{von Maßen}}{=}} \lim\limits_{\substack{t_k \to \infty, \\ k \neq i}} \mathbb{P}(X_1 \leq t_1,...,X_d \leq t_d)\\
+			& \overset{\text{Dichte}}{=} \lim\limits_{\substack{t_k \to \infty, \\ k \neq i}} \underbrace{\int_{-\infty}^{t_1} ... \int_{-\infty}^{t_d}}_{d\text{-mal}} f(x_1,...,x_d) \dint x_d ... \dint x_1 \\
+			&\overset{\text{\ref{allgMonKonv}}}{=} \int_{-\infty}^{t_i} f_i(x_i) \dint x_i.
+		\end{align*}
+		In der Rechnung haben wir fr\"ohlich die Reihenfolge der iterierten Integrale getauscht, das war nat\"urlich der Satz von Fubini.
+	\end{enumerate}
+\end{proof}
+\begin{bem}
+	Die R\"uckrichtung von Proposition \ref{p4} ist falsch. Es gilt im Allgemeinen nicht, dass die Existenz von Dichten $f_1,...,f_d$ f\"ur $X_1, ..., X_d$ auch die Existenz einer gemeinsamen Dichte $f$ impliziert. Als Beispiel kann man $X\sim \mathcal U([0,1])$ und $Y=X$ betrachten. Der Vektor $(X,Y)$ nimmt nur Werte in $A=\{(x,y) \in [0,1]\times [0,1]:x=y\}$ an und das ist eine Lebesgue-Nullmenge. Es m\"usste also eine nichnegative messbare Funktion $f:\R^2\to \R$ geben, mit $1=\int_A f(x)\dint x=\int_{\R^2} \mathbf 1_{A} f \dint x$ geben. Weil aber $\mathbf 1_A f=0$ fast \"uberall gilt, muss das Integral $0$ sein und das ist ein Widerspruch.
+\end{bem}
+Um mit gemeinsamen Verteilungen rumzurechnen, ist das n\"achste Korollar ganz essentiell:
+\begin{korollar}
+	Sind $X_1,...,X_d$ Zufallsvariablen mit gemeinsamer Dichte $f$, dann gilt: 
+	\begin{align*}	
+		X_1,...,X_d\text{ sind unabhängig }\quad \Leftrightarrow \quad f(x) = f_1(x_1)\cdot ... \cdot f_d(x_d)\quad \text{Lebesgue-fast \"uberall},
+	\end{align*}	
+	wobei $f_1,...,f_d$ Dichten von $X_1,...,X_d$ sind.
+\end{korollar}
+
+\begin{proof}
+	Zuerst erinnern wir daran, dass die Existenz der gemeinsamen Dichte die Absolutstetigkeit der einzelnen Zufallsvariablen impliziert (nicht andersrum). 
+	\begin{itemize}
+	\item[\enquote{$\Leftarrow$}:] Um die Unabh\"angigkeit zu pr\"ufen, rechnen wir die Verteilungsfunktion aus und zeigen dabei, dass sie faktorisiert:
+	\begin{align*}
+	F_X(t_1,...,t_d) &\overset{\text{Annahme}}{=} \int_{-\infty}^{t_1} ... \int_{-\infty}^{t_d} f_1(x_1) \cdot ... \cdot f_d(x_d) \dint x_d ... \dint x_1\\
+	& \overset{\text{Lin.}}{=} \int_{-\infty}^{t_1} f_1(x_1) \dint x_1 \cdot ... \cdot \int_{-\infty}^{t_d} f_d(x_d) \dint x_d\\
+	&\overset{\text{Def.}}{=} F_{X_1}(t_1) \cdot ... \cdot F_{X_d}(t_d),\quad t_i\in\R.
+	\end{align*}
+	Also sind $X_1,...,X_d$ nach Definition unabhängig.
+	\item[\enquote{$\Rightarrow$}:] Rechnen wir andersrum mit der gemeinsamen Verteilungsfunktion los:	
+	\begin{align*}
+		\int_{(-\infty,t_1] \times ... \times (-\infty,t_d]} f(x) \dint x &\overset{\text{Dichte}}{=} F_X(t_1,...,t_d)\\
+		& \overset{\text{Ann.}}{=} F_{X_1}(t_1) \cdot ... \cdot F_{X_d}(t_d)\\
+		& = \int_{-\infty}^{t_1} f_1(x_1) \dint x_1 \cdot ... \cdot \int_{-\infty}^{t_d} f_d(x_d)\dint x_d\\
+		&\overset{\text{Lin.}}{=}\int_{-\infty}^{t_1} ... \int_{-\infty}^{t_d} f_1(x_1) \cdot ... \cdot f_d(x_d) \dint x_d ... \dint x_1\\
+		& \overset{\text{Fubini}}{=} \int_{(-\infty,t_1] \times ... \times (-\infty,t_d]} f_1(x_1) \cdot ... \cdot f_d(x_d) \dint (x_1,...,x_d).
+	\end{align*}
+	Mit etwas Ma\ss theorie (??!!) folgt die Gleichheit der Integranden Lebesgue-fast \"uberall.
+	\end{itemize}
+\end{proof}
+Wir kennen jetzt Zufallsvektoren und deren Verteilungen, fehlen noch Erwartungswerte von Zufallsvektoren.
+
+\subsection*{(D) Erwartungswerte}
+Die Definition ist analog zu der Definition f\"ur eine Zufallsvariable:
+\begin{deff}
+	Seien $X_1,...X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ und $ g \colon \R^d \to \overline \R$ $(\mathcal A, \mathcal B(\overline \R))$-messbar. Dann sei 
+	\[ \E[g(X_1,...,X_d)] := \int_{\Omega} g(X_1(\omega),...,X_d(\omega)) \dint \mathbb{P}(\omega), \]
+	wenn das Integral wohldefiniert ist. Wir sprechen von $\E[g(X_1,...,X_d)]$ als Erwartungswert, weil $Y:= g(X_1,...,X_d)$ eine Zufallsvariable ist.
+\end{deff}
+Die Berechnungstheorie geht jetzt komplett analog zu dem Fall einer Zufallsvariablen. Erst der Trafosatz, dann die Rechenregeln f\"ur absolutstetige und diskrete Zufallsvektoren.
+\begin{lemma}\label{gemVert}
+	Seien $X_1,...X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ und sei $\mathbb{P}_X$ die gemeinsame Verteilung von $X = (X_1,...,X_d)$. Dann gilt \[ \E[g(X_1,...,X_d)] = \int_{\R^d} g(x_1,...,x_d) \dint \mathbb{P}_X(x_1,...,x_d), \]
+	wobei eine Seite wohldefiniert ist, wenn es die andere Seite ist.
+\end{lemma}
+
+\begin{proof}
+	Das ist nichts anderes als der Trafosatz, genau wie in Lemma \ref{ewTrafo}:
+	\begin{center}		
+		\begin{tikzcd}
+			{}&{}&{}\\
+			(\Omega, \cA, \mathbb P) \arrow[r, "{X}"] \arrow[rd, "{g \circ X}"']
+			& (\R, \cB(\R^d), \mathbb P_X) \arrow[d, "{g}"] \arrow[ur, phantom, "", near start] \\
+			& (\overline{\R}, \cB(\overline{\R}))
+		\end{tikzcd}
+	\end{center}
+\end{proof}
+Wie f\"ur eine Zufallsvariable in Satz \ref{regeln} kommen nun die Rechenregeln:
+\begin{satz}[Berechnungsregeln]
+Seien $X_1,...X_d$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item Haben $X_1,...X_d$ eine gemeinsame Dichte $f$, so gilt 
+		\[ \E[g(X_1,...,X_d)] = \int_{\R^d} g(x) f(x) \dint x \overset{\text{Fubini}}{=} \int_{\R} ... \int_{\R} g(x_1,...,x_d) f(x_1,...,x_d) \dint x_d ... \dint x_1.  \]
+		\item Ist $X=(X_1,...,X_d)$ diskret und nimmt die Werte $a_1, ..., a_N\in\R^d$ mit Wahrscheinlichkeiten $p_1, ..., p_N$ an, so gilt \[ \E[g(X_1,...,X_d)]= \sum\limits_{k=1}^{N} p_k g(a_k) = \sum\limits_{k=1}^{N} \mathbb{P}(X=a_k) g(a_k) . \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	Exakt wie für $d=1$ in Satz \ref{regeln}.
+\end{proof}
+Rechnen wir einfach mal ein Beispiel aus. In der Tat kennen wir kaum Beispiele von Zufallsvariablen $X_1$ und $X_2$ mit gemeinsamer Dichte. Wir wissen bisher nur, dass unabh\"angige Zufallsvariablen eine gemeinsame Dichte haben, wenn sie alle Dichten haben, denn das war gerade Beispiel \ref{dichte}. Berechnen wir also mal einen Erwartungswert f\"ur unabh\"angige Exponentialverteilungen:
+\begin{beispiel}
+	Seien $X_1 \sim \operatorname{Exp}(\lambda)$ und $X_1 \sim \operatorname{Exp}(\beta)$ unabhängig. Was ist die Verteilungsfunktion von $ Y := \min(X_1,X_2)$? Wir zeigen, dass $Y \sim \operatorname{Exp}(\lambda + \beta)$. Das ist ein ganz typisches Beispiel, wof\"ur wir die Berechnungsregeln nutzen. Erst die Wahrscheinlichkeit als Erwartungswert umschreiben, dann die Formel anwenden und schlie\ss lich die gemeinsame Dichte als Produkt rausintegrieren. Mit $g(x_1,x_2) := \mathbf{1}_{(-\infty,t]}(\min(x_1,x_2))$ und gemeinsamer Dichte $f(x)=f_1(x_1)f_2(x_2)$ gibt das
+	\begin{align*}
+		\mathbb{P}(Y \leq t) & \overset{\ref{rechenregeln}, (iv)}{=} \E[\mathbf{1}_{(-\infty,t]}(Y)] \\
+		&= \E[\mathbf{1}_{(-\infty,t]}(\min(X_1,X_2))] \\
+		&= \E[g(X_1,X_2)] \\
+		&=\int_{\R^2} g(x)f(x)\dint x\\
+		&= \int_{\R^2} g(x_1,x_2) \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint (x_1,x_2)\\
+		&\overset{\text{Fubini}}{=} \int_{\R} \int_{\R} g(x_1,x_2) \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint x_1 \dint x_2 \\
+		&= \int_{\R} \int_{\R} (1 - \mathbf{1}_{(t,\infty)}(x_1)\mathbf{1}_{(t,\infty)}(x_2)) \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint x_1 \dint x_2\\
+		&= 1 - \int_{t}^{\infty} \int_{t}^{\infty} \lambda e^{-\lambda x_1} \beta e^{-\beta x_2} \dint x_1 \dint x_2 \\
+		&= 1 - \int_{t}^{\infty} \lambda e^{-\lambda x_1} \dint x_1 \int_{t}^{\infty} \beta e^{-\beta x_2} \dint x_2\\
+		& = 1 - e^{-\lambda t} e^{-\beta t} = 1 - e^{-(\lambda + \beta)t}.
+	\end{align*}
+	Weil wir die Verteilungsfunktion der Exponentialverteilung kennen, ist  $Y\sim \operatorname{Exp}(\lambda+\beta)$.
+\end{beispiel}
+
+\begin{satz}\label{un}
+	Sind $X_1,...,X_d$ unabhängige Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so gilt
+	$$ \E[g_1(X_1) \cdot ... \cdot g_d(X_d)] = \E[g_1(X_1)] \cdot ... \cdot \E[g_d(X_d)]$$
+	f\"ur alle messbaren $g_1, ..., g_d: \R \to \overline \R$.
+\end{satz}
+
+\begin{proof}
+	Wir schreiben den Beweis nur f\"ur $d=2$, sonst wird die Notation zu h\"ass lich. Schauen wir uns zun\"achst nochmal die Verteilung unabh\"angiger Zufallsvariablen an. Wegen
+	 \begin{align*}
+			\mathbb{P}_{(X_1,X_2)}((-\infty,t_1]) \times (-\infty,t_2]) 
+			&\overset{\text{Def.}}{=} \mathbb{P}(X_1\leq t_1, X_2 \leq t_1) \\
+			&\overset{\text{unabh.}}{=} \mathbb{P}(X_1\leq t_1) \cdot \mathbb{P}(X_2 \leq t_1) \\
+			&= \mathbb{P}_{(X_1,X_2)}((-\infty,t_1]\times \R) \cdot \mathbb{P}_{(X_1,X_2)}(\R\times (-\infty,t_2]),
+		\end{align*}
+		erf\"ullt $\mathbb{P}_{(X_1,X_2)}$ die definierende Eigenschaft des Produktma\ss es auf einem $\cap$-stabilen Erzeuger. Damit gilt $\mathbb{P}_{(X_1,X_2)} = \mathbb{P}_{X_1} \otimes \mathbb{P}_{X_2}$ auf ganz $\cB(\R^2)$. Berechnen wir damit den Erwartungswert mit dem Trafosatz und der Funktion $g(x_1,x_2):=g_1(x_1)g_2(x_2)$:
+		 \begin{align*}
+			\E[g_1(X_1) \cdot g_2(X_2)] &= \E[g(X_1,X_2)]\\
+			&\overset{\text{\ref{gemVert}}}{=} \int_{\R^2} g(x_1,x_2) \dint \mathbb{P}_{(X_1,X_2)}(x_1,x_2)\\
+			&= \int_{\R^2} g(x_1,x_2) \dint\mathbb{P}_{X_1} \otimes \mathbb{P}_{X_2}(x_1,x_2)\\
+			&\overset{\text{Fubini}}{=} \int_{\R} \Big(\int_{\R} g_1(x_1) g_2(x_2) \dint\mathbb{P}_{x_1}(x_1)\Big) \dint\mathbb{P}_{x_2}(x_2)\\
+			& \overset{\text{Lin.}}{=} \int_{\R} g_1(x_1) \dint\mathbb{P}_{X_1}(x_1) \int_{\R} g_2(x_2) \dint\mathbb{P}_{X_2}(x_2)\\
+			&\overset{\text{\ref{gemVert}}}{=} \E[g_1(X_1)] \cdot \E[g_2(X_2)].
+		\end{align*}
+\end{proof}
+Als Anwendung kommt jetzt eine ganz wichtige Eigenschaft unabh\"angiger Zufallsvariablen:
+\begin{korollar}
+	Sind $X_1,...,X_d$ unabhängige Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so gilt $$\mathbb{P}(X_1 \in A_1,...,X_d \in A_d) = \mathbb{P}(X_1 \in A_1) \cdot ... \cdot \mathbb{P}(X_d \in A_d)$$ f\"ur alle $A_1, ..., A_d\in \mathcal B(\R)$.
+\end{korollar}
+
+\begin{proof}
+	Das ist gerade Satz \ref{un} mit den messbaren Abbildungen $g_1=\mathbf{1}_{A_1},...,g_d=\mathbf{1}_{A_d}$ sowie die wichtige Verbindung von Wahrscheinlichkeiten und Erwartungswerten aus Satz \ref{rechenregeln} (iv).
+\end{proof}
+Eine andere direkte Folgerung aus Satz \ref{un} ist die Folgerung, dass Unabh\"angigkeit erhalten bleibt, wenn messbare Abbildungen angewandt werden. Formulieren wir das f\"ur zwei Zufallsvariablen:
+\begin{korollar}
+	Sind $X$ und $Y$ unabh\"angige Zufallsvariablen auf $(\Omega, \mathcal A, \mathbb P)$ und $f, g:\R\to \R$ messbar. Dann sind auch $f(X)$ und $g(Y)$ unabh\"angig.	
+\end{korollar}
+\begin{proof}
+	Mit Satz \ref{un} gilt f\"ur $s, t\in \R$
+	\begin{align*}
+		\mathbb P(f(X)\leq t, g(Y)\leq s)&=\E[\mathbf 1_{(-\infty,t]}(f(X)) \mathbf 1_{(\infty,s]}(g(Y))]\\
+		&= \E[\tilde f(X) \tilde g(Y)]\\
+				&= \E[\tilde f(X)]\E[ \tilde g(Y)]\\
+		&=\E[\mathbf 1_{(-\infty,t]}(f(X))] \E[\mathbf 1_{(-\infty,s]}(g(y))]\\
+		&=\mathbb P(f(X)\leq t) \mathbb P( g(Y)\leq s),
+	\end{align*}
+	wobei $\tilde f(x)=\mathbf 1_{(-\infty,t]}(f(x)), \tilde g(x)=\mathbf 1_{(-\infty,s}(g(x))$ als Verkn\"upfung messbarer Abbildungen messbar sind. Also sind $f(X)$ und $g(Y)$ unabh\"angig.
+\end{proof}
+
+
+\begin{deff}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Sind $X,Y$ Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$ mit $\E[X^2],\E[Y^2] < \infty$. Dann heißt 
+		$$\Cov(X,Y) = \E[(X - \E[X])(Y - \E[Y])]$$ \textbf{Kovarianz} von $X$ und $Y$.
+		\item Sind $\V(X), \V(Y) \neq 0$, das bedeutet $X$ und $Y$ sind nicht fast sicher konstant, so heißt \[ \rho(X,Y) = \frac{\Cov(X,Y)}{\sqrt{\V(X)\V(Y)}} \] \textbf{Korrelation} von $X, Y$.
+		\item Ist $\rho(X,Y) = 0$, so heißen $X,Y$ \textbf{unkorreliert}.
+	\end{enumerate} 
+\end{deff}
+In der gro\ss en \"Ubung wurden folgende Eigenschaften diskutiert:
+\begin{bem}\abs
+\begin{itemize}
+	\item Fall $X$ und $Y$ endliche zweite Momente haben, so existiert die Kovarianz und es gilt $\rho(X,Y)\in [-1,1]$. Das ist einfach nur Cauchy-Schwarz (d. h. H\"older mit $p=q=2$):
+	\begin{align*}
+		\Cov(X,Y)&= \E[(X - \E[X])(Y - E[Y])]\\
+		&\leq  \sqrt{\E[(X - \E[X])^2]} \sqrt{ \E[(Y - E[Y])^2]}=\sqrt{\V(X)\V(Y)}.
+	\end{align*}
+	Durchteilen gibt $\rho(X,Y)\in [-1,1]$.
+	\item Sind $X$ und $Y$ unabh\"angig, so gilt $\Cov(X,Y)=\rho(X,Y)=0$. Unabh\"angige Zufallsvariablen sind also auch unkorelliert! Das folgt sofort durch Ausmultiplizieren und Satz \ref{un}. 
+	\item Die Korrelation wird in der Statistik genutzt, um Abh\"angigkeiten zu beschreiben. Positive Korrelation bedeutet, dass $X$ und $Y$ eher gleiches Vorzeichen haben, negative Korrelation bedeutet, dass $X$ und $Y$ eher ungleiches Vorzeichen haben. Je n\"aher $\rho(X,Y)$ an $\pm 1$ ist, desto st\"arker ist dieser Effekt. Je n\"aher $\rho(X,Y)$ bei $0$ ist, desto weniger wissen wir \"uber den Zusammenhang von $X$ und $Y$. Am besten sieht man das an den Extremf\"allen: F\"ur $X=Y$ gilt $\rho(X,Y)=1$, f\"ur $X=-Y$ gilt $\rho(X,Y)=-1$, f\"ur unabh\"angige Zufallsvariablen gilt $\rho(X,Y)=0$.
+\end{itemize}
+\end{bem}
+
+\marginpar{\textcolor{red}{Vorlesung 22}}
+
+\begin{satz}[Bienaymé]\label{bien}
+ Sind $X_1,...,X_n$ Zufallsvariablen auf $(\Omega, \mathcal A, \mathbb P)$ mit $\E[X_1^2],...,\E[X_n^2] < \infty$, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item
+		\[ \V\Big(\sum\limits_{i=1}^{n} X_i\Big) = \sum\limits_{i=1}^{n} \V(X_i) + \sum\limits_{\substack{i,j=1\\i \neq j}}^{n} \Cov(X_i,X_j).  \]
+		\item \[ \V\Big(\sum\limits_{i=1}^{n} X_i\Big) = \sum\limits_{i=1}^{n} \V(X_i), \] falls $X_1,...,X_n$ paarweise unkorreliert sind, \mbox{d. h.} wenn $\Cov(X_i,X_j) = 0$ f\"ur alle $ i,j = 1,...,n$, $i\neq j$. 
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	Übung, das ist einfach nur Ausmultiplizieren und Definitionen einsetzen.
+\end{proof}
+
+\section{Rechnen mit Zufallsvariablen}
+
+\subsection{Inverse Transformations Methode}
+
+\subsection{Ein paar Tricks}
+
+
+Diverse weitere Verbindungen zwischen verschiedenen Verteilungen kann man auf \hyperlink{https://en.wikipedia.org/wiki/Relationships_among_probability_distributions}{dieser Wikipdia-Seite finden}.
+
+
+\subsection{Summen von unabhängigen Zufallsvariablen}
+Ziel: Berechne Verteilungen von Summen unabhängiger Zufallsvariablen. Was ist zum Beispiel die Verteilung der Summe zweier exponentialverteilter unabh\"angiger Zufallsvariablen? Oder wie ist die Summe zweier unabh\"angiger Normalverteilungen verteilt?\smallskip
+
+Starten wir mit dem diskreten Fall, der ist einfacher:
+\begin{satz}[Diskrete Faltungsformel]\label{diskreteFaltung}
+	Sind $X,Y$ unabhängige diskrete Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$. Dann ist auch $X+Y$ diskret und die Wahrscheinlichkeiten k\"onnen mit der diskreten Faltungsformel berechnet werden:
+	\[ \mathbb{P}(X+Y = a) = \sum\limits_{b \in Y(\Omega)} \mathbb{P}(X = a-b) \mathbb{P}(Y=b),
+	\]
+	dabei sind $Y(\Omega) := \{ Y(\omega): \omega \in \Omega\}=\{b_1,...b_N\}$ die Werte, die $Y$ mit positiven Wahrscheinlichkeiten $p_k=\mathbb P(Y=b_k)$ annimmt.
+\end{satz}
+
+\begin{proof}
+	Der Trick ist es, einen Event in eine disjunkte Vereinigung von Teilevents zu zerlegen und darauf die $\sigma$-Additivit\"at anzuwenden.
+	\begin{align*}
+		\mathbb{P}(X+Y = a) &\overset{\text{Notation}}{=} \mathbb{P}(\{ \omega\colon X(\omega) + Y(\omega) = a \}) \\
+		&\overset{\text{Trick}}{=} \mathbb{P}\Big(\bigcupdot_{b \in Y(\Omega)} \{ \omega\colon X(\omega) + Y(\omega) = a, Y(\omega) = b \} \Big)\\
+		&\overset{\sigma\text{-add.}}{=} \sum\limits_{b \in Y(\Omega)} \mathbb{P}(\{ \omega\colon X(\omega) + Y(\omega) = a, Y(\omega) = b \})\\ 
+		&= \sum\limits_{b \in Y(\Omega)} \mathbb{P}(\{ \omega\colon X(\omega) = a - b, Y(\omega) = b \})\\
+		&\overset{\text{Notation}}{=} \sum\limits_{b \in Y(\Omega)} \mathbb{P}(X = a - b, Y = b )\\
+		& \overset{\text{unab.}}{=} \sum\limits_{b \in Y(\Omega)} \mathbb{P}(X=a-b) \mathbb{P}(Y=b).
+	\end{align*}
+\end{proof}
+Als Anmerkung zum Freuen auf die strahlende Zukunft: Genau wegen dieses kleinen Tricks, kann man so sch\"on mit Markovketten rumrechnen!\smallskip
+
+Die Formel sieht vielleicht abstrakt und unhandlich aus, wie k\"onnen aber wirklich ganz einfach in konkrete Beispielen damit rechnen:
+
+
+
+\begin{beispiel}
+	Sind $X_1,...,X_n$ u.i.v mit $X_1 \sim \operatorname{Ber}(p)$ f\"ur ein $p\in (0,1)$, dann gilt $X_1+...+X_n \sim \operatorname{Bin}(n,p)$. Interpretation: Wenn $\operatorname{Ber}(p)$ die erfolgreiche Ausf\"uhrung eines Versuchs ($1$=Erfolg, $0$=Misserfolg) beschreibt, so beschreibt $\operatorname{Bin}(n,p)$ die Anzahl der erfolgreichen Ausf\"uhrungen von $n$ unabhängigen Versuchen.
+\end{beispiel}
+
+\begin{proof}
+	Induktion über $n$:
+	\begin{itemize}
+		\item[IA:] $n=1$: $\checkmark$ $\operatorname{Ber}(p) = \operatorname{Bin}(1,p)$ nach Definition beider Verteilungen.
+		\item[IV:] Die Behauptung gelte für ein \textit{beliebiges}, aber festes $n \in \N$
+		\item[IS:] Indem wir $X_1+...+X_{n+1}=(X_1+...+X_n)+X_{n+1}$ klammern, wenden wir die diskrete Faltungsformel an und nutzen dann die Induktionsvoraussetzung:
+		 \begin{align*}
+			\mathbb{P}(X_1+...+X_{n+1} = k)&
+			\overset{\text{\ref{diskreteFaltung}}}{=} \mathbb{P}(X_1+...+X_{n} = k-1) \mathbb{P}(X_{n+1} = 1)\\
+			&\quad + \mathbb{P}(X_1+...+X_{n} = k) \mathbb{P}(X_{n+1} = 0)\\
+			&= \left(  n\atop{k-1}\right) p^{k-1} (1-p)^{n-k+1}p + \left( n\atop k\right) p^{k} (1-p)^{n-k}(1-p) \\
+			&= \left(\left( n\atop {k-1} \right) + \left( n\atop  k\right)\right) p^k (1-p)^{n-k+1}\\
+			& = \left({n + 1}\atop  k \right) p^k (1-p)^{n-k+1}.
+		\end{align*}
+		Im letzten Schritt haben wir eine Rechnenregel f\"ur Binomialkoeffizienten benutzt, die kennen wir aus Analysis 1. Also ist $X_1+...+X_n \sim \operatorname{Bin}(n,p)$ gezeigt. 
+	\end{itemize} 
+\end{proof}
+\begin{beispiel}
+	Seien $X \sim \operatorname{Poi}(\lambda), Y \sim \operatorname{Poi}(\beta)$ unabhängig. Dann ist auch $X+Y$ Poissonverteilt, und zwar mit Parameter $\lambda+\beta$. In den \"Ubungen setzt ihr einfach in die Faltungsformel ein, um $X+Y\sim \operatorname{Poi}(\lambda+\beta)$ zu zeigen. Easy.
+%	\begin{align*}
+%		\mathbb{P}(X+Y=n) &= \sum\limits_{k \in \N_0} \mathbb{P}(X = n-k)\mathbb{P}(Y = k)\\
+%		& = \sum\limits_{k=0}^{n} e^{-\lambda} \frac{\lambda^{n-k}}{(n-k)!} e^{-\beta} \frac{\beta^{k}}{k!}\\
+%		&= e^{-(\lambda + \beta)} \frac{1}{n!} \sum\limits_{k=0}^{n} \frac{n!}{(n-k)!} \lambda^{n-k} \beta^{k}\\
+%		& = e^{-(\lambda + \beta)} \frac{1}{n!} \sum\limits_{k=0}^{n} \Big(\begin{array}{c} n\\ k\end{array}\Big) \lambda^{n-k} \beta^{k}\\
+%		& \overset{\text{bin.}}{\underset{\text{Formel}}{=}} e^{-(\lambda + \beta)} \frac{(\lambda + \beta)^n}{n!}.
+%	\end{align*}
+%	Damit ist $X+Y\sim \operatorname{Poi}(\lambda+\beta)$ gezeigt.
+\end{beispiel}
+
+\begin{deff}
+	Sind $\mu_1,...,\mu_n$ Wahrscheinlichkeitsmaße auf $(\R, \cB(\R))$, so heißt das Bildmaß vom Produktmaß $\mu_1 \otimes ... \otimes \mu_n$ unter der Abbildung $h_d(x_1,...,x_d) = x_1+...+x_d$ \textbf{Faltung} der Maße. Wir schreiben $\mu_1 *...* \mu_n$ für die Faltung.
+%	\begin{center}		
+%		\begin{tikzcd}
+%			(\cB(\R^d), \mu_1 \otimes ... \otimes \mu_n) \arrow[r, "{h_d}"] & (\cB(\R), \mu_1 \times ... \times \mu_n).
+%		\end{tikzcd}
+%	\end{center}
+	Sind $X_1,...,X_d$ unabhängige Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$, so heißt $\mathbb{P}_{X_1} *...*\mathbb{P}_{X_d}$ \textbf{Faltung} von $X_1, ..., X_d$.
+\end{deff}
+
+\begin{bem}
+	Nat\"urlich ist die Definition der Faltung abstrakt, andererseits ist sie auch konkret. Die Faltung ist nichts weiter als die Verteilung der Summe unabh\"angiger Zufallsvariablen, wir m\"ussen uns nur daran erinnern, dass die Verteilung unabh\"angiger Zufallsvariablen das Produktma\ss{} ist:
+	\begin{align*}
+		\mathbb{P}(X_1+...+X_d \in B) &= \mathbb{P}(h_d(X_1,...,X_d) \in B) \\
+		&\overset{\text{unab.}}{=} \mathbb{P}_{X_1} \otimes ... \otimes \mathbb{P}_{X_d}(h_d(X_1,...,X_d) \in B)\\
+		&\overset{\text{Def.}}{\underset{\text{push-f.}}{=}} \mathbb{P}_{X_1} *...*\mathbb{P}_{X_d}(B).
+	\end{align*}
+\end{bem}
+Mit der Definition der Faltung k\"onnen wir erstmal nicht viel anstellen, wir haben die Faltung schlie\ss lich einfach als das definiert, was wir berechnen wollen. Was wir gerne h\"atten, w\"are ein analog zu der diskreten Faltungsformel weil wir damit in konkreten Beispielen rechnen k\"onnen. Hier ist die allgemeine Formel, danach konkretisieren wir diese f\"ur den Fall mit Dichten.
+\begin{prop}\label{randomProp}
+	Seien $\mu_1,\mu_2$ Wahrscheinlichkeitsmaße auf $(\R,\cB(\R))$ mit Verteilungsfunktionen $F_1,F_2$, dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item Mit $B-y: = \{ x-y\colon x \in B \}$, d. h. die Verschiebung der Menge $B$ um $y$ nach links, gilt \[ \mu_1 * \mu_2(B) = \int_{\R} \mu_1(B-y) \dint \mu_2(y)\] f\"ur alle $B\in \mathcal B(\R)$.
+		\item F\"ur alle $t\in \R$ gilt \[ F_{\mu_1 * \mu_2}(t) = \int_{\R} F_1(t-y) \dint \mu_2(y).\]
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item 
+		Wegen der Manipulation
+		 \[ \mathbf{1}_{B-y}(x) = \begin{cases}
+		1&:x \in B-y\\
+		0&:\text{sonst}
+		\end{cases} = \begin{cases}
+		1&: x+y \in B\\
+		0&: \text{sonst}
+		\end{cases} = \mathbf{1}_{h_2^{-1}(B)}(x,y) \]
+		folgt
+		\begin{align*}
+		\mu_1 * \mu_2(B)& \overset{\text{Def.}}{=} \mu_1 \otimes \mu_2(h_d^{-1}(B)) \\
+		&= \int_{\R^2} \mathbf{1}_{h_2^{-1}(B)}(x,y) \dint \mu_1\otimes \mu_2(x,y)\\
+		& = \int_{\R^2} \mathbf{1}_{B-y}(x) \dint \mu_1\otimes \mu_2(x,y) \\
+		&\overset{\text{Fubini}}{=} \int_{\R} \Big( \int_{\R} \mathbf{1}_{B-y}(x) \dint \mu_1(x) \Big) \mu_2(y)\\
+		& = \int_{\R} \mu_1(B-y) \dint \mu_2(y).
+		\end{align*}
+		Das ist die erste Aussage.
+		\item Setze $B = (-\infty,t]$ mit $B-y = (-\infty,t-y]$ ein.
+	\end{enumerate}
+\end{proof}
+Nun zur konkreten Rechenvorschrift, um die Verteilung der Summe unabh\"angiger Zufallsvariablen mit Dichten zu berechnen:
+\begin{prop}[Stetige Faltungsformel]
+	Sind $X,Y$ unabhängige absolutstetige Zufallsvariablen. Dann ist auch $X+Y$ absolutstetig und hat Dichte 
+	\[ f_{X+Y}(x) = \int_{\R} f_X(x-y)f_Y(y) \dint y, \quad x\in\R.\]
+\end{prop}
+\begin{proof}
+	Mit vorheriger Proposition kennen wir die Verteilungsfunktion der Summe. Wir rechnen diese mit der Formel aus und setzen dabei die bekannten Dichten ein:
+	\begin{align*}
+		\mathbb{P}_{X+Y}((-\infty,t])&\overset{\text{Def.}}{=}\mathbb{P}_X * \mathbb{P}_Y((-\infty,t])\\
+		& \overset{\text{\ref{randomProp}}}{=} \int_{\R} \mathbb{P}_X ((-\infty,t-y]) \dint \mathbb{P}_Y(y) \\
+		&\overset{\text{\ref{IntDichten}}}{=} \int_{\R} \int_{-\infty}^{t-y} f_X(x) \dint x f_Y(y) \dint y\\
+		& \overset{\text{Subst.}}{=} \int_{\R} \int_{-\infty}^{t} f_X(x-y) \dint x f_Y(y) \dint y\\
+		&= \int_{\R} \int_{\R} \mathbf{1}_{(-\infty,t]}(x) f_X(x-y) f_Y(y) \dint x \dint y\\
+		& \overset{\text{Fubini}}{=} \int_{-\infty}^{t} \int_{\R} f_X(x-y) f_Y(y) \dint y \dint x\\
+		&= \int_{\infty}^t f_{X+Y}(x)\dint x.	
+	\end{align*}
+	Also ist $X+Y$ absolutstetig mit behaupteter Dichte $f_{X+Y}$.
+\end{proof}
+
+	Das Konzept der Faltung kommt nicht aus der Stochastik, daher k\"onnen wir mit dem Begriff \enquote{Faltung} auch nichts anfangen. Die Faltung zweier integrierbarer Funktionen wir in der Fourieranalysis als 
+	\begin{align*}
+		g\ast h (x)=\int_\R g(x-y) h(y)\dint y
+	\end{align*}
+	definiert und zum Beispiel in der Signalverarbeitung studiert. Dass die Faltung bei uns f\"ur Summen unabh\"angiger Zufallsvariablen auftaucht, ist ein Zufall der Mathematik. Es gibt also keinen Grund sich Gedanken \"uber die Begrifflichkeit Faltung zu machen, f\"ur uns ist es einfach nur eine Berechnungsformel.
+
+\begin{beispiel}\label{B5}\abs
+	\begin{enumerate}[label=(\roman*)]\label{bspFaltung}
+		\item Sind $X_1 \sim \cN(\mu_1,\sigma_1^2)$ und $X_2 \sim \cN(\mu_2,\sigma_2^2)$ unabhängig, dann ist auch die Summe wieder normalverteilt, genauer, es gilt $X_1 + X_2 \sim \cN(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$. Das kann man mit der stetigen Faltungsformel ausrechnen:
+		\begin{align*}
+			f_{X_1 + X_2}(x) &= \int_{\R} \frac{1}{\sqrt{2 \pi \sigma_1^2}} e^{-\frac{(x-y-\mu_1)^2}{2\sigma_1^2}} \frac{1}{\sqrt{2 \pi \sigma_2^2}} e^{-\frac{(y-\mu_2)^2}{2\sigma_2^2}} \dint y\\
+			&=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}} e^{-\frac{(x-(\mu_1+\mu_2))^2}{2(\sigma_1^2+\sigma_2^2)}},\quad x\in\R.
+		\end{align*}
+		Auf den ersten Blick ist nicht so klar, ob die Berechnung einfach oder nicht so einfach ist. Im Prinzip muss man nur richtig quadratisch erg\"anzen und Substituieren. In der Tat ist die Rechnung ziemlich b\"ose, klappt aber. Weil wir gleich eine viel einfachere Methode kennenlernen, lassen wir die Rechnung weg.
+		\item Sind $X \sim \operatorname{Exp}(\lambda), Y \sim \operatorname{Exp}(\lambda)$ unabhängig, so ist $X + Y \sim \Gamma(2,\lambda)$. Das kann man direkt mit der stetigen Faltungsformel ausrechnen, siehe \"Ubungsaufgabe.
+	\end{enumerate}
+\end{beispiel}
+
+Jetzt noch eine ganz andere Methode zur Berechnung der Verteilung der Summe von unabh\"angigen Zufallsvariablen. Daf\"ur nutzen wir einen Satz der Wahrscheinlichkeitstheorie, den Eindeutigkeitssatz f\"ur momenterzeugende Funktionen. Der Satz besagt, dass Verteilungen eindeutig durch ihre momenterzeugenden Funktionen festgelegt sind, falls diese um $0$ existieren.
+\begin{satz}\label{WT}
+	Seien $X$ und $Y$ Zufallsvariablen, f\"ur die die momenterzeugenden Funktionen $\cM_X(t),\cM_Y(t)$ in $(-\varepsilon,\varepsilon)$ existieren für ein $\varepsilon > 0$. Falls $\cM_X(t) = \cM_Y(t)$ für alle $t \in (-\varepsilon,\varepsilon)$ gilt, so gilt auch $F_X = F_Y$.
+\end{satz}
+\begin{proof}
+	Siehe Wahrscheinlichkeitstheorie 1 - hart!
+\end{proof}
+F\"ur Verteilungen mit expliziten momenterzeugenden Funktionen ist diese ein extrem n\"utzliches Hilfsmittel. 
+\begin{example}
+	Mit der momenterzeugenden Funktion k\"onnen wir ganz einfach die Skalierungseigenschaft der Normalverteilung zeigen: Ist $X\sim \mathcal N(0,1)$, $\mu\in \R$ und $\sigma^2>0$, so gilt $Y:=\sigma X+\mu \sim \mathcal N(\mu,\sigma^2)$ Rechen wir dazu die momenterzeugende Funktion von $Y$ aus:
+	\begin{align*}
+		M_Y(t)=\E[e^{(\sigma X  + \mu)t}]=\E[e^{\sigma t X}]e^{\mu t}=M_{X}(\sigma t)\cdot e^{\mu t}= e^{-\frac{\sigma^2 t^2}{2}+\mu t},\quad t\in \R,
+	\end{align*}
+	und die rechte Seite ist gerade die momenterzeugende Funktion einer $\mathcal N(\mu, \sigma^2)$-verteilten Zufallsvariable. Also folgt die Behauptung aus Satz \ref{WT}.
+\end{example}
+
+
+Gemeinsam mit folgender Proposition ist Satz \ref{WT} besonders ein m\"achtiges Hilfsmittel um die Verteilung Summen unabh\"angiger Zufallsvariablen zu berechnen:
+\begin{prop}\label{P7}
+	Sind $X$ und $Y$ unabhängige Zufallsvariablen mit $\cM_X(t),\cM_Y(t) < \infty$ f\"ur $t\in\R$, so gilt $\cM_{X+Y}(t) = \cM_X(t)\cM_Y(t)$.
+\end{prop}
+
+\begin{proof} 
+Das folgt direkt daraus, dass Erwartungswerte von Produkten unabh\"angiger Zufallsvariablen faktorisieren, siehe Satz \ref{un}:
+	$$\cM_{X+Y}(t) = \E[e^{t(X+Y)}] = \E[e^{tX}\cdot e^{tY}] = \E[e^{tX}] \cdot \E[e^{tY}] = \cM_X(t)\cM_Y(t).$$
+\end{proof}
+
+Die Anwendung der momenterzeugenden Funktion zur Bestimmung der Verteilung von Summen unabh\"angiger Zufallsvariablen versteht man am besten mit folgendem einfachen Beispiel. Beachte: Das Beispiel ist einfach, die Aussage aber nicht. H\"atten wir nicht die Kanone aus der Wahrscheinlichkeitstheorie 1 ausgepackt, h\"atten wir das mit der stetigen Faltungsformel nachrechnen m\"ussen. 
+
+\begin{beispiel}
+	Kommen wir zur\"uck zu Beispiel \ref{B5} (i) und berechnen die momenterzeugende Funktion der Summe der zwei unabh\"angigen Normalverteilungen. Wegen Proposition \ref{P7} und der in den \"Ubungen berechneten Formel f\"ur die momenterzeugende Funktion einer Normalverteilung, gilt
+	\begin{gather*}
+		\cM_{X_1+X_2}(t) = \cM_{X_1}(t)\cM_{X_2}(t) = e^{\mu_1 t + \frac{\sigma_1^2}{2}t^2} e^{\mu_2 t + \frac{\sigma_2^2}{2}t^2}=e^{(\mu_1+\mu_2)t + \frac{\sigma_1^2 + \sigma_2^2}{2}t^2},\quad t\in\R.
+	\end{gather*}
+	Nun wissen wir aber auch, dass
+	\begin{align*}
+		\cM_Y(t)=e^{(\mu_1+\mu_2)t + \frac{\sigma_1^2 + \sigma_2^2}{2}t^2}, \quad t\in\R,
+	\end{align*}
+	 f\"ur $Y \sim \cN(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$. Also gilt $X_1+X_2\sim Y$ nach Satz \ref{WT} und damit gilt f\"ur die Summe $X_1+X_2\sim \mathcal N(\mu_1+\mu_2,\sigma_1^2 + \sigma_2^2)$.
+\end{beispiel}
+Warnung: Die Vorlesung ist hier etwas irref\"uhrend. Satz \ref{WT} ist kein Allheilmittel. In der (mathematischen) Realit\"at sind exponentielle Momente fast immer unendlich und wir k\"onnen nicht mit der momenterzeugenden Funktion arbeiten. 
+
+
+
+\marginpar{\textcolor{red}{Vorlesung 23}}
+
+\section{Bedingte Wahrscheinlichkeiten und Unabhängigkeit}\label{Sunab}
+Wir kommen nun zu bedingten Wahrscheinlichkeiten, die aus der Schule vielleicht bekannt sind. In dieser Vorlesung spielen bedingte Wahrscheinlichkeiten noch keine zentrale Rolle, das \"andert sich in sp\"ateren Vorlesungen sehr, wenn zum Beispiel Markovketten angeschaut werden.
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb P)$ ein Wahrscheinlichkeitsraum und $A, B \in \cA$ mit $ \mathbb P(B)> 0$. Dann heißt \[ \mathbb{P}(A|B) := \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}, \quad A \in \cA, \]
+	\enquote{\textbf{bedingte Wahrscheinlichkeit von $A$ gegeben $B$}}.	
+\end{deff}
+
+\begin{lemma}
+	Für $ B \in \cA$ mit $ \mathbb{P}(B)> 0$ ist $ A \mapsto \mathbb{P}(A|B) =: \mathbb{P}_B(A)$ ein Maß auf $(\Omega, \cA)$.
+\end{lemma}
+
+\begin{proof}
+	Wir rechnen die definierenden Eigenschaften eines Ma\ss es nach:
+	\begin{itemize}
+		\item $\mathbb P_B(A) \geq 0$ f\"ur alle $A\in \mathcal A$ ist klar, weil $\mathbb P$ ein Ma\ss{} ist.
+		\item Weil $\mathbb P$ ein Ma\ss{} ist, gilt auch 
+		\[ \mathbb{P}_B(\emptyset) = \mathbb{P}(\emptyset|B) = \frac{\mathbb{P}(\emptyset \cap B)}{\mathbb{P}(P)} = 0. \]
+		\item $\sigma$-Additivität: Seien $A_1,A_2,... \in \cA$ disjunkt, so gilt wegen der $\sigma$-Additivit\"at von $\mathbb P$
+		\begin{align*}
+			\mathbb{P}_B\Big(\bigcupdot_{k=1}^{\infty} A_k \Big)& \overset{\text{Def.}}{=} \frac{\mathbb{P}\Big(\bigcupdot_{k=1}^{\infty} A_k \cap B\Big)}{\mathbb{P}(B)}\\
+			&= \frac{\mathbb{P}\Big(\bigcupdot_{k=1}^{\infty} (A_k \cap B) \Big)}{\mathbb{P}(B)} \\
+			&\overset{\sigma\text{-Add. }\mathbb{P}}{=} \frac{\sum\limits_{k=1}^{\infty} \mathbb{P}(A_k \cap B)}{\mathbb{P}(B)}\\
+			& = \sum\limits_{k=1}^{\infty} \mathbb{P}_B(A_k).
+		\end{align*}
+	\end{itemize}
+\end{proof}
+Wir kommen nun zu extrem wichtigen Rechenregeln, obwohl diese ganz einfach aus der Definition folgen:
+\begin{satz}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{multipl} \textbf{Multiplikationsregel}: Für $A_1,...,A_n\in \mathcal A$ mit $\mathbb{P}(\bigcap_{k=1}^{n} A_k) > 0$ gilt
+		\[ \mathbb{P}\Big(\bigcap_{k=1}^{n} A_k\Big) = \mathbb{P}(A_1)\cdot \mathbb{P}(A_2|A_1)\cdot ... \cdot \mathbb{P}\Big(A_n\Big|\bigcap_{k=1}^{n-1} A_k\Big). \]
+		\item \label{totWk} \textbf{Formel der totalen Wahrscheinlichkeit}: Ist $B_1,...,B_n$ eine disjunkte Zerlegung von $\Omega$, \mbox{d. h.}  $\bigcupdot_{k=1}^{n} B_k = \Omega$, mit $\mathbb P(B_k)>0$ f\"ur alle $k=1,...,n$, so gilt 
+		\[ \mathbb{P}(A) = \sum\limits_{k=1}^{n} \mathbb{P}(B_k)\mathbb{P}(A|B_k), \quad \forall A \in \cA. \]
+		\item \label{bayes} \textbf{Bayes-Formel}: Mit $B_1,...,B_n$ aus \ref{totWk} gilt für $A \in \cA$ mit $\mathbb{P}(A) > 0$ \[ \mathbb{P}(B|A) = \frac{\mathbb{P}(A|B) \cdot \mathbb{P}(B)}{\mathbb{P}(A)} \] oder \[ \mathbb{P}(B|A) = \frac{\mathbb{P}(A|B) \cdot \mathbb{P}(B)}{\sum\limits_{k=1}^{n} \mathbb{P}(B_k) \mathbb{P}(A | B_k)}. \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	\begin{enumerate}[label=(\roman*)]
+		\item Induktion über $n$:
+		\begin{itemize}
+			\item[IA:] $n=2$ folgt direkt aus der Definition.
+			\item[IV:] \label{IVmult} Die Behauptung gelte für ein \textit{beliebiges}, aber festes $n \in \N$.
+			\item[IS:] Wenn wir nun die Induktionsvoraussetzung und den Fall $n=2$ nutzen, bekommen wir 
+			\begin{align*}
+				\mathbb{P}\Big(\bigcap_{k=1}^{n+1} A_k\Big) &= \mathbb{P}\Big( A_{n+1} \cap \bigcap_{k=1}^{n} A_k\Big)\\
+				& = \mathbb{P}\Big(\bigcap_{k=1}^{n} A_k\Big) \mathbb{P}\Big(A_{n+1}\Big |\bigcap_{k=1}^{n} A_k\Big)\\
+				& \overset{\text{IV}}{=} \mathbb{P}(A_1)\cdot \mathbb{P}(A_2|A_1)\cdot ... \cdot \mathbb{P}\Big(A_{n+1}\Big|\bigcap_{k=1}^{n} A_k\Big)
+			\end{align*}
+			und das ist gerade die Aussage.
+		\end{itemize}
+		\item 
+		Zun\"achst folgt direkt aus der Definition
+		\begin{align*}
+			\mathbb{P}(B_i)\mathbb{P}(A|B_i) = \mathbb{P}(B_i) \frac{\mathbb{P}(A \cap B_i)}{\mathbb{P}(B_i)} = \mathbb{P}(A \cap B_i).
+		\end{align*}
+		Setzen wir dies in die Definition ein, bekommen wir 
+		\begin{align*}
+			\mathbb{P}(A) = \mathbb{P}(A \cap \Omega) = \mathbb{P}\Big(A \cap \bigcupdot_{k=1}^{n} B_k\Big) = \mathbb{P}\Big(\bigcupdot_{k=1}^{n} (A \cap B_k)\Big)
+			\overset{\sigma\text{-Add.}}{=} \sum\limits_{k=1}^{n} \mathbb{P}(A \cap B_k).
+		\end{align*}
+		Einsetzen des ersten Schritts gibt die Aussage.
+		\item Die einfache Bayes Formel folgt direkt durch Einsetzen der Definition:		
+		\[ \mathbb{P}(B|A) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)} = \frac{\mathbb{P}(A \cap B) \mathbb{P}(B)}{\mathbb{P}(B) \cdot \mathbb{P}(A)} =\frac{\mathbb{P}(A|B) \cdot \mathbb{P}(B)}{\mathbb{P}(A)} \]
+		Die zweite Formel folgt aus der ersten Formel durch Ersetzen des Nenners durch die Formel der totalen Wahrscheinlichkeit. 
+	\end{enumerate}
+\end{proof}
+Kommen wir nun zu zwei klassischen Anwendungen. Hier ist allerdings Vorsichtig angesagt, das ist alles etwas wild (funktioniert aber). Gem\"a\ss{} Definition brauchen wir f\"ur bedingte Wahrscheinlichkeiten einen Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$. In vielen Anwendungen au\ss erhalb der Mathematik werden die Formeln auch genutzt, allerdings ohne einen Wahrscheinlichkeitsraum hinzuschreiben. Nennen wir das vielleicht \enquote{heuristischen Gebrauch von Wahrscheinlichkeiten}. Das ist nat\"urlich nicht sehr sch\"on, allerdings solche Aussagen extrem wichtig. 
+
+\begin{beispiel}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Wir ziehen aus vier blauen und drei weißen Kugeln zweimal ohne Zurücklegen. Was ist die Wahrscheinlichkeit, zwei blaue zu ziehen? Machen wir das ganze zun\"achst \enquote{heuristisch}. Das ist ein zweistufiges Experiment. Im ersten Versuch ziehen wir blau mit Wahrscheinlichkeit $\frac{4}{7}$. Mit dem Wissen im ersten Zug blau gezogen zu haben, ist das \enquote{bedingte Ziehen} im zweiten Schritt ein Ziehen aus drei blauen und drei wei\ss en Kugeln. Die bedingte Wahrscheinlichkeit im zweiten Schritt blau zu ziehen, gegeben das erste Ziehen gab eine blaue Kugel, ist also $\frac{3}{6}$. Mit der Multiplikationsregel folgt
+		\begin{align*} 
+		&\quad \mathbb{P}(\text{zweite Kugel blau}) \\
+		&= \mathbb{P}(\text{erste Kugel blau}) \cdot \mathbb{P}(\text{zweite Kugel blau} \: | \: \text{erste Kugel blau})\\
+		& = \frac{4}{7}\cdot \frac{3}{6} = \frac{2}{7}.
+		\end{align*}
+		Das funktioniert ganz entspannt, ist aber schon etwas kritisch. Wir nutzen hier ganz intuitiv den Begriff der bedingten Wahrscheinlichkeit in einem interpretierten Sinn (\"Anderung des Modells, eine Kugel weniger). Dann haben die Multiplikationsregel genutzt, die aufgrund unseres Beweises und damit aufgrund der mathematischen Definition der bedingten Wahrscheinlichkeit stimmt. Nun ist allerdings nicht so ganz klar, warum der intuitive Begriff der bedingten Wahrscheinlichkeit (ge\"andertes Experiment) mit der mathematischen Definition $\mathbb P(A\,|\,B):=\frac{\mathbb P(A\cap B)}{\mathbb P(B)}$ \"uberhaupt etwas zu tun hat. Machen wir das ganze zur Beruhigung also nochmal mathematisch penibel genau. Schreiben wir zun\"achst ein Modell hin, das wir als Modell f\"ur das zweifache W\"urfeln plausibel finden. Dazu sei
+		$$\Omega = \{ (\omega_1,\omega_2)\colon \omega_1, \omega_2 \in \{ \text{blau, weiß} \} \}$$
+		und $\cA = \cP(\Omega)$. Als Wahrscheinlichkeiten definieren wir
+		\[ \mathbb{P}(\{ \omega_1, \omega_2 \}) = \begin{cases}
+		\frac{4}{7} \cdot \frac{3}{6}&: \omega_1 = \omega_2 = \text{blau}\\
+		\frac{3}{7} \cdot \frac{2}{6}&: \omega_1 = \omega_2 = \text{weiß}\\
+		\frac{4}{7} \cdot \frac{3}{6}&: \omega_1 = \text{blau}, \: \omega_2 = \text{weiß}\\		
+		\frac{4}{7} \cdot \frac{4}{6}&: \omega_1 = \text{weiß}, \: \omega_2 = \text{blau}\\
+		\end{cases}. \]
+		Mit den Ereignissen 		
+		$A = \{ (\omega_1, \omega_2)\colon \omega_1 = \text{blau} \}$, $B = \{ (\omega_1, \omega_2)\colon \omega_2 = \text{blau} \}$
+		wollen wir die Wahrscheinlichkeit von $A\cap B$ bestimmen. Mit der Multiplikationsregel folgt
+		\begin{align*}
+			\mathbb{P}(\text{ziehe zweimal blau}) = \mathbb{P}(A \cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B|A) =  \frac{4}{7} \cdot \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)} = \frac{2}{7}.
+		\end{align*}
+		Das macht nat\"urlich auch wieder nicht so richtig viel Sinn, wir h\"atten die Wahrscheinlichkeit von $A\cap B$ auch ohne die Multiplikationsregel \enquote{ausz\"ahlen} k\"onnen. Dennoch ist das vielleicht eine gute Beruhigung: Wenn wir wollen, k\"onnen wir ein rigoroses Modell hinschreiben, in dem die Multiplikationsformel rigoros gemacht werden kann. F\"ur die Schulanwendungen ist das nat\"urlich viel zu kompliziert.		
+		\item Nun ein Beispiel f\"ur die Bayes Formel, ein medizinischer Test, \mbox{z. B.} ein Aidstest. Wir machen das jetzt wieder in der \enquote{heuristischen} Art, wer will, kann sich wieder ein sauberes Modell definieren. Wir nehmen an, dass die Wahrscheinlichkeiten folgender Ereignisse bekannt sind:
+		\begin{itemize}
+			\item Test ist mit $98\%$ positiv, wenn eine Person krank ist, das nennt man false-negative.
+			\item Test ist mit $5\%$ positiv, wenn eine Person nicht krank ist.
+			\item $1\%$ der Bevölkerung ist krank.
+		\end{itemize}
+		Gesucht ist die Wahrscheinlichkeit gesund zu sein, obwohl der Test positiv ist, das nennt man false-positive. Mit \ref{bayes} gilt. Die Wahrscheinlichkeit von false-negative kann mit der Bayes Formel aus false-positive und dem restlichen Wissen berechnet werden:
+		\begin{align*}
+			&\quad \mathbb{P}(\text{krank} \: | \: \text{Test positiv})\\
+			 &= \mathbb{P}(\text{Test positiv} \: | \: \text{krank}) \cdot \frac{\mathbb{P}(\text{krank})}{\mathbb{P}(\text{Test positiv})}\\
+			&=	\frac{\mathbb{P}(\text{Test positiv} \: | \: \text{krank}) \mathbb{P}(\text{krank})}{\mathbb{P}(\text{Test positiv} \: | \: \text{krank})\mathbb{P}(\text{krank}) + \mathbb{P}(\text{Test positiv} \: | \: \text{gesund})\mathbb{P}(\text{gesund})}\\
+			&= \frac{0,98 \cdot 0,01}{0,98 \cdot 0,01 + 0,05 \cdot 0,99} \\
+			&= 0,165.
+		\end{align*}
+		Das ergibt dann
+		\begin{align*}
+			\mathbb{P}(\text{gesund} \: | \: \text{Test positiv}) = 1 - 0,165 = 0,835,
+		\end{align*}
+		was erschreckend hoch ist! Die wichtige take-home message ist also: Wird etwas sehr unwahrscheinliches getestet, dominiert der false-negative und man muss bei positiven Tests umbedingt weitere Tests machen. Ein weiteres sehr wichtiges Beispiel sind pr\"anatale Tests bei ungeborenen Kindern, z. B. Tests auf Trisomie 21.
+	\end{enumerate}
+\end{beispiel}
+
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A,B \in \cA$. Die Ereignisse $A$ und $B$ heißen \textbf{unabhängig}, falls $\mathbb{P}(A \cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$.
+\end{deff}
+Aufgrund der Definition der bedingten Wahrscheinlichkeit sind, sofern $\mathbb P(B)>0$ gilt, $A$ und $B$ unabh\"angig genau dann, wenn $\mathbb P(A|B)=P(A)$. Das passt also zur Begriffsbildung: Zwei Ereignisse sind genau dann unabh\"angig, falls die Wahrscheinlichkeit des einen sich nicht \"andert, wenn das Eintreten des anderen gegeben ist. Beispielsweise w\"aren die Ereignisse \enquote{Meine Kaffeemaschiene geht morgen kaputt} und \enquote{Es regnet morgen in Thailand} vermutlich unabh\"angig. 
+
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum, $A_i \in \cA$, $i \in I$, und $I$ eine beliebige Indexmenge.
+	\begin{enumerate}[label=(\roman*)]
+		\item Die Ereignisse ${(A_i)}_{i\in I}$ heißen \textbf{unabhängig}, falls 
+		\[ \mathbb{P}\Big(\bigcap_{i \in J} A_i \Big) = \prod\limits_{i \in J} \mathbb{P}(A_i),\quad \forall J \subseteq I \text{ mit }  \# J<\infty. \]
+		\item Die Ereignisse ${(A_i)}_{i\in I}$ heißen \textbf{paarweise unabhängig}, falls 
+		$$\mathbb{P}(A_i \cap A_j) = \mathbb{P}(A_i) \cdot \mathbb{P}(A_j), \quad \forall i,j \in I.$$
+	\end{enumerate}
+\end{deff}
+Selbstverst\"andlich impliziert Unabh\"angikgkeit die paarweise Unabh\"angigkeit, statt aller endlicher Teilmengen $J$ von $I$ werden schlie\ss lich nur alle Teilmengen mit $\# J=2$ gew\"ahlt. Die Umkehrung gilt nicht:
+\begin{warnung}
+	Paarweise Unabhängigkeit impliziert im Allgemeinen nicht Unabhängigkeit. Kleine Mengen reichen schon aus, um Gegenbeispiel anzugeben, siehe \"Ubungsblatt.
+\end{warnung}
+
+\begin{deff}\label{Ka}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und ${(\cE_i)}_{i \in I}$ ein System von Teilmengen $\cE_i \subseteq \cA$ der $\sigma$-Algebra f\"ur eine beliebige Indexmenge $I$. Dann heißen die $(\cE_i)_{i\in I}$ unabhängig, falls die Mengen ${(A_i)}_{i \in I}$ unabhängig sind, und zwar f\"ur alle Wahlen $A_i \in \cE_i$.
+\end{deff}
+
+
+\marginpar{\textcolor{red}{Vorlesung 24}}
+Die Definition wird insbesondere f\"ur $\sigma$-Algebren verwendet. Wie bei Messbarkeit fragen wir uns hier, ob wir die Unabh\"angigkeit auf Erzeuger reduzieren k\"onnen. Wie bisher immer funktioniert auch das, jedenfalls, wenn der Erzeuger $\cap$-stabil ist:
+\begin{prop}\label{unabh}
+	Ist $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und $\cE_i \subseteq \cA$ für f\"ur alle $i \in I$. Sind alle $\cE_i$ $\cap$-stabil, so gilt:
+	\begin{align*}
+		(\cE_i)_{i\in I}\text{ unabhängig }\quad \Leftrightarrow\quad  (\sigma(\cE_i))_{i \in I}\text{ unabhängig.}
+	\end{align*}
+\end{prop}
+
+\begin{proof}\abs
+	\begin{itemize}
+		\item[\enquote{$\Leftarrow$}:] Klar nach Definition, weil $\cE_i \subseteq \sigma(\cE_i)$ gilt. Die Unabh\"angigkeit von Mengensystemen bedeutet schlie\ss lich, dass die Unabh\"angigkeit f\"ur alle Wahlen von Teilmengen gilt. Gilt dies f\"ur mehr M\"oglichkeiten, so nat\"urlich auch f\"ur weniger M\"oglichkeiten.
+		\item[\enquote{$\Rightarrow$}:] Ohne Einschr\"ankung sei $I$ endlich weil die Definition der Unabh\"angkigkeit nur auf endlichen Teilmengen $J \subseteq I$ beruht. Nennen wir die Mengen $\cE_1,...,\cE_n$. Wir zeigen, dass dann auch $\sigma(\cE_1),...,\sigma(\cE_n)$ unabhängig sind. Dazu zeigen wir:
+		$$\cD:= \big\{ E \in \cA \colon \{ E \}, \cE_2, ..., \cE_n \text{ sind unabhängig} \big\}\text{ ist ein Dynkin-System.}$$
+		Um das zu zeigen, checken wir die definierenden Eigenschaften eines Dynkin-Systems:
+		\begin{enumerate}[label=(\roman*)]
+			\item Aufgrund der Definition \ref{Ka} m\"ussen wir zeigen, dass beliebige Wahlen von Mengen der Mengensysteme unabh\"angige Mengen sind. Genauer, wir m\"ussen zeigen, dass f\"ur alle $ A_2 \in \cE_2,...,A_n \in \cE_n$ die Mengen $\Omega, A_2,...,A_n$ unabhängig sind, die Wahrscheinlichkeit vom Schnitt also zur Wahrscheinlichkeiten der einzelnen Ereignisse faktorisiert. Das folgt aber direkt aus der angenommenen Unabh\"angigkeit von $\mathcal E_1, ..., \mathcal E_n$:			
+			\begin{align*}
+				\mathbb{P}(\Omega \cap A_2 \cap ... \cap A_n) &= \mathbb{P}(A_2 \cap ... \cap A_n)\\
+				 &= \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)\\
+				 & = 1 \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)
+				  = \mathbb{P}(\Omega) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n).
+			\end{align*}
+			Also ist $\Omega \in \cD$.
+			\item Nun zur Abgeschlossenheit bez\"uglich Komplementbildung. Wir argumentieren wie im ersten Schritt. Sei dazu $E \in \cD$ und seien $A_2 \in \cE_2,...,A_n \in \cE_n$ beliebig. Weil $\Omega=E\cupdot E^C$ ergibt sich
+			\begin{align*}
+				\mathbb{P}(E^C \cap A_2 \cap ... \cap A_n)& \overset{\sigma\text{-Add.}}{=} \mathbb{P}(\Omega \cap A_2 \cap ... \cap A_n) - \mathbb{P}(E \cap A_2 \cap ... \cap A_n) \\
+				&\overset{\Omega, E\in \mathcal D}{=} \mathbb{P}(\Omega) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n) - \mathbb{P}(E) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)\\
+				&= (\mathbb{P}(\Omega) - \mathbb{E}(\Omega)) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)\\
+				&= \mathbb{P}(E^C) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n).
+			\end{align*}
+			Also sind $E^C, A_2, ...,A_n$ unabh\"angige Ereignisse und damit ist $E^C\in \cD$.
+			\item Das Argument f\"ur die Vereinigungen geht genau wie f\"ur die Komplemente.
+		\end{enumerate}
+		Jetzt beenden wir den Beweis. Aufgrund der Annahme $\cE_1,...,\cE_n$ unabhängig gilt f\"ur jede Menge $E\in \cE_1$ auch $E\in \cD$. Also gilt $\cE_1\subseteq \cD$. Daraus folgt mit dem Hauptsatz f\"ur Dynkinsysteme, Satz \ref{Hauptsatz}, wie \"ublich
+			\[ \sigma(\cE_1) \subseteq \sigma(\cD) \overset{\cap\text{-stabil}}{=} d(\cD) = \cD. \]			
+			Weil also $\sigma(\cE_1)\subseteq \cD$ gilt, folgt aus der Definition von $\cD$, dass $\sigma(\cE_1), \cE_2,...,\cE_n$ unabhängig sind. Iterativ ersetzen wir nun Schritt f\"ur Schritt mit einem analogen Argument ein $\cE_k$ nach dem anderen durch $\sigma(\cE_k)$, indem wir genau wie oben zeigen, dass alle 
+			\begin{align*}
+				\cD_k:= \big\{ E \in \cA \colon \sigma(\cE_1), \sigma(\cE_2),... ,\sigma(\cE_{k-1}),\{E\}, \cE_{k+1}, ..., \cE_n \text{ sind unabhängig} \big\}
+			\end{align*}
+			Dynkin-Systeme sind.
+		\end{itemize}
+\end{proof}
+Kommen wir nun zu einer alternativen Definition der Unabh\"angigkeit von Zufallsvariablen. Anstatt die Faktorisierung der gemeinsamen Verteilung zu fordern, kann man auch fordern, dass die erzeugten $\sigma$-Algebren (siehe Definition \ref{Kat}) unabh\"angige Mengensysteme sind:
+\begin{deff}\label{unab}
+	Für Zufallsvariablen $(X_i)_{i \in I}$ auf $(\Omega, \cA, \mathbb{P})$ definiert man: $(X_i)_{i \in I}$ sind unabhängig, falls die erzeugten $\sigma$-Algebren $(\sigma(X_i))_{i \in I}$ unabhängig sind. 
+\end{deff}
+Weil $\sigma(X_i) = \sigma(\{ \{X_i \leq t \}\colon t \in \R \})$, k\"onnen wir direkt folgern, dass die Unabh\"angigkeit auch durch die gemeinsame Verteilungsfunktion definiert werden kann.
+\begin{korollar}
+	Für Zufallsvariablen $X_1,...,X_d$ auf $(\Omega, \cA, \mathbb{P})$ stimmt die neue Definition mit der alten überein. Die Zufallsvariablen sind also unabh\"angig genau dann, wenn 
+	\begin{align*}
+		F_X(t_1,..., t_d)=F_{X_1}(t_1)\cdots F_{X_d}(t_d),\quad t_1,..., t_d\in \R.
+	\end{align*}
+\end{korollar}
+
+\begin{proof}
+Um die Proposition anzuwenden, seien $\cE_i := \{ \{X_i \leq t \}\colon t \in \R \}$ f\"ur $i=1,...,d$. Also gilt $\sigma(\cE_i) = \sigma(X_i)$ und die $\cE_i$ sind $\cap$-stabil. Nun gilt wegen Proposition \ref{unabh}
+\begin{align*}
+	&\quad \sigma(X_1),...,\sigma(X_d) \text{ unabhängig }\\
+	&\Leftrightarrow\quad \cE_1,...,\cE_d \text{ unabhängig}\\
+	&\Leftrightarrow\quad E_1 \in \cE_1, ..., E_d\in \cE_d\text{ unabh\"angig f\"ur alle } E_1\in \cE_1, ..., E_d\in \cE_d\\
+	&\Leftrightarrow\quad \mathbb{P}(\{ X_1 \leq t_1 \} \cap ... \cap \{ X_d \leq t_d \})=\mathbb P(X_1\leq t_1)\cdots \mathbb P(X_d\leq t_d),\quad t_1,..., t_d\in \R\\
+	&\overset{\text{Def.}}{\Leftrightarrow} \quad F_X(t_1,..., t_d)=F_{X_1}(t_1)\cdots F_{X_d}(t_d),\quad t_1,..., t_d\in \R.
+\end{align*}	
+\end{proof}
+\begin{bem}
+	Genau wie f\"ur endlich viele Zufallsvariablen k\"onnen wir auch die Unabh\"angigkeit von Folgen $X_1, X_2, ...$ von Zufallsvariablen auf $(\Omega, \mathcal A, \mathbb P)$ definieren entweder als 
+	\begin{align*}
+		(\sigma(X_i))_{i\in \N} \text{ sind unabh\"angig}
+	\end{align*}
+	oder als 
+	\begin{align*}
+		\mathbb P(X_1 \leq t_1, ..., X_n\leq t_n)=\prod_{i=1}^n \mathbb P(X_i \leq t_i),\quad \text{ f\"ur alle } n\in\N \text{ und } t_1, ..., t_n\in\R.
+	\end{align*}
+\end{bem}
+Wie f\"ur Zufallsvariablen und Zufallsvektoren ist es auch f\"ur Folgen von Zufallsvariablen nicht klar, dass es diese \"uberhaupt gibt. In der Tat kann man auch in diesem Fall eine kanonische Konstruktion angeben, die uns die Existenz von Folgen unabh\"angiger Zufallsvariablen gibt. Der kanonische Wahrscheinlichkeitsraum besteht ganz analog aus den Werten, die angenommen werden. Dies war zun\"achst $\R$, dann $\R^d$ und ist nun $\R^\infty$ (die Menge der reellen Folgen). Die kanonische $\sigma$-Algebra ist die passende \enquote{Borel}-$\sigma$-Algebra und die Folge der Zufallsvariablen ist durch die Identit\"atsabbildung gegeben. Das Thema geh\"ort eigentlich nicht in die Stochastik 1 sondern in die Wahrscheinlichkeitstheorie 1. Daher skizzieren wir die Konstruktion nur ganz kurz. Ihr solltet euch jedoch merken, dass es eine kanonische Konstruktion gibt und insbesondere Folgen von unabh\"angigen Zufallsvariablen existieren
+\begin{satz}[Kanonische Konstruktion von Folgen unabhängiger Zufallsvariablen]
+	Seien $F_1,F_2,...$ Verteilungsfunktionen, so existieren ein Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ und \textit{unabhängige} Zufallsvariablen $X_1,X_2,...$ auf $(\Omega, \cA, \mathbb{P})$ mit $X_i \sim F_i$.
+\end{satz}
+
+
+\begin{proof}
+	Kanonische Konstruktion:
+\begin{itemize}
+\item $\Omega = \R^{\infty} := \{ a_n\colon n \in \N \}$, die Menge der \enquote{reelle Folgen}.
+\item $\cA = \cB(\R^{\infty}) := \sigma(\{B_1\times ... \times B_d \times \R \times ... : d\in \N, B_1, ..., B_d \in \cB(\R) \})$
+\item $\mathbb{P} = \mathbb{P}_{F_1} \otimes \mathbb{P}_{F_2} \otimes ...$, das unendliche Produktma\ss, das auf dem Erzeuger von $\cA$ festgelegt ist durch $\mathbb P(B_1 \times ... \times B_d \times \R\times ...)=\mathbb P_{X_1}(B_1) \cdots \mathbb P_{X_d}(B_d)$.
+\item $(X_1(\omega), X_2(\omega), ... ):=X(\omega):=\omega$
+\end{itemize}
+Um zu zeigen, dass es ein unendliches Produktma\ss{} auf $(\R^\infty, \mathcal B(\R^\infty))$ auch gibt, kann man den Fortsetzungssatz von Carath\'eodory anwenden. Das ist etwas h\"asslich, siehe Wahrscheinlichkeitstheorie 1. Die Unabh\"angigkeit der konstruierten Folge folgt direkt aus der Produkteigenschaft des Produktma\ss es. Auch sofort folgt durch Einsetzen, dass die Randverteilungen $\mathbb P(X_i\leq t)=F_{X_i}(t)$ erf\"ullen.
+\end{proof}
+
+\begin{deff}
+	Sind alle $F_i$ gleich, so nennen wir die Folge $X_1,X_2,...$ eine u.i.v. Folge mit $X_1 \sim F_1$.
+\end{deff}
+In den n\"achsten Kapitel schauen wir uns Konvergenzeigenschaften von u.i.v Folgen an, insbesondere das Gesetz der gro\ss en Zahlen und den zentralen Grenzwertsatz.
+
+\section{Konvergenz von Zufallsvariablen}
+Bevor wir zu den zentralen Konvergenzs\"atzen kommen, m\"ussen wir uns \"uberlegen, was Konvergenz von Zufallsvariablen \"uberhaupt bedeutet. Das ist in der Tat gar nicht so klar, es gibt verschiedene Begriffe:
+\begin{deff}[Vier Konvergenzarten in der Stochastik]
+	Für eine Zufallsvariable $X$ und eine Folge $X_1,X_2,...$ von Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$  definiert man
+	\begin{enumerate}[label=(\roman*)]
+		\item \enquote{$X_n$ konvergiert \textbf{stochastisch} gegen $X$}, man schreibt		
+		$$X_n \overset{P}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\forall \varepsilon > 0\colon \mathbb{P}(|X_n-X|>\varepsilon) \to 0, \quad n \to \infty.$$
+		\item \enquote{$X_n$ konvergiert \textbf{im $p$-ten Mittel} gegen $X$} (oder \enquote{in $\cL_p$}) f\"ur $p\geq 1$, man schreibt
+		$$X_n \overset{\cL^p}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\E[|X_n - X|^p] \to 0, \quad n \to \infty.$$
+		\item 
+		\enquote{$X_n$ konvergiert \textbf{fast sicher} gegen $X$}, man schreibt
+		$$X_n \overset{\text{f. s.}}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\mathbb{P}(X_n \to X) := \mathbb{P}(\{ \omega\colon X_n(\omega) \to X(\omega), \: n\to \infty \}) = 1.$$
+		\item 
+		 \enquote{$X_n$ konvergiert  \textbf{in Verteilung} (oder schwach) gegen $X$}, man schreibt		
+		$$X_n \overset{(d)}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\lim\limits_{n \to \infty} \E[f(X_n)] = \E[f(X)]\,\, \text{ f\"ur alle } f \colon \R \to \R \text{ stetig und beschränkt}.$$
+	\end{enumerate}
+\end{deff}
+Nur die ersten drei Konvergenzbegriffe ben\"otigen wirklich, dass die Zufallsvariablen auf dem selben Wahrscheinlichkeitsraum definiert sind. Die Konvergenz in Verteilung ist strukturell anders weil die Zufallsvariablen nicht direkt mit der Grenzzufallsvariablen \enquote{verglichen} werden, es wird nicht $|X_n-X|$ berechnet. Die Konvergenz in Verteilung h\"angt tats\"achlich nur von den Verteilungen ab, vergleiche dazu die Berechnungsformel des Erwartungswertes mit dem Transformationssatz, Lemma \ref{ewTrafo}.
+\begin{bem}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Warnung: Die Konvergenzen sind nicht durch Metriken definiert worden, \mbox{d. h.} \"ubliche Tricks aus der Analysis (z. B. $\triangle$-Ungleichung) gelten nicht einfach so! Nur wenn man einen Quotientenraum mit fast sicher gleichen ZV bildet, ist Konvergenz im $p$-ten Mittel eine Normenkonvergenz.
+		\item Zwei Konvergenzarten sind uns schon bekannt, zwei sind neu:
+		\begin{itemize}
+			\item fast sichere Konvergenz schon von messbaren Funktionen bekannt,
+			\item $p$-tes Mittel schon von $(\mathcal L^p, ||\cdot||_p)$ bekannt.
+		\end{itemize}
+	\end{enumerate}
+\end{bem}
+
+Um ein Gef\"uhl f\"ur die Konvergenzarten zu bekommen, sind Beispiele \"ausserst n\"utzlich. Viele n\"utzliche Beispiele k\"onnen ganz explizit hingeschrieben werden.
+\begin{beispiel}
+	Seien $X_1, X_2, ... $ Zufallsvariablen mit $$\mathbb{P}(X_n = e^n) = \frac{1}{n}, \quad \mathbb{P}(X_n = 0) = 1 - \frac{1}{n},$$ so gelten:\smallskip
+	
+	$X_n \overset{P}{\longrightarrow} 0$, $n \to \infty,$ weil $$\mathbb{P}(|X_n - X| > \varepsilon) = \mathbb{P}(X_n = e^n)=\frac{1}{n}\to 0, \quad n\to\infty.$$
+	
+	$X_n \overset{\cL^p}{\not\longrightarrow} 0$, $n \to \infty$, f\"ur alle $p\geq 1$, weil 
+	$$\E[|X_n - X|^p] = \E[|X_n|^p] = e^{pn} \frac{1}{n} + 0^p\Big(1-\frac{1}{n}\Big) = \frac{e^{pn}}{n} \to +\infty,\quad n\to\infty.$$
+\end{beispiel}
+Das n\"achste Beispiel ist sehr anschaulich. Dazu beachten wir, dass die Einschr\"ankung des Lebesguema\ss es auf $[0,1]$ ein Wahrscheinlichkeitsma\ss{} ist. WIr k\"onnen also viele Beispiele basteln, wenn wir uns als Zufallsvariablen einfach messbare Funktionen (z. B. Indikatorfunktionen) auf $[0,1]$ w\"ahlen. Das hat den Vorteil, dass die Begriffe durch Skizzen sehr anschaulich gemacht werden k\"onnen. So ist zum Beispiel die fast sichere Konvergenz die punktweise Konvergenz (bis auf eine Nullmenge) und die $\mathcal L^p$-Konvergenz ist die Konverenz der Fl\"acheninhalte der Differenzfunktion (hoch $p$) weil $\E[X]=\int_0^1 X(\omega)\dint \omega$. Sieht wegen $\dint \omega$ vielleicht bl\"od aus, ist aber einfach nur das ganz normale Integral auf $[0,1]$.
+\begin{beispiel}
+	Sei $\Omega = [0,1]$, $\cA = \cB([0,1])$ und $\mathbb{P} = \lambda_{[0,1]}$, das Lebesgue Ma\ss{} auf $[0,1]$. Zufallsvariablen sind hier also ganz einfach, es sind messbare Abbildungen von $[0,1]$ nach $\R$. Der Erwartungswert ist dann einfach nur das Integral auf $[0,1]$. Schauen wir uns als Beispiel $X \equiv 0$ und die Folge
+	\[ X_n(\omega) = \begin{cases}
+	1&:\frac{m}{2^k} < \omega \leq \frac{m+1}{2^k}\\
+	0&: \text{sonst}\\
+	\end{cases} \]
+	an, wobei $m,k \in \N$ die eindeutigen nat\"urlichen Zahlen mit $n = 2^k + m$ und $m < 2^k$ sind. In Worten (ab besten skizziert ihr die Funktionen) schieben wir f\"ur wachsendes $n$ einfach nur Indikatorfunktionen von links nach rechts durch $[0,1]$, wobei die breite der Indikatorfunktionen schmaler wird: $\mathbf 1_{(0,\frac 1 2]}, \mathbf 1_{(\frac 1 2, 1]}, \mathbf 1_{(0,\frac 1 4]}, \mathbf 1_{(\frac 1 2, \frac 1 4]}$, ... 
+Mit dieser Folge gelten:\smallskip	
+	
+	$\mathbf{X_n \overset{\cL^p}{\longrightarrow} 0, n \to \infty}$, weil
+	\begin{gather*}
+		\E[|X_n-X|^p] = \E[|X_n|^p] = \int_{\Omega} X_n^p(\omega) \dint \mathbb{P}(\omega) = \int_{0}^{1} \mathbf 1_{(\frac{m}{2^k},\frac{m+1}{2^k}]}(\omega) \dint\omega = \frac{1}{2^k}.
+	\end{gather*}
+	Weil mit $n\to\infty$ auch $k\to \infty$ gilt, konvergiert die Folge also im $p$-ten Mittel gegen $0$. Warum ist das auch anschaulich klar? $\E[|X_n|^p]$ ist der Fl\"acheninhalt zwischen der Indikatorfunktion und der $x$-Achse. Weil die Breite des Indikators gegen $0$ konvergiert, konvergiert das Integral und damit (in diesem Wahrscheinlichkeitsraum) der Erwartungswert gegen $0$.\smallskip	
+	
+	$\mathbf{X_n \overset{\text{f. s.}}{\not\longrightarrow} 0, n \to \infty}$, weil 
+	$$\mathbb{P}(\{ \omega\colon X_n(\omega) \to 0 \}) = 0.$$
+	Man beachte: In diesem Wahrscheinlichkeitsraum bedeutet die fast sichere Konvergenz die punktweise Konvergenz auf einer Menge von Ma\ss{} $1$. Weil diese Folge ausgewertet in beliebigem $\omega\in [0,1]$ unendlich oft zwischen $0$ und $1$ wechselt ($1$ wenn das kleine Intervall $\omega$ enth\"alt, $0$ sonst), konvergiert sie sogar fast sicher nicht. 
+\end{beispiel}
+\begin{beispiel}\label{Adam}
+	Seien $X_1, X_2, ... $ unabh\"angige Zufallsvariablen mit $$\mathbb{P}(X_n = 1) = \frac{1}{n}, \quad \mathbb{P}(X_n = 0) = 1 - \frac{1}{n},$$ also $X_n \sim \operatorname{Ber}(\frac{1}{n})$, $n \in \N$. Man stelle sich z. B. unabh\"angige M\"unzw\"urfe vor ($1$ bedeutet \enquote{Zahl}, $0$ bedeutet \enquote{Kopf}), bei denen die Wahrscheinlichkeit f\"ur \enquote{Zahl} immer kleiner wird. Alternativ kann man sich unabh\"angige Versuche vorstellen, bei denen $1$ \enquote{Erfolg} und $0$ \enquote{Misserfolg} bedeutet. Mit dieser Folge gelten:\smallskip
+	
+	$\mathbf{X_n \overset{P}{\longrightarrow}0, n \to \infty}$:
+	Für $\varepsilon > 0$ gilt 
+	\[ \mathbb{P}(|X_n - X| > \varepsilon) = \mathbb{P}(X_n > \varepsilon) = 
+	\begin{cases} 
+	\mathbb{P}(X_n = 1)&: \epsilon\leq 1\\
+	0&: \epsilon> 1
+	\end{cases}
+	 = 
+	 \begin{cases}
+		 \frac{1}{n}&: \epsilon\leq 1\\
+		 0 &: \epsilon >1
+	\end{cases}	 
+		 \to 0, \quad n \to \infty.
+		  \]
+	
+	$\mathbf{X_n \overset{\text{f. s.}}{\not\longrightarrow}0, n \to \infty}$: Das Argument ist nicht einfach, taucht aber im n\"achsten Kapitel in verschiedenen Formen auf. Wir schreiben die Konvergenz um, indem wir die $\epsilon-N$-Definition in Schnitte und Vereinigen \"ubersetzten. Die k\"onnen wir dann mit den Mengenmanipulationen der Ma\ss theorie behandeln:
+	\begin{align*}
+		\mathbb{P}(X_n \to 0) &= \mathbb{P}(\{ \omega\colon X_n(\omega) \to 0 \})\\
+		& = \mathbb{P}(\{ \omega\colon \exists n_0 \in \N \colon X_n(\omega) = 0 \: \forall n \geq n_0 \})\\
+		&= \mathbb{P}\Big(\bigcup_{n_0 = 1}^{\infty} \bigcap_{n \geq n_0} \{ \omega: X_n(\omega) = 0 \}\Big)\\
+		& \overset{\text{subadd.}}{\leq} \sum\limits_{n_0 = 1}^{\infty} \mathbb{P}\Big(\bigcap_{n \geq n_0} \{ X_n(\omega) = 0 \}\Big)\\
+		& \overset{\text{Stetigkeit}}{\underset{\text{von Maßen}}{=}}\sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \mathbb{P}\Big(\bigcap_{n = n_0}^m \{ X_n(\omega) = 0 \}\Big)\\
+		& \overset{\text{unab.}}{=} \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty} \prod_{n=n_0}^m \mathbb{P}(X_n = 0)\\
+		& = \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \Big(1-\frac{1}{n_0}\Big)\cdots \Big(1-\frac{1}{m}\Big)\\
+		& = \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \Big(\frac{n_0-1}{n_0}\Big)\cdots \Big(\frac{m-1}{m}\Big)\\
+		& \overset{\text{k\"urzen}}{=} \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \frac{n_0-1}{m}=0.
+	\end{align*}
+\end{beispiel}
+	Die ersten drei Zeilen der letzten Rechnung sind unglaublich wichtig. Sie werden der Weg sein, das starke Gesetz der gro\ss en Zahlen zu beweisen. Zur Erinnerung, wie hatten wir Vereinigungen und Schnitte in Analysis 1 definiert?
+	\begin{align*}
+		\bigcup_{i\in I} A_i&:=\{\omega \in \Omega\, |\, \text{es gibt ein }i\in I \text{ mit }\omega \in A_i\},\\
+		\bigcap_{i\in I} A_i&:=\{\omega \in \Omega\, |\, \text{f\"ur alle }i\in I \text{ gilt }\omega \in A_i\}.
+	\end{align*}
+	Daher kann fast sichere Konvergenz immer in Vereinigungen \"uber Schnitte umformuliert werden und diese k\"onnen wir immer mit Subadditivit\"at und Stetigkeit von Ma\ss en attackieren.
+\marginpar{\textcolor{red}{Vorlesung 25}}
+
+
+\begin{beispiel}
+	Sei $\Omega = [0,1]$, $\cA = \cB([0,1])$ und $\mathbb{P} = \lambda_{|[0,1]}$, das Lebesguema\ss{} auf $[0,1]$. Wir schauen uns die konkrete Folge $$X_n = n \cdot \mathbf{1}_{[0,\frac{1}{n}]}$$ an, und schauen, in welchem Sinne sie gegen die Grenzzufallsvariable $X=0$ (Nullfunktion) konvergiert. \smallskip
+			
+	$\mathbf{X_n \overset{\text{f. s.}}{\longrightarrow} 0, n \to \infty:}$ Das ist klar, weil in diesem Beispiel die fast sichere Konvergenz einfach nur die \"ubliche punktweise Konvergenz von Funktionen auf einer Menge von Ma\ss{} $1$ bedeutet und unsere Folge auf $(0,1]$ punktweise gegen $0$ konvergiert. Weil ein einzelner Punkt im Lebesguema\ss{} eine Nullmenge ist, konvergiert die Folge fast sicher:	
+	$$\mathbb{P}(X_n \to 0) = \mathbb{P}((0,1]) = 1.$$
+	
+	$\mathbf{X_n \overset{P}{\longrightarrow} 0, n \to \infty}$:	Sei dazu $\varepsilon > 0$. Die stochastische Konvergenz folgt, weil
+	\begin{align*}
+		\mathbb{P}(|X_n-X| > \varepsilon) &= \mathbb{P}(|X_n| > \varepsilon) \\
+		&= \mathbb{P}(\mathbf{1}_{[0,\frac{1}{n}]} > \varepsilon)\\
+		& = \mathbb{P}\Big(\Big[0,\frac{1}{n}\Big]\Big)\\
+		&\overset{\text{Def.}}{ =} \frac{1}{n} \to 0, \quad n\to\infty.
+	\end{align*}	
+	$\mathbf{X_n \overset{\cL^p}{\not\longrightarrow} 0, n \to \infty}$: Weil wir nur Erwartungswerte von Indikatoren berechnen m\"ussen, folgt alles direkt aus den Rechenregeln f\"ur Erwartungswerte:
+	\begin{align*}
+		\E[X_n-X|^p] & = \E[n^p \cdot \mathbf{1}_{[0,\frac{1}{n}]}^p]\\
+		& = n^p \E[ \mathbf{1}_{[0,\frac{1}{n}]}] \\
+		&= n^p \mathbb{P}\Big(\Big[0,\frac{1}{n}\Big]\Big) \\
+		&= n^p  \frac{1}{n} = n^{p-1} \not\to 0,\quad  n \to \infty,
+	\end{align*}
+	weil wir bei $\mathcal L^p$-Konvergenz immer $p\geq 1$ annehmen.
+\end{beispiel}
+\begin{beispiel}
+	Sei $X \sim \cN(0,1)$ und $X_n = (-1)^n X$ f\"ur $n\in \N$. Es gilt aufgrund der Symmetrie der Normalverteilung $X_n \sim \cN(0,1)$ f\"ur alle $n\in\N$. Weil Erwartungswerte nur von der Verteilung abh\"angen, gilt also $\E[f(X)]=\E[f(X_n)]$ f\"ur alle $n\in\N$, die Folge der Erwartungswerte ist also konstant und konvergiert daher gegen $\E[f(X)]$. Also gilt $X_n \overset{(d)}{\longrightarrow} X, n\to\infty$. Andere Konvergenzarten gelten f\"ur diese Folge nicht.
+\end{beispiel}
+Mit den Beispielen haben wir schon ein paar Beispiele gesammelt, die zeigen, dass die Konvergenzarten nicht \"aquivalent sein k\"onnen. Das allgemeine Bild sieht wie folgt aus:
+
+
+
+\begin{satz}[Zusammenhang Konvergenzarten]
+	Bildchen Website. % mache ich irgendwann noch richtig
+\end{satz}
+
+
+
+
+\begin{proof}
+	\textbf{Konvergenz in } $\mathcal L^p$ $\Rightarrow$ \textbf{ Konvergenz in } $\mathcal L^q$ \textbf{ f\"ur } $q<p$:  Wir wissen schon, wie aus H\"older $\E[X^q]\leq \E[X^p]$ folgt, man f\"ugt einfach eine $1$ hinzu. Als Wiederholung machen wir das nochmal: Definiere dazu $r' = \frac{p}{q}$ und $r=\frac{r'}{r'-1}$, also gilt
+	\begin{align*}
+		\E[|X_n - X|^q]& = \E[1 \cdot |X_n - X|^q]\\
+		& \leq (\E[1])^{1/r}(\E[|X_n - X|^{qr'}])^{1/{r'}}\\
+		& = 1 \cdot \E[|X_n - X|^p]^{q/p} \overset{\text{Vor.}}{\to} 0, \quad n\to\infty.
+	\end{align*}
+	Also gilt die Konvergenz in $\mathcal L^q$.\smallskip
+	
+\textbf{Konvergenz in } $\mathcal L^p$  $\Rightarrow$ \textbf{ stochastische Konvergenz}: Wegen des ersten Teils reicht es, $p=1$ zu betrachten. Mit der Markov Ungleichung gilt:
+\begin{align*}
+	\mathbb{P}(|X_n - X| > \varepsilon) \leq \frac{\E[|X_n - X|]}{\varepsilon} \overset{\text{Vor.}}{\rightarrow }0,\quad n \to \infty.
+\end{align*}
+Das war es schon.\smallskip
+
+\textbf{Fast sichere Konvergenz } $\Rightarrow$ \textbf{ Stochastische Konvergenz}: Der Trick ist es, die Definition der Konvergenz aus Analysis 1 als Schnitte und Vereinigungen von Mengen zu schreiben:
+	\begin{align*}
+			1& = \mathbb{P}(X_n \to X)\\
+			& \overset{\text{Notation}}{=} \mathbb{P}(\{ \omega \colon X_n(\omega)\to X(\omega), n\to\infty \}) \\
+			&\overset{\text{Def. }}{=} \mathbb{P}(\{\omega \colon \forall \varepsilon > 0 \exists N \in \N \colon |X_n(\omega) - X(\omega)| < \varepsilon \: \forall n \geq N \})\\
+			&= \mathbb{P}\Big(\bigcap_{\varepsilon > 0} \bigcup_{N \in \N} \bigcap_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| < \varepsilon \}\Big).
+		\end{align*}
+		Mit Komplementbildung und de Morgan'schen Regeln folgt daraus
+		\begin{gather*}
+			0 = \mathbb{P}\Big(\Big(\bigcap_{\varepsilon > 0} \bigcup_{N \in \N} \bigcap_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| < \varepsilon \}\Big)^C\Big) \\
+			= \mathbb{P}\Big(\bigcup_{\varepsilon > 0} \bigcap_{N \in \N} \bigcup_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| \geq \varepsilon \}\Big)\\
+			\overset{\text{Mon.}}{\underset{\varepsilon\text{ fest}}{\geq}} \mathbb{P}\Big(\bigcap_{N \in \N} \bigcup_{n \geq N} \{\omega\colon |X_n(\omega) - X(\omega)| \geq \varepsilon \}\Big)\\
+			\overset{\text{Mon.}}{\underset{\text{Maß}}{=}} \lim\limits_{N \to \infty} \mathbb{P}\Big(\bigcup_{n \geq N} \{\omega \colon |X_n(\omega) - X(\omega)| \geq \varepsilon \}\Big)\\ \overset{\text{Mon.}}{\geq} \lim\limits_{N \to \infty} \mathbb{P}(\{ \omega\colon | X_n(\omega) - X(\omega) | > \varepsilon \}) \geq 0.\\
+		\end{gather*}
+		Also gilt  $\lim\limits_{n \to \infty} \mathbb{P}(|X_n - X| > \varepsilon) = 0$ für alle $\varepsilon > 0$, also gilt stochastische Konvergenz.\smallskip
+
+
+\textbf{Stochastische Konvergenz } $\Rightarrow$ \textbf{ Konvergenz in Verteilung}: Wir zeigen die Aussage in zwei Schritten, erst f\"ur gleichm\"a\ss ig stetiges $f$, dann f\"ur stetiges $f$.\smallskip
+
+(i) Sei $f$ gleichm\"a\ss ig stetig, \mbox{d. h.} 
+			\begin{equation}\label{delta}
+				\forall \varepsilon>0 \exists \delta > 0\colon |x-x'| < \delta \Rightarrow |f(x)-f(x')| < \varepsilon.
+			\end{equation}
+			Sei also $\varepsilon > 0$ beliebig und $\delta$ aus \eqref{delta}. Definiere $A_n = \{ \omega\colon |X_n(\omega) - X(\omega)| \geq \delta \}$. Damit gilt, mit $||f||_\infty=\sup_{x\in\R} |f(x)|$,
+			\begin{align*}
+				0 &\leq | \E[f(X_n)] - \E[f(X)] |\\
+				& \leq \E[|f(X_n) - f(X)|]\\
+				& \overset{\substack{\text{vgl.}\\\text{Bew.}}}{\underset{\ref{markov}}{=}} \E[|f(X_n) - f(X)|\cdot \underbrace{1}_{\mathbf 1_{A_n}+\mathbf 1_{A_n^C}}|]\\ 
+				&= \E[|f(X_n) - f(X)|\cdot \mathbf{1}_{A_n}] + \E[|f(X_n) - f(X)|\cdot \mathbf{1}_{A_n^C}]\\
+				&\overset{\text{\eqref{delta}}}{\underset{\text{Def. } A_n}{\leq}} \E[2 ||f||_{\infty} \mathbf{1}_{A_n}] + \E[\varepsilon \mathbf{1}_{A_n^C}]\\
+				& = 2 ||f||_{\infty} \mathbb{P}(A_n) + \varepsilon \mathbb{P}\big(A_n^C\big)\\
+				&\leq 2 ||f||_{\infty}\mathbb{P}(A_n) + \varepsilon\\
+				& = 2 ||f||_{\infty}\mathbb{P}(|X_n-X| > \delta) + \varepsilon\\
+				&\overset{\text{Vor.}}{\rightarrow} \epsilon, \quad n\to\infty.
+			\end{align*}
+			Weil $\varepsilon > 0$ beliebig, gilt damit \[ \lim\limits_{n \to \infty} |\E[f(X_n)] - \E[f(X)]| = 0 \]
+			und somit
+			\[ \lim\limits_{n \to \infty} \E[f(X_n)] = \E[f(X)]. \]
+		Damit ist die Definition der Konvergenz in Verteilung f\"ur gleichm\"assig stetige beschr\"ankte Funktionen gezeigt.\smallskip
+		
+		(ii) Sei jetzt $f$ eine beliebige stetige beschr\"ankte Funktion und $\varepsilon>0$ fest. %hier irgendwann Bildchen...
+			 F\"ur Intervalle $I_k = [-k,k]$ gilt wegen der Stetigkeit von Maßen $\mathbb{P}(X\in I_k) \to 1$, $k \to \infty$. Wähle $k_0 \in \N$ mit $\mathbb{P}(X \notin I_k) < \varepsilon$, $\forall k \geq k_0$. Sei $U_{\varepsilon} = (\text{Bildchen in der Vorlesung})$ und $\bar f = f \cdot U_{\varepsilon}$. In Worten: $\bar f$ ist $f$ in $[-k,k]$, null in $[-k-1,k+1]^C$ und verbindet dazwischen stetig $0$ und f(k) bzw. $f(-k)$. Die wichtige dazugewonnene Information ist, dass $\bar f$ gleichm\"a\ss ig stetig ist. Das gilt, weil (siehe Analysis 1) stetige Funktionen auf kompakten Mengen gleichm\"a\ss ig stetig sind und $\bar f$ au\ss erhalb der kompakten Menge $[-k-1,k+1]$ null ist. Jetzt kommt ein mehrfach genutzter Trick (Ana 1 + Ana 2), wir addieren zwei Mal $0$ und nutzen die Dreicksungleichung
+			 \begin{align}\label{F4}
+			 \begin{split}
+				 &\quad |\E[f(X_n)] - \E[f(X)]|\\
+			 	&\overset{\triangle}{\leq} \underbrace{\E[|f(X_n) - \bar f(X_n)|]}_{:= \text{ I}_n} + \underbrace{\E[|\bar f(X_n) - \bar f(X)|]}_{:= \text{ II}_n} + \underbrace{\E[|\bar f(X) - f(X)|]}_{:= \text{ III}_n}
+			\end{split}
+			 \end{align}
+			 und betrachten einzeln die Grenzwerte der drei Summanden. Aus (i), und weil $\bar f$ gleichmäßig stetig, wissen wir, dass $\text{II}_n \to 0$ f\"ur $n \to \infty$. F\"ur den dritten Summanden gilt
+			 \begin{align*}
+			 	\text{III}_n = \E[|f(X) - \bar f(X)| \mathbf{1}_{I_k^C}] \leq 2||f||_{\infty} \E[\mathbf{1}_{I_k^C}]
+			 	= 2||f||_{\infty} \mathbb{P}(X \in I_k^C)
+				= 2||f||_{\infty} \mathbb{P}(X \notin I_k),
+			 \end{align*}
+			 weil $f(x)-\bar f(x)=0$ f\"ur $|x|<k$. Schlie\ss lich noch der erste Summand. Weil nach Definition $\bar f=f\cdot U_\epsilon$ und $1-U_\epsilon \leq \mathbf 1_{I_{k+1}^C}$ gilt, bekommen wir
+			\begin{align*}
+			 	\text{I}_n &\overset{\text{Def.}}{=} \E[|f(X_n)|(1-U_{\varepsilon}(X_n))] \\
+			 	&\leq ||f||_{\infty} \E[1-U_{\varepsilon}(X_n)]\\
+				&\overset{\text{Mon.}}{\leq} ||f||_{\infty} \E[\mathbf{1}_{I_{k+1}^C}(X)]\\
+			 	&= ||f||_{\infty} \mathbb{P}(X \in I_{k+1}^C) \leq ||f||_{\infty} \varepsilon.
+			 \end{align*}
+			 Die drei einzelnen Betrachtungen zusammen ergeben wegen \eqref{F4}
+			 
+			  \[0\leq \lim\limits_{n \to \infty} |\E[f(X_n)] - \E[f(X)]| \leq ||f||_{\infty} \varepsilon + 0 + 2||f||_{\infty}\varepsilon. \] 
+			 Weil $\varepsilon$ beliebig war, folgt $\lim\limits_{n \to \infty} |\E[f(X_n)] - \E[f(X)]|=0$ und damit \[ \lim\limits_{n \to \infty} \E[f(X_n)] = \E[f(X)]. \] 
+
+
+
+\end{proof}
+
+	Das Ziel ist immer, die \enquote{starken} Konvergenzen (links im Bildchen) zu zeigen. Das geht leider nicht immer! Um die Begriffe mit Leben zu f\"ullen, zeigen wir drei ber\"uhmte S\"atze, je einen f\"ur fast sichere, stochastische Konvergenz und Konvergenz in Verteilung:
+\begin{itemize}
+	\item schwaches Gesetz der gro\ss en Zahlen (stochastische Konvergenz)
+	\item starkes Gesetz der gro\ss en Zahlen (fast sicher Konvergenz)
+	\item Zentraler Grenzwertsatz (Konvergenz in Verteilung)
+\end{itemize}
+Beim schwachen Gesetz der gro\ss en Zahlen werden wir merken, dass Konvergenz in $\mathcal L^p$ gerade f\"ur $p=1$ oder $p=2$ ein extrem n\"utzliches Werkzeug ist. Der Grund ist, dass man mit Momenten gut rumrechnen kann (Ausmultipliziere, Linearit\"at, ...). 
+
+\begin{satz}[Schwaches Gesetz der großen Zahlen]\label{schwaches}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Sind $X_1,X_2,...$ u.i.v. mit $\E[X_1^2] < \infty$, so gilt
+		\[ \frac{1}{n} \sum_{k=1}^{n} X_k \overset{P}{\longrightarrow} \E[X_1], \quad n \to \infty. \]
+		\item Variante mit schw\"acheren Annahmen: Sind $X_1,X_2,...$ paarweise unkorreliert (z. B. paarweise unabh\"angig) mit 
+		\begin{align}
+		 \frac{1}{n^2} \sum\limits_{k=1}^{n} \V(X_k) \to 0,\quad n\to\infty, \label{F1}
+		\end{align}
+		so gilt
+		\[ \frac{1}{n} \sum_{k=1}^{n} X_k \overset{P}{\longrightarrow} \E[X_1], \quad n \to \infty. \]
+	\end{enumerate}
+\end{satz}
+
+\begin{proof}
+	(i)  Wenn man den Beweis gesehen hat, ist alles ziemlich simple: \textbf{Erst Tschebyscheff, dann Bienaym\'e}. Zun\"achst merken wir an, dass wir ohne Einschr\"ankung $\E[X_1]=0$ annehmen k\"onnen. Sonst f\"uhren wir die Aussage einfach auf diesen Fall mit $Y_i:=X_i-\E[X_i]$ zur\"uck (der Trick hei\ss t zentrieren), denn es gilt $\E[Y_i]=0$ und $\frac{1}{n}\sum_{k=1}^n Y_i=\frac{1}{n}\sum_{k=1}^n X_i-\E[X_1]$, also gilt die Behauptung f\"ur $(X_i)$ genau dann, wenn sie f\"ur $(Y_i)$ gilt.\smallskip
+	
+	Es gelte nun also $\E[X_1]=0$, insbesondere $\E[\sum_{k=1}^nX_k]=0$. Mit Tschebyscheff und Bienaym\'e gilt f\"ur beliebiges $\varepsilon>0$ aufgrund der u.i.v. Annahme
+		\begin{align*}
+		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{k=1}^{n} X_k\Big| \geq \varepsilon\Big)
+		&=\mathbb{P}\Big(\Big| \sum\limits_{k=1}^{n} X_k\Big| \geq n \varepsilon\Big)\\
+		&\overset{\ref{Markov}}{\leq} \frac{\V \big( \sum_{k=1}^n X_k\big) }{n^2\varepsilon^2}\\
+		&\overset{\ref{bien}}{=} \frac{\sum\limits_{k=1}^{n} \V(X_k)}{n^2 \varepsilon^2}\\
+		& = \frac{n \cdot \V(X_1)}{n^2 \varepsilon^2} \to 0, \quad n \to \infty.
+		\end{align*}
+		Also gilt $\frac{1}{n}\sum_{k=1}^n X_k\overset{P}{\rightarrow}0= \E[X_1]$ f\"ur $n\to\infty$. Um ganz genau zu sein, merken wir noch an, dass \enquote{$>$} oder \enquote{$\geq$} in der Definition der schwachen Konvergenz nat\"urlich keine Rolle spielt, $\varepsilon$ ist schlie\ss lich beliebig.\smallskip
+		
+		In dem Beweis kann man die Schritte auch ein wenig anders mit Korollar \ref{vari} begr\"unden. Zum einen kann man wegen $\V(X_i-\E[X_i])=\V(X_i)$ auch ohne Zentrieren mit $X_i-\E[X_i]$ rechnen, zum anderen kann man den Faktor $\frac 1 n$ nach Tschebyscheff quadratisch aus der Varianz rausziehen, statt ihn vor Tschebyscheff r\"uberzumultiplizieren. Schreibt das zum \"Uben einfach mal hin!\smallskip
+		
+		(ii) Um die schw\"acheren Annahmen von (ii) zu verstehen, brauchen wir nur in den vier Zeilen des Arguments zu schauen, wie wir die Unabh\"angigkeit abschw\"achen k\"onnen, so dass die Konvergenz immer noch folgt. Wir sehen dann sofort, dass f\"ur Bienaym\'e nur paarweise unkorreliert gebraucht wird, dann aber f\"ur die Konvergenz noch \eqref{F1} gefordert werden muss (es wird nicht mehr identisch verteilt angenommen, es gilt also nicht $\V[X_k]=\V[X_1]$). Schaut euch das in Ruhe an, um die Idee \enquote{erst Tschebyscheff, dann Bienaym\'e} einzubrennen.
+\end{proof}
+
+	Zum besseren Verst\"andnis kann man ja mal ausprobieren, ob man das schwache Gesetz genauso mit der Annahme $\E[|X_1|]<\infty$ beweisen k\"onnte. Warum funktioniert der Beweis nicht, wenn man die Markovungleichung f\"ur das erste Moment statt f\"ur das zweite Moment ausprobiert? Der Trick an dem Beweis mit zweiten Momenten ist, dass die Varianz der Summe, die eigentlich aus $n^2$ vielen Summanden besteht, sich aufgrund der Annahme (unabh\"angig oder unkorreliert) zu einer Summe aus nur $n$ vielen Summanden reduziert (vergleiche Bienaym\'e). Damit dominiert der Nenner mit $n^2$ und die obere Schranke konvergiert gegen $0$. Der Effekt passiert beim ersten Moment nicht, weil keine \enquote{gemischten Terme} $\E[X_iX_j]=0$ auftauchen. Deshalb st\"unde sowohl in Z\"ahler als auch in Nenner etwas mit $n$, die obere Schranke w\"urde also nicht gegen $0$ konvergieren, in Formeln:
+	\begin{align*}
+		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{k=1}^{n} X_k\Big| \geq \varepsilon\Big)
+		&\overset{\ref{Markov},\, h(x)=|x|}{\leq} \frac{\E \big[\big|\sum_{k=1}^n X_k\big|\big] }{n\varepsilon}\leq \frac{\sum_{k=1}^n \E[|X_k|]}{n\varepsilon}= \frac{n\E[|X_1|]}{n\varepsilon} \not\to 0,
+	\end{align*}
+	f\"ur $n\to\infty$. Genau den selben Effekt werden wir beim Beweis des starken Gesetzes der gro\ss en Zahlen sehen, bei dem wir endliche 4.te Momente annehmen und bei der Markovungleichung mit $h(x)=x^4$ genug Summanden verschwinden, dass der Nenner dominiert.
+	
+	
+%\begin{bem}
+%	Gilt $\E[X_2] < \infty$, so gilt $\V(X) = \V(X+a)$. Warum? $\V(X+a) = \E[(X+a -\E[X+a])^2] = \E[(X+a -(\E[X]+\E[a]))^2] = \E[(X -\E[X])^2] = \V(X)$.
+%\end{bem}
+
+%\begin{proof}
+%	\OE \space gelte $\E[X_1] = 0$. Warum? Wenn nicht, betrachte $Y_n = X_n - \E[X_n]$ (das nennt man zentrieren). Damit gilt 
+%	\begin{gather*}
+%		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} (X_i - \E[X_1]) - 0\Big| > \varepsilon\Big) = \mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} (X_i - \E[X_i]) - 0\Big| > \varepsilon\Big) \\
+%		= \mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} Y_i - 0\Big| > \varepsilon\Big) \to 0, \: n \to \infty,
+%	\end{gather*}
+%	weil $\E[Y_i] = \E[X_i - \E[X_i]] = \E[X_i] - \E[X_i] = 0$.
+%	Sei also $\E[X_1] = 0$. 
+%	\begin{gather*}
+%		\mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} X_i - 0\Big| > \varepsilon\Big) = \mathbb{P}\Big(\Big|\frac{1}{n} \sum\limits_{i=1}^{n} X_i - \E[\frac{1}{n} \sum\limits_{i=1}^{n} X_i]\Big| > \varepsilon\Big) \\
+%		\overset{\text{\ref{tscheby}}}{\leq} \frac{\V\Big(\frac{1}{n} \sum\limits_{i=1}^{n} X_i\Big)}{\varepsilon^2} = \frac{\frac{1}{n^2} \V\Big(\sum\limits_{i=1}^{n} X_i\Big)}{\varepsilon^2} \overset{\text{\ref{bien}}}{=} \frac{\frac{1}{n^2} \sum\limits_{i=1}^{n} \V\Big(X_i\Big)}{\varepsilon^2}  \\
+%		= \frac{\frac{1}{n^2} \cdot n \cdot \sum\limits_{i=1}^{n} \V\Big(X_i\Big)}{\varepsilon^2} = \frac{\sum\limits_{i=1}^{n} \V\Big(X_i\Big)}{n \varepsilon^2} \to 0, \: n \to \infty.
+%	\end{gather*}
+%\end{proof}
+
+
+\section{Starkes Gesetz der großen Zahlen}
+	Was bedeutet die stochastische Konvergenz, bzw. warum ist sie schwach? Seien als Beispiel $X_1,X_2,...$ u.i.v. Würfel, also diskret gleichverteilt auf $\{1,...,6\}$. Wegen $\E[X_1]=3,5$ bedeutet das schwache Gesetz der großen Zahlen (w\"ahle zum Beispiel $\epsilon=0.01$), dass 
+	\[ \mathbb{P}\Big(3,49 < \frac{1}{n} \sum\limits_{i=1}^{n} X_i < 3,51\Big) = \mathbb{P}\Big(\Big|\frac 1 n\sum\limits_{i=1}^{n} X_i - \E[X_1]\Big| < 0,01\Big) \to 1, \quad n \to \infty. \]
+	In Worten steht hier: \enquote{Der Mittelwert wird mit hoher Wahrscheinlichkeit nah bei 3,5 liegen, wenn $n$ groß ist.} Es wird damit nicht ausgeschlossen, dass der Mittelwert mit kleiner Wahrscheinlichkeit weit vom Erwartungswert entfernt liegt. Genau hier liegt der Unterschied zum starken Gesetz der gro\ss en Zahlen, das wir als n\"achstes beweisen wollen. Hier wird die stochastische Konvergenz durch fast sichere Konvergenz ersetzt. Weil in der Definition der fast sicheren Konvergenz alle $n$ gemeinsam \textit{innerhalb} der Wahrscheinlichkeit auftauchen, $\mathbb P(X_n\to X)=1$, kann der Effekt nicht auftreten.\smallskip
+
+\marginpar{\textcolor{red}{Vorlesung 26}}
+	
+Als Hilfsmittel f\"ur den Beweis diskutieren wir zun\"achst das Borel-Cantelli Lemma. Dazu zun\"achst ein paar Definitionen:	
+\begin{deff}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse.
+	\begin{enumerate}[label=(\roman*)]
+		\item \begin{align*}
+			\limsup\limits_{n \to \infty} A_n 
+			&:= \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k\\
+			&= \{ \omega \in \Omega\colon \omega \in A_n \text{ für unendlich viele } n \}\\ 
+			&\overset{\text{Notation}}{=} \{ A_n \text{ unendlich oft} \} 
+		\end{align*}
+		heißt \textbf{Limes superior} der Folge $A_n$.
+		\item \begin{align*}
+			\liminf\limits_{n \to \infty} A_n 
+			&:= \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{\infty} A_k\\
+			&= \{ \omega \in \Omega\colon \omega \in A_n \text{ schließlich immer} \}\\
+			&\overset{\text{Notation}}{=} \{ A_n \text{ schließlich immer} \}
+		\end{align*}
+		\textbf{Limes inferior} der Folge $A_n$.
+	\end{enumerate}
+\end{deff}
+Weil aufgrund einer $\sigma$-Algebra abz\"ahlbare Schnitte und Vereinigungen wieder in $\mathcal A$ sind, sind auch $\limsup_{n\to\infty} A_n$ und $\liminf_{n\to\infty} A_n$ in $\mathcal A$. Wem der Begriff \enquote{schlie\ss lich immer} suspekt ist, der (oder die) schaue einfach die formelle Definition an. Diese besagt, dass es eine nat\"urliche Zahl $n$ gibt, so dass das Ereigniss danach \textit{immer} eintritt (der Durchschnitt von Mengen enth\"alt alle Elemente, die in allen Mengen enthalten sind).\smallskip
+
+Tats\"achlich haben die neuen Begriffe $\liminf$ und $\limsup$ f\"ur Mengen auch etwas mit den uns bekannten Begriffen $\liminf$ und $\limsup$ f\"ur Folgen zu tun:
+\begin{lemma}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse. Dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \liminf\limits_{n \to \infty} A_n \subseteq \limsup\limits_{n \to \infty} A_n, \]
+		\item \[ (\liminf\limits_{n \to \infty} A_n)^C = \limsup\limits_{n \to \infty} A_n^C, \]
+		\item \[ \limsup\limits_{n \to \infty} \mathbf{1}_{A_n}(\omega) = \mathbf{1}_{\limsup\limits_{n \to \infty} A_n}(\omega),\quad \forall \omega \in \Omega, \]
+		\item \[ \liminf\limits_{n \to \infty} \mathbf{1}_{A_n}(\omega) = \mathbf{1}_{\liminf\limits_{n \to \infty} A_n}(\omega),\quad \forall \omega \in \Omega. \]
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Übung. Denkt einfach mal kurz dar\"uber nach, was $\liminf_{n\to\infty} a_n=1$ oder $\liminf_{n\to\infty} a_n=0$ f\"ur eine reelle Folge $(a_n)$ bedeutet, wenn diese nur die Werte $0$ und $1$ annimmt.
+\end{proof}
+
+Das Borel-Cantelli Lemma gibt uns gleich ein Kriterium, ob die Wahrscheinlichkkeit des $\limsup A_n$ null ist oder (mit einer st\"arkeren Annahme) $1$ ist. Daf\"ur basteln wir mit Zufallsvariablen rum, alles basiert auf folgender Bemerkung:
+\begin{bem}\label{ereig}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse. Dann gilt
+	\begin{align*}
+		A_1, A_2, ... \text{ sind unabh\"angig}\quad \Leftrightarrow\quad  \mathbf{1}_{A_1},\mathbf{1}_{A_2},... \text{ sind unabhängig}.
+	\end{align*}
+	Beachte: $A_1, A_2, ...$ ist ein Folge von Ereignissen, wohingegen $\mathbf{1}_{A_1},\mathbf{1}_{A_2},... $ eine Folge von Zufallsvariablen ist. Das ist also ein guter Moment, in Kapitel \ref{Sunab} die Definitionen von Unabh\"angigkeit von Ereignissen und Zufallsvariablen nochmal zu vergleichen! Warum gilt die \"Aquivalenz? Checken wir die Definitionen:
+	\begin{align*}
+		\mathbf{1}_{A_1},\mathbf{1}_{A_2},... \text{ unabh\"angig}\quad 
+		&\overset{\text{Def. }\ref{unab}}{\Leftrightarrow} \quad \sigma(\mathbf{1}_{A_1}),\sigma(\mathbf{1}_{A_2}),... \text{ unabhängig}\\
+		&\Leftrightarrow\quad \{ \emptyset, \Omega, A_1, A_1^C \},\{ \emptyset, \Omega, A_2, A_2^C \}, ... \text{ unabhängig}\\
+		&\Leftrightarrow\quad A_1, A_2, ... \text{ unabh\"angig}.
+	\end{align*}
+F\"ur die dritte \"Aquivalenz haben wir Definition \ref{Ka} genutzt, sowie die Eigenschaft, dass Unabh\"angigkeit von Ereignissen sich auch auf die Komplemente \"ubertr\"agt (\"Ubung). 
+	
+	
+\end{bem}
+
+\begin{satz}[Borel-Cantelli-Lemma]\label{BC}
+	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A_1,A_2,... \in \cA$ beliebige Ereignisse, so gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item \[ \sum\limits_{n = 1}^{\infty} \mathbb{P}(A_n) < \infty \quad \Rightarrow\quad  \mathbb{P}\big(\limsup\limits_{n \to \infty} A_n\big) =0. \]
+		\item Sind die $A_1, A_2, ...$ \textit{zusätzlich} paarweise unabhängig, so gilt \[ \sum\limits_{n = 1}^{\infty} \mathbb{P}(A_n) = \infty \quad \Rightarrow \quad \mathbb{P}\big(\limsup\limits_{n \to \infty} A_n\big) = 1. \]
+	\end{enumerate}
+\end{satz}
+	Damit kennt ihr nun euer erstes \enquote{0-1-Gesetz}: Sind die Ereignisse $A_1, A_2, ...$ paarweise unabh\"angig, so ist $\mathbb P(\limsup_{n\to\infty} A_n)\in \{0,1\}$ und es gilt $\mathbb P(\limsup_{n\to\infty}A_n)=1$ genau dann, wenn $\sum_{n=1}^\infty \mathbb P(A_n)=\infty$. Das witzige an 0-1-Gesetzen ist, dass man nur zeigen muss, dass etwas strikt positive Wahrscheinlichkeit hat, um sogar Wahrscheinlichkeit $1$ zu schlie\ss en. 
+
+\begin{proof}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item \enquote{triviale Rechnung}: Die einfache Richtung folgt aus einfachen Manipulationen mit Mengen und Eigenschaften des Ma\ss es:
+		\begin{align*}
+			\mathbb{P}(\limsup\limits_{n \to \infty} A_n) 
+			&= \mathbb{P}\Big(\bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k\Big)\\
+			&\overset{\text{Stetigkeit}}{\underset{\text{von Maßen}}{=}}\lim\limits_{N \to \infty} \mathbb{P}\Big(\bigcap_{n=1}^{N} \bigcup_{k=n}^{\infty} A_k\Big)\\
+			&\overset{\text{Monotonie}}{\underset{\text{von Maßen}}{\leq}}\lim\limits_{N \to \infty} \mathbb{P}(\bigcup_{k=N}^{\infty} A_k) \\
+			&\overset{\text{subadd.}}{\leq} \lim\limits_{N \to \infty} \sum\limits_{k=N}^{\infty} \mathbb{P}(A_k) = 0.
+		\end{align*}
+		Die letzte Gleichheit gilt nach Annahme und Analysis 1 (Eigenschaft konvergenter Reihen).
+		\item Die R\"uckrichtung ist deutlich schwieriger, wir nutzen die sogenannte \enquote{zweite-Momente-Methode}. Daf\"ur werden erstes und zweites Moment einer geeigneten Zufallsvariable miteinander verglichen. Wir betrachten im Folgenden die Zufallsvariablen $\mathbf 1_{A_n}$, die aufgrund von Bemerkung \ref{ereig} unabh\"angig sind. Weil die Zufallsvariablen nur die Werte $0$ und $1$ annehmen, sind sie Bernoulli-verteilt. Genauer, es gilt $\mathbf 1_{A_n}\sim \operatorname{Ber}(p_n)$, wobei $p_n=\mathbb P(A_n)$ die Wahrscheinlichkeit f\"ur den Wert $1$ ist. Kleine Erinnerung: F\"ur $\operatorname{Ber}(p)$-verteilte Zufallsvariablen ist der Erwartungswert $p$ und die Varianz $p(1-p)$. Das werden wir im Folgenden ausnutzen.\smallskip
+		
+		Wir betrachten die Folge
+		\[ Z_k = \sum\limits_{n=1}^{k} \mathbf{1}_{A_n},\quad k\in\N, \]
+		weil mit dieser Folge $\limsup_{n\to\infty} A_n$ beschrieben werden kann:
+		\begin{align}\label{kyp}
+			\omega \in \limsup\limits_{n \to \infty} A_n \quad \Leftrightarrow \quad +\infty=\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n}(\omega) = \lim\limits_{k \to \infty} Z_k(\omega).
+		\end{align}
+		Das gilt nat\"urlich weil die Reihe nur aus Summanden $0$ oder $1$ besteht und daher unendlich ist genau dann, wenn unendlich viele Summanden $1$ sind, also wenn $\omega$ in unendlich vielen $A_n$ ist. Berechnen wir Erwartungswert und Varianz:
+		 \begin{align*}
+		 	\E[Z_k] &= \sum\limits_{n=1}^{k} \E[\mathbf{1}_{A_n}] = \sum\limits_{n=1}^{k} \mathbb P(A_n) \overset{\text{Ann.}}{\longrightarrow}+\infty, \quad k \to \infty,\\
+		 	\V(Z_k) &\underset{\text{\ref{ereig}}}{\overset{\text{\ref{bien}}}{=}} \sum\limits_{n=1}^{k}\V(\mathbf{1}_{A_n}) 
+		 	= \sum\limits_{n=1}^{k} \mathbb P(A_n)(1-\mathbb P(A_n)) \leq \sum\limits_{n=1}^{k} \mathbb P(A_n) = \E[Z_k],
+		 \end{align*}
+		 weil unabh\"angige Zufallsvariablen auch unkorrelliert sind. Jetzt benutzen wir Tschebyscheff mit den Formeln f\"ur Erwartungswert und Varianz:
+		  \begin{align}\label{absch}
+		 	\mathbb{P}\Big(|Z_k - \E[Z_k]| \geq \frac{\E[Z_k]}{2}\Big) \overset{\ref{Markov}}{\leq}\frac{\V(Z_k)}{\frac{1}{4} \E[Z_k]^2} \leq \frac{4\E[Z_k]}{\E[Z_k]^2} = \frac{4}{\E[Z_k]} \to 0,
+		 \end{align}
+		 f\"ur $k\to\infty$. Sei nun $\lambda > 0$ beliebig. Dann existiert wegen der Konvergenz der Erwartungswerte gegen unendlich ein $k_0 \in \N$ mit $\frac{\lambda}{\E[Z_k]} < \frac{1}{2}$ f\"ur alle $k\geq k_0$.
+		 Weil aufgrund der Definition von $Z_k$ auch $Z_k \leq \sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n}$ gilt, bekommen wir für beliebiges $k \geq k_0$
+		 \begin{align*}
+		 	\mathbb{P}\Big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < \lambda \Big)& \leq \mathbb{P}(Z_k < \lambda)\\
+			& = \mathbb{P}\Big(\frac{Z_k}{\E[Z_k]} < \frac{\lambda}{\E[Z_k]}\Big)\\
+			& \leq \mathbb{P}\Big(\frac{Z_k}{\E[Z_k]} < \frac{1}{2}\Big)\\ 
+		 	&= \mathbb{P}\Big(\frac{Z_k}{\E[Z_k]} - 1 < -\frac{1}{2}\Big)\\
+			& \leq \mathbb{P}\Big(\Big|\frac{Z_k}{\E[Z_k]} - 1\Big| > \frac{1}{2}\Big)\\
+		 	&= \mathbb{P}\Big(\big|Z_k - \E[Z_k]\big| > \frac{\E[Z_k]}{2}\Big) \overset{\text{\eqref{absch}}}{\longrightarrow} 0, \quad k \to \infty.
+		 \end{align*}
+		Also gilt $\mathbb{P}\big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < \lambda \big)=0$. Weil $\lambda$ beliebig gew\"ahlt war, folgt aufgrund der Stetigkeit von Ma\ss en auch $\mathbb{P}\big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < \infty \big)=\lim_{k\to\infty}\mathbb{P}\big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} < k \big) =0$.	Wegen \eqref{kyp} gilt nun \[ \mathbb{P}\big(\limsup\limits_{n \to \infty}A_n\big) = \mathbb{P}\Big(\sum\limits_{n=1}^{\infty} \mathbf{1}_{A_n} = +\infty\Big) = 1. \]
+	\end{enumerate}
+\end{proof}
+Nach diesem Highlight der Ma\ss theorie, nun zur\"uck zur fast sicheren Konvergenz und dem starken Gesetz der gro\ss en Zahlen. 
+\begin{korollar}\label{ko}
+	Seien $X, X_1, X_2, ...$ Zufallsvariablen auf einem Wahrscheinlichkeitsraum $(\Omega, \mathcal A, \mathbb P)$, dann gelten:
+	\begin{enumerate}[label=(\roman*)]
+		\item $$\sum_{n=1}^\infty \mathbb P(|X_n-X|>\epsilon)<\infty\text{  f\"ur alle }\varepsilon>0 \quad\Longrightarrow\quad X_n\overset{\text{f.s.}}{\to}X, n\to\infty.$$
+		\item Unter der zus\"atzlich Annahme $X_1-X, X_2-X, ...$ sind unabh\"angig, gilt: $$\sum_{n=1}^\infty \mathbb P(|X_n-X|>\epsilon)=+\infty\text{ f\"ur ein }\varepsilon>0\quad \Longrightarrow\quad X_n\overset{\text{f.s.}}{\not\to}X, n\to\infty.$$
+	\end{enumerate}
+\end{korollar}
+\begin{proof}
+	Beide Aussagen folgen sofort aus Borel-Cantelli:
+\begin{enumerate}[label=(\roman*)]
+\item Mit $\epsilon=\frac 1 k$ impliziert das Borel-Cantelli-Lemma $\mathbb P(|X_n-X|>\frac 1 k\text{ unendlich oft})=0$ bzw. $\mathbb P(|X_n-X|>\frac 1 k\text{ nur endlich oft})=1$ f\"ur alle $k\in\N$. Daraus folgt
+	\begin{align*}
+		\mathbb P(X_n\to X)&=\mathbb P\Big(\Big\{\omega: \forall k \in \N\, \exists N\in \N: |X_n(\omega)-X(\omega)|\leq \frac{1}{k}\, \forall n\geq N\Big\}\Big)\\
+		&=\mathbb P\Big( \bigcap_{k=1}^\infty \Big\{ |X_n-X|>\frac{1}{k}\text{ endlich oft}\Big\}\Big)=1,
+	\end{align*}
+	weil der Durchschnitt abz\"ahlbar vieler Mengen von Ma\ss{} $1$ auch Ma\ss{} $1$ hat (wegen Komplementbildung, abz\"ahlbare Schnitte von Nullmengen sind Nullmengen).
+\item Borel-Cantelli impliziert $\mathbb P(|X_n-X|>\epsilon\text{ unendlich oft})=1$, also ist die Wahrscheinlichkeit, dass $X_n$ gegen $X$ konvergiert, sogar $0$.
+\end{enumerate}
+\end{proof}
+Wegen Borel-Cantelli k\"onnen wir den Unterschied von stochastischer und fast sicherer Konvergenz nun besser verstehen:
+\begin{bem}\label{bem4}
+	Um stochastische Konvergenz zu zeigen, muss f\"ur beliebiges $\epsilon>0$ $a_n:=\mathbb P(|X_n-X|>\epsilon)$ eine Nullfolge sein. Konvergiert die Nullfolge so schnell gegen $0$, dass auch der Reihengrenzwert $\sum_{n=1}^\infty a_n$ endlich ist, so konvergiert nach Korollar \ref{ko} die Folge $(X_n)$ fast sicher gegen $X$. Wenn wir uns an Analysis 1 erinnern, ist es ein gro\ss er Unterschied, ob die Reihe \"uber eine Folge konvergiert oder die Folge eine Nullfolge ist. Beispielsweise reicht f\"ur stochastische Konvergenz die Absch\"atzung $\mathbb P(|X_n-X|>\epsilon)\leq \frac{1}{n}$, f\"ur fast sichere Konvergenz aber nicht!
+\end{bem}
+
+
+Bevor wir mit dem Korollar \ref{ko} das starke Gesetz der gro\ss en Zahlen diskutieren, schauen wir uns nochmal Beispiel \ref{Adam} an, aber etwas allgemeiner:
+\begin{example}
+Seien $X_1, X_2, ... $ unabh\"angige Zufallsvariablen mit $$\mathbb{P}(X_n = 1) = \frac{1}{n^p}, \quad \mathbb{P}(X_n = 0) = 1 - \frac{1}{n^p},$$ also $X_n \sim \operatorname{Ber}(\frac{1}{n^p})$, $n \in \N$. Man stelle sich wieder unabh\"angige Versuche vor ($1$ bedeutet \enquote{Erfolg}, $0$ bedeutet \enquote{Misserfolg}), bei denen die Wahrscheinlichkeit f\"ur \enquote{Erfolg} immer kleiner wird. Fragen wir uns wieder: Konvergiert die Folge fast sicher gegen die Zufallsvariable $X=0$? Wegen der angenommenen Unabh\"angigkeit gilt mit Korollar \ref{ko} 
+\begin{align*}
+	X_n\overset{\text{f.s.}}{\to} 0,\quad n\to\infty \quad &\Leftrightarrow\quad \sum_{n=1}^\infty \mathbb P(X_n=1)=\sum_{n=1}^\infty \frac{1}{n^p}<+\infty\quad
+	\Leftrightarrow\quad p>1.
+\end{align*}
+Ausformuliert ist die Aussage noch spektakul\"arer weil die Konvergenz gegen $0$ einer Folge mit Werten $0$ oder $1$ bedeutet, dass die Folge irgendwann nur noch den Wert $0$ annimmt. Ist $p\leq 1$, so ist der Versuch immer mal wieder erfolgreich, wohingegen f\"ur $p>1$ der Versuch nur endlich oft erfolgreich ist. Wenn man bedenkt, dass der Versuch unendlich oft ausgef\"uhrt wird und jedes Mal positive Wahrscheinlichkeit f\"ur Erfolg besteht, ist der Fall $p>1$ schon \"uberraschend!
+\end{example}
+
+
+Jetzt zum starken Gesetz der gro\ss en Zahlen:
+
+\begin{satz}[Starkes Gesetz der großen Zahlen]\label{sGGZ}
+	Sind $X_1,X_2,...$ u.i.v. mit $\E[|X_1|] < \infty$, so gilt \[ \frac{1}{n} \sum\limits_{i=1}^{n} X_i \overset{\text{f. s.}}{\longrightarrow} \E[X_1], \quad n \to \infty. \]
+\end{satz}
+
+
+\begin{proof}
+	Wir beweisen den Satz nur unter der zus\"atzlichen Annahme $\E[X_1^4] < \infty$. Die Aussage gilt auch unter der schwachen Annahme $\E[|X_1|]<\infty$, den Beweis werden wir aber erst in der WT1 Vorlesung diskutieren. Wie beim schwachen Gesetz nehmen wir ohne Einschr\"ankung $\E[X_1] = 0$ (sonst mit $Y_i:=X_i-\E[X_i]$ zentrieren). Um Korollar \ref{ko} anzuwenden, m\"ussen wir $\mathbb P(A_n)$ absch\"atzen, wobei 
+	\[ A_n = \Big\{ \Big| \frac{1}{n} \sum\limits_{k=1}^{n} X_k \Big| >\epsilon \Big\}. \] 
+	Dazu nutzen wir wieder Tschebyscheff und die Annahme der endlichen vierten Momente:
+	\begin{align*}
+		\mathbb{P}(A_n) &= \mathbb{P}\Big(\Big| \frac{1}{n} \sum\limits_{i=1}^{n} X_i \Big| \geq \epsilon \Big)\\
+		& = \mathbb{P}\Big(\Big| \frac{1}{n} \sum\limits_{i=1}^{n} X_i \Big|^4 \geq \epsilon^4 \Big)\\
+		&\overset{\text{\ref{Markov}}, h(x)=x}{\leq} \frac{\E\Big[ \Big| \frac{1}{n} \sum\limits_{i=1}^{n} X_i \Big|^4\Big]}{\epsilon^4}\\
+		& = \frac{1}{\epsilon^4 n^4}\E\Big[\sum\limits_{i_1,i_2,i_3,i_4=1}^{n} X_{i_1}  X_{i_2}  X_{i_3}  X_{i_4}  \Big] \\
+		&\overset{\text{unabh.}}{=}  \frac{1}{\epsilon^4 n^4} \Big( \sum\limits_{i=1}^{n} \E[X_i^4]+ \sum\limits_{k,l=1}^{n} \E[X_k^2  X_l^2] \Big)\\
+		&= \frac{1}{\epsilon^4n^4} \Big(n  \E[X_1^4] +\frac{n(n-1)}{2} \E[X_1^2]  \E[X_1^2] \Big)\\
+		&\leq \frac{C}{n^2},
+	\end{align*}
+	mit $C=\frac{\E[X_1^4]}{\epsilon^4}+\frac{\E[X_1^2]^2}{2}$. Damit haben wir die Voraussetzung von Korollar \ref{ko} (i) gecheckt und die Aussage folgt. Wie beim schwachen Gesetzt gilt auch hier wieder: Weil $\epsilon$ beliebig ist, spielt \enquote{$>$} oder \enquote{$\geq$} keine Rolle.
+	\end{proof}
+Der Trick im Beweis ist die vierte Gleichheit. Eigentlich sollten bei Tschebyscheff mit vierter Potenz $n^4$ Summanden im Z\"ahler auftauchen. Wegen der Unabh\"angigkeit fallen von den Summanden $\E[X_{i_1}  X_{i_2}  X_{i_3}  X_{i_4}]$ jedoch alle als $0$ weg, bei denen eine der Zufallsvariablen nur einmal auftaucht (es gilt wegen der Unabh\"angigkeit zum Beispiel $\E[X_1 X_1 X_4X_5]=\E[X_1^2] \E[X_3]\E[X_4]=\E[X_1^2] 0=0$). Es bleiben also nicht $n^4$ viele Summanden stehen, sondern nur die, bei denen entweder immer die gleiche oder nur zwei verschiedene Zufallsvariablen auftauchen. Das sind aber nur etwa $n^2$ viele und damit bringt der Nenner $n^4$ die Reihe zum konvergieren. Bemerkung \ref{bem4} zeigt uns ganz genau den Unterschied zwischen unseren Beweisen der schwachen und dem starken Gesetze der gro\ss en Zahlen: Im Beweis des schwachen Gesetzes haben wir mit zweiten Momenten die obere Schranke $\frac{\V(X_1)}{\epsilon n}$ hergeleitet. Das reichte f\"ur stochastische Konvergenz, aber nicht f\"ur fast sichere Konvergenz weil die harmonische Reihe divergiert. Das Tschebyscheff Argument mit vierten Momenten hingeben gibt die summierbare obere Schranke $\frac{C}{n^2}$.  Dritte Momente funktionieren \"ubrigens auch nicht, da st\"ort der Betrag. Der \enquote{richtige} Beweis (nur unter der Voraussetzung $\E[|X_1|]<\infty$ funktioniert anders, Tschebyscheff ist einfach keine gute Absch\"atzung.
+\begin{bem}
+Unabh\"angig von den Annahmen an die Folge $X_1, X_2, ...$ spricht man immer von einem \enquote{starken Gesetz}, wenn fast sichere Konvergenz vorliegt. Man spricht von einem \enquote{schwachen Gesetz}, wenn stochastische Konvergenz vorliegt. Weil fast sichere Konvergenz die stochastische Konvergenz impliziert, impliziert ein starkes Gesetz immer ein schwaches Gesetz. Wir haben also das schwache Gesetz der gro\ss en Zahlen f\"ur u.i.v. Folgen mit endlichen zweiten Momenten gezeigt, das starke Gesetz der gro\ss en Zahlen f\"ur u.i.v. Folgen mit endlichen ersten Momenten. Weil $\E[X_1^2]<\infty$ auch $\E[|X_1|]<\infty$ impliziert, ist die Annahme $\E[X_1^2]<\infty$ im schwachen Gesetz nat\"urlich viel zu stark, es gilt schlie\ss lich mit der schw\"acheren Annahme $\E[|X_1|]<\infty$ die st\"arkere Aussage der fast sicheren Konvergenz! Teil (i) in Satz \ref{schwaches} ist also im Prinzip \"uberfl\"ussig und wurde nur aus didaktischen Gr\"unden behandelt. Interessanter ist eigentlich Teil (ii), denn unter diesen schw\"acheren Annahmen muss das starke Gesetz der gro\ss en Zahlen nicht gelten. Ein Beispiel ist folgendes: Ist $X_1, X_2, ...$ eine Folge von unabh\"angigen (nicht identisch verteilten) Zufallsvariablen mit 
+\begin{align*}
+	\mathbb P(X_n=n)&=\frac{1}{2 n \log(n+1)},\\
+	\mathbb P(X_n=-n)&=\frac{1}{2 n \log(n+1)},\\
+	\mathbb P(X_n=0)&=1-\frac{1}{ n \log(n+1)},
+\end{align*}
+so gilt das schwache Gesetz, aber nicht das starke Gesetz. Es gibt also durchaus einen Grund f\"ur Teil (ii) von Satz \ref{schwaches}.
+\end{bem}
+
+Am Ende des Kapitels noch eine spannende Anwendung von Borel-Cantelli, die wir nicht in der Vorlesung behandelt haben. Wir zeigen, dass Mittelwerte $\frac 1 n \sum_{k=1}^n X_k$ von u.i.v. Folgen von Zufallsvariablen nur f\"ur $\E[|X_1|]<\infty$ fast sicher konvergieren k\"onnen und (dann gilt das starke Gesetz der gro\ss en Zahlen) daher nur gegen den Erwartungswert konvergieren k\"onnen!
+\begin{satz}
+	Es seien $X_1,X_2,...$ paarweise unabh\"angig und identisch verteilt (z. B. u.i.v.), so dass $\frac 1 n \sum_{k=1}^n X_k$ fast sicher f\"ur $n\to\infty$ konvergiert. Dann gilt $\E[|X_1|]<\infty$ und 
+	\begin{align*}
+		\frac 1 n \sum_{k=1}^n X_k \overset{\text{f.s.}}{\to} \E[X_1],\quad n\to\infty.
+	\end{align*}	 
+\end{satz}
+\begin{proof}
+Elementare Umformungen geben
+\begin{align*}
+	\frac{X_n}{n}=\frac{\sum_{k=1}^n X_k}{n}-\frac{\sum_{k=1}^{n-1}X_k}{n}= \frac{\sum_{k=1}^nX_k}{n}-\frac{n-1}{n} \frac{\sum_{k=1}^{n-1}X_k}{n-1}\to 0,\quad n\overset{\text{f.s.}}{\to}\infty,
+\end{align*}
+weil beide Summanden der rechten Seite nach Annahme gegen den selben (endlichen) Wert konvergieren. Damit gilt dann 
+\begin{align*}
+	\mathbb P\Big(\frac{|X_n|}{n}>1\text{ unendlich oft}\Big)=0
+\end{align*}
+und mit $A_n:=\{|X_n|>n\}$ folgt mit der zweiten Aussage von Borel-Cantelli $\sum_{k=1}^\infty \mathbb P(A_n)<\infty.$ Der Vergleich von Integralen mit Reihen (f\"ur die monton fallende Funktion $f(t)=\mathbb P(|X_1|>t)$ mit $f(n)=\mathbb P(|X_1|>n)=\mathbb P(|X_n|>n)=\mathbb P(A_n)$) impliziert damit 
+\begin{align*}
+	\E[|X_1|]\overset{\ref{lab}\text{ (ii)}}{=}\int_0^\infty \mathbb P(|X_1|>t)\dint t<\infty.
+\end{align*}
+Damit ist die erste Aussage gezeigt. Weil nun $\E[|X_1|]<\infty$ gilt, ist die Voraussetzung von Satz \ref{sGGZ} erf\"ullt und die zweite Aussage folgt.
+\end{proof}
+
+

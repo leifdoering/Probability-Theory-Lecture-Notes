@@ -1,0 +1,221 @@
+\marginpar{\textcolor{red}{Vorlesung 24}}
+Die Definition wird insbesondere f\"ur $\sigma$-Algebren verwendet. Wie bei Messbarkeit fragen wir uns hier, ob wir die Unabh\"angigkeit auf Erzeuger reduzieren k\"onnen. Wie bisher immer funktioniert auch das, jedenfalls, wenn der Erzeuger $\cap$-stabil ist:
+\begin{prop}\label{unabh}
+	Ist $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und $\cE_i \subseteq \cA$ für f\"ur alle $i \in I$. Sind alle $\cE_I$ $\cap$-stabil, so gilt:
+	\begin{align*}
+		(\cE_i)_{i\in I}\text{ unabhängig }\quad \Rightarrow\quad  (\sigma(\cE_i))_{i \in I}\text{ unabhängig.}
+	\end{align*}
+\end{prop}
+
+\begin{proof}\abs
+	\begin{itemize}
+		\item[\enquote{$\Leftarrow$}:] Klar nach Definition, weil $\cE_i \subseteq \sigma(\cE_i)$ gilt. Die Unabh\"angigkeit von Mengensystemen bedeutet schlie\ss lich, dass die Unabh\"angigkeit f\"ur alle Wahlen von Teilmengen gilt. Gilt dies f\"ur mehr M\"oglichkeiten, so nat\"urlich auch f\"ur weniger M\"oglichkeiten.
+		\item[\enquote{$\Rightarrow$}:] Ohne Einschr\"ankung sei $I$ endlich weil die Definition der Unabh\"angkigkeit nur auf endlichen Teilmengen $J \subseteq I$ beruht. Nennen wir die Mengen $\cE_1,...,\cE_n$. Wir zeigen, dass dann auch $\sigma(\cE_1),...,\sigma(\cE_n)$ unabhängig sind. Dazu zeigen wir:
+		$$\cD:= \big\{ E \in \cA \colon \{ E \}, \cE_2, ..., \cE_n \text{ sind unabhängig} \big\}\text{ ist ein Dynkin-System.}$$
+		Um das zu zeigen, checken wir die definierenden Eigenschaften eines Dynkin-Systems:
+		\begin{enumerate}[label=(\roman*)]
+			\item Aufgrund der Definition \ref{Ka} m\"ussen wir zeigen, dass beliebige Wahlen von Mengen der Mengensysteme unabh\"angige Mengen sind. Genauer, wir m\"ussen zeigen, dass f\"ur alle $ A_2 \in \cE_2,...,A_n \in \cE_n$ die Mengen $\Omega, A_2,...,A_n$ unabhängig sind, die Wahrscheinlichkeit vom Schnitt also zur Wahrscheinlichkeiten der einzelnen Ereignisse faktorisiert. Das folgt aber direkt aus der angenommenen Unabh\"angigkeit von $\mathcal E_1, ..., \mathcal E_n$:			
+			\begin{align*}
+				\mathbb{P}(\Omega \cap A_2 \cap ... \cap A_n) &= \mathbb{P}(A_2 \cap ... \cap A_n)\\
+				 &= \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)\\
+				 & = 1 \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)
+				  = \mathbb{P}(\Omega) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n).
+			\end{align*}
+			Also ist $\Omega \in \cD$.
+			\item Nun zur Abgeschlossenheit bez\"uglich Komplementbildung. Wir argumentieren wie im ersten Schritt. Sei dazu $E \in \cD$ und seien $A_2 \in \cE_2,...,A_n \in \cE_n$ beliebig. Weil $\Omega=E\cupdot E^C$ ergibt sich
+			\begin{align*}
+				\mathbb{P}(E^C \cap A_2 \cap ... \cap A_n)& \overset{\sigma\text{-Add.}}{=} \mathbb{P}(\Omega \cap A_2 \cap ... \cap A_n) - \mathbb{P}(E \cap A_2 \cap ... \cap A_n) \\
+				&\overset{\Omega, E\in \mathcal D}{=} \mathbb{P}(\Omega) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n) - \mathbb{P}(E) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)\\
+				&= (\mathbb{P}(\Omega) - \mathbb{E}(\Omega)) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n)\\
+				&= \mathbb{P}(E^C) \cdot \mathbb{P}(A_2) \cdot ... \cdot \mathbb{P}(A_n).
+			\end{align*}
+			Also sind $E^C, A_2, ...,A_n$ unabh\"angige Ereignisse und damit ist $E^C\in \cD$.
+			\item Das Argument f\"ur die Vereinigungen geht genau wie f\"ur die Komplemente.
+		\end{enumerate}
+		Jetzt beenden wir den Beweis. Aufgrund der Annahme $\cE_1,...,\cE_n$ unabhängig gilt f\"ur jede Menge $E\in \cE_1$ auch $E\in \cD$. Also gilt $\cE_1\subseteq \cD$. Daraus folgt mit dem Hauptsatz f\"ur Dynkinsysteme, Satz \ref{Hauptsatz}, wie \"ublich
+			\[ \sigma(\cE_1) \subseteq \sigma(\cD) \overset{\cap\text{-stabil}}{=} d(\cD) = \cD. \]			
+			Weil also $\sigma(\cE_1)\subseteq \cD$ gilt, folgt aus der Definition von $\cD$, dass $\sigma(\cE_1), \cE_2,...,\cE_n$ unabhängig sind. Iterativ ersetzen wir nun Schritt f\"ur Schritt mit einem analogen Argument ein $\cE_k$ nach dem anderen durch $\sigma(\cE_k)$, indem wir genau wie oben zeigen, dass alle 
+			\begin{align*}
+				\cD_k:= \big\{ E \in \cA \colon \sigma(\cE_1), \sigma(\cE_2),... ,\sigma(\cE_{k-1}),\{E\}, \cE_{k+1}, ..., \cE_n \text{ sind unabhängig} \big\}
+			\end{align*}
+			Dynkin-Systeme sind.
+		\end{itemize}
+\end{proof}
+Kommen wir nun zu einer alternativen Definition der Unabh\"angigkeit von Zufallsvariablen. Anstatt die Faktorisierung der gemeinsamen Verteilung zu fordern, kann man auch fordern, dass die erzeugten $\sigma$-Algebren (siehe Definition \ref{Kat}) unabh\"angige Mengensysteme sind:
+\begin{deff}\label{unab}
+	Für Zufallsvariablen $(X_i)_{i \in I}$ auf $(\Omega, \cA, \mathbb{P})$ definiert man: $(X_i)_{i \in I}$ sind unabhängig, falls die erzeugten $\sigma$-Algebren $(\sigma(X_i))_{i \in I}$ unabhängig sind. 
+\end{deff}
+Weil $\sigma(X_i) = \sigma(\{ \{X_i \leq t \}\colon t \in \R \})$, k\"onnen wir direkt folgern, dass die Unabh\"angigkeit auch durch die gemeinsame Verteilungsfunktion definiert werden kann.
+\begin{korollar}
+	Für Zufallsvariablen $X_1,...,X_d$ auf $(\Omega, \cA, \mathbb{P})$ stimmt die neue Definition mit der alten überein. Die Zufallsvariablen sind also unabh\"angig genau dann, wenn 
+	\begin{align*}
+		F_X(t_1,..., t_d)=F_{X_1}(t_1)\cdots F_{X_d}(t_d),\quad t_1,..., t_d\in \R.
+	\end{align*}
+\end{korollar}
+
+\begin{proof}
+Um die Proposition anzuwenden, seien $\cE_i := \{ \{X_i \leq t \}\colon t \in \R \}$ f\"ur $i=1,...,d$. Also gilt $\sigma(\cE_i) = \sigma(X_i)$ und die $\cE_i$ sind $\cap$-stabil. Nun gilt wegen Proposition \ref{unabh}
+\begin{align*}
+	&\quad \sigma(X_1),...,\sigma(X_d) \text{ unabhängig }\\
+	&\Leftrightarrow\quad \cE_1,...,\cE_d \text{ unabhängig}\\
+	&\Leftrightarrow\quad E_1 \in \cE_1, ..., E_n\in \cE_d\text{ unabh\"angig f\"ur alle } E_1\in \cE_1, ..., E_d\in \cE_d\\
+	&\Leftrightarrow\quad \mathbb{P}(\{ X_1 \leq t_1 \} \cap ... \cap \{ X_d \leq t_d \})=\mathbb P(X_1\leq X_1)\cdots \mathbb P(X_d\leq t_d),\quad t_1,..., t_d\in \R\\
+	&\overset{\text{Def.}}{\Leftrightarrow} \quad F_X(t_1,..., t_d)=F_{X_1}(t_1)\cdots F_{X_d}(t_d),\quad t_1,..., t_d\in \R.
+\end{align*}	
+\end{proof}
+\begin{bem}
+	Genau wie f\"ur endlich viele Zufallsvariablen k\"onnen wir auch die Unabh\"angigkeit von Folgen $X_1, X_2, ...$ von Zufallsvariablen auf $(\Omega, \mathcal A, \mathbb P)$ definieren entweder als 
+	\begin{align*}
+		(\sigma(X_i))_{i\in \N} \text{ sind unabh\"angig}
+	\end{align*}
+	oder als 
+	\begin{align*}
+		\mathbb P(X_i \leq t_i, ..., X_n\leq t_n)=\prod_{i=1}^n \mathbb P(X_i \leq t_i),\quad \text{ f\"ur alle } n\in\N \text{ und } t_1, ..., t_n\in\R.
+	\end{align*}
+\end{bem}
+Wie f\"ur Zufallsvariablen und Zufallsvektoren ist es auch f\"ur Folgen von Zufallsvariablen nicht klar, dass es diese \"uberhaupt gibt. In der Tat kann man auch in diesem Fall eine kanonische Konstruktion angeben, die uns die Existenz von Folgen unabh\"angiger Zufallsvariablen gibt. Der kanonische Wahrscheinlichkeitsraum besteht ganz analog aus den Werten, die angenommen werden. Dies war zun\"achst $\R$, dann $\R^d$ und ist nun $\R^\infty$ (die Menge der reellen Folgen). Die kanonische $\sigma$-Algebra ist die passende \enquote{Borel}-$\sigma$-Algebra und die Folge der Zufallsvariablen ist durch die Identit\"atsabbildung gegeben. Das Thema geh\"ort eigentlich nicht in die Stochastik 1 sondern in die Wahrscheinlichkeitstheorie 1. Daher skizzieren wir die Konstruktion nur ganz kurz. Ihr solltet euch jedoch merken, dass es eine kanonische Konstruktion gibt und insbesondere Folgen von unabh\"angigen Zufallsvariablen existieren
+\begin{satz}[Kanonische Konstruktion von Folgen unabhängiger Zufallsvariablen]
+	Seien $F_1,F_2,...$ Verteilungsfunktionen, so existieren ein Wahrscheinlichkeitsraum $(\Omega, \cA, \mathbb{P})$ und \textit{unabhängige} Zufallsvariablen $X_1,X_2,...$ auf $(\Omega, \cA, \mathbb{P})$ mit $X_i \sim F_i$.
+\end{satz}
+
+
+\begin{proof}
+	Kanonische Konstruktion:
+\begin{itemize}
+\item $\Omega = \R^{\infty} := \{ a_n\colon n \in \N \}$, die Menge der \enquote{reelle Folgen}.
+\item $\cA = \cB(\R^{\infty}) := \sigma(\{B_1\times ... \times B_d \times \R \times ... : d\in \N, B_1, ..., B_d \in \cB(\R) \})$
+\item $\mathbb{P} = \mathbb{P}_{F_1} \otimes \mathbb{P}_{F_2} \otimes ...$, das unendliche Produktma\ss, das auf dem Erzeuger von $\cA$ festgelegt ist durch $\mathbb P(B_1 \times ... \times B_d \times \R\times ...)=\mathbb P_{X_1}(B_1) \cdots \mathbb P_{X_d}(B_d)$.
+\item $(X_1(\omega), X_2(\omega), ... ):=X(\omega):=\omega$
+\end{itemize}
+Um zu zeigen, dass es ein unendliches Produktma\ss{} auf $(\R^\infty, \mathcal B(\R^\infty))$ auch gibt, kann man den Fortsetzungssatz von Carath\'eodory anwenden. Das ist etwas h\"asslich, siehe Wahrscheinlichkeitstheorie 1. Die Unabh\"angigkeit der konstruierten Folge folgt direkt aus der Produkteigenschaft des Produktma\ss es. Auch sofort folgt durch Einsetzen, dass die Randverteilungen $\mathbb P(X_i\leq t)=F_{X_i}(t)$ erf\"ullen.
+\end{proof}
+
+\begin{deff}
+	Sind alle $F_i$ gleich, so nennen wir die Folge $X_1,X_2,...$ eine u.i.v. Folge mit $X_1 \sim F_1$.
+\end{deff}
+In den n\"achsten Kapitel schauen wir uns Konvergenzeigenschaften von u.i.v Folgen an, insbesondere das Gesetz der gro\ss en Zahlen und den zentralen Grenzwertsatz.
+
+\section{Konvergenz von Zufallsvariablen}
+Bevor wir zu den zentralen Konvergenzs\"atzen kommen, m\"ussen wir uns \"uberlegen, was Konvergenz von Zufallsvariablen \"uberhaupt bedeutet. Das ist in der Tat gar nicht so klar, es gibt verschiedene Begriffe:
+\begin{deff}[Vier Konvergenzarten in der Stochastik]
+	Für eine Zufallsvariable $X$ und eine Folge $X_1,X_2,...$ von Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$  definiert man
+	\begin{enumerate}[label=(\roman*)]
+		\item \enquote{$X_n$ konvergiert \textbf{stochastisch} gegen $X$}, man schreibt		
+		$$X_n \overset{P}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\forall \varepsilon > 0\colon \mathbb{P}(|X_n-X|>\varepsilon) \to 0, \quad n \to \infty.$$
+		\item \enquote{$X_n$ konvergiert \textbf{im $p$-ten Mittel} gegen $X$} (oder \enquote{in $\cL_p$}) f\"ur $p\geq 1$, man schreibt
+		$$X_n \overset{\cL^p}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\E[|X_n - X|^p] \to 0, \quad n \to \infty.$$
+		\item 
+		\enquote{$X_n$ konvergiert \textbf{fast sicher} gegen $X$}, man schreibt
+		$$X_n \overset{\text{f. s.}}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\mathbb{P}(X_n \to X) := \mathbb{P}(\{ \omega\colon X_n(\omega) \to X(\omega), \: n\to \infty \}) = 1.$$
+		\item 
+		 \enquote{$X_n$ konvergiert  \textbf{in Verteilung} (oder schwach) gegen $X$}, man schreibt		
+		$$X_n \overset{(d)}{\longrightarrow} X, \quad n \to \infty,$$ falls $$\lim\limits_{n \to \infty} \E[f(X_n)] = \E[f(X)]\,\, \text{ f\"ur alle } f \colon \R \to \R \text{ stetig und beschränkt}.$$
+	\end{enumerate}
+\end{deff}
+Nur die ersten drei Konvergenzbegriffe ben\"otigen wirklich, dass die Zufallsvariablen auf dem selben Wahrscheinlichkeitsraum definiert sind. Die Konvergenz in Verteilung ist strukturell anders weil die Zufallsvariablen nicht direkt mit der Grenzzufallsvariablen \enquote{verglichen} werden, es wird nicht $|X_n-X|$ berechnet. Die Konvergenz in Verteilung h\"angt tats\"achlich nur von den Verteilungen ab, vergleiche dazu die Berechnungsformel des Erwartungswertes mit dem Transformationssatz, Lemma \ref{ewTrafo}.
+\begin{bem}\abs
+	\begin{enumerate}[label=(\roman*)]
+		\item Warnung: Die Konvergenzen sind nicht durch Metriken definiert worden, \mbox{d. h.} \"ubliche Tricks aus der Analysis (z. B. $\triangle$-Ungleichung) gelten nicht einfach so! Nur wenn man einen Quotientenraum mit fast sicher gleichen ZV bildet, ist Konvergenz im $p$-ten Mittel eine Normenkonvergenz.
+		\item Zwei Konvergenzarten sind uns schon bekannt, zwei sind neu:
+		\begin{itemize}
+			\item fast sichere Konvergenz schon von messbaren Funktionen bekannt,
+			\item $p$-tes Mittel schon von $(\mathcal L^p, ||\cdot||_p)$ bekannt.
+		\end{itemize}
+	\end{enumerate}
+\end{bem}
+
+Um ein Gef\"uhl f\"ur die Konvergenzarten zu bekommen, sind Beispiele \"ausserst n\"utzlich. Viele n\"utzliche Beispiele k\"onnen ganz explizit hingeschrieben werden.
+\begin{beispiel}
+	Seien $X_1, X_2, ... $ Zufallsvariablen mit $$\mathbb{P}(X_n = e^n) = \frac{1}{n}, \quad \mathbb{P}(X_n = 0) = 1 - \frac{1}{n},$$ so gelten:\smallskip
+	
+	$X_n \overset{P}{\longrightarrow} 0$, $n \to \infty,$ weil $$\mathbb{P}(|X_n - X| > \varepsilon) = \mathbb{P}(X_n = e^n)=\frac{1}{n}\to 0, \quad n\to\infty.$$
+	
+	$X_n \overset{\cL^p}{\not\longrightarrow} 0$, $n \to \infty$, f\"ur alle $p\geq 1$, weil 
+	$$\E[|X_n - X|^p] = \E[|X_n|^p] = e^{pn} \frac{1}{n} + 0^p\Big(1-\frac{1}{n}\Big) = \frac{e^{pn}}{n} \to +\infty,\quad n\to\infty.$$
+\end{beispiel}
+Das n\"achste Beispiel ist sehr anschaulich. Dazu beachten wir, dass die Einschr\"ankung des Lebesguema\ss es auf $[0,1]$ ein Wahrscheinlichkeitsma\ss{} ist. WIr k\"onnen also viele Beispiele basteln, wenn wir uns als Zufallsvariablen einfach messbare Funktionen (z. B. Indikatorfunktionen) auf $[0,1]$ w\"ahlen. Das hat den Vorteil, dass die Begriffe durch Skizzen sehr anschaulich gemacht werden k\"onnen. So ist zum Beispiel die fast sichere Konvergenz die punktweise Konvergenz (bis auf eine Nullmenge) und die $\mathcal L^p$-Konvergenz ist die Konverenz der Fl\"acheninhalte der Differenzfunktion (hoch $p$) weil $\E[X]=\int_0^1 X(\omega)\dint \omega$. Sieht wegen $\dint \omega$ vielleicht bl\"od aus, ist aber einfach nur das ganz normale Integral auf $[0,1]$.
+\begin{beispiel}
+	Sei $\Omega = [0,1]$, $\cA = \cB([0,1])$ und $\mathbb{P} = \lambda_{[0,1]}$, das Lebesgue Ma\ss{} auf $[0,1]$. Zufallsvariablen sind hier also ganz einfach, es sind messbare Abbildungen von $[0,1]$ nach $\R$. Der Erwartungswert ist dann einfach nur das Integral auf $[0,1]$. Schauen wir uns als Beispiel $X \equiv 0$ und die Folge
+	\[ X_n(\omega) = \begin{cases}
+	1&:\frac{m}{2^k} < \omega \leq \frac{m+1}{2^k}\\
+	0&: \text{sonst}\\
+	\end{cases} \]
+	an, wobei $m,k \in \N$ die eindeutigen nat\"urlichen Zahlen mit $n = 2^k + m$ und $m < 2^k$ sind. In Worten (ab besten skizziert ihr die Funktionen) schieben wir f\"ur wachsendes $n$ einfach nur Indikatorfunktionen von links nach rechts durch $[0,1]$, wobei die breite der Indikatorfunktionen schmaler wird: $\mathbf 1_{(0,\frac 1 2]}, \mathbf 1_{(\frac 1 2, 1]}, \mathbf 1_{(0,\frac 1 4]}, \mathbf 1_{(\frac 1 2, \frac 1 4]}$, ... 
+Mit dieser Folge gelten:\smallskip	
+	
+	$\mathbf{X_n \overset{\cL^p}{\longrightarrow} 0, n \to \infty}$, weil
+	\begin{gather*}
+		\E[|X_n-X|^p] = \E[|X_n|^p] = \int_{\Omega} X_n^p(\omega) \dint \mathbb{P}(\omega) = \int_{0}^{1} \mathbf 1_{(\frac{m}{2^k},\frac{m+1}{2^k}]}(\omega) \dint\omega = \frac{1}{2^k}.
+	\end{gather*}
+	Weil mit $n\to\infty$ auch $k\to \infty$ gilt, konvergiert die Folge also im $p$-ten Mittel gegen $0$. Warum ist das auch anschaulich klar? $\E[|X_n|^p]$ ist der Fl\"acheninhalt zwischen der Indikatorfunktion und der $x$-Achse. Weil die Breite des Indikators gegen $0$ konvergiert, konvergiert das Integral und damit (in diesem Wahrscheinlichkeitsraum) der Erwartungswert gegen $0$.\smallskip	
+	
+	$\mathbf{X_n \overset{\text{f. s.}}{\not\longrightarrow} 0, n \to \infty}$, weil 
+	$$\mathbb{P}(\{ \omega\colon X_n(\omega) \to 0 \}) = 0.$$
+	Man beachte: In diesem Wahrscheinlichkeitsraum bedeutet die fast sichere Konvergenz die punktweise Konvergenz auf einer Menge von Ma\ss{} $1$. Weil diese Folge ausgewertet in beliebigem $\omega\in [0,1]$ unendlich oft zwischen $0$ und $1$ wechselt ($1$ wenn das kleine Intervall $\omega$ enth\"alt, $0$ sonst), konvergiert sie sogar fast sicher nicht. 
+\end{beispiel}
+\begin{beispiel}\label{Adam}
+	Seien $X_1, X_2, ... $ unabh\"angige Zufallsvariablen mit $$\mathbb{P}(X_n = 1) = \frac{1}{n}, \quad \mathbb{P}(X_n = 0) = 1 - \frac{1}{n},$$ also $X_n \sim \operatorname{Ber}(\frac{1}{n})$, $n \in \N$. Man stelle sich z. B. unabh\"angige M\"unzw\"urfe vor ($1$ bedeutet \enquote{Zahl}, $0$ bedeutet \enquote{Kopf}), bei denen die Wahrscheinlichkeit f\"ur \enquote{Zahl} immer kleiner wird. Alternativ kann man sich unabh\"angige Versuche vorstellen, bei denen $1$ \enquote{Erfolg} und $0$ \enquote{Misserfolg} bedeutet. Mit dieser Folge gelten:\smallskip
+	
+	$\mathbf{X_n \overset{P}{\longrightarrow}0, n \to \infty}$:
+	Für $\varepsilon > 0$ gilt 
+	\[ \mathbb{P}(|X_n - X| > \varepsilon) = \mathbb{P}(X_n > \varepsilon) = 
+	\begin{cases} 
+	\mathbb{P}(X_n = 1)&: \epsilon\leq 1\\
+	0&: \epsilon> 1
+	\end{cases}
+	 = 
+	 \begin{cases}
+		 \frac{1}{n}&: \epsilon\leq 1\\
+		 0 &: \epsilon >1
+	\end{cases}	 
+		 \to 0, \quad n \to \infty.
+		  \]
+	
+	$\mathbf{X_n \overset{\text{f. s.}}{\not\longrightarrow}0, n \to \infty}$: Das Argument ist nicht einfach, taucht aber im n\"achsten Kapitel in verschiedenen Formen auf. Wir schreiben die Konvergenz um, indem wir die $\epsilon-N$-Definition in Schnitte und Vereinigen \"ubersetzten. Die k\"onnen wir dann mit den Mengenmanipulationen der Ma\ss theorie behandeln:
+	\begin{align*}
+		\mathbb{P}(X_n \to 0) &= \mathbb{P}(\{ \omega\colon X_n(\omega) \to 0 \})\\
+		& = \mathbb{P}(\{ \omega\colon \exists n_0 \in \N \colon X_n(\omega) = 0 \: \forall n \geq n_0 \})\\
+		&= \mathbb{P}\Big(\bigcup_{n_0 = 1}^{\infty} \bigcap_{n \geq n_0} \{ \omega: X_n(\omega) = 0 \}\Big)\\
+		& \overset{\text{subadd.}}{\leq} \sum\limits_{n_0 = 1}^{\infty} \mathbb{P}\Big(\bigcap_{n \geq n_0} \{ X_n(\omega) = 0 \}\Big)\\
+		& \overset{\text{Stet. von Ma\ss en}}{=} \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \mathbb{P}\Big(\bigcap_{n = n_0}^m \{ X_n(\omega) = 0 \}\Big)\\
+		& \overset{\text{unab.}}{=} \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty} \prod_{n=n_0}^m \mathbb{P}(X_n = 0)\\
+		& = \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \Big(1-\frac{1}{n_0}\Big)\cdots \Big(1-\frac{1}{m}\Big)\\
+		& = \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \Big(\frac{n_0-1}{n_0}\Big)\cdots \Big(\frac{m-1}{m}\Big)\\
+		& \overset{\text{k\"urzen}}{=} \sum\limits_{n_0 = 1}^{\infty} \lim_{m\to\infty}  \frac{n_0-1}{m}=0.
+	\end{align*}
+\end{beispiel}
+	Die ersten drei Zeilen der letzten Rechnung sind unglaublich wichtig. Sie werden der Weg sein, das starke Gesetz der gro\ss en Zahlen zu beweisen. Zur Erinnerung, wie hatten wir Vereinigungen und Schnitte in Analysis 1 definiert?
+	\begin{align*}
+		\bigcup_{i\in I} A_i&:=\{\omega \in \Omega\, |\, \text{es gibt ein }i\in I \text{ mit }\omega \in A_i\},\\
+		\bigcap_{i\in I} A_i&:=\{\omega \in \Omega\, |\, \text{f\"ur alle }i\in I \text{ gilt }\omega \in A_i\}.
+	\end{align*}
+	Daher kann fast sichere Konvergenz immer in Vereinigungen \"uber Schnitte umformuliert werden und diese k\"onnen wir immer mit Subadditivit\"at und Stetigkeit von Ma\ss en attackieren.
+\marginpar{\textcolor{red}{Vorlesung 25}}
+
+
+\begin{beispiel}
+	Sei $\Omega = [0,1]$, $\cA = \cB([0,1])$ und $\mathbb{P} = \lambda_{|[0,1]}$, das Lebesguema\ss{} auf $[0,1]$. Wir schauen uns die konkrete Folge $$X_n = n \cdot \mathbf{1}_{[0,\frac{1}{n}]}$$ an, und schauen, in welchem Sinne sie gegen die Grenzzufallsvariable $X=0$ (Nullfunktion) konvergiert. \smallskip
+			
+	$\mathbf{X_n \overset{\text{f. s.}}{\longrightarrow} 0, n \to \infty:}$ Das ist klar, weil in diesem Beispiel die fast sichere Konvergenz einfach nur die \"ubliche punktweise Konvergenz von Funktionen auf einer Menge von Ma\ss{} $1$ bedeutet und unsere Folge auf $(0,1]$ punktweise gegen $0$ konvergiert. Weil ein einzelner Punkt im Lebesguema\ss{} eine Nullmenge ist, konvergiert die Folge fast sicher:	
+	$$\mathbb{P}(X_n \to 0) = \mathbb{P}((0,1]) = 1.$$
+	
+	$\mathbf{X_n \overset{P}{\longrightarrow} 0, n \to \infty}$:	Sei dazu $\varepsilon > 0$. Die stochastische Konvergenz folgt, weil
+	\begin{align*}
+		\mathbb{P}(|X_n-X| > \varepsilon) &= \mathbb{P}(|X_n| > \varepsilon) \\
+		&= \mathbb{P}(\mathbf{1}_{[0,\frac{1}{n}]} > \varepsilon)\\
+		& = \mathbb{P}\Big(\Big[0,\frac{1}{n}\Big]\Big)\\
+		&\overset{\text{Def.}}{ =} \frac{1}{n} \to 0, \quad n\to\infty.
+	\end{align*}	
+	$\mathbf{X_n \overset{\cL^p}{\not\longrightarrow} 0, n \to \infty}$: Weil wir nur Erwartungswerte von Indikatoren berechnen m\"ussen, folgt alles direkt aus den Rechenregeln f\"ur Erwartungswerte:
+	\begin{align*}
+		\E[X_n-X|^p] & = \E[n^p \cdot \mathbf{1}_{[0,\frac{1}{n}]}^p]\\
+		& = n^p \E[ \mathbf{1}_{[0,\frac{1}{n}]}] \\
+		&= n^p \mathbb{P}\Big(\Big[0,\frac{1}{n}\Big]\Big) \\
+		&= n^p  \frac{1}{n} = n^{p-1} \not\to 0,\quad  n \to \infty,
+	\end{align*}
+	weil wir bei $\mathcal L^p$-Konvergenz immer $p\geq 1$ annehmen.
+\end{beispiel}
+\begin{beispiel}
+	Sei $X \sim \cN(0,1)$ und $X_n = (-1)^n X$ f\"ur $n\in \N$. Es gilt aufgrund der Symmetrie der Normalverteilung $X_n \sim \cN(0,1)$ f\"ur alle $n\in\N$. Weil Erwartungswerte nur von der Verteilung abh\"angen, gilt also $\E[f(X)]=\E[f(X_n)]$ f\"ur alle $n\in\N$, die Folge der Erwartungswerte ist also konstant und konvergiert daher gegen $\E[f(X)]$. Also gilt $X_n \overset{(d)}{\longrightarrow} X, n\to\infty$. Andere Konvergenzarten gelten f\"ur diese Folge nicht.
+\end{beispiel}
+Mit den Beispielen haben wir schon ein paar Beispiele gesammelt, die zeigen, dass die Konvergenzarten nicht \"aquivalent sein k\"onnen. Das allgemeine Bild sieht wie folgt aus:
