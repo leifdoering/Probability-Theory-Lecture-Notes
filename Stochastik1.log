@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.23)  1 APR 2022 08:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.23)  1 APR 2022 11:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1391,32 +1391,28 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 <special> ps:tx@Dict begin  gsave STV CP T /ps@rot 0 def grestore  end
 
-{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (/Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/Stochastik1.toc
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 3.
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.40 ...onvergence theorem}{187}{subsection.6.3.3}
-                                                  % [1
-
-
-])
+{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (/Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/Stochastik1.toc)
 \tf@toc=\write8
 \openout8 = `Stochastik1.toc'.
 
- [2] (./kapitel/kapitel0/kapitel0.tex) (./kapitel/kapitel1/Kapitel1.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.196 	\mainmatter
+                   [1
+
+
+] (./kapitel/kapitel0/kapitel0.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 5.
+) (./kapitel/kapitel1/Kapitel1.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.3 	\part
           *{Teil 1: Maß- und Integrationstheorie} [1
 
 
-]pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.3 	\part*{Teil 1: Maß- und Integrationstheorie}
-                                                   [2
+] [2
 
 ]
 Kapitel 1.
@@ -1773,7 +1769,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1291--1293
  []
 
 [120] [121]
-<Satz.png, id=2746, 4859.15375pt x 2820.5375pt>
+<Satz.png, id=2692, 4859.15375pt x 2820.5375pt>
 File: Satz.png Graphic file (type png)
 <use Satz.png>
 Package pdftex.def Info: Satz.png  used on input line 1339.
@@ -1800,7 +1796,7 @@ Kapitel 5.
 [141
 
 ]
-<macros/Bilder/stretching.png, id=3250, 513.92pt x 513.92pt>
+<macros/Bilder/stretching.png, id=3196, 513.92pt x 513.92pt>
 File: macros/Bilder/stretching.png Graphic file (type png)
 <use macros/Bilder/stretching.png>
 Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 29.
@@ -1818,18 +1814,18 @@ Overfull \hbox (6.13895pt too wide) detected at line 82
 Underfull \vbox (badness 2828) has occurred while \output is active []
 
  [142 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/macros/Bilder/stretching.png>]
-<macros/Bilder/wrench2.png, id=3260, 513.92pt x 513.92pt>
+<macros/Bilder/wrench2.png, id=3205, 513.92pt x 513.92pt>
 File: macros/Bilder/wrench2.png Graphic file (type png)
 <use macros/Bilder/wrench2.png>
 Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 97.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-<macros/Bilder/warning.png, id=3262, 513.92pt x 513.92pt>
+<macros/Bilder/warning.png, id=3207, 513.92pt x 513.92pt>
 File: macros/Bilder/warning.png Graphic file (type png)
 <use macros/Bilder/warning.png>
 Package pdftex.def Info: macros/Bilder/warning.png  used on input line 103.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
  [143 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/macros/Bilder/wrench2.png> </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/macros/Bilder/warning.png>]
-<macros/Bilder/footprints.png, id=3271, 513.92pt x 513.92pt>
+<macros/Bilder/footprints.png, id=3217, 513.92pt x 513.92pt>
 File: macros/Bilder/footprints.png Graphic file (type png)
 <use macros/Bilder/footprints.png>
 Package pdftex.def Info: macros/Bilder/footprints.png  used on input line 127.
@@ -1847,7 +1843,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [145] [146]
-<macros/Bilder/open-book-2.png, id=3296, 513.92pt x 513.92pt>
+<macros/Bilder/open-book-2.png, id=3242, 513.92pt x 513.92pt>
 File: macros/Bilder/open-book-2.png Graphic file (type png)
 <use macros/Bilder/open-book-2.png>
 Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 364.
@@ -1930,7 +1926,7 @@ File: macros/Bilder/wrench2.png Graphic file (type png)
 Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 731.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
  [154]
-<macros/Bilder/heart.png, id=3405, 513.92pt x 513.92pt>
+<macros/Bilder/heart.png, id=3350, 513.92pt x 513.92pt>
 File: macros/Bilder/heart.png Graphic file (type png)
 <use macros/Bilder/heart.png>
 Package pdftex.def Info: macros/Bilder/heart.png  used on input line 771.
@@ -1947,55 +1943,55 @@ Package pdftex.def Info: macros/Bilder/warning.png  used on input line 857.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 File: macros/Bilder/wrench2.png Graphic file (type png)
 <use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 874.
+Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 875.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
  [157]
 File: macros/Bilder/stretching.png Graphic file (type png)
 <use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 911.
+Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 912.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 File: macros/Bilder/wrench2.png Graphic file (type png)
 <use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 922.
+Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 923.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 File: macros/Bilder/stretching.png Graphic file (type png)
 <use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 933.
+Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 934.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
  [158]
 File: macros/Bilder/stretching.png Graphic file (type png)
 <use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 933.
+Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 934.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 
 
-LaTeX Warning: Reference `formelnp' on page 159 undefined on input line 946.
+LaTeX Warning: Reference `formelnp' on page 159 undefined on input line 947.
 
 File: macros/Bilder/wrench2.png Graphic file (type png)
 <use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 972.
+Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 973.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 [159]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 1017.
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 1018.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 ) [160]
 File: macros/Bilder/open-book-2.png Graphic file (type png)
 <use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1077.
+Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1078.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 File: macros/Bilder/open-book-2.png Graphic file (type png)
 <use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1088.
+Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1089.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 File: macros/Bilder/wrench2.png Graphic file (type png)
 <use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1104.
+Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1105.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
  [161]
 File: macros/Bilder/wrench2.png Graphic file (type png)
 <use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1174.
+Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1175.
 (pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
 
 Underfull \vbox (badness 1097) has occurred while \output is active []
@@ -2003,839 +1999,4 @@ Underfull \vbox (badness 1097) has occurred while \output is active []
  [162]
 File: macros/Bilder/warning.png Graphic file (type png)
 <use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 1233.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [163]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1241.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-) (./kapitel/kapitel6/Kapitel6.tex [164]
-Kapitel 6.
-
-LaTeX Warning: Reference `secGGZ' on page 165 undefined on input line 5.
-
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 14.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-LaTeX Warning: Reference `secStochastik' on page 165 undefined on input line 15.
-
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 30.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 41.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[165
-
-]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 41.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/8'
-(microtype)             (new value: 8.0pt) on input line 42.
-Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/6'
-(microtype)             (new value: 6.0pt) on input line 42.
-File: macros/Bilder/warning.png Graphic file (type png)
-<use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 49.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- (/Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/./kapitel/Kapitel6/Bilder/ex_2_3_BM.tex)
-Underfull \vbox (badness 1132) has occurred while \output is active []
-
- [166]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 148.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 158.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [167]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 170.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/warning.png Graphic file (type png)
-<use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 175.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 228.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [168]
-<macros/Bilder/idea.png, id=3574, 513.92pt x 513.92pt>
-File: macros/Bilder/idea.png Graphic file (type png)
-<use macros/Bilder/idea.png>
-Package pdftex.def Info: macros/Bilder/idea.png  used on input line 279.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 287.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 315.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 325.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [169 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/macros/Bilder/idea.png>]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 360.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 385.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [170]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 412.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 453.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[171]
-File: macros/Bilder/idea.png Graphic file (type png)
-<use macros/Bilder/idea.png>
-Package pdftex.def Info: macros/Bilder/idea.png  used on input line 497.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/idea.png Graphic file (type png)
-<use macros/Bilder/idea.png>
-Package pdftex.def Info: macros/Bilder/idea.png  used on input line 528.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-<M2.jpeg, id=3616, 2689.04625pt x 1003.75pt>
-File: M2.jpeg Graphic file (type jpg)
-<use M2.jpeg>
-Package pdftex.def Info: M2.jpeg  used on input line 531.
-(pdftex.def)             Requested size: 322.67163pt x 120.4448pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[172]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 554.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [173 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/M2.jpeg>]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 598.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/warning.png Graphic file (type png)
-<use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 611.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 616.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[174]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 695.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [175]
-File: macros/Bilder/idea.png Graphic file (type png)
-<use macros/Bilder/idea.png>
-Package pdftex.def Info: macros/Bilder/idea.png  used on input line 718.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/warning.png Graphic file (type png)
-<use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 747.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [176]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 774.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 786.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 802.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [177]
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 849.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 855.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [178]
-File: macros/Bilder/footprints.png Graphic file (type png)
-<use macros/Bilder/footprints.png>
-Package pdftex.def Info: macros/Bilder/footprints.png  used on input line 862.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 880.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-<mart2.jpeg, id=3686, 1098.1025pt x 1003.75pt>
-File: mart2.jpeg Graphic file (type jpg)
-<use mart2.jpeg>
-Package pdftex.def Info: mart2.jpeg  used on input line 886.
-(pdftex.def)             Requested size: 439.23322pt x 401.49289pt.
-
-Overfull \hbox (23.82297pt too wide) in paragraph at lines 886--888
-[][]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [179] [180 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/mart2.jpeg>]
-
-LaTeX Warning: Reference `mlimits' on page 181 undefined on input line 918.
-
-[181]
-Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/12'
-(microtype)             (new value: 12.0pt) on input line 979.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 979.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 979.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 979.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 979.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 979.
-
-
-LaTeX Warning: Reference `Lp' on page 182 undefined on input line 980.
-
-Missing character: There is no ; in font nullfont!
-[182]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1028.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1034.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [183]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1059.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1083.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-LaTeX Warning: Reference `zusatz' on page 184 undefined on input line 1087.
-
-[184]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1107.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 1124.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [185]
-File: macros/Bilder/footprints.png Graphic file (type png)
-<use macros/Bilder/footprints.png>
-Package pdftex.def Info: macros/Bilder/footprints.png  used on input line 1134.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [186]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1177.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1192.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 1192.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1192.
-
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1205.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1217.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[187]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1238.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1246.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1262.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [188]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1286.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [189]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1329.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-LaTeX Warning: Reference `Lp' on page 190 undefined on input line 1339.
-
-[190]
-
-LaTeX Warning: Reference `konvergenzsatz' on page 191 undefined on input line 1374.
-
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1375.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 1395.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[191]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1448.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [192]
-Overfull \hbox (28.46353pt too wide) in paragraph at lines 1487--1487
-[][][]$\U/msb/m/n/10 E\OT1/lmr/m/n/10 (-20) [\OML/lmm/m/it/10 Z\OMS/lmsy/m/n/10 jF[]\OT1/lmr/m/n/10 (-20) ]$[]  
- []
-
-
-Overfull \hbox (28.46353pt too wide) in paragraph at lines 1488--1488
-[][][]$\U/msb/m/n/10 E\OT1/lmr/m/n/10 (-20) [\OML/lmm/m/it/10 Z\OMS/lmsy/m/n/10 jF[]\OT1/lmr/m/n/10 (-20) ]$[]  
- []
-
-Missing character: There is no ) in font nullfont!
-Missing character: There is no ; in font nullfont!
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1531.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[193] [194]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1617.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1623.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1634.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [195]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1634.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [196]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1719.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [197]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1744.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1754.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 1770.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [198]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1798.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-) (./kapitel/kapitel7/Kapitel7.tex [199]
-Kapitel 7.
-
-LaTeX Warning: Reference `sec:konvergenz' on page 200 undefined on input line 4.
-
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 25.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 63.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[200
-
-]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 63.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 80.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 113.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 117.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 123.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [201]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 141.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 151.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 155.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 165.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [202]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 190.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 202.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 212.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 216.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 230.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [203]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 230.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 236.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 266.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [204]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 295.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 301.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-<f.jpeg, id=4135, 3760.0475pt x 1003.75pt>
-File: f.jpeg Graphic file (type jpg)
-<use f.jpeg>
-Package pdftex.def Info: f.jpeg  used on input line 316.
-(pdftex.def)             Requested size: 263.23022pt x 70.26967pt.
- [205 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/f.jpeg>]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 330.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-LaTeX Warning: Reference `Konvergenzarten' on page 206 undefined on input line 343.
-
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 356.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 368.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[206]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 368.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-LaTeX Warning: Reference `sec:konvergenz' on page 207 undefined on input line 369.
-
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 372.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/footprints.png Graphic file (type png)
-<use macros/Bilder/footprints.png>
-Package pdftex.def Info: macros/Bilder/footprints.png  used on input line 388.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 408.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[207]
-File: macros/Bilder/warning.png Graphic file (type png)
-<use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 415.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [208]
-
-LaTeX Warning: Reference `sec:push' on page 209 undefined on input line 476.
-
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 485.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[209]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 485.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 545.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 571.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [210]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 598.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-<tight.jpeg, id=4196, 3485.02pt x 1003.75pt>
-File: tight.jpeg Graphic file (type jpg)
-<use tight.jpeg>
-Package pdftex.def Info: tight.jpeg  used on input line 602.
-(pdftex.def)             Requested size: 243.97632pt x 70.26967pt.
- [211 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/tight.jpeg>]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 636.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 639--640
-
- []
-
-[212] [213]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 738.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [214]
-Package microtype Info: Fixing zero fontdimen6 for font `U/dsrom/m/n/14.4'
-(microtype)             (new value: 14.4pt) on input line 770.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 770.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 770.
-
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 778.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-Package amsmath Warning: Foreign command \atopwithdelims;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 788.
-
-[215]
-
-LaTeX Warning: Reference `sec:RV' on page 216 undefined on input line 818.
-
-File: macros/Bilder/footprints.png Graphic file (type png)
-<use macros/Bilder/footprints.png>
-Package pdftex.def Info: macros/Bilder/footprints.png  used on input line 836.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[216]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 865.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 872.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [217]
-<complex.jpeg, id=4275, 1915.155pt x 1003.75pt>
-File: complex.jpeg Graphic file (type jpg)
-<use complex.jpeg>
-Package pdftex.def Info: complex.jpeg  used on input line 910.
-(pdftex.def)             Requested size: 134.07454pt x 70.26967pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[218]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 926.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 949.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [219 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/complex.jpeg>]
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 972.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 978.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1009.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [220]
-
-LaTeX Warning: Reference `momg' on page 221 undefined on input line 1012.
-
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1037.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[221]
-File: macros/Bilder/open-book-2.png Graphic file (type png)
-<use macros/Bilder/open-book-2.png>
-Package pdftex.def Info: macros/Bilder/open-book-2.png  used on input line 1045.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1059.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1064.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [222]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1098.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [223]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1159.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 1167.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-<compact.jpeg, id=4341, 2581.645pt x 1003.75pt>
-File: compact.jpeg Graphic file (type jpg)
-<use compact.jpeg>
-Package pdftex.def Info: compact.jpeg  used on input line 1173.
-(pdftex.def)             Requested size: 180.73361pt x 70.26967pt.
-<periodic.jpeg, id=4343, 1623.06375pt x 1003.75pt>
-File: periodic.jpeg Graphic file (type jpg)
-<use periodic.jpeg>
-Package pdftex.def Info: periodic.jpeg  used on input line 1190.
-(pdftex.def)             Requested size: 113.62607pt x 70.26967pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[224 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/compact.jpeg>]
-File: macros/Bilder/warning.png Graphic file (type png)
-<use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 1223.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [225 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/periodic.jpeg>]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1236.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1240.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1240.
-
-
-Overfull \hbox (2.74158pt too wide) detected at line 1253
-[]
- []
-
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1260.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-Overfull \hbox (0.82506pt too wide) detected at line 1274
-[]
- []
-
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1281.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[226]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1281.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1366--1367
-[]\T1/lmr/m/n/10 (+20) Suppose that
- []
-
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 1376.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/warning.png Graphic file (type png)
-<use macros/Bilder/warning.png>
-Package pdftex.def Info: macros/Bilder/warning.png  used on input line 1385.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-[227]
-<bild.jpg, id=4392, 616.3025pt x 570.13pt>
-File: bild.jpg Graphic file (type jpg)
-<use bild.jpg>
-Package pdftex.def Info: bild.jpg  used on input line 1436.
-(pdftex.def)             Requested size: 184.89217pt x 171.04031pt.
- [228 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/bild.jpg>]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1497.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [229]
-<characteristic.jpeg, id=4405, 2590.67876pt x 1003.75pt>
-File: characteristic.jpeg Graphic file (type jpg)
-<use characteristic.jpeg>
-Package pdftex.def Info: characteristic.jpeg  used on input line 1511.
-(pdftex.def)             Requested size: 181.36604pt x 70.26967pt.
- [230 </Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/characteristic.jpeg>]
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1553.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [231]
-File: macros/Bilder/stretching.png Graphic file (type png)
-<use macros/Bilder/stretching.png>
-Package pdftex.def Info: macros/Bilder/stretching.png  used on input line 1609.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
-File: macros/Bilder/wrench2.png Graphic file (type png)
-<use macros/Bilder/wrench2.png>
-Package pdftex.def Info: macros/Bilder/wrench2.png  used on input line 1620.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [232]
-File: macros/Bilder/heart.png Graphic file (type png)
-<use macros/Bilder/heart.png>
-Package pdftex.def Info: macros/Bilder/heart.png  used on input line 1644.
-(pdftex.def)             Requested size: 17.07164pt x 17.07155pt.
- [233]
-Kapitel 8.
-) [234
-
-] (/Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/Stochastik1.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `Stochastik1.out' has not changed.
-(rerunfilecheck)             Checksum: B15CC60A168EF106D3E26BC4338CA7E3;11055.
- ) 
-Here is how much of TeX's memory you used:
- 57977 strings out of 478994
- 1240639 string characters out of 5858184
- 2105258 words of memory out of 5000000
- 72805 multiletter control sequences out of 15000+600000
- 555411 words of font info for 352 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 127i,29n,130p,1792b,2423s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{satz.7.4.13} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{satz.7.4.6} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{satz.7.4.5} has been referenced but does not exist, replaced by a fixed one
-
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} </Users/stochastik/Library/texlive/2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk>{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/fontawesome/fontawesomethree.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/fontawesome/FontAwesome.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmbx7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on "/Users/stochastik/uni-mannheim.de/Team Stochastik - Dokumente/Lehre/Stochastik 1/Skript/Stochastik1.pdf" (237 pages, 27050009 bytes).
-PDF statistics:
- 4811 PDF objects out of 5155 (max. 8388607)
- 3183 compressed objects within 32 object streams
- 1150 named destinations out of 1200 (max. 500000)
- 82554 words of extra memory for PDF output out of 89155 (max. 10000000)
-
+Package p
