@@ -1670,7 +1670,7 @@ F\"urs bessere Verst\"andniss kann man \"uberlegen, wie die Annahme \enquote{ide
 %\end{proof}
 
 
-\section{Starkes Gesetz der großen Zahlen} \marginpar{\textcolor{red}{Vorlesung 26}}
+\section{Starkes Gesetz der großen Zahlen} \marginpar{\textcolor{red}{Vorlesung 26}}\label{secGGZ}
 	Was bedeutet die stochastische Konvergenz, bzw. warum ist sie schwach? Seien als Beispiel $X_1,X_2,...$ u.i.v. Würfel, also diskret gleichverteilt auf $\{1,...,6\}$. Wegen $\E[X_1]=3,5$ bedeutet das schwache Gesetz der großen Zahlen (w\"ahle zum Beispiel $\varepsilon=0.01$), dass 
 	\[ \mathbb{P}\Big(3,49 < \frac{1}{n} \sum\limits_{i=1}^{n} X_i < 3,51\Big) = \mathbb{P}\Big(\Big|\frac 1 n\sum\limits_{i=1}^{n} X_i - \E[X_1]\Big| < 0,01\Big) \to 1, \quad n \to \infty. \]
 	In Worten steht hier: \enquote{Der Mittelwert wird mit hoher Wahrscheinlichkeit nah bei 3,5 liegen, wenn $n$ groß ist.} Es wird damit nicht ausgeschlossen, dass der Mittelwert mit kleiner Wahrscheinlichkeit weit vom Erwartungswert entfernt liegt. Genau hier liegt der Unterschied zum starken Gesetz der gro\ss en Zahlen, das wir als n\"achstes beweisen wollen. Hier wird die stochastische Konvergenz durch fast sichere Konvergenz ersetzt. Weil in der Definition der fast sicheren Konvergenz alle $n$ gemeinsam \textit{innerhalb} der Wahrscheinlichkeit auftauchen, $\mathbb P(X_n\to X)=1$, kann der Effekt nicht auftreten.\smallskip
