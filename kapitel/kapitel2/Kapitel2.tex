@@ -64,12 +64,12 @@ Schreibt euch das n\"achste Beispiel einmal selber hin:
 	\end{itemize}
 \end{beispiel}
 Die n\"achste Definition verallgemeinert die erzeugte $\sigma$-Algebra von einer auf beliebig viele Funktionen. Der Begriff ist f\"ur die Stochastik 1 nicht besonders wichtig, ist f\"ur die Finanzmathematik aber essentiell. Mit der Definition wird das Konzept von Information mathematisiert.
-\begin{deff}
+\begin{deff}\label{def:generatedsigmaalgebra}
 \link{https://www.youtube.com/watch?v=Pj5TaNiE05c&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=9&t=2608s}
 	Seien $(\Omega_i',\cA_i')$ messbare Räume und $f_i \! : \Omega \rightarrow \Omega_i', i \in I,$ f\"ur eine beliebige Indexmenge. Dann ist \[\sigma(f_i, \: i \in I) := \sigma \Big(\bigcup_{i \in I}\sigma(f_i)\Big) = \sigma(\{ f_i^{-1}(A_i) \! : A'_i \in \cA'_i, \: i \in I \}) \] die kleinste $\sigma$-Algebra auf $\Omega$, bez\"uglich derer alle $f_i$ messbar sind. Man spricht auch hier von der \textbf{von den $f_i, i\in I$, erzeugte $\sigma$-Algebra}.
 \end{deff}
 
-\section{Bildmaße oder \enquote{push-forward} eines Maßes}
+\section{Bildmaße oder \enquote{push-forward} eines Maßes}\label{sec:push}
 
 Wir nutzten die Messbarkeit einer $(\mathcal A, \mathcal A')$-messbaren Abbildung $f:\Omega\to \Omega'$, um ein Ma\ss{} $\mu$ auf $\mathcal A$ auf ein Ma\ss{} $\mu_f$ auf $\mathcal A'$ r\"uberzuschieben (deshalb \enquote{push-forward}). In dem Stochastikteil werden wir noch sehen, dass der push-forward extrem wichtig ist.
 

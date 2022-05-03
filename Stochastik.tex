@@ -1,0 +1,215 @@
+%%
+%% 'BScWIM.tex'
+%%
+%% LaTeX template for Bachelor theses at the faculty WIM
+%% of Mannheim University
+%%
+%% copyleft (2012-2014) by J. Berger, T. Christen, and J. Potthoff
+%% 
+%% copyleft 2015 on tiny changes by Martin Schlather 
+%%
+
+\documentclass[11 tpt, a4paper]{book}
+\usepackage{./macros/jpA4}
+\usepackage{./macros/BScMac}
+\usepackage{./macros/BScTitel}
+\input{./macros/fverbatim.tex}
+\usepackage{caption}
+
+\usepackage[paper=a4paper,left=32mm,right=32mm,top=32mm,bottom=32mm]{geometry}
+ 
+%% neu
+\usepackage{graphicx}
+\usepackage{float}
+%
+\usepackage{hyperref}
+
+\usepackage{qrcode}
+
+\usepackage{bbm}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calc}
+\usetikzlibrary{math}
+\usetikzlibrary{pgfplots.fillbetween}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
+
+
+
+\tikzset{
+  cross/.pic={
+    \draw[pic actions] 
+      (-3pt,0) -- (3pt,0)
+      (0,-3pt) -- (0,3pt);
+  },
+}
+\definecolor{darkgreen}{RGB}{52,125,63}
+\usepackage{aligned-overset} % !!!!!!!!!!!!
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage{enumitem}
+%\usepackage{halloweenmath}
+%\usepackage{MnSymbol}
+\usepackage{fontawesome}
+\usepackage{bclogo}
+\usepackage{csquotes}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{media9}
+\usepackage{pgfplots}
+\usepackage{titletoc}
+%\setmainfont{lmodern}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{cd}
+\usetikzlibrary{babel}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=1.14}
+
+\renewcommand{\P}{\mathbb P}
+\hypersetup{hidelinks}
+
+
+%----------------------------------------------------------------------------------------
+
+% Entsprechende Version auskommentieren bzw. nicht auskommentieren
+
+%----------------------------------------------------------------------------------------
+%	YOUTUBE LINKS VERSION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\link}[1]{
+\href{#1}{\color[HTML]{FF0000}{\faYoutubePlay}}
+}
+
+
+%----------------------------------------------------------------------------------------
+%	QR CODE VERSION
+%----------------------------------------------------------------------------------------
+
+%\newcommand{\link}[1]{
+%\marginpar{\vspace{0.2cm} \qrcode[height=1.7cm]{#1}}
+%}
+
+% Parameter height bestimmt Größe des QR Codes
+% \vspace muss (Stand jetzt) noch händisch einmalig auf die finale Größe angepasst werden
+%----------------------------------------------------------------------------------------
+
+\pgfmathdeclarefunction{gauss}{2}{%
+	\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\newcommand\symbolwithin[2]{%
+	{\mathmakebox[\widthof{\ensuremath{{}#2{}}}][c]{{#1}}}}
+
+%\command{\labelitemii}{\labelitemi}
+%\renewcommand{\thesubsection}{(\Alph{subsection})\hspace{-1em} }
+%\titleformat{\subsection}[]{}{\Alph}{\quad}
+
+\makeatletter
+\def\moverlay{\mathpalette\mov@rlay}
+\def\mov@rlay#1#2{\leavevmode\vtop{%
+		\baselineskip\z@skip \lineskiplimit-\maxdimen
+		\ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+\newcommand{\charfusion}[3][\mathord]{
+	#1{\ifx#1\mathop\vphantom{#2}\fi
+		\mathpalette\mov@rlay{#2\cr#3}
+	}
+	\ifx#1\mathop\expandafter\displaylimits\fi}
+\makeatother
+
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+\newcommand{\platz}{\relax}
+\newcommand{\dint}{\, \mathrm{d}}
+
+\parindent0mm
+
+%%
+%% Font auswaehlen: '\TimesFont' auskommentiert -> computer modern
+%% '\TimesFont' aktiv -> Textfont: times, Mathfont: computer modern
+%%
+%\TimesFont
+%%v
+%% ein- oder doppelseitiger Satz
+%%
+\einseitig
+%\doppelseitig
+%%
+%% deaktiviere die farbigen Rahmen um interne links (s. hyperref package):
+%%
+%\nocolorlinks
+
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			%% neu !!!			
+			%\hrule
+			%\vspace{\baselineskip}
+			%\vspace{1cm}
+			%%
+			\begin{picture}(300,1)
+			\put(0,0){\line(1,0){300}}
+			\end{picture}
+			\\[1cm]
+			\huge{\bfseries Stochastik}
+			\\[1cm]
+			\textsc{\LARGE Leif D\"oring\footnote{Besten Dank an den Skriptschreiber (aka Johannes N\"agele) f\"urs Tippen und die Erstellung der Graphiken! Auch vielen Dank f\"ur die Korrekturen (auch zuk\"unftige) von Tippfehlern durch Teilnehmer der Vorlesung!}
+}
+			\\[0.2cm]
+			\textsc{\Large Universit\"at Mannheim}
+			\\[10cm]
+		\end{center}
+
+	\end{titlepage}
+	
+	\cleardoublepage
+	%%
+	%% Vorwort
+	%%
+	
+	%%
+	%% Inhaltsverzeichnis
+	%%
+	
+	\setcounter{page}{1}
+	\setcounter{chapter}{0}
+	\makeatletter
+	\renewcommand{\platz}{\hspace{4pt}}
+		
+	
+	\tableofcontents
+	\makeatother
+	
+	
+	\mainmatter
+	%%
+	%% eigentliche Kapitel der Arbeit
+	%%	
+	
+	%\renewcommand\qedsymbol{$\bigpumpkin$}
+	%\renewcommand\qedsymbol{$\pumpkin$}
+	%\renewcommand\qedsymbol{$\skull$}
+	%\renewcommand\qedsymbol{ciao $\bcvelo$}
+
+
+\input{./kapitel/kapitel0/kapitel0}	
+	\input{./kapitel/kapitel1/Kapitel1}
+	\input{./kapitel/kapitel2/Kapitel2}
+%	\input{./kapitel/kapitel3/Kapitel3}
+%	\input{./kapitel/kapitel4/Kapitel4}
+%	\input{./kapitel/kapitel5/Kapitel5}
+%	\input{./kapitel/kapitel6/Kapitel6}
+	\input{./kapitel/kapitel7/Kapitel7}
+	\input{./kapitel/kapitel8/Kapitel8}
+	
+\end{document}

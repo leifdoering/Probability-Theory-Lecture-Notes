@@ -292,12 +292,12 @@ Die $\sigma$-Algebra aus dem Korollar hat eine enorme Bedeutung in der Stochasti
 \textit{Warnung:} Der Erzeuger einer $\sigma$-Algebra ist nicht eindeutig. Das wird gleich anhand der Borel-$\sigma$-Algebra deutlich werde.\smallskip
 
 In folgendem Beispiel wird eine offensichtliche kleine Beobachtung genutzt: Aus der Definition folgt sofort $\mathcal E\subseteq \sigma(\mathcal E)$, $\sigma(\mathcal E)$ ist schlie\ss lich die kleinste $\sigma$-Algebra, die $\mathcal E$ enth\"alt. Merkt euch das, so wie in folgendem Beispiel wird das \"ofters benutzt.
-\begin{beispiel} \link{https://www.youtube.com/watch?v=S6DazSJqA50&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=3&t=2545s}
+\begin{beispiel}\label{bspd} \link{https://www.youtube.com/watch?v=S6DazSJqA50&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=3&t=2545s}
 	Sei $\Omega \neq \emptyset$ und $\mathcal E=\{ \{ x \} \! : x\in \Omega \}$. Dann ist \[ \sigma(\mathcal E)= \{ A \subseteq \Omega \! : \text{$A$ abzählbar oder $A^C$ abzählbar}\}=:\mathcal B . \]
 	Warum? Es gilt offensichtlich $\sigma(\mathcal E) \subseteq \mathcal B$ weil $\sigma(\mathcal E)$ die kleinste $\sigma$-Algebra ist, die $\mathcal E$ enth\"alt und $\mathcal B$ auch eine $\sigma$-Algebra ist (siehe Beispiel \ref{E1}), die $\mathcal E$ enth\"alt. Es gilt aber auch $\mathcal B \subseteq \sigma(\mathcal E)$ weil jede abzählbare Menge als abzählbare Vereinigung von einelementigen Mengen wieder zu $\sigma(\mathcal E)$ gehört und auch Komplemente abzählbarer Mengen wieder in $\sigma(\mathcal E)$ enthalten sind (Definition $\sigma$-Algebra).
 \end{beispiel}
 
-\begin{beispiel} \link{https://www.youtube.com/watch?v=S6DazSJqA50&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=3&t=3217s} \textbf{[\underline{Das} Beispiel - die Borel-$\sigma$-Algebra]}
+\begin{beispiel}\label{bsp:borel} \link{https://www.youtube.com/watch?v=S6DazSJqA50&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=3&t=3217s} \textbf{[\underline{Das} Beispiel - die Borel-$\sigma$-Algebra]}
 Wir kommen jetzt zu dem mit Abstand wichtigstem Beispiel einer $\sigma$-Algebra der Stochastik. Sei $\Omega = \mathbb{R}^d$ und $\mathcal E = \{ O \subseteq \mathbb{R}^d \! : O \text{ offen} \}$. Dann heißt $\cB(\mathbb{R}^d):= \sigma(\mathcal E)$ die \textbf{Borel-$\sigma$-Algebra auf $\mathbb{R}^d$}. Die Mengen in $\cB(\mathbb{R}^d)$ hei\ss en \textbf{Borelmengen}.
 \end{beispiel}
 Anhand der Borel-$\sigma$-Algebra spielen wir mal mit den neuen Begriffen rum. Wenn ihr folgende \"Uberlegungen verstanden habt, habt ihr einen gro\ss en Schritt geschafft! \smallskip
@@ -879,7 +879,7 @@ Anschlie\ss end an die abstrakte Theorie wollen wir nun als Beispiel die Borel-$
 
 
 
-\section[Das Beispiel f\"ur Wahrscheinlichkeitsma\ss e]{Das Beispiel - Wahrscheinlichkeitsmaße auf $\mathcal B(\R)$ aus Verteilungsfunktionen}
+\section[Das Beispiel f\"ur Wahrscheinlichkeitsma\ss e]{Das Beispiel - Wahrscheinlichkeitsmaße auf $\mathcal B(\R)$ aus Verteilungsfunktionen}\label{sec:VF}
 Das Konzept von Verteilungsfunktionen von Wahrscheinlichkeitsma\ss en auf $\mathcal B(\R)$ ist euch bereits bei Dynkin-Systemen und in den \"Ubungen \"uber den Weg gelaufen. Definieren wir nun abstrakt, welche reellen Funktionen wir Verteilungsfunktionen nennen wollen:
 \begin{deff}
 \link{https://www.youtube.com/watch?v=nlUyBvwBkhE&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=6&t=4310s}

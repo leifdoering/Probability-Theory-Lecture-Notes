@@ -235,7 +235,7 @@ After all these definition let us prove a first proposition on measures on Polis
 \end{prop}
 \end{llemma}
 \begin{proof}[Proof]
-	The trick is to replace the increasing intervals $(-n,n)$ in $\R$ by the right substitute and then try to argue with continuity of measures. Let $x_1,x_2,...$ the countable dense subset of $E$ and $n\in\mathbb{N}$. Then $E = \bigcup\limits_{k=1}^{\infty} B_{\frac{1}{n}}(x_k)$ for all $n\in\N$. Using continuity of measures (this needs $\mu\in \mathcal M_f$, compare Theorem \ref{S1}) fix $N_n \in \mathbb{N}$ with 
+	The trick is to replace the increasing intervals $[-n,n]$ in $\R$ by the right substitute and then try to argue with continuity of measures. Let $x_1,x_2,...$ the countable dense subset of $E$ and $n\in\mathbb{N}$. Then $E = \bigcup\limits_{k=1}^{\infty} B_{\frac{1}{n}}(x_k)$ for all $n\in\N$. Using continuity of measures (this needs $\mu\in \mathcal M_f$, compare Theorem \ref{S1}) fix $N_n \in \mathbb{N}$ with 
 	\begin{align*}
 		\mu \Big( E \text{\textbackslash} \bigcup\limits_{k=1}^{N_n}B_{\frac{1}{n}}(x_k)\Big) < \frac{\varepsilon}{2^n}
 	\end{align*}
@@ -311,12 +311,24 @@ As promised the Lipschitz continuous functions are separating the finite measure
 		f_A^{\varepsilon}(x) \coloneqq \Big( 1 - \frac{1}{\varepsilon} \cdot d(x,A) \Big)^+,\quad x\in E, \varepsilon>0,
 	\end{align*}
 	with $d(x,A)=\inf\{d(x,y):y\in A\}$. 
-			\begin{figure}[h]
-			\begin{center}
-				\includegraphics[scale=0.07]{f.jpeg}
-			\end{center}
-			\vspace{-9mm}
-			\end{figure}	
+	\begin{figure}[h]
+		\begin{center}
+		\begin{tikzpicture}[scale=0.5,transform shape]
+			  %AXIS X
+		  \draw[black!90,line width=0.4mm] (-2.25,0.9) --++(0:13.4cm);
+	  
+	  
+		  %blue 
+		  \draw[blue!90,line width=0.4mm] (-2.25,1) --++(0:3.5cm) --++(65:3.5cm) --++(0:3.5cm) --++(-65:3.5cm) --++(0:3.5cm);
+	  
+		  %red 
+		  \draw[red!90,line width=0.4mm] (2.7,0.8) --++(0:3.4cm) node[red!90,pos=0.5,yshift=-5mm,scale=2] {A};
+	  
+		  \node[blue!90,scale=2] (f) at (8,3) {$f_A^{\epsilon}$};
+		  \end{tikzpicture}
+		\end{center}
+		\vspace{-5mm}
+	  \end{figure}		  
 	Remember from basic analysis (or quickly check yourself by using that $\bar A$ are precisely the limits of sequences in $A$) that $d(x,A)=0$ if and only if $x\in \bar A$. The functions $f_A^\varepsilon$ have the following properties:	
 			\begin{itemize}
 				\item $f_A^{\varepsilon} = 1$ on A
@@ -366,15 +378,14 @@ In order to speak of convergence of processes we will thus have to define a noti
 	and write $\mu_n \overset{\text{(w)}}{\longrightarrow}\mu$ or $\mu_n\Rightarrow \mu$ or $\mu = \operatorname{w-\lim\limits}_{n\to\infty}\mu_n$.
 \end{deff}
 \end{ldef}
-Before returning to probability theory let us discuss important properties that help us to link the general weak convergence theory (a field of Functional Analysis) to properties from Section \ref{sec:konvergenz} in the particular case $E=\R$. 	There are many other ways of defining convergence of measures through distances. They are usually stronger (less sequences converge) which is one of the reasons to speak of weak convergence.
+Before returning to probability theory let us discuss important properties that help us to link the general weak convergence theory (a field of Functional Analysis) to properties from Section \ref{sec:Lp} in the particular case $E=\R$. 	There are many other ways of defining convergence of measures through distances. They are usually stronger (less sequences converge) which is one of the reasons to speak of weak convergence.
 \begin{luebung}
 	Let $(\delta_{x_n})_{n\in\N}$ a sequence of Dirac-measures on $E$ such that $x_n\to x$ for $n\to\infty$. Show that $(\delta_{x_n})_{n\in\N}$ converges weakly in $\cM_1(E)$ to $\delta_x$.
 \end{luebung}
-
 If you are familiar with Functional Analysis a bit of care is needed as the wording does not match. In the standard terminology of Functional Analysis this is not weak convergence but weak-$*$-convergence on $\cM_f(E)$ using that $\cM_f(E)$ is the dual-space of $C_b(E)$.
-\begin{lstep}
-\begin{remark}
-			If $(E,d)$ is separable then weak convergence in $\cM_f(E)$ can be metrized: Defining the \textbf{\smash{Prohorov metric}} (here the definition for $\nu,\mu\in \cM_1(E)$)
+\begin{prop}
+			If $(E,d)$ is separable then weak convergence in $\cM_f(E)$ can be metrized: 
+			Defining the \textbf{\smash{Prohorov metric}} (here the definition for $\nu,\mu\in \cM_1(E)$)
 			\begin{align*}
 				d_p(\mu,\nu) \coloneqq \inf \big\{ \varepsilon >0 \colon \mu (B) \leq \nu (B_{\varepsilon}(0)) + \varepsilon \:\forall B\in \cB(E) \big\}
 			\end{align*}
@@ -383,9 +394,10 @@ If you are familiar with Functional Analysis a bit of care is needed as the word
 				\mu_n \overset{\text{(w)}}{\longrightarrow}\mu, \: n \to \infty \quad\Leftrightarrow \quad d_p(\mu_n,\mu) \to 0, \: n\to \infty.
 			\end{align*}
 			This is important as all properties of convergence in  metric spaces (such as uniqueness of limits) hold for weak convergence. Taking $f \equiv 1$ shows that also the total masses must converge. In particular, the weak limit of a sequence of probability measures is a probability measure, no mass gets lost or appears. In other words of topology, $\cM_1(E)$ is a closed subset of $\cM_f(E)$ with respect to the Prohorov metric.
-
-\end{remark}
-\end{lstep}
+\end{prop}
+\begin{proof}[Proof]
+	to be written, not in the lecture
+\end{proof}
 %\begin{example}
 %	$\mu_n \coloneqq \delta_{\frac{1}{n}}$, $\mu \coloneqq \delta_0$ are measures in $\mathcal M_f(\mathbb{R})$. Since $$\int_{\mathbb{R}} f \dint \mu_n = f\bigg( \frac{1}{n} \bigg) \overset{n\to \infty}{\longrightarrow} f(0) = \int_{\mathbb{R}} f \dint \mu$$
 %	we have $\mu_n \overset{\text{(w)}}{\longrightarrow} \mu$, $n\to\infty$.	
@@ -473,13 +485,13 @@ More concrete criteria for special cases such as $E=[a,b], E=[0,\infty)$, $E=\R^
 	\end{align*}
 	Since $k$ was arbitrary, we obtain $\limsup\limits_{n\to\infty} \int_E {f} \dint \mu_n \leq \int_E {f} \dint \mu$. The same reasoning for $-f$ gives $\liminf\limits_{n\to\infty} \int_E  f \dint \mu_n \geq \int_E f \dint \mu$. Both inequalities prove (i).
 \end{proof}
-For the next theorem recall from Section \ref{sec:push} the notion of the push-forward of a measure under a measurable map. If $g:\Omega \rightarrow \Omega'$ is $(\mathcal A, \mathcal A')$-measurable and $\mu$ is a measures on $\mathcal A$, then we defined $$\mu_g(A):=\mu(g^{-1}(A)),\quad A\in \mathcal A',$$ also written $\mu\circ g$ (more useful if there is a further index), is a measure on $\mathcal A'$. The measure is called the push-forward of $\mu$ under $g$ or the image measure. If we think of converging sequences of measures it is natural to also ask for convergence of the sequence of push-forwards for a given mapping. If $g$ is continuous, this can be proved easily:
+For the next theorem recall from Section \ref{sec:push} the notion of the push-forward of a measure under a measurable map. If $g:\Omega \rightarrow \Omega'$ is $(\mathcal A, \mathcal A')$-measurable and $\mu$ is a measures on $\mathcal A$, then we defined $$\mu_g(A):=\mu(g^{-1}(A)),\quad A\in \mathcal A',$$ also written $\mu\circ g^{-1}$ (more useful if there is a further index), is a measure on $\mathcal A'$. The measure is called the push-forward of $\mu$ under $g$ or the image measure. If we think of converging sequences of measures it is natural to also ask for convergence of the sequence of push-forwards for a given mapping. If $g$ is continuous, this can be proved easily:
 \begin{lsatz}
 \begin{theorem}[continuous mapping theorem]
 	Let $(E_1,d_1)$, $(E_2,d_2)$ be metric spaces and $g\colon E_1 \to E_2$ continuous.
 	If $\mu,\mu_1,\mu_2,...$ are finite measures on $\mathcal B(E_1)$, then
 	\begin{align*}
-		 \mu_n \overset{\text{(w)}}{\rightarrow} \mu,\,\, n\to\infty\quad \Longrightarrow \quad   \mu_n\circ g \overset{\text{(w)}}{\rightarrow} \mu\circ g,\,\, n\to\infty.
+		 \mu_n \overset{\text{(w)}}{\rightarrow} \mu,\,\, n\to\infty\quad \Longrightarrow \quad   \mu_n\circ g^{-1} \overset{\text{(w)}}{\rightarrow} \mu\circ g^{-1},\,\, n\to\infty.
 	\end{align*}
 \end{theorem}
 \end{lsatz}
@@ -487,9 +499,9 @@ In fact, continuity is not really needed, the assumption $\mu\big( \{ x\in E_1 \
 \begin{proof}[Proof]
  Let $f\in C_b(E_2)$, then $f\circ g \in C_b(E_1)$. Using the transformation formula for integrals twice (see Theorem \ref{trafo}) then gives
 \begin{align*}
-	\int_{E_2}f\dint \mu_n \circ g = \int_{E_1} f\circ g \dint \mu_n \overset{n\to\infty}{\longrightarrow} \int_{E_1}f\circ g \dint \mu  = \int_{E_2} f\dint \mu \circ g.
+	\int_{E_2}f\dint \mu_n \circ g^{-1} = \int_{E_1} f\circ g \dint \mu_n \overset{n\to\infty}{\longrightarrow} \int_{E_1}f\circ g \dint \mu  = \int_{E_2} f\dint \mu \circ g^{-1}.
 \end{align*}
-Hence, $\mu_n \circ g \overset{\text{(w)}}{\rightarrow} \mu \circ g$.
+Hence, $\mu_n \circ g^{-1} \overset{\text{(w)}}{\rightarrow} \mu \circ g^{-1}$.
 \end{proof}
 % CMT
 %\begin{lsatzwichtig}
@@ -776,7 +788,7 @@ The previous section showed how to reformulate relative sequential compactness i
 	In words: The polynomials are dense in $( C([0,1]),||\cdot||_\infty)$.
 \end{theorem}
 \end{lsatzwichtig}
-The proof we give is awesome, as it is a probabilistic proof for an analytic theorem. The sequence of polynomials is actually given explicitly, the so-called Bernstein polynomials.
+The proof we give is beautiful, a probabilistic proof for an analytic theorem. The sequence of polynomials is actually given explicitly, the so-called Bernstein polynomials.
 \begin{proof}[Proof]
 	Let $X_1,...,X_n$ be iid Ber$(p)$-distributed random variables, hence, $S_n = \sum_{k=1}^n X_k$ is $\text{Bin}(n,p)$-distributed. Now recall the proof of the weak law of large numbers \eqref{schwaches} - Tschebycheff and Bienaymé:
 	\begin{align*}
@@ -809,7 +821,14 @@ The proof we give is awesome, as it is a probabilistic proof for an analytic the
 		\end{align*}
 		Since $\varepsilon$ was arbitrary, we proved that $\left\Vert f_n - f \right\Vert_{\infty} \to 0$, $n \to \infty$.
 \end{proof}
-It turns out that classes of complex-valued functions are more useful than only real-valued functions. For that sake let us recall some definitions and facts for the complex numbers:
+Additionally, every polynomial can be approximated uniformly by a sequence of polynomials with rational coefficients. To see this claim we only need to approximate all coefficients by a sequence of rational coefficients to get
+\begin{align*}
+	||p-p_n||_\infty \leq  \sup_{x\in [0,1]}\sum_{k=1}^n |(a_k-a_{k,n})||x^k|\leq \sum_{k=1}^n |a_k-a_{k,n}|\to 0.
+\end{align*}
+Hence, Stone-Weierstra\ss{} combined with a diagonal argument shows that $( C([0,1]),||\cdot||_\infty)$ is separable. From basic analysis it should also be known that $( C([0,1]),||\cdot||_\infty)$ is complete, hence, it is a Polish space. In Section \ref{sec:BM} we will show that also $C([0,\infty))$ can be turned into a Polish space, an important fact to prove Donsker's theorem.
+\smallskip
+
+For later purposes we now turn towards complex-valued functions that sometimes can be more useful in function approximation than real-valued functions. For that sake let us recall some definitions and facts for the complex numbers:
 \begin{lstep}
   As a set the complex numbers are identical to $\R^2$ with a different notation for the vectors: $$\mathbb{C}\coloneqq \{ z = u+iv \,|\, u,v\in\mathbb{R} \}.$$ The following properties will be used:
 	\begin{itemize}
@@ -904,14 +923,31 @@ It remains to consider the case $K = \mathbb{C}$. If $f =\mathcal{R}e(f)+\mathca
 	for some $a_i,b_i\neq 0$.
 	Thus, $$\mathcal{R}e(h)(x)=0\neq b_1= \mathcal{R}e(g)(x)\quad \text{and}\quad \mathcal{I}m(h)(y)=a_3\neq 0= \mathcal{I}m(g)(y).$$ Hence, $\mathcal{R}e(h)\in C_{\mathcal{R}}$ and $\mathcal{I}m(g)\in C_{\mathcal{I}}$ both separate $x$ and $y$.
 	This proves that $C_{\mathcal R}$ and $C_{\mathcal I}$ are separating algebras of real functions. Why did we need to involve this little trick? It is possible that the imaginary parts and/or real parts of $f(x)$ and $f(y)$ coincide. If they do, then the imaginary parts and/or real parts of $f$ do not separate $x$ and $y$. To avoid this problem we can multiply $f$ by a constant $z'$ to rotate (and stretch) the complex numbers $f(x)$ and $f(y)$ to ensure that the real and imaginary parts of $h(z):=z'f(z)\in C$ differ and thus separate points. The trick is best understood in a picture:
-	\begin{figure}[h]
-		\vspace{-3mm}
-		\begin{center}
-			\includegraphics[scale=0.07]{complex.jpeg}
-		\end{center}
-		\vspace{-3mm}
-		\caption*{The rotation trick to separate points}
-		\end{figure}	
+	
+\begin{figure}[h]
+	\begin{center}
+    \begin{tikzpicture}
+        %AXIS Y
+        \draw[black!90,line width=0.4mm] (1,-1) -- ++(90:3cm);
+        %AXIS X 
+        \draw[black!90,line width=0.4mm] (-0.5,0) --++(0:5cm); 
+
+        %RED 
+        \node[circle,inner sep=0.5mm,fill,red,label={[text=red]left:$h(x)$}] (hx) at (1,1) {};
+        \node[circle,inner sep=0.5mm,fill,red,label={[text=red]right:$h(y)$}] (hy) at (1.5,2) {};
+
+        %green
+        \node[circle,inner sep=0.5mm,fill,darkgreen,label={[text=darkgreen]30:$f(x)$}] (fx) at (2,0.8) {};
+        \node[circle,inner sep=0.5mm,fill,darkgreen,label={[text=darkgreen]30:$f(y)$}] (fy) at (3.3,0.8) {};
+
+        %orange
+        \node[circle,inner sep=0.5mm,fill,orange,label={[text=orange]left:$g(x)$}] (gx) at (2.5,0.3) {};
+        \node[circle,inner sep=0.5mm,fill,orange,label={[text=orange]-30:$g(y)$}] (gy) at (3.5,0) {};
+    \end{tikzpicture} 
+  \caption*{The rotation trick to separate points}
+\end{center}
+\end{figure}
+	
 
 	Therefore, from the above, $\bar{C}_{\mathcal R} = \bar{C}_{\mathcal I} = C_b(E,\mathbb{R})$. Since $C_b(E, \mathbb{C}) = C_b(E,\mathbb{R}) + i \cdot C_b(E,\mathbb{R})$ we find that $C = C_{\mathcal{R}} + i \cdot C_{\mathcal{I}}$ is dense in $C_b(E, \mathbb{C})$.
 \end{proof}
@@ -931,8 +967,8 @@ The examples that will appear in the sequal are typically polynomials or exponen
 	
 	Fix $\varepsilon>0$. Then for all $f \in C_b(E)$ there exists $g \in C^{\prime}$ with $\left\Vert f - g \right\Vert_{\infty} < \varepsilon$ so that 
 	\begin{align*}
-		&\quad\Big| \int_E f \dint  \mu - \int_E f \dint \nu \Big|  \\ 
-		&\leq \Big| \int_E f \dint \mu - \int_E g \dint \nu \Big| + \Big| \int_E g \dint \nu - \int_E g \dint \mu \Big| + \Big| \int_E g \dint \mu - \int_E f \dint \nu \Big| \\
+		&\quad\Big| \int_E f \dint  \mu - \int_E f \dint \mu \Big|  \\ 
+		&\leq \Big| \int_E f \dint \mu - \int_E g \dint \mu \Big| + \underbrace{\Big| \int_E g \dint \mu - \int_E g \dint \nu \Big|}_{= 0, \text{ by assumption}} + \Big| \int_E g \dint \nu - \int_E f \dint \nu \Big| \\
 		&\leq \left\Vert f - g \right\Vert_{\infty} \cdot \mu(E) + 0 + \left\Vert f - g \right\Vert_{\infty} \cdot \nu(E) = 2 \varepsilon.
 	\end{align*}
 	Since this works for all $\varepsilon > 0$ it follows that $$\int_E f \dint \mu = \int_E f \dint \nu,\quad \forall f\in C_b(E).$$ Recalling from Proposition \ref{theorem_4124} that $C_b(E)$ is separating for $\cM_1(E)$ we proved $\mu = \nu$. Hence, $C$ is separating for $\cM_1(E)$.
@@ -941,7 +977,7 @@ The examples that will appear in the sequal are typically polynomials or exponen
 \begin{lsuperwichtigersatz}
 \begin{theorem}\label{coruniq}
 	\begin{enumerate}[label=(\roman*)]
-		\item Every measures $\mu\in \mathcal M_1([a,b])$ is uniquely determined by all integrals $$\int_{[a,b]} x^m \dint \mu(x),\quad m\in\N_0.$$
+		\item Every measures $\mu\in \mathcal M_1([a,b])$ is uniquely determined by all integrals $$\int_{[a,b]} x^m \dint \mu(x),\quad m\in\N.$$
 		\item The law of a \underline{bounded} real-valued random variable is determined by all it's moments, i.e. if $\E[X^m]=\E[Y^m]$ for all $m\in\N$, then $X\sim Y$.
 
 	\end{enumerate}
@@ -955,59 +991,17 @@ First note that $([a,b],|\cdot|)$ is a compact metric space. Define $C$ to be th
 \end{align*}
 implies $\nu=\mu$.\smallskip
 
-The second claim follows from the first claim applied to the laws $\P_X$.
+(ii) follows from the first claim applied to the laws $\P_X$ as $\E[X^m]=\int_{[a,b]}x^m\dint \P_X(x)$.
 \end{proof}
-
-
-
-
-
-\begin{lsuperwichtigersatz}
-\begin{theorem}\label{cor_distributions_1}
-	\begin{enumerate}[label=(\roman*)]
-		\item Every measures $\mu \in \mathcal M_1([0,\infty)])$ is uniquely determined by all integrals $$\int_{[0,\infty)} e^{-\lambda x}\dint \mu(x),\quad \lambda>0.$$
-		\item The law of a \underline{\smash{non-negative}} random variable is determined by it's Laplace transformation $L_X(\lambda) \coloneqq \E \big[ e^{- \lambda X} \big]$, $\lambda \geq 0$, i.e. if $L_X=L_Y$ then $X\sim Y$.
-	\end{enumerate}
-\end{theorem}
-\end{lsuperwichtigersatz}
-Of course part (ii) of the theorem also holds for non-positive random variables replacing the Laplace transformation by the moment generating function $M_X(t)=\E[e^{tX}]$ for all $t>0$.
-\begin{proof}[Proof]
-As in the previous proof we would like to apply Corollary \ref{cor_514} to the family of exponential functions, but there is a problem as $[0,\infty)$ is not compact. We apply a trick from Functional Analysis and use $E = [0, \infty]$ instead (the so-called one-point compactification).
-\begin{luebung}
-	$([0,\infty],d)$ is a compact metric space with $d(x,y):=|e^{-x}-e^{-y}|$. The metric is compatible with the usual convergence in $[0,\infty]$.
-\end{luebung}
-Note that convergence towards $\infty$ is divergence from basic analysis. Continuity of functions $f:[0,\infty]\to \R$ is best understood through sequences, $\lim_{n\to\infty} f(x_n)=f(x)$ and this takes in particular sequences that diverge to $\infty$. Hence, we can extend continuous functions on $[0,\infty)$ to continuous functions on $[0,\infty]$ if and only if $\lim_{x\to\infty} f(x)$ exists and in that case we must set $f(\infty)=\lim_{x\to\infty} f(x)$. For the exponential functions we thus define
-\begin{align*}
-	f_{\lambda}(x) \coloneqq \begin{cases}
-			e^{- \lambda x} &: x>0 \\
-			0 &: x = \infty, \lambda>0\\
-			1 &: x = \infty, \lambda=0
-			 \end{cases}.
-\end{align*}
-Then $C\coloneqq \{ f_{\lambda} \colon \lambda > 0 \}\subseteq C_b([0,\infty])$ separates points, $f_0 \equiv 1\in C$, and $f_{\mu}\cdot f_{\lambda} = f_{\mu + \lambda}$. Hence, $C$ separates probability measures on $\cB([0,\infty])$ and in particular measures on $\cB([0,\infty))$ which can be extended to $\cB([0,\infty])$ by extending a measure $\mu$ with $\bar{\mu}(\{ +\infty \} ) = 0$. That is, for $\nu, \mu\in \cM([0,\infty])$,
-\begin{align*}
-	&\quad \int_{[0,\infty)} e^{-\lambda x}\dint \mu(x)
-	=\int_{[0,\infty)} e^{-\lambda x}\dint \nu(x),\quad \forall \lambda \geq 0\\
-	& \Rightarrow \quad \int_{[0,\infty]}f \dint \bar \mu=\int_{[0,\infty]}f \dint \bar \nu,\quad \forall f\in C\\
-	& \Rightarrow\quad \bar \mu=\bar \nu\\
-	& \Rightarrow\quad \mu=\nu.
-\end{align*}	
-The second claim follows from the first claim applied to the laws $\P_X$.
-	%	Let us assume $X$ and $Y$ take values in $[0,1]$, otherwise both are multiplied by the same constant which equally changes the moments. Now define $C$ to be the family of monomials, that is $C = \{ f_n \colon n \in \mathbb{N}_0 \}$ where $f_n=x^n$. Then $C$ is closed under multiplication, separates points in $[0,1]$ and contains the constant $1$ function. Hence, $C$ is a separating family for $\cM_1([0,1])$. But then, recalling the definition of a separating family,
-%	\begin{align*}
-%		\int_{[0,1]} f_n \dint \P_X= \E[X^n]  = \E[Y^n]= \int_{[0,1]} f_n \dint \mathbb{P}_Y,\quad \forall n \in \mathbb{N},
-%	\end{align*}
-%	implies $\mathbb{P}_X = \mathbb{P}_Y$, which is $X \sim Y$.
-\end{proof}
-Could we extend the same argument also to all measures on $\R$ (i.e. all random variables)? No! To do so we needed a family that is closed under multiplication (that leads to polynomials or exponentials) that converge at $+\infty$ and $-\infty$. Trying to find such a family is a good exercise to better understand the previous proofs. The trick that we get to know below is to replace the exponential functions by complex exponential functions.\smallskip
-
+The most simple examples of bounded random variables are uniformly distributed random variables:
 \begin{luebung}
 	A little induction shows that all moments of $U\sim \mathcal U([a,b])$ are given by 
 	\begin{align}\label{momuniform}
 		\E[U^n]=\frac{1}{n+1}\sum_{k=0}^na^kb^{n-k}=\frac{b^{n+1}-a^{n+1}}{(n+1)(b-a)}	
 	\end{align}
+	Hence, if for some random variable $X$ with values in $[a,b]$ one can show that all moments satisfy the formula from \eqref{momuniform} then the random variable is uniformly distributed on $[a,b]$. If for some reason one can show that a random variable $X$ with values in $[a,b]$ has the moments from \eqref{B55}, then $X$ is uniformly distributed. \smallskip
+
 \end{luebung}
-If for some reason one can show that a random variable has the moments from \eqref{B55}, then the random variable must be uniform. \smallskip
 
 It is important to have an example in mind that shows that all moments do not uniquely determine the law of unbounded random variables. Here is nice counterexample that appears in the Black-Scholes theory of time-continuous financial markets. A random variable $X$ is called \textbf{log-normal} distributed if $X = \exp(Z)$, with $Z \sim \cN(0,1)$. Using substitution in $\P(X\leq t)=\P(Z\leq \log(t))=\int_{-\infty}^{\log(t)} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}\dint x$ shows that $X$ has density $$ f_X(x) = \frac{1}{\sqrt{2 \pi}} \frac{1}{x} e^{- \frac{1}{2} \log(x)^2}\mathbf 1_{[0,\infty)}(x),\quad x\in\R.$$ From the moment generating function of the standard Gaussian distribution (see \ref{momg}) we obtain a formula for the moments: $\mathbf E\big[X^n \big] = \mathbf E \big[ e^{n\cdot Z} \big] = e^{\frac{1}{2}n^2}$. Next, we will write down an entire family of density functions that give the same moments but are log-normal densities. For $\alpha \in [-1,1]$ define
 \begin{align*}
@@ -1026,24 +1020,71 @@ and combine with $\int_\R x^n\cdot f_X(x)\dint x=\E[X^n]=e^{\frac{1}{2}n^2}$. He
 \end{align*}
 That's it.\smallskip
 
-No doubt, the most exciting random variables (such as the Gaussian) are neither concentrated on a bounded interval nor are positive (or negative). In general the law is not determined only by moments as $\R$ (or $\R^d$) cannot be compactified such that enough functions are continuous on the compactification. Hence, an approach different from the Stone-Weierstra\ss{} theory is needed.\smallskip
+Log-normal distributions are not determined by all moments but they are determined by all negative exponential moments as the following theorem shows:
+\begin{lsuperwichtigersatz}
+\begin{theorem}\label{cor_distributions_1}
+	\begin{enumerate}[label=(\roman*)]
+		\item Every measures $\mu \in \mathcal M_1([0,\infty)])$ is uniquely determined by all integrals $$\int_{[0,\infty)} e^{-\lambda x}\dint \mu(x),\quad \lambda>0.$$
+		\item The law of a \underline{\smash{non-negative}} random variable is determined by it's Laplace transformation $L_X(\lambda) \coloneqq \E \big[ e^{- \lambda X} \big]$, $\lambda \geq 0$, i.e. if $L_X=L_Y$ then $X\sim Y$.
+	\end{enumerate}
+\end{theorem}
+\end{lsuperwichtigersatz}
+Of course part (ii) of the theorem also holds for non-positive random variables replacing the Laplace transformation by the moment generating function $M_X(t)=\E[e^{tX}]$ for all $t>0$.
+\begin{proof}[Proof]
+As in the previous proof we would like to apply Corollary \ref{cor_514} to the family of exponential functions, but there is a problem as $[0,\infty)$ is not compact. We apply a trick from Functional Analysis and use $E = [0, \infty]$ instead (the so-called one-point compactification).
+\begin{luebung}
+	$([0,\infty],d)$ is a compact metric space with $d(x,y):=|e^{-x}-e^{-y}|$. The metric is compatible with the usual convergence in $[0,\infty]$.
+\end{luebung}
+Note that convergence towards $\infty$ is divergence from basic analysis. Continuity of functions $f:[0,\infty]\to \R$ is best understood through sequences, $\lim_{n\to\infty} f(x_n)=f(x)$ and this takes in particular sequences that diverge to $\infty$. Hence, we can extend continuous functions on $[0,\infty)$ to continuous functions on $[0,\infty]$ if and only if $\lim_{x\to\infty} f(x)$ exists and in that case we must set $f(\infty)=\lim_{x\to\infty} f(x)$. For the exponential functions we thus define
+\begin{align*}
+	f_{\lambda}(x) \coloneqq \begin{cases}
+			e^{- \lambda x} &: x\in [0,+\infty) \\
+			\lim_{x\to+\infty} e^{- \lambda x} &: x=+\infty \\
+			 \end{cases}.
+\end{align*}
+Then $C\coloneqq \{ f_{\lambda} \colon \lambda \geq 0 \}\subseteq C_b([0,\infty])$ separates points, $f_0 \equiv 1\in C$, and $f_{\mu}\cdot f_{\lambda} = f_{\mu + \lambda}$. By Corollary \ref{cor_514} $C$ separates $\cM_1([0,\infty])$. By extending measures as
+\begin{align*}
+	\bar \mu(A):=\mu(A\cap [0,\infty)),\quad A\in \mathcal B([0,\infty]).
+\end{align*}
+we find that the exponential functions also separate $\cM_1([0,\infty))$:
+\begin{align*}
+	&\quad \int_{[0,\infty)} e^{-\lambda x}\dint \mu(x)
+	=\int_{[0,\infty)} e^{-\lambda x}\dint \nu(x),\quad \forall \lambda \geq 0\\
+	& \Rightarrow \quad \int_{[0,\infty]}f \dint \bar \mu=\int_{[0,\infty]}f \dint \bar \nu,\quad \forall f\in C\\
+	& \Rightarrow\quad \bar \mu=\bar \nu\\
+	&\Rightarrow\quad \mu=\nu.
+\end{align*}	
+(ii) follows from the first claim applied to the laws $\P_X$ as $L_X(\lambda)=\int_{[0,\infty)]}e^{-\lambda x}\dint \P_X(x)$.
+	%	Let us assume $X$ and $Y$ take values in $[0,1]$, otherwise both are multiplied by the same constant which equally changes the moments. Now define $C$ to be the family of monomials, that is $C = \{ f_n \colon n \in \mathbb{N}_0 \}$ where $f_n=x^n$. Then $C$ is closed under multiplication, separates points in $[0,1]$ and contains the constant $1$ function. Hence, $C$ is a separating family for $\cM_1([0,1])$. But then, recalling the definition of a separating family,
+%	\begin{align*}
+%		\int_{[0,1]} f_n \dint \P_X= \E[X^n]  = \E[Y^n]= \int_{[0,1]} f_n \dint \mathbb{P}_Y,\quad \forall n \in \mathbb{N},
+%	\end{align*}
+%	implies $\mathbb{P}_X = \mathbb{P}_Y$, which is $X \sim Y$.
+\end{proof}
+Here is another version of the theorem which can help you to understand the proof better.
+\begin{luebung}
+	Prove that a random variable $X\geq 1$ is determined by all it's negative moments $\E[X^{-m}]$, $m\in\N$.
+\end{luebung}
 
-The alternative approach uses the periodic structure of $e^{it}$:
+Could we extend the same argument to measures on $\R$ (i.e. all real-valued random variables)? No! To do so we needed a family that is closed under multiplication (that leads to polynomials or exponentials) that converge at $+\infty$ and $-\infty$ in order to be extandeable to continuous function on $[-\infty,+\infty]$. Trying to find such a family is a good exercise to better understand the previous proofs. If you try you will realise that all algebras you come up with do not separate the points $+\infty$ and $-\infty$!\smallskip
+
+
+The trick that we get to know below is to replace the exponential functions by complex exponential functions.
 \begin{ldef}
 \begin{deff}
 
-			For $\mu \in \cM_1(\mathbb{R}^d)$ the function $\varphi_\mu:\R^d\to\C$ defined by $$\varphi_{\mu}(t) \coloneqq \int_{\mathbb{R}^d} e^{\langle t,x \rangle} \dint\mu (x) \quad t\in \mathbb{R}^d,$$ is called the \textbf{characteristic function} (or Fourier transform) of $\mu$.
+			For $\mu \in \cM_1(\mathbb{R}^d)$ the function $\varphi_\mu:\R^d\to\C$ defined by $$\varphi_{\mu}(t) \coloneqq \int_{\mathbb{R}^d} e^{i\langle t,x \rangle} \dint\mu (x), \quad t\in \mathbb{R}^d,$$ is called the \textbf{characteristic function} (or Fourier transform) of $\mu$.
 \end{deff}
 \end{ldef}
-The wording Fourier transformation comes from Fourier Analysis where integrable functions are studied through their Fourier transform $\hat{f}(x) \coloneqq \int e^{i\langle x, y \rangle} f(y) \dint y$. In probability theory people prefer to use the name characteristic function as a random variable is uniquely characterised through the characteristic functions.\smallskip
+The wording Fourier transformation comes from Fourier Analysis where integrable functions are studied through their Fourier transform $\hat{f}(x) \coloneqq \int e^{i\langle x, y \rangle} f(y) \dint y$. The name characteristic functions comes from the fact that the function $\varphi_\mu$ uniquely characterised $\mu$ as we prove below.\smallskip
 
 As always we can either define objects for probability measures or random variables with the corresponding law. Since the characteristic function is such an important object let us fix the other notation as well:
 \begin{ldef}
 \begin{deff}
-			For a random vector $X$ the function $\varphi_X:\R^d\to\C$ defined by $$\varphi_X(t) \coloneqq \E[e^{i \langle t, X \rangle}] = \varphi_{\mathbb{P}_X}(t), \quad t\in \mathbb{R}^d,$$ is called the textbf{characteristic function of $X$}.
+			For a random vector $X$ the function $\varphi_X:\R^d\to\C$ defined by $$\varphi_X(t) \coloneqq \E[e^{i \langle t, X \rangle}] = \varphi_{\mathbb{P}_X}(t), \quad t\in \mathbb{R}^d,$$ is called the \textbf{characteristic function of $X$}.
 \end{deff}
 \end{ldef}
-			 The characteristic function plays exactly the same role as moment generating function $\mathcal M_X$, or the distribution function $F_X$. It is just a function with certain properties (see below) that can be used to study more complicated mathematical objects such as measures or random variables. The major advantage of the characteristic function is that $\varphi$ is always well-defined because $\varphi_X$ is always defined as $\lvert e^{ix} \rvert = 1$.\smallskip
+			 The characteristic function plays exactly the same role as moment generating function $\mathcal M_X$, or the distribution function $F_X$. It is just a function with certain properties (see below) that can be used to study more complicated mathematical objects such as measures or random variables. The major advantage of the characteristic function is that $\varphi$ is always well-defined because $\varphi_X$ is always defined as $\lvert e^{ix} \rvert = 1$. The magic about the complex exponential $x\mapsto e^{ix}$ is that it is much more useful to work with (bounded) but carries as much information as the unbounded real exponential function $x\mapsto e^x$.\smallskip
 
 Here are some properties that indicate that characteristic functions are useful to work with:
 \begin{llemma}
@@ -1051,8 +1092,8 @@ Here are some properties that indicate that characteristic functions are useful 
 	Let $X$ be a random vector and $\varphi_X \colon \mathbb{R}^d \to \mathbb{C}$ the characteristic function.
 	\begin{enumerate}[label=(\roman*)]
 		\item $\varphi_X(0) = 1$ and $\lvert \varphi_X(t) \rvert \leq 1$ for all $t \in \mathbb{R}^d$.
-		\item $\varphi_{aX+b}(t) = \varphi_X(a t)  e^{i\langle b,t \rangle}$ for all $ a \in \mathbb{R}$ and $b\in \mathbb{R}^d$.
-		\item $\varphi$ is real-valued if and only if $X$ is symmetric, i.e. $\mathbb{P}_X = \mathbb{P}_{-X}$.
+		\item $\varphi_{aX+b}(t) = \varphi_X(a t)  e^{i\langle t,b \rangle}$ for all $ a \in \mathbb{R}$ and $t, b\in \mathbb{R}^d$.
+		\item $\varphi$ is real-valued if $X$ is symmetric, i.e. $\mathbb{P}_X = \mathbb{P}_{-X}$.
 		\item $\varphi_{X+Y} = \varphi_X \cdot \varphi_Y$ if $X$ and $Y$ are independent.
 	\end{enumerate}
 \end{lemma}
@@ -1063,7 +1104,7 @@ Here are some properties that indicate that characteristic functions are useful 
 		To get started please check the linearity $\int (\alpha f+\beta g)\dint \mu=\alpha \int f \dint \mu+\beta \int f \dint \mu$ for $\alpha, \beta \in\C$ of complex integrals by using the definition and properties of real integrals.
 	\end{luebung}
 	\begin{enumerate}[label=(\roman*)]
-		\item Let us first assume the usual triangle inequality also for complex integrals. Then we obtain
+		\item The first claim is clear as $e^0=1$. Let us first assume the usual triangle inequality also for complex integrals. Then we obtain
 			\begin{align*}
 				\lvert \varphi_X(t) \rvert 
 				= \big| \E \big[ e^{i \langle t,X \rangle} \big] \big| 
@@ -1085,7 +1126,7 @@ Here are some properties that indicate that characteristic functions are useful 
 		\item Recall that
 			$e^{-i\theta} = \cos(-\theta) + i \sin(-\theta) = \cos(\theta) - i \sin(\theta) = \overline{e^{i \theta}}$, hence, 
 			\begin{align*}
-				\varphi_{-X}(t) = \E \big[ e^{-i \langle X, t \rangle} \big] = \E \big[ \overline{ e^{i \langle X, t \rangle}} \big] = \overline{\E [ e^{i \langle X, t \rangle}]} = \overline{\varphi_X(t)},
+				\varphi_{-X}(t) = \E \big[ e^{-i \langle t, X \rangle} \big] = \E \big[ \overline{ e^{i \langle t, X \rangle}} \big] = \overline{\E [ e^{i \langle t, X \rangle}]} = \overline{\varphi_X(t)},
 			\end{align*}
 			where we used
 			\begin{align*}
@@ -1113,15 +1154,15 @@ Here are some properties that indicate that characteristic functions are useful 
 \end{proof}
 	\marginpar{\textcolor{red}{Lecture 16}}
 
-	To get a feeling let us check some examples.
+	To get a feeling let us check some examples. Most computations are almost identical to the computations with moment generating functions from Section \ref{sec:summen}.
 	\begin{example}
 		Using the discrete computation rule from \eqref{expec} yields
-		$$\varphi_{\text{Poi}(\lambda)}(t) = \E \big[ e^{itX} \big] = \sum_{k=0}^{\infty} e^{-\lambda} e^{itk} \frac{\lambda^k}{k!} = e^{\lambda (e^{it}-1)}e^{\lambda ( e^{it} - 1)},\quad t\in\R,$$
+		$$\varphi_{\text{Poi}(\lambda)}(t) = \E \big[ e^{itX} \big] = \sum_{k=0}^{\infty}  e^{itk}e^{-\lambda} \frac{\lambda^k}{k!} = e^{\lambda (e^{it}-1)},\quad t\in\R,$$
 		and
 		\begin{align*}
 			\varphi_{\text{Bin}(n,p)}(t)
 			&=\E\big[ e^{itX} \big]\\
-			&= \sum\limits_{k=0}^{n} {n\choose k} e^{itk}p^k (1-p)^{n-k}\\
+			&= \sum\limits_{k=0}^{n} e^{itk}{n\choose k} p^k (1-p)^{n-k}\\
 			&= \sum\limits_{k=0}^{n}{n\choose k} (p  e^{it})^k (1-p)^{n-k} = \big( 1 - p +p  e^{it} \big)^n,\quad t\in\R.
 		\end{align*}
 		The second example can also be computed from (iv) of Lemma \ref{lemma_5111} using
@@ -1149,7 +1190,7 @@ and that a binomial random variable is a sum of $n$ independent Bernoulli random
 					= \frac{e^{iat}-1}{a i  t}
 			\end{align*}
 		\end{example}
-	Unfortunately, it is not always the case that the complex integrals can be computed that easily. In many instances countour integrals $\int_\gamma f(z)\dint z$ need to used in order to compute $\int_\R f(x)\dint x$. If you know about contour integration this is a good exercise, otherwise it is a good reason to learn about contour integration!
+	Unfortunately, it is not always the case that the complex integrals can be computed easily using real-valued integration. In many instances countour integrals $\int_\gamma f(z)\dint z$ need to used in order to compute $\int_\R f(x)\dint x$. If you know about contour integration this is a good exercise, otherwise it is a good reason to learn about contour integration!
 	\begin{luebung}
 			\begin{example}
 		$$\varphi_{\cN(\mu,\sigma^2)}(t) = e^{i \mu t}e^{-\frac{\sigma^2}{2}t^2},\quad t\in\R,$$
@@ -1165,67 +1206,134 @@ Apart from being nice to compute with there must be a deeper reason to study cha
 		\item The law of a random vector $X$ is determined by it's characteristic function, i.e. if $\varphi_X=\varphi_Y$ then $X\sim Y$.
 	\end{enumerate}\end{theorem}
 \end{lsuperwichtigersatz}
+Of course one might ask why one might be interested in computing moments (for bounded random variables) or Laplace transformations (for non-negative random variables) if there is one general theorem that states that characteristic functions uniquely determine all real random variables. This is because it is easier to compute moments or Laplace transformations these are the preferred tools in the special situations when they are sufficiently powerful.
 \begin{proof}[Proof]
-	Since $C_c(\R^d)$ is separating by Proposition \ref{theorem_4124} it suffices to prove that the complex exponentials are dense in $C_c(\R^d)$, then we can proceed similarly (but with an extra trick) to the proof of Corollary \ref{cor_514}. The main idea of the proof is best understood in pictures. Let us fix two measures $\mu_1, \mu_2\in \cM_1(\R^d)$, $f\in C_c(\R^d)$ and suppose $f$ that vanishes outside of a box $[-\frac{k}{2}, \frac{k}{2} ]^d$. 
+	Since $C_c(\R^d)$ is separating by Proposition \ref{theorem_4124} it suffices to prove that the complex exponentials are dense in $C_c(\R^d)$ Then we can proceed similarly (but with an extra trick) to the proof of Corollary \ref{cor_514}.\smallskip
+	
+	Let us fix two measures $\mu_1, \mu_2\in \cM_1(\R^d)$, $f\in C_c(\R^d)$, $\varepsilon>0$, and fix $k\in \N$ such that
+	\begin{itemize}
+		\item $f$ vanishes outside of the box $[-k,k]^d$,
+		\item $\mu_i \big( \mathbb{R}^d  \setminus [-k,k]^d \big) < \varepsilon$ or $i=1,2$.
+	\end{itemize}
+	The first can be achieved as $f$ vanishes outside of a compact set, the second can be achieved using continuity of measures or Proposition \ref{prop_4120}.
 	\begin{figure}[h]
-		\vspace{-3mm}
 		\begin{center}
-			\includegraphics[scale=0.07]{compact.jpeg}
-		\end{center}
-		\vspace{-3mm}
-		\caption*{The support of $f$}
-		\end{figure}
-	By enlarging $k$ we can choose $k$ such that $\mu_i \big( \mathbb{R}^d  \setminus (k,k)^d \big) < \varepsilon$ for a fixed $\varepsilon >0$ (continuity of measures or Proposition \ref{prop_4120}). Next we define
-	\begin{align*}
-		g_m \colon \mathbb{R}^d \to \mathbb{C},\quad g_m (x) = e^{ i \langle \frac{\pi m}{k}, x \rangle },\quad m \in x,\mathbb{Z}^d,
-	\end{align*}
-	and $C_k$ as the algebra of finite linear combinations of the $g_m$. Here is the important point of the functions $g_m$, they are periodic. For $n \in \mathbb{Z}^d$ they satisfy
-			\begin{align*}
-				g_m(x+2 k n) = e^{ i \langle \frac{\pi m}{k}, x \rangle } \cdot \underbrace{e^{ i \langle \frac{\pi m}{k}, 2k n \rangle }}_{=1} = g_m(x),
-			\end{align*}
-			as $e^{2\pi l}=1$ for all $l\in\Z$.	Hence, the entire family $C_k$ is periodic!
-			\begin{figure}[h]
-				\vspace{-1mm}
-				\begin{center}
-					\includegraphics[scale=0.07]{periodic.jpeg}
-				\end{center}
-				\vspace{-3mm}
-				\caption*{Periodic function $g\in C_k$}
-				\end{figure}			
+		\begin{tikzpicture}
 
-			This is important to us as bounding $g\in C_k$ on $[-k,k]^d$ will automatically bound $g$ everywhere. Restricting $C_k$ to $[-k,k]^d$ the class is separating (this needs the $1 /k$ in the scalar product as without it the functions would be periodic for a smaller box taking the same values on shifts of the smaller boxes in the larger box). The Stone-Weierstra\ss{} approximation theorem now implies that there is $g \in C_k$ with 
+		%AXIS Y
+		\draw[black!90,line width=0.4mm] (2,-1.5) -- ++(90:3cm);
+		%AXIS X 
+		\draw[black!90,line width=0.4mm] (-0.5,0) --++(0:5cm);
+	
+		\node[rectangle,fill=red!30,fill opacity=0.3,draw=red!50,minimum width=1.5cm,minimum height = 1.5cm] (rec) at (2,0) {};
+		\node[red!30,scale=0.8,xshift=10mm] (int) at (rec.north east) {$[-k,k]^d$};
+		\draw[draw=darkgreen!90,line width=0mm,fill=darkgreen,fill opacity=1] (2,0) ellipse (0.5 and 0.2);
+			\end{tikzpicture}
+			\caption*{support of $f$}
+	\end{center}
+	\end{figure}
+	\footnote{Koordinatensystem etwas kuerzer}
+			 Next we define
+	\begin{align*}
+		g_m \colon \mathbb{R}^d \to \mathbb{C},\quad g_m (x) = e^{ i \langle \frac{4\pi m}{3k}, x \rangle },\quad m, x\in \mathbb{Z}^d,
+	\end{align*}
+	and $C^k$ as the algebra of finite linear combinations of the $g_m$. To apply Stone-Weierstra\ss{} we restrict $C^k$ to the compact set $[-k,k]^d$.
+	\begin{luebung}
+		Check that the restriction $C^k_{|[-k,k]^d}\subseteq C_b([-k,k]^d,\C)$ is an algebra that separates points of $[-k,k]^d$ (use the unit vectors $m=e_i$, the Euler formula and look at the sine/cosine functions with period $\frac{3}{2} k$ on $[-k,k]$). The strange choice of constants in the exponentials ensure that all points are separated.
+	\end{luebung}
+	Using the Stone-Weierstra\ss{} theorem we see that the restriction is dense in $C_b([-k,k]^d,\C)$ and, in particular, also dense in the subset $C_b([-k,k]^d,\R)$. Hence, there is some $g \in C^k$ with 
+	\begin{align*}
+		\sup_{x\in [-k,k]^d}\lvert f(x) - g(x) \rvert < \varepsilon.
+	\end{align*}
+	In order to bound the difference also outside of $[-k,k]^d$ it is crucial to realize that all $g_m$ are periodic (compare the picture for what this means) with period $\frac{3}{2}k$. For $n \in \mathbb{Z}^d$ they satisfy
 			\begin{align*}
-				\sup_{x\in [-k,k]^d}\lvert f(x) - g(x) \rvert < \varepsilon.
+				g_m\Big(x+ \frac{3k}{2} n\Big) = e^{ i \langle \frac{4\pi m}{3k}, x \rangle } \cdot e^{ i \langle \frac{4\pi m}{3k}, \frac{3k}{2} n \rangle } = e^{ i \langle \frac{4\pi m}{3k}, x \rangle } \cdot \underbrace{e^{ i2\pi \langle m,n \rangle }}_{=1} = g_m(x),
 			\end{align*}
-			Since $g$ is close to $f$ on $[-k,k]^d$ we can also use the periodicity to bound $g$ on $\R^d$:
+			as $e^{i 2\pi l}=1$ for all $l\in\Z$.	Hence, the entire family $C^k$ is periodic! Functions are schematically represented in the picture.			
+\begin{figure}[h]
+	\begin{center}
+    \begin{tikzpicture}
+    \definecolor{darkgreen}{RGB}{52,125,63}
+    \begin{scope}[xshift=-10mm]
+        %AXIS Y
+        \draw[black!90,line width=0.4mm] (2,-1.5) -- ++(90:3cm);
+        %AXIS X 
+        \draw[black!90,line width=0.4mm] (-0.5,0) --++(0:5cm);
+        \draw[draw=darkgreen,line width=0mm,fill=darkgreen,fill opacity=1] (2,0) ellipse (0.5 and 0.2);
+    \end{scope}
+
+    \foreach \x/\y in  {0/1,1/1,2/1}{
+        \node[rectangle,fill=red!30,fill opacity=0.3,draw=red!50,minimum width=1cm,minimum height = 1cm]  at (\x,\y) {};
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y+0.2) .. controls (\x-0.2,\y+0.2+0.2) and (\x,\y-0.2+0.2)  .. (\x+0.3,\y+0.2);
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y) .. controls (\x-0.2,\y+0.2) and (\x,\y-0.2)  .. (\x+0.3,\y);
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y-0.2) .. controls (\x-0.2,\y+0.2-0.2) and (\x,\y-0.2-0.2)  .. (\x+0.3,\y-0.2);
+    }
+    \foreach \x/\y in  {0/0,1/0,2/0}{
+        \node[rectangle,fill=red!30,fill opacity=0.3,draw=red!50,minimum width=1cm,minimum height = 1cm]  at (\x,\y) {};
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y+0.2) .. controls (\x-0.2,\y+0.2+0.2) and (\x,\y-0.2+0.2)  .. (\x+0.3,\y+0.2);
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y) .. controls (\x-0.2,\y+0.2) and (\x,\y-0.2)  .. (\x+0.3,\y);
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y-0.2) .. controls (\x-0.2,\y+0.2-0.2) and (\x,\y-0.2-0.2)  .. (\x+0.3,\y-0.2);
+    }
+    \foreach \x/\y in  {0/-1,1/-1,2/-1}{
+        \node[rectangle,fill=red!30,fill opacity=0.3,draw=red!50,minimum width=1cm,minimum height = 1cm]  at (\x,\y) {};
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y+0.2) .. controls (\x-0.2,\y+0.2+0.2) and (\x,\y-0.2+0.2)  .. (\x+0.3,\y+0.2);
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y) .. controls (\x-0.2,\y+0.2) and (\x,\y-0.2)  .. (\x+0.3,\y);
+        \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y-0.2) .. controls (\x-0.2,\y+0.2-0.2) and (\x,\y-0.2-0.2)  .. (\x+0.3,\y-0.2);
+    }
+    \end{tikzpicture}
+	\caption*{periodic function $g \in C^k$}
+\end{center}
+\end{figure}
+\footnote{Koordinatensystem zu kurz, gruen etwas groesser machen}
+		Using the periodicity allows us to bound $g$ on $\R^d$ by comparing with the values in $[-\frac{3k}{4},\frac{3k}{4}]^d$, this is one full periodic block, where $g$ is close to $f$:
 			\begin{align*}
-				\sup_{x\in\R^d}|g(x)|=\sup_{x\in [-k,k]^d} \lvert g(x) \rvert &\leq \sup_{x\in [-k,k]^d}\lvert f(x) - g(x) \rvert + \sup_{x\in [-k,k]^d} \lvert f(x) \rvert 
+				\sup_{x\in\R^d}|g(x)|=\sup_{x\in [-\frac{3k}{4},\frac{3k}{4}]^d} \lvert g(x) \rvert &\leq \sup_{x\in [-\frac{3k}{4},\frac{3k}{4}]^d}\lvert g(x) - f(x) \rvert + \sup_{x\in [-\frac{3k}{4},\frac{3k}{4}]^d} \lvert f(x) \rvert 
 					\leq \varepsilon + \left\Vert f \right\Vert_{\infty}.
 			\end{align*}
-			Putting everything together, the above thoughts yields (please compare the proof of Corollar \ref{cor_514})
+			Note that this argument would not work if we approximated $f$ on $[-k,k]^d$ for instance through polynomials (they grow to infinity at infinity) or any other dense set of continuous functions that is not bounded on $\R^d$, periodicity is key to control $g$ outside of $[-k,k]^d$! Putting everything together, the above thoughts yield, please compare the proof of Corollary \ref{cor_514},
 			\begin{align*}
 				&\quad\Big\lvert \int_{\mathbb{R}^d} f \dint \mu_1 - \int_{\mathbb{R}^d} f \dint \mu_2 \Big\rvert \\
-				&\leq \Big\lvert \int_{\mathbb{R}^d} f \dint \mu_1 - \int_{\mathbb{R}^d} g \dint \mu_1 \Big\rvert + \underbrace{ \Big\lvert \int_{\mathbb{R}^d} g \dint \mu_1 - \int_{\mathbb{R}^d} g \dint \mu_2 \Big\rvert }_{= 0 \text{ by assumption}} + \Big\lvert \int_{\mathbb{R}^d} g \dint \mu_2 - \int_{\mathbb{R}^d} f \dint \mu_2 \Big\rvert  \\
-&\leq \int_{[k,k]^d}|f-g|\dint \mu_1+ \int_{([k,k]^d)^c}|f-g|\dint \mu_1+ \int_{[k,k]^d}|f-g|\dint \mu_2+ \int_{([k,k]^d)^c}|f-g|\dint \mu_2\\
-				& \leq \mu_1 \big( [-k,k]^d \big) \cdot \varepsilon + \mu_1 \big( ([-k,k]^d)^c \big) \cdot ( \varepsilon + \left\Vert f \right\Vert_{\infty}) 
-				 +   \mu_2 \big( [-k,k]^d \big)
-				+ \mu_2 \big( ([-k,k]^d)^c \big) \cdot ( \varepsilon + \left\Vert f \right\Vert_{\infty}) \\
-				&\leq 2 \varepsilon + 2 \varepsilon \big( \varepsilon + \left\Vert f \right\Vert_{\infty} \big).
+				&\leq \Big\lvert \int_{\mathbb{R}^d} f \dint \mu_1 - \int_{\mathbb{R}^d} g \dint \mu_1 \Big\rvert + \underbrace{ \Big\lvert \int_{\mathbb{R}^d} g \dint \mu_1 - \int_{\mathbb{R}^d} g \dint \mu_2 \Big\rvert }_{= 0, \text{ by assumption}} + \Big\lvert \int_{\mathbb{R}^d} g \dint \mu_2 - \int_{\mathbb{R}^d} f \dint \mu_2 \Big\rvert  \\
+&\leq \int_{[-k,k]^d}|f-g|\dint \mu_1+ \int_{([-k,k]^d)^c}|f-g|\dint \mu_1+0
++ \int_{[-k,k]^d}|f-g|\dint \mu_2 + \int_{([-k,k]^d)^c}|f-g|\dint \mu_2\\
+				& \leq \varepsilon \mu_1 (\R)  + \mu_1 ( ([-k,k]^d)^c ) \cdot ( \varepsilon + 2\left\Vert f \right\Vert_{\infty})  +   \varepsilon \mu_2 (\R)
+				 + \mu_2 ( ([-k,k]^d)^c ) \cdot ( \varepsilon + 2\left\Vert f \right\Vert_{\infty}) \\
+				&\leq 2 \varepsilon + 2 \varepsilon \big( \varepsilon + 2\left\Vert f \right\Vert_{\infty} \big).
 			\end{align*}
-			For the inequalities we used that $\mu_i$ are probability measures, $|f-g|\leq |f|+|g|$, and that $\mu_i$ only have mass at most $\varepsilon$ outside of the chosen box. Since $\varepsilon$ was arbitrary we proved $\int f \dint \mu_1 = \int f \dint \mu_2$.\smallskip
+			For the inequalities we used that $\mu_i$ are probability measures, $|f-g|\leq |f|+|g|\leq ||f||_\infty+\varepsilon +||f||_\infty$, and that $\mu_i$ only have mass at most $\varepsilon$ outside of the chosen box. Since $\varepsilon$ was arbitrary we proved $\int_{\R^d} f \dint \mu_1 = \int_{\R^d} f \dint \mu_2$ for all $f\in C_c(\R^d)$. But since $C_c(\R^d)$ separates measures we get $\mu_1=\mu_2$.			
+			\smallskip
 
-			The second claim follows from the first claim applied to the laws $\P_X$.
-\end{proof}
-Of course one might ask why one might be interested in computing moments (for bounded random variables) or Laplace transformations (for non-negative random variables) if there is one general theorem that states that characteristic functions uniqueley determine all real random variables. This is because it is easier to compute moments or Laplace transformations these are the preferred tools in the special situations when they are sufficiently powerful.\smallskip
-
-\begin{lwarnhinweis}
-So far we are used to describe random variables through their cummulative distribution function, density, or discrete probability weights. An alternative way is to describe random variables directly in terms of their chracteristic functions, which, according to the previous theorem, is as good as using the CDF.
-\end{lwarnhinweis}
-The drawback of using characteristic functions is that one needs to compute expectations (integrals) for complex functions. At the same time this is the big advantage, too, as complex integration has wonderful tricks to offer. \smallskip
-
-In many examples the uniquneness is applied as follows. In order to identify the distribution of a random variable (such as a sum of other random variables) one tries to compute the characteristic function. If that characteristic function is already known we can identify the law. We already know this concept from Proposition \ref{P7} and the example below but always used the trick without a proof. Here is another little exercise to play with the examples, Lemma \ref{lemma_5111} and uniqueness theorem.
+			(ii) follows from the first claim applied to the laws $\P_X$ as $\varphi_X(\lambda)=\varphi_{\P_X}$.
+		 \end{proof}
+Here is a little application of the theorem that is useful to get a feeling of how to use it.
 \begin{luebung}
-	Check that 
+	Use the uniqueness theorem to prove the converse of (iii) in Lemma \ref{lemma_5111}. If a characteristic function only takes real values, then the random variable is symmetric.
+\end{luebung}
+
+Before discussing further applications and weak convergence in $\R^d$ let us quickly discuss the method. The main point of the argument was to approximate continuous functions $f:\R^d\to \R$ with compact support. It looks strange that for the approximation we use function $g:\R^d\to \C$ and not functions $g:\R^d\to \R$.  Since $f$ is real-valued the definition of the complex norm yields
+\begin{align*}
+	|f-g|=\sqrt{|\mathcal R e(f)-\mathcal R e(g)|^2+|\mathcal I m(f)-\mathcal I m(g)|^2}=\sqrt{|f-\mathcal R e (g)|^2+|\mathcal I m(g)|^2}\geq |f-\mathcal R e(g)|.
+\end{align*}
+Hence, since we can approximate with complex $g$, we could even better approximate with the real-valued functions $\mathcal R e (g)$. Keeping in mind the Euler formula $e^{ix}=\cos(x)+i\sin(x)$ it becomes clear that real-parts of all complex linear combinations of the $g_m$ are  so-called real-valued trigonometric polynomials \footnote{The wording "{}polynomial"{} is motivated by writing  $z^n=|z|e^{i\varphi n}$ in terms of cosine and sine functions (Euler formula) so that complex polynomials can be written as trigonometric sums with complex coefficients.}
+\begin{align*}
+	\sum_{n=1}^N \big(\alpha_n \cos(\langle m_n, x \rangle)+\beta_n\sin(\langle m_n, x \rangle)\big),\quad \alpha_n,\beta_n\in \R, m_n\in \R^d.
+\end{align*}
+In fact, it is a well-known fact that the real-valued trigonometric polynomials are dense in $C_b([-k,k]^d,\R)$! Hence, we could completely skip the complex numbers and instead work with cosine and sine moments. There are three main reasons why it is preferable to use the complex numbers even though it seems more complicated:
+\begin{itemize}
+	\item Since $\E[e^{i\langle t,X\rangle}]=\E[\cos(\langle t,X\rangle)]+i\E[\sin(\langle t,X\rangle)]$ there is absolutely no practical advantage of working with cosine and sine moments instead of the characteristic function!
+	\item There are wonderful tricks from complex analysis to compute the complex integral $\E[e^{i\langle t,X\rangle}]$. Just try to compute $\E[\cos(tX)]$ for $X\sim \mathcal N(0,1)$ and you will realize that working with the exponential is a good idea!
+	\item How do we prove that the trigonometric polynomials are dense? Exactly the way we proceeded in the proof, by checking that complex exponentials are dense via Stone-Weierstra\ss{} and then taking the real parts. A direct proof is more  complicated as one needs to use the additivity theorems of cosine and sine to derive the algebra properties. This is simpler for the complex exponential since both additivity theorems together give the simple multiplication property of the exponential.
+\end{itemize}
+
+
+
+
+%\begin{lwarnhinweis}
+%So far we are used to describe random variables through their cumulative distribution function, density, or discrete probability weights. An alternative way is to describe random variables directly in terms of their characteristic functions, which, according to the previous theorem, is as good as using the CDF.
+%\end{lwarnhinweis}
+
+In many examples the uniqueness theorem is applied as follows. In order to identify the distribution of a random variable (such as a sum of other random variables) one tries to compute the characteristic function. If that characteristic function is already known then the law can be identified using the theorem. We already know this trick for moment generating functions (if they exist) from Proposition \ref{P7} and the example below but always used the trick without knowing a proof of the uniqueness theorem for moment generating function (see Corollary \ref{cor:uniqu} below). Here is another exercise to play with simple examples, Lemma \ref{lemma_5111} and the uniqueness theorem. Please use characteristic functions and the uniqueness theorem to check the following examples:
+\begin{luebung}
 	\begin{itemize}
 		\item If $Y\sim \mathcal N(0,1)$, then $Y:=\sigma X+Y\sim \mathcal N(\mu,\sigma^2)$.
 		\item
@@ -1259,9 +1367,9 @@ We have identified separating families in the previous section. It now remains t
 \end{theorem}
 \end{lsatzwichtig}
 \begin{proof}[Proof]
-	(ii) follows from (i) by the definition of convergence in distribution with the measures $\mu_n:=\P_{X_n}$ using that $\E[X_n^m]=\int x^m \dint \P_{X_n}(x)$.\smallskip
+	(i) The necessity of convergerence of the integrals follows as $x^m$ is bounded and continuous on $[a,b]$. The sufficiency is also simple as $([a,b],|\cdot|)$ is compact. Hence, every sequence of measures is automatically tight (choose $K=[a,b]$ in the definition of tightness). According to Proposition \ref{most_useful_characterization_weak_convergence} only convergence of integrals needs to be checked for a separating family. Since the family of monomials $C=\{x^m:m\in\N_0\}$ is separating according to Theorem \ref{coruniq} the proof is complete.\smallskip
 
-	(i) The situation is simple as $([a,b],|\cdot|)$ is compact. Hence, every sequence of measures is automatically tight (choose $K=[a,b]$ in the definition of tightness). According to Proposition \ref{most_useful_characterization_weak_convergence} only convergence of integrals needs to be checked for a separating family. Since the family of monomials $C=\{x^m:m\in\N_0\}$ is separating according to Theorem \ref{coruniq} the proof is complete.
+	(ii) follows from (i) by the definition of convergence in distribution with the measures $\mu_n:=\P_{X_n}$ using that $\E[X_n^m]=\int x^m \dint \P_{X_n}(x)$.\smallskip
 \end{proof}
 
 The situation is very similar for non-negative (or non-positive) sequences of random variables. In contrast to bounded sequences we now need convergence of the exponential moments (Laplace transformation):
@@ -1280,12 +1388,16 @@ The situation is very similar for non-negative (or non-positive) sequences of ra
 	\end{theorem}
 	\end{lsatzwichtig}
 	\begin{proof}[Proof]
+		(i) We argue as in the proof of Theorem \ref{cor_distributions_1}. The necessity is clear as the exponentials are bounded and continuous on $[0,\infty)$. For the sufficiency we argue with compactification. Compactifying $[0,\infty]$ and extending the measures trivially to measures $\bar \mu_n$ yields a sequence of measures in a compact space. As in the previous proof the sequence is automatically tight (choose $K=[0,\infty]$). 
+		According to Proposition \ref{most_useful_characterization_weak_convergence} the weak convergence is equivalent to convergence of all integrals against a separating family. Since the family of exponentials $C\coloneqq \{ f_{\lambda} \colon \lambda > 0 \}$ is separating according to Theorem \ref{cor_distributions_1} and 
+		\begin{align*}
+			\int_{[0,\infty]} f_\lambda \dint \bar\mu_n(x)=\int_{[0,\infty)} f_\lambda \dint \mu_n(x)
+		\end{align*}		
+		the proof is complete.\smallskip
+
 		(ii) follows from (i) by the definition of convergence in distribution with the measures $\mu_n:=\P_{X_n}$ using that $L_{X_n}(\lambda)=\int e^{-\lambda x} \dint \P_{X_n}(x)$.\smallskip
-	
-		(i) We argue as in the proof of Theorem \ref{cor_distributions_1}. Compactifying $[0,\infty]$ and extending the measures trivially to measures $\bar \mu_n$ yields a sequence of measures in a compact space. As in the previous proof the sequence is automatically tight (choose $K=[0,\infty]$). 
-		According to Proposition \ref{most_useful_characterization_weak_convergence} only convergence of integrals needs to be checked for a separating family. Since the family of exponentials $C\coloneqq \{ f_{\lambda} \colon \lambda > 0 \}$ is separating according to Theorem \ref{cor_distributions_1} the proof is complete.
 	\end{proof}
-The most general theorem is L\'evy's continuity theorem. Without any further assumption weak convergences is equivalent to convergence of the characteristic functions. 
+The most general theorem is \textbf{L\'evy's continuity theorem}. Without any further assumption weak convergences is equivalent to convergence of the characteristic functions. 
 %Erst beschränkt und positiv. Dann R. Dann C.
 
 %\textbf{Goal:}
@@ -1361,7 +1473,8 @@ The most general theorem is L\'evy's continuity theorem. Without any further ass
 
 
 		\begin{lsuperwichtigersatz}
-			\begin{theorem}[L\'{e}vy's continuity theorem]\label{levy_special}
+			\begin{theorem}\label{levy_special}
+				{}
 				\begin{enumerate}[label=(\roman*)]
 					\item Suppose that $\mu,\mu_1,...\in \cM_1(\mathbb{R}^d)$, then
 					\begin{align*}
@@ -1379,7 +1492,7 @@ As earlier we only prove (i) as (ii) follows directly using $\mu_n=\P_{X_n}$.\sm
 
 "$\Rightarrow$": Since $g = e^{i \langle t, \cdot \rangle}=\cos(\langle t,\cdot\rangle)+i\sin(\langle t,\cdot\rangle)$ and $\cos,\sin\in C_b(\mathbb{R}^d)$ the pointwise convergence follows from the definition of weak convergence.\smallskip
 
-"$\Leftarrow$": We will actually prove a stronger statement than claimed, the so-called general continuity theorem:
+"$\Leftarrow$": We will actually prove a stronger statement than claimed, the so-called \textbf{general continuity theorem}:
 \begin{lwarnhinweis}
 	Suppose $\lim_{n\to\infty}\varphi_{\mu_n}(t)= f(t)$, for all $t\in\R^d$, where $f \colon \mathbb{R}^d \to \mathbb{C}$ is continuous at $0$. Then there is a probability measure $Q$ on $\cB(\R^d)$ with $f = \varphi_Q$ and $\mu_n \overset{\text{(w)}}{\longrightarrow} Q, \: n\to \infty$.
 \end{lwarnhinweis}
@@ -1392,15 +1505,13 @@ Comparing with the proofs of the previous two theorems the strategy is as follow
 \end{itemize}
 because then the claim follows from Proposition \ref{most_useful_characterization_weak_convergence}. Chosing $C:=\{e^{i\langle t,x\rangle}: t\in\R\}$ we already proved in Theorem \ref{CF} that $C$ is separating. Hence, we need to prove that the assumed pointwise convergence of $\varphi_{\mu_n}$ implies tightness of $(\mu_n)$.\smallskip
 
-To do so let us first check that without loss of generality we may assume $d=1$. If $\pi_k(x)=x_k$ denotes the projection on the $k$th coordinate, then we define $\mu_n^k:= \mu_n\circ \pi_k$, the push-forward of the measures on the coordinates. Their characteristic functions of $\mu_n^k$ can be expresses through the characteristic functions of $\mu_n$:
+To do so let us first check that without loss of generality we may assume $d=1$. If $\pi_j(x)=x_j$ denotes the projection on the $j$th coordinate, then we define $\mu_n^j:= \mu_n\circ \pi^{-1}_j$, the push-forward of the measures on the coordinates. Their characteristic functions $\mu_n^j$ can be expressed through the characteristic functions of $\mu_n$:
 \begin{align*}
-	\varphi_{\mu_n^{k}}(t) = \int_{\mathbb{R}} e^{ixt} \dint \mu_n^k(x)
-		=  \int_{\mathbb{R}} e^{i \langle x , t  \text{e}_k \rangle} \dint \mu_n(x)
-		= \varphi_{\mu_n}(t  \text{e}_k),\quad t\in\R.
+	\varphi_{\mu_n^{j}}(t) = \int_{\mathbb{R}} e^{ixt} \dint \mu_n^j(x)
+		=  \int_{\mathbb{R}^d} e^{i \langle x , t  \text{e}_j \rangle} \dint \mu_n(x)
+		= \varphi_{\mu_n}(t  \text{e}_j),\quad t\in\R.
 \end{align*}
-Hence, the assumed pointwise convergence of $\varphi_{\mu_n}$ implies the convergence of all $\varphi_{\mu_n^k}$. If now we can prove that this implies tightness for all $(\mu_n^k)_{k\in\N}$, then, using Prohorov's characterisation of tightness through sequences, we obtain tightness of $(\mu_n)_{n\in\N}$. BECUASE.\smallskip 
-
-From now on we assume $d=1$ and that $(\varphi_{\mu_n})_{n\in\N}$ converges pointwise to a function $f$ that is continuous at $0$. 
+Hence, the assumed pointwise convergence of $\varphi_{\mu_n}$ implies the pointwise convergence of all $\varphi_{\mu_n^j}$. If now we can prove that this implies tightness for all $(\mu_n^j)_{n\in\N}$, then the tightness of $(\mu_n)_{n\in\N}$ follows. The last claim can for instance be shown as follows: If $K_1,...,K_d$ are compacts sets such that $\sup_{n\in\N}\mu^j_n(K_j^c)<\frac{\varepsilon}{d}$ then the compact set $K_1\times \cdots \times K_d$ does the job for $(\mu_n)$. This follows from subadditivity as $(K_1\times \cdots \times K_d)^c\subseteq \cup_{j=1}^d\pi_j^{-1}(K_j^c)$. From now on we assume $d=1$ and that $(\varphi_{\mu_n})_{n\in\N}$ converges pointwise to a function $f$ that is continuous at $0$. 
 %\end{proof}
 %\begin{lsuperwichtigersatz}
 %	\begin{theorem}[L\'{e}vy continuity theorem, general formulation]\label{levy_general}
@@ -1431,11 +1542,30 @@ We want to relate tightness (probabilities) to integrals (characteristic functio
 									0 &: x = 0 \end{cases},
 							\end{align*}				
 						which is non-negative and continuous on $\mathbb{R}$ (Analysis):
-							\begin{figure}[h]
-							\begin{center}
-								\includegraphics[scale=0.3]{bild.jpg}
-							\end{center}
-							\end{figure}
+\begin{figure}[h]
+	\begin{center}
+%    \begin{tikzpicture}[scale=0.7,transform shape]
+ %   \begin{axis}[ grid=both, xmin=-6, xmax=6, ymin=0, ymax=2, xlabel=$x$, ylabel=$y$, axis lines=center, >=stealth ]
+  %      \addplot[ domain=-6:6, blue, thick, samples=100, ] plot[smooth] {1-sin(deg(x))/x};
+   % \end{axis}
+  %  \end{tikzpicture}
+   % \hfill \break
+   % \hspace*{2mm}
+    \begin{tikzpicture}[scale=0.7,transform shape]
+    \begin{axis}[ grid=both, xmin=-37, xmax=37, ymin=0.0, ymax=1.5, xlabel=$$, ylabel=$$, axis lines=center, >=stealth ]
+        \addplot[ domain=-37:37, blue, ultra thick, samples=100, ] plot[smooth] {1-sin(deg(x))/x};
+    \end{axis}
+    \end{tikzpicture}
+	\caption*{plot of $h$}
+\end{center}
+\end{figure}						
+						
+						
+				%			\begin{figure}[h]
+				%			\begin{center}
+				%				\includegraphics[scale=0.3]{bild.jpg}
+				%			\end{center}
+				%			\end{figure}
 						
 							Now define 
 						 $$\alpha \coloneqq \inf \{ h(x) \colon \lvert x \rvert \geq 1 \} = 1 -\sin(1) > 0$$ so that $\frac{h(x)}{\alpha}\geq 1$ for $|x|>1$. Then, for $k\geq 1$,
@@ -1450,12 +1580,22 @@ We want to relate tightness (probabilities) to integrals (characteristic functio
 						\begin{align*}
 							\limsup_{n\to\infty} \mu_n \big( [-k,k]^c \big) &\leq \frac{1}{\alpha} \lim_{n\to\infty} \int_0^1 \Big( 1 - \cR e \Big( \varphi_{\mu_n} \Big( \frac{t}{k} \Big) \Big) \big) \dint t \\
 						\overset{\text{DCT}}&{=} \frac{1}{\alpha} \int_0^1 \lim_{n \to \infty}  \bigg( 1 - \cR e \Big( \varphi_{\mu_n} \Big( \frac{t}{k} \Big) \Big) \bigg) \dint t \\
-							&= \frac{1}{\alpha} \int_0^1  \Big( 1 - \cR e \Big( f \Big( \frac{t}{k} \Big) \Big) \Big)
+							&= \frac{1}{\alpha} \int_0^1  \Big( 1 - \cR e \Big( f \Big( \frac{t}{k} \Big) \Big) \Big)\,dt.
 						\end{align*}	
-						In the last step we have used that convergence of a sequence of complex numbers implies convergence of real- and imaginary-parts.			
-						Finally, we use the continuity of $f$ (and thus $\cR e(f)$) at $0$. For all $\varepsilon > 0$ there is a $\delta>0$ such that $\lvert 0 - \frac{t}{k} \rvert < \delta$ implies $\lvert 1 - \cR e ( f(\frac{t}{k})) ) \rvert = \lvert \cR e(f(0)) - \cR e ( f(\frac{t}{k})) ) \rvert \leq \varepsilon$. Hence, there is some $k$ so that $\lvert 1 - \cR e ( f(\frac{t}{k})) ) \rvert < \varepsilon$ for all $t \in [0,1]$. But then there is some $k$ so that $\limsup_{n\to\infty} \mu_n \big( [-k,k]^c \big) < \varepsilon$. 
-				
-						From this the tightness follows as every single probability measure on $\mathbb{R}^d$ is tight. ARGUMENT HINSCHREIBEN
+						In the last step we have used that convergence of a sequence of complex numbers implies convergence of real- and imaginary-parts. To deduce the tightness we use the continuity of $f$. The continuity of $f$ implies continuity of $\cR e(f)$ at $0$. In $\varepsilon-\delta$ formalism this means that for every $\varepsilon>0$ there is some $\delta>0$ such that 
+						\begin{align*}
+							\Big| 0 - \frac{t}{k} \Big| < \delta
+							\quad \Rightarrow\quad \Big| 1 - \cR e \Big( f\Big(\frac{t}{k}\Big) \Big) \Big| 
+							= \Big| \cR e(f(0)) - \cR e \Big( f\Big(\frac{t}{k}\Big) \Big) \Big| < \alpha \varepsilon.
+						\end{align*}
+						Hence, if we chose $k>\frac{1}{\delta}$, then the integrand is bounded by $\alpha \varepsilon$ for all $t\in [0,1]$. With this choice of $k$ we obtain 
+						\begin{align*}
+							\limsup_{n\to\infty} \mu_n \big( [-k,k]^c \big)< \varepsilon.
+						\end{align*}
+						The tightness can be deduced as follows. For fixed $\varepsilon>0$ we can find a compact set $[-K,K]$ and $N\in\N$ such that $\sup_{n\geq N}\mu_n([-K,K]^c)<\varepsilon$. Since single measures on $\mathcal B(\R)$ are always tight we can also find compact sets $[-K_i,K_i]$ such that $\mu_i([-K_i,K_i]^c)<\varepsilon$ for $i=1,...,N-1$. If now we chose $M:=\max\{K_1,...,K_{N-1}, K\}$, then $\sup_{n\in\N}\mu_n([-M,M]^c)<\varepsilon$. Hence, the sequence $(\mu_n)$ is tight.\smallskip
+
+
+						Now we can summarize: Under the assumption of the general continuity theorem we proved that $(\mu_n)$ is tight. Using Prohorov, there is a weakly converging subsequences $(\mu_{n_k})$ with some limit $Q$. But then the characteristic functions $\varphi_{\mu_{n_k}}$ converge to $\varphi_Q$. Since we also assumed that the characteristic functions of $(\mu_n)$ converge towards $f$ it follows that $f=\varphi_Q$.
 	\end{proof}
 	%\begin{lsuperwichtigersatz}
 	%\begin{corollary}[L\'{e}vy continuity theorem - special formulation]\label{levy_special}
@@ -1477,9 +1617,9 @@ We finish the section with a short discussion of the usefulness of the generalis
 \begin{align*}
 	\text{random variable }X\quad \Leftrightarrow \quad \text{ law }\P_X\quad \Leftrightarrow \quad \text{CDF }F_X.
 \end{align*}
-In fact, just as CDFs are functions with a set of properties one can ask if also characteristic functions are functions with a set of axiomatic properties so that it is reasonable to extend 
+In fact, just as CDFs are functions with a set of properties one can ask if also characteristic functions are functions with a set of axiomatic properties that uniquely characterise all random variables:
 \begin{align*}
-	\text{random variable }X\quad \Leftrightarrow \quad \text{ law }\P_X\quad \Leftrightarrow \quad \text{CDF }F_X\quad \Leftrightarrow\quad \text{characteristic function }\varphi_X.
+	\text{random variable }X\quad \Leftrightarrow \quad \text{ law }\P_X\quad \Leftrightarrow \quad \text{CDF }F_X\quad \Leftrightarrow\quad \text{characteristic function }\varphi_X
 \end{align*}
 Indeed, this is the case but unfortunately the appearing property of positive definitness is hard to check:
 \begin{lsatz}
@@ -1498,33 +1638,61 @@ Indeed, this is the case but unfortunately the appearing property of positive de
 \begin{proof}[Proof]
 	"$\Rightarrow$": Suppose $\varphi(t)=\E[e^{itX}]$ for some random variable $X$. Then $\varphi(0) = 1$ is clear, continuity at $0$ follows from dominated convergence, and
 		\begin{align*}
-			\sum_{k,l=1} y_k \bar{y}_l \varphi (t_k - t_l) &= \sum_{k,l=1} y_k \bar{y}_l \int_{\mathbb{R}^d} e^{i \langle x, t_k - t_l \rangle} \dint \mu(x) \\
+			\sum_{k,l=1}^n y_k \bar{y}_l \varphi (t_k - t_l) &= \sum_{k,l=1}^n y_k \bar{y}_l \int_{\mathbb{R}^d} e^{i \langle x, t_k - t_l \rangle} \dint \mu(x) \\
 				&= \int_{\mathbb{R}^d} \sum_{k,l=1}^n y_k e^{i \langle x ,t_k \rangle} \overline{y_l e^{i \langle x ,t_l \rangle}} \dint \mu(x) \\
-				&= \int_{\mathbb{R}^d} \Big\lvert \sum_{k=1} y_k e^{i \langle x , t_k \rangle} \Big\rvert^2 \dint \mu(x) \geq 0.
+				&= \int_{\mathbb{R}^d} \Big\lvert \sum_{k=1}^n y_k e^{i \langle x , t_k \rangle} \Big\rvert^2 \dint \mu(x) \geq 0.
 		\end{align*}
 	"$\Leftarrow$": Too hard
 \end{proof}
 There are many classes of characteristic functions that can be understood more directly using the general version of the continuity theorem. If for some reason we have a sequence of characteristic functions $\varphi_n$ that converges pointwise to a function $\varphi$ that is continuous at $0$, then $\varphi$ is a characteristic function. For all even continuous functions $\varphi \colon \mathbb{R} \to [0,1]$ with $\varphi(0)=1$ that are convex on $[0,\infty)$ this can be done (P\'olya's theorem). One can in fact construct simple explicit random variables which characteristic functions $\varphi_n$ that are  approximations of such such functions and converge pointwise to $\varphi$.
 
-\begin{figure}[h]
+\begin{figure}
 	\begin{center}
-		\includegraphics[scale=0.07]{characteristic.jpeg}
-	\end{center}
-	\vspace{-9mm}
+	\begin{tikzpicture}
+			\tikzset{
+			  pics/tick/.style args={#1}{code={
+				\draw[line width=0.3mm,inner sep=0mm] (0,-#1) -- (0,#1) ;
+				},
+			  }
+			}
+			\draw[black!90,line width=0.4mm] (2.2,0) -- ++(90:3cm);
+			%AXIS X
+			\draw[black!90,line width=0.4mm] (-0.5,0) --++(0:5.5cm);
+			\draw (2.2,2.5) pic[rotate=90] {tick={1mm}} node[xshift=3mm] {1} ;
+			\foreach \x in {0,0.75,1.5,3,3.75,4.5}{
+				\draw[darkgreen] (\x,0) pic[] {tick={1mm}} ;
+		
+			}
+			\draw[line width=0.4mm,red] (2.2,2.5) .. controls (2.8,0.7) and (3.75,0.2)  .. (4.5,0.2);
+			\draw[line width=0.4mm,red] (2.2,2.5) .. controls (1.7,0.7) and (0.75,0.2)  .. (0,0.2);
+	
+			\foreach \x/\y [count=\i] in {0/0.2,0.75/0.4,1.5/1,2.2/2.5}{
+				\coordinate[] (\i) at (\x,\y) ;
+				\node[circle,inner sep=0.3mm,fill=darkgreen] at (\x,\y) {};
+			}
+			\draw[darkgreen,line width=0.3mm] (1) -- (2) -- (3) -- (4);
+	
+			\foreach \x/\y [count=\i] in {2.2/2.5,3/1,3.75/0.4,4.5/0.2}{
+				\coordinate[] (\i) at (\x,\y) ;
+				\node[circle,inner sep=0.3mm,fill=darkgreen] at (\x,\y) {};
+			}
+			\draw[darkgreen,line width=0.3mm] (1) -- (2) -- (3) -- (4); 
+	\end{tikzpicture}
+	\caption*{Polya's trick}
+\end{center}
 	\end{figure}
 
-
-
+The most prominent class of distributions that is defined using Polya's theorem are the stable laws:
 \begin{example}
-	For $\alpha\in (0,1)$ and $\lambda>0$ the function $\varphi_{\alpha}(t) = e^{- \lambda \lvert t \rvert^{\alpha}}$ is even and convex on $[0,\infty)$. By P\'olya's theorem this is a characteristic function of a random variable $X$. The random variable is called $\alpha$-stable. In fact, the assumption $\alpha\in (0,1)$ is only needed to apply P\'olya's theorem, actually $\varphi_\alpha$ is a characteristic function if and only if $\alpha\in [0,2]$. All such random variables are called $\alpha$-stable and generalise the Gaussian distribution which appears for $\alpha=2$.
+	For $\alpha\in (0,1]$ and $\lambda>0$ the function $\varphi_{\alpha}(t) = e^{- \lambda \lvert t \rvert^{\alpha}}$ is even and convex on $[0,\infty)$. By P\'olya's theorem this is a characteristic function of a random variable $X$. The random variable is called $\alpha$-stable. In fact, the assumption $\alpha\in (0,1]$ is only needed to apply P\'olya's theorem, actually $\varphi_\alpha$ is a characteristic function if and only if $\alpha\in [0,2]$. All such random variables are called $\alpha$-stable and generalise the Gaussian distribution which appears for $\alpha=2$.
 \end{example}
+The interesting point about the stable laws is the simple for of their characteristic functions whereas the densities (they exist!) are not simple at all.
 
 
 	\marginpar{\textcolor{red}{Lecture 18}}
 
 
-
-\section{Applications}
+\section{Applications}\label{sec:applications}
 Recall from Theorem \ref{erzeugende} the relation $\E[X^n]=\frac{\mathcal M_X^{(n)}(0)}{n!}$ between derivatives of the moment generating function $\mathcal M_X(t)=\E[e^{tX}]$ and the moments. The relation is useful as it allows to compute moments easily for a couple of examples (such as the Gaussian). In principle the idea is very simple, here for the first moment: $$\mathcal M'_X(t)=\frac{d}{dt}\E[e^{tX}]=\E\Big[\frac{d}{dt}e^{tX}\Big]=\E[X e^{tX}]$$ and then plugging-in $t=0$. What makes the proof tricky is the interchange of differentiation and expectation for which dominated convergence needs to be applied in the right way and this forced us to assume finiteness of $\mathcal M_X$ in some interval $(-\varepsilon, \varepsilon)$. Since finiteness of $\mathcal M_X(t)$ means existence of exponential moments the theorem looks much better than it is, the assumption is extremely strong! We will now repeat the same story using the complex exponential. Before doing so we should first say a word on differentiation for functions $f:\R\to \C$. This is either defined by interpreting $\C$ as $\R^2$ and then the rewriting the derivative (a vector) in terms of polar coordinates or directly by taking limits in $\C$: $\frac{d}{dt} f(t)=f'(t)=\lim_{h\to 0}\frac{f(t+h)-f(t)}{h}$. Writing 
 \begin{align*}
 	\lim_{h\to 0}\frac{f(t+h)-f(t)}{h}=\lim_{h\to 0}\frac{\mathcal R ef(t+h)-\mathcal R ef(t)}{h}+i\lim_{h\to 0}\frac{\mathcal I m f(t+h)-\mathcal I mf(t)}{h}
@@ -1540,13 +1708,13 @@ shows that both approaches give exactly the same. As always it is important to k
 		\item
 			If $\E [ \lvert X^n \rvert ] < \infty$ for some $n\in\N$, then $\varphi_X$ satisfies the Taylor approximation
 			\begin{align}\label{Taylor}
-				\varphi_X(t) = \sum_{k=0}^n \frac{i^k \E[X^k]}{k!} t^k + h_n(t)t^2, \quad t\in \mathbb{R},
+				\varphi_X(t) = \sum_{k=0}^n \frac{i^k \E[X^k]}{k!} t^k + h_n(t)t^n, \quad t\in \mathbb{R},
 			\end{align}
 			with a residual term satisfying $\lim\limits_{t \to 0} h_n(t) =0$.
 		\item
-			If $\lim\limits_{k \to \infty} \frac{t^k \cdot \E [ \lvert X^k \rvert ]}{k!} = 0$ for some $t\in\R$, then $\lim_{n\to\infty} h_n(t) =0$. In particular, $\varphi_X$ has the power series representation
+			If all moments are finite and $\lim\limits_{k \to \infty} \frac{t^k \cdot \E [ \lvert X^k \rvert ]}{k!} = 0$ for some $t\in\R$, then $\lim_{n\to\infty} h_n(t) =0$. In particular, $\varphi_X(t)$ has the power series representation
 			\begin{align*}
-				\varphi_X(t) = \sum_{k=0}^{\infty} \frac{i^k \E[X^k]}{k!}t^k,\quad t\in\R.
+				\varphi_X(t) = \sum_{k=0}^{\infty} \frac{i^k \E[X^k]}{k!}t^k.
 			\end{align*}
 	\end{enumerate}
 \end{theorem}
@@ -1591,11 +1759,11 @@ Of course, the interchange is non-trivial and there are essentially two ways to 
 
 	(ii) Since all derivatives at $0$ are known from (i) the complex version of Taylor's theorem for $x_0 =0$ gives
 			\begin{align*}
-				\varphi_X(t) = 1+  i t \E[X] - \frac{1}{2} t^2 \E [ X^2] + ... + \frac{i^n t^n\E [X^n]}{n!} + R_n(t)t^n,
+				\varphi_X(t) = 1+  i t \E[X] - \frac{1}{2} t^2 \E [ X^2] + ... + \frac{i^n t^n\E [X^n]}{n!} + h_n(t)t^n,
 			\end{align*}
 			with a remainder term satisfying $\lim\limits_{t\to 0} h_n(t) = 0$.\smallskip
 
-	(iii)
+	(iii) 
 			We need to show that, for fixed $t$, the residual $h_n(t)$ vanishes as $n$ tends to infinity. It is most practical to use the integral representation for $R_n(t):=h_n(t)t^n$:
 			\begin{align*}
 				\lvert R_n(t) \rvert = \Big\lvert \int_0^t \frac{\varphi_X^{(n+1)}(s)}{(n+1)!}(t-s)^n \dint s \Big\rvert &\leq \int_0^t \frac{\E [ \lvert X^{n+1}\rvert] }{(n+1)!}(t-s)^n \dint s
@@ -1605,14 +1773,14 @@ Of course, the interchange is non-trivial and there are essentially two ways to 
 \end{proof}
 Just as we used the moment generating functions to compute moments for random variables with exponential moments we can also use the characteristic functions:
 \begin{luebung}
-	Compute the first few moments of $\mathcal N(0,1)$, $\text{Poi}(\lambda)$, and $\mathcal U([0,1])$.
+	Compute the first few moments of $\mathcal N(0,1)$, $\text{Poi}(\lambda)$, and $\text{Exp}(\lambda)$.
 \end{luebung}
 As an application we prove what is sometimes called the \textbf{method of moments} and, as a special case, we can finally give a proof of Theorem \ref{WT}.
 \begin{llemma}
-\begin{corollary}
+\begin{corollary}\label{cor:uniqu}
 	\begin{enumerate}[label=(\roman*)]
 		\item
-			Let $X$ be a real-valued random variable such that there is a constant $C$ with $\frac{1}{n} \big( \E[\lvert X^n \rvert ] \big)^{\frac{1}{n}}< C$ for all $n\in \mathbb{N}$. Then the law of $X$ is uniquely determined by all it's moments.
+			Let $X$ be a real-valued random variable such that there is a constant $C$ with $\frac{1}{n} \big( \E[|X|^n ] \big)^{\frac{1}{n}}< C$ for all $n\in \mathbb{N}$. Then the law of $X$ is uniquely determined by all it's moments.
 		\item
 			In particular, if $\mathcal M_X(t) < \infty$ for $t \in (-\varepsilon,\varepsilon)$ for some $\varepsilon > 0$, then $\mathcal M_X$ uniquely determines the law of $X$.
 	\end{enumerate}
@@ -1620,9 +1788,9 @@ As an application we prove what is sometimes called the \textbf{method of moment
 \end{llemma}
 The corollary is a significant extension of Theorem \ref{coruniq}. If $|X|$ is bounded by some $C$, then $\E[|X^n|]$ is bounded by $C^n$ so that the assumption of the corollary is clearly satisfied. The corollary states that also for other (rather special) random variables which moments increase slowly enough the same statement holds.
 \begin{proof}[Proof]
-			(i) For $\lvert t \rvert < \frac{1}{3C}$ we have
+			(i) For $\lvert t \rvert < \frac{1}{3C}$, using the Sterling formula, we have
 			\begin{align*}
-				\limsup_{n\to \infty} \frac{\E [ \lvert X^n \rvert ] \cdot \lvert t \rvert^n}{n!} \overset{\text{Sterling}}&{=} \limsup_{n\to \infty} \Big( \E [ \lvert X^n \rvert ]^{\frac{1}{n}}  \lvert t \rvert  \frac{e}{n} \Big)^n  \sqrt{2 \pi n}
+				\limsup_{n\to \infty} \frac{\E [ |X|^n ] \cdot \lvert t \rvert^n}{n!} \overset{\ref{sterling}}&{=} \limsup_{n\to \infty} \Big( \E [ \lvert |X|^n \rvert ]^{\frac{1}{n}}  \lvert t \rvert  \frac{e}{n} \Big)^n  \sqrt{2 \pi n}
 					\leq \limsup_{n\to \infty} \Big( \frac{e}{3} \Big)^n \sqrt{2\pi n}
 					= 0
 			\end{align*}
@@ -1634,6 +1802,7 @@ The corollary is a significant extension of Theorem \ref{coruniq}. If $|X|$ is b
 			\end{align*}	
 			Now we can use the proof of (i) to finish the proof.	
 \end{proof}
+To finish the chapter with a spectacular theorem we give a proof of the central limit theorem. The proof we have given in Section \ref{sec:ZGS} imposed the additional assumption $\E[|X_1|^3]<\infty$, hence, this is our first complete proof of the most important theorem of probability theory and statistics.
 \begin{lsuperwichtigersatz}
 	\begin{theorem}[Central Limit Theorem]
 	Let $X_1,X_2,...$ be iid with $\mu \coloneqq \E[ X_1]$ and $\sigma^2 \coloneqq \mathbb{V}[X_1] < \infty$. Then
@@ -1673,8 +1842,45 @@ In many textbooks one can see the formulation
 	\begin{align*}
 		\lim_{n\to\infty}\mathbb{P} \bigg( \frac{\sum_{k=0}^n X_k - n \cdot \mu}{\sqrt{n \sigma^2}} \in [a,b] \bigg)= \frac{1}{\sqrt{2\pi}} \int_a^b e^{- \frac{x^2}{2}} \dint x, \quad \forall a<b,
 	\end{align*}
-	which holds due to Portemanteau because $\mathbb{P}_{\cN(0,1)}( \partial [a,b]) = 0$.
+	which holds due to Portemanteau because $\mathbb{P}_{\cN(0,1)}( \partial [a,b]) = 0$.\smallskip
+
+	There are plenty of generalisations of the central limit theorem. Here is a multi-dimensional version that will be used for the proof of the Donsker theorem in the next section.
+	\begin{ldef}
+		\begin{deff}
+			If $Y$ is a $d$-dimensional random vector consisting of independent $\mathcal N(0,1)$ random variables, $\mu\in \R^p$, and $B\in \R^{d\times p}$, then $X:=\mu+B Y$ is called a $p$-dimensional \textbf{Gaussian random vector}. In analogie to $\mathcal N(\mu,\sigma^2)$ we write $X\sim \mathcal N(\mu,\Sigma)$, where $\Sigma:=B B^T$ is the so-called covariance matrix.
+		\end{deff}
+	\end{ldef}
+There are several equivalent definitions of Gaussian random vectors. Most prominently through the characteristic function involving a mean vector $m$ and a symmetric positive semidefinite matrix $\Sigma$ or by saying that all linear combinations of the entries are univariate Gaussian. All approaches lead to the same characteristic functions (see the next exercise) and therefore are equivalent.
+\begin{luebung}
+	If $X\sim \mathcal N(\mu, \Sigma)$, then 
+	\begin{align}\label{CFG}
+		\varphi_X(t)&=\exp\Big(i\langle t,\mu\rangle-\frac 1 2 \langle t,\Sigma t\rangle\Big),\quad t\in\R^d
+	\end{align}
+	and 
+	\begin{align*}
+		\E[X_k]=\mu_k,\quad 
+		\Cov(X_i,X_j)=\Sigma_{i,j}.
+	\end{align*}
+	If furthermore $\Sigma$ is invertible, then $X$ has the multivariate density 
+	\begin{align*}
+		f(x)=\frac{1}{(2\pi)^{d/2} \det(\Sigma)} \exp\Big(-\frac{1}{2} \big\langle x-\mu,\Sigma^{-1}(x-\mu) \big\rangle\Big),\quad x\in\R^d.
+	\end{align*}
+\end{luebung}
+The exercise shows that the key quantities for Gaussian random vectors are the mean vector $\mu$ and the covariance matrix $\Sigma$. If a random vector is known to be Gaussian it is uniquely determined through the mean vector and all covariances of two-coordinates. In particular, coordinates of a Gaussian random vector are independent if and only if they are uncorrelated, a fact, which is wrong for non-Gaussian vectors.
+\begin{luebung}
+	Show the following multivariate version of the central limit theorem. If $X_1,...$ is an iid sequence of random vectors with mean vector $\mu_k=\E[X_{1,k}]$ and covariance matrix $\Sigma_{i,j}=\Cov(X_{1,i},X_{1,j})$, then
+	\begin{align*}
+		\frac{1}{\sqrt{n}}\sum_{k=1}^n (X_k-\mu)\overset{\text{(d)}}{\longrightarrow} \mathcal N(\mu,\Sigma),\quad n\to\infty.
+	\end{align*}
+	Note that differences, sums, and scalar multiplications are in the vector sense.
+\end{luebung}
+
+%
+%
+%Since all matrices $B B^T$ are automatically symmetric they are also self-adjoint so that QUATSCH, DAFUER MUSS B SYM SEIN $\langle B B^T x,x\rangle=\langle Bx, Bx\rangle=|Bx|^{1/2}\geq 0$ for all $x\in\R^d$. Hence, the covariance matrix $\Sigma$ is automatically positive definite. This motivates an alternative definition of a Gaussian random vector through the characteristic function \eqref{CFG} for some $\mu\in \R^d$ and some positive definite matrix $\Sigma$.
+%\begin{luebung}
+%	Use Bochner's theorem to prove that $\varphi_X$ from \eqref{CFG} is a characteristic function of some random vector $X$ if $\mu\in\R^d$ and $\Sigma\in \R^{d\times d}$ is a symmetric positive semi-definite matrix.
+%\end{luebung}
 
 
-\chapter{Brownian Motion}\label{sec:BM}
-
+	

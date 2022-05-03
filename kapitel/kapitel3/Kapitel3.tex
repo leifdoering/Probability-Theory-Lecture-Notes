@@ -231,7 +231,7 @@ damit die Analogie zur Analysis nicht verloren geht.
  Weil das Integral nur f\"ur messbare Funktionen definiert ist, ist es ganz essentiell, dass auch $f \mathbf{1}_A$ eine messbare Funktion ist. Das liegt an der gro\ss en Flexibilit\"at von messbaren Funktionen: $\mathbf{1}_A$ ist messbar, weil $A$ messbar ist und das Produkt messbarer Funktionen ist messbar.
 
 
-\begin{lemma}
+\begin{lemma}\label{properties}
 \link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=1910s}
 	F\"ur $ f, g \! : \Omega \rightarrow \overline{\mathbb{R}}$ $\mu$-integrierbar und $\alpha \in \mathbb{R}$ gelten
 	\begin{enumerate}[label=(\roman*)]
@@ -336,7 +336,7 @@ Die rechte Seite sieht sehr viel n\"utzlicher aus als die eigentliche Definition
 	\end{itemize}
 \end{beispiel}
 Vielleicht habt ihr in der Analysis 2 schon \"uber Nullmengen gesprochen. Dann habt ihr schon gelernt, dass Nullmengen bei Integralen keine Rolle spielen. Wenn nicht, lernt ihr Nullmengen und ihre Bedeutung f\"ur Integrale jetzt kennen:
-\begin{deff}
+\begin{deff}\label{def:Nullmenge}
 \link{https://www.youtube.com/watch?v=jWVbp8ck7d8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=11&t=5412s}
 	$ N \in \cA$ heißt $ \mu $-\textbf{Nullmenge}, falls $ \mu (N) = 0$. \footnote{Eigentlich macht man das Allgemeiner: Eine Teilmenge $N$ von $\Omega$ hei\ss t Nullmenge, falls es eine messbare Menge $A$ mit $N\subseteq A$ und $\mu(A)=0$ gibt. Weil in der Stochastik 1 alle von uns ben\"otigten Nullmengen selber messbar sind, ignorieren wir das. Das Thema wird erst relevant, wenn ihr die Brownsche Bewegung kennenlernt.
 	}
@@ -366,7 +366,7 @@ Weil aufgrund der Definition des Integrals f\"ur Indikatorfunktionen $f=\mathbf 
 		\item $f \geq 0$ und $ \int_{\Omega} f\, \mathrm{d} \mu=0$ impliziert $f = 0$ $\mu$-fast überall.
 	\end{enumerate}
 \end{satz}
-
+%%
 \begin{proof}\abs
 	\begin{enumerate}[label=(\roman*)]
 		\item Sei $A := \{ |f| = \infty \} = f^{-1}(\{ -\infty, +\infty \}) \in \cA$. Weil  $ n \mathbf{1}_A \leq |f| $ f\"ur alle $n\in\N$ gilt, folgt \[ n \mu(A) \overset{\text{Def.}}{=} \int_{\Omega} n \mathbf{1}_A\, \mathrm{d}\mu \overset{\text{Mon.}}{\leq} \int_{\Omega} |f|\, \mathrm{d}\mu= \int_\Omega(f^++f^-)\mathrm{d}\mu \overset{f}{\underset{\mu\text{-int.}}{<}} \infty \] f\"ur alle $n\in\N$.
@@ -924,7 +924,7 @@ Kommen wir zur\"uck zur Konzentration der Normalverteilung um $\mu$.
 
 \marginpar{\textcolor{red}{Vorlesung 14}}
 
-\section{Integralabsch\"atzungen und $L^p$-R\"aume}
+\section{Integralabsch\"atzungen und $L^p$-R\"aume}\label{sec:Lp}
 
 Sei jetzt wieder $(\Omega, \cA, \mu)$ ein beliebiger messbarer Raum und $f \colon \Omega \to \overline \R$ sei $(\cA, \cB(\overline{\R}))$-messbar. Wir werden in diesem Kapitel mehrfach nutzen, dass wegen Satz \ref{S7} folgende \"Aquivalenz gilt:
 \begin{align*}
@@ -1085,7 +1085,7 @@ besteht. Die Operationen und die Norm werden durch beliebige Repr\"asentanten de
 [f]+[g]:=[f+g], \quad \alpha [f]:=[\alpha f] \quad \text{ und }\quad ||[f]||_p:=||f||_p.
 \end{align*}
 Der Quotientenraum wird als  $L^p(\mu)=\{[f]: f\in \mathcal L^p(\mu)\}$ bezeichnet. Gemeinsam mit den Operationen und der Norm auf den Elementen (\"Aquivalenzklassen) ist $L^p(\mu)$ ein normierter Vektorraum:
-\begin{satz}
+\begin{satz}\label{Lp}
 \link{https://www.youtube.com/watch?v=ASEjDqO30DQ&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=15&t=4469s}
 	F\"ur $p\geq 1$ ist $L^p(\mu)$ mit den gerade definierten Operationen ein normierter Vektorraum und mit $||\cdot||_p$ ein vollst\"andiger normierter Raum (Banachraum).
 \end{satz}
@@ -1112,7 +1112,7 @@ Was wir hier nicht zeigen werden, ist die Vollst\"andigkeit von $\mathcal L^p(\m
 
 
 
-\section{Produktmaße und Satz von Fubini}
+\section{Produktmaße und Satz von Fubini}\label{sec:Fubini}
 Jetzt wird es noch einmal so richtig dreckig, bevor wir die wunderbare Welt der Stochastik erobern k\"onnen. Sobald wir uns durch die Konstruktion des Produktma\ss es und des Satzes von Fubini gequ\"alt haben, f\"allt uns alles andere aber sofort vor die F\"u\ss e.\smallskip
 
 Im Folgenden seien $(\Omega_1, \cA_1, \mu_1)$ und $(\Omega_2, \cA_2, \mu_2)$ Maßräume und $$\Omega = \Omega_1 \times \Omega_2 = \{ (\omega_1, \omega_2)\colon \omega_1 \in \Omega_1, \: \omega_2 \in \Omega_2 \}$$ das kartesische Produkt aus Analysis 1. Wir wollen auf $\Omega$ eine $\sigma$-Algebra und darauf ein Ma\ss{} mit einer sch\"onen Produkteigenschaft definieren (deshalb wird das Ma\ss{} Produktma\ss{} hei\ss en).
@@ -1350,7 +1350,7 @@ Unter den selben Voraussetzungen von Satz \ref{SatzFubini} sei nun $f:\Omega_1\t
 		\end{align*}
 		Die zweite Gleichheit von (iii) folgt genauso aus Satz \ref{SatzFubini}.
 \end{proof}
-\chapter{Stochastik}
+\chapter{Stochastik}\label{sec:Stochastik}
 
 An dieser Stelle beenden wir die allgemeine Ma\ss- und Integrationstheorie und wenden uns endlich vollst\"andig der Stochastik zu. Wir haben bereits zuf\"allige Experimente durch Wahrscheinlichkeitsr\"aume modelliert, die Verteilung \glqq einer Masse Zufall\grqq{} auf die reellen Zahlen durch Verteilungsfunktionen diskutiert und die Konzentration des Zufalls unter $\mathbb{P}_F$ abgesch\"atzt. Jetzt kommt noch ein letzter Modellierungsschritt, wir wenden uns sogenannten Zufallsvariablen zu.
 
@@ -1866,7 +1866,7 @@ Zum Abschluss nochmal die Markov- und Tschebyscheff-Ungleichungen, die wir f\"ur
 Wie bei den Konzentrationsungleichungen f\"ur Ma\ss e, k\"onnen wir durch Bildung von Gegenwahr-scheinlichkeiten sofort Ungleichungen f\"ur $\mathbb{P}(X<a)$ oder $\mathbb P(|X|<a)$ bekommen. Hier ein konkretes Beispiel: Ist $ X \sim \cN(\mu, \sigma^2)$, so gilt $ \mathbb{P}(|X - \mu| \geq a) \leq \frac{\sigma^2}{a^2}$.
 
 
-\section{Zufallsvektoren}
+\section{Zufallsvektoren}\label{sec:ZV}
 Nachdem Zufallsvariablen jetzt hoffentlich einigerma\ss en klar geworden sind, gehen wir jetzt weiter zu Zufallsvektoren. Das sind Zufallsvariablen, deren Werte nicht reell, sondern aus dem $\R^d$ sind. Weil wir den Namen Zufallsvariablen nur f\"ur den Fall $d=1$ definiert haben, sprechen wir nun von Zufallsvektoren. Das Kapitel ist in gro\ss en Teilen eine Wiederholung, wir gehen durch die gleichen Schritte, die Notationen werden nur einen Tick aufwendiger. Das Vorgehen ist genau wie f\"ur reelle (eindimensionale) Zufallsvariablen: 
 \begin{itemize}
 	\item Lege $\sigma$-Algebra auf $\R^d$ fest und zeige wichtige Eigenschaften f\"ur sp\"ater.
