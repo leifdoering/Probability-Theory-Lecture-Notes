@@ -507,14 +507,13 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
 				\item
 					$(\mathcal F_n)$-submartingale if $\E[Y_1] \geq 0$.
 			\end{itemize}
-			To see why, let us check the definition. Adaptivity and integrability ($\Delta$-inequality) is clear, the martingale property is deduced using properties of the conditional expectation:
+			To see why, let us check the definition. Adaptivity and integrability ($\Delta$-inequality) is clear, the martingale property is deduced using properties of the conditional expectation, measurability and independence assumption on the jump sizes:
 			\begin{align*}
 				\E[X_{n+1}\,|\,\cF_n] &= \E \Big[ \sum\limits_{k=1}^{n+1}Y_k \,\big|\,\cF_n\Big]\\
 											&= \sum\limits_{k=1}^{n+1} \E[Y_k\,|\,\cF_n] \\
 											&= \sum\limits_{k=1}^{n}Y_k \: + \: \E[Y_{n+1}\,|\,\cF_n]\\% && Y_k\:\text{is}\: \cF_n\text{-meas. for}\: k\leq n \\
-											&= X_n + \E[Y_1],
+											&= X_n + \E[Y_1]
 			\end{align*}
-			using in the third equality the measurability and independence assumption on the jump sizes.
 \end{example}
 \begin{example}\label{GW}		
  Another famous class of discrete time stochastic processes are so-called branching processes ("{}Verzweigungsprozesse"{}). 
