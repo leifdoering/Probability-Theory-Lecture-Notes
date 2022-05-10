@@ -618,7 +618,7 @@ Here is something simple to check yourself.
 %$\E[X_{n+1}\vee Y_{n+1}\,|\,\cF_n] \geq \E[X_{n+1}\,|\,\cF_n] \geq X_n$ a.s. and \\
  %$\E[X_{n+1}\vee Y_{n+1}\,|\,\cF_n] \geq \E[Y_{n+1}\,|\,\cF_n] \geq Y_n$.\\ Hence, $\E[X_{n+1}\vee Y_{n+1}\,|\,\cF_n] \geq X_{n+1}\vee Y_{n+1}$ a.s.
 %\end{proof}
-We come to the first theorem on martingales where we relate martingales and stopping times. If $T$ is a stopping time then we define the \textbf{stopped process} $X^T$ as $$X_n^T(\omega)\coloneqq X_{n \wedge T(\omega)}(\omega),\quad n \in \mathbb{N}.$$ The path of the stopped process is the same as the original process up to time $T$ and stays constant at the value $X_T$ after time $T$. 
+We come to the first theorem on martingales where we relate martingales and stopping times. If $T$ is a stopping time then we define the \textbf{stopped process} $(X^T_n)_{n\in \N}$ as $$X_n^T(\omega)\coloneqq X_{n \wedge T(\omega)}(\omega),\quad n \in \mathbb{N}.$$ The path of the stopped process is the same as the original process up to time $T$ and stays constant at the value $X_T$ after time $T$. 
 \begin{figure}[h]
   \begin{center}
   \scalebox{0.7}{
@@ -755,7 +755,7 @@ The optional sampling theorem in particular applies to martingales on finite tim
 			\lvert X_T- X_{T \wedge n}  \rvert \overset{\text{telescope}}= \Big| \sum\limits_{k=T\wedge n }^{T-1} (X_{k+1}-X_k)\Big| \leq K\cdot T
 		\end{align*}
 		so that, again by dominated convergence, we obtain
-		$$\lim\limits_{n \to \infty}\big(\E[X_{T}]-\E[X_{\wedge n}]\big) =  \E\big[\lim\limits_{n \to \infty}(X_{T}-X_{T\wedge n})\big] = \E[0] = 0.$$ 
+		$$\lim\limits_{n \to \infty}\big(\E[X_{T}]-\E[X_{T\wedge n}]\big) =  \E\big[\lim\limits_{n \to \infty}(X_{T}-X_{T\wedge n})\big] = \E[0] = 0.$$ 
 		Since $\E[X_{T\wedge n}]=\E[X_1] $ by optional stopping, optional sampling follows.
 				\item As a counter example to the optional sampling theorem when the boundedness of $T$ is violated let us consider the symmetric simple random walk. Let $T = \inf\{n\in\mathbb{N}\colon X_n=1\}$ and $X_0=0$. Then $T<\infty$ almost surely but $$\E[X_T] = 1 \neq 0 = \E[X_0] = \E[X_n]$$ for $n\in \mathbb{N}$. Since the martingale differences are bounded (they are $+1$ or $-1$), (ii) shows that $\E[T]=\infty$.
 
