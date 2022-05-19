@@ -553,7 +553,7 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
 	\end{luebung}
 	Integrability is deduced immediately as the Wald-identity gives $\E[X_n]=\E[X_{n-1}]\cdot \E[\xi_1^1]$ so that $\E[X_n]=m\cdot\mu^{n}<\infty$ by a simple induction. Adaptivity follows direction from the definition of $\mathcal F_n$. The martingale property is deduced using properties of the conditional expectation:
 			\begin{align*}
-				\E[X_{n+1}\,|\,\cF_n] &= \E\big[ \sum_{k=1}^{\infty}\mathbf 1_{k \leq X_n}\cdot \xi_k^{n+1}\,\big|\,\cF_n\big] \\
+				\E[X_{n+1}\,|\,\cF_n] &= \E\Big[ \sum_{k=1}^{\infty}\mathbf 1_{k \leq X_n}\cdot \xi_k^{n+1}\,\big|\,\cF_n\Big] \\
 										&=\sum_{i=1}^{\infty}\mathbf 1_{j \leq X_n} \E\big[\xi_j^{n+1}\,|\,\cF_n\big] \\
 										&=\sum_{i=1}^{\infty}\mathbf 1_{j \leq X_n} \E\big[\xi_j^{n+1}\big] 
 										=\mu \cdot X_n,
