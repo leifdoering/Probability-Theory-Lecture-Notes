@@ -810,7 +810,7 @@ The interpretation of $H\cdot X$ in mathematical finance is the wealth obtained 
 					\E\big[|(H\cdot X )_n|\big] \overset{\Delta}{\leq}  \sum\limits_{k=1}^{n}\E\big[|H_k \cdot (X_k - X_{k-1})|\big] \leq K \sum_{k=1}^n (\E[|X_k|]+\E[|X_{k-1}|])<\infty.
 				\end{align*}
 							\item
-				The martingale property follows from a direct computation using the assumed measurability properties to simplify the conditional expectations:
+				The martingale property follows from direct computation using the assumed measurability properties to simplify the conditional expectations:
 					\begin{align*}
 						\E\big[ (H\cdot X)_{n+1}\,\big|\,\cF_n\big] &= \E \Big[ \sum\limits_{k=1}^{n+1} H_k (X_k-X_{k-1})\,\Big|\, \cF_n \Big] \\
 						&=\sum\limits_{k=1}^{n} H_k(X_k-X_{k-1}) + \E\big[ H_{n+1}(X_{n+1}-X_n)\,\big|\,\cF_n\big] \\
