@@ -1161,7 +1161,7 @@ Suppose $p$ is a constant that is \underline{\smash{strictly}} larger than $1$ a
 		\E\Big[ \sup\limits_{n\in\mathbb{N}_0} \lvert X_n \rvert^p \Big]
 		&= \lim_{n\to\infty} \E \Big[ \sup\limits_{k\leq n} \lvert X_k \rvert^p \Big] 
 		\leq \lim_{n\to\infty} \left( \frac{p}{p-1} \right)^p \E\big[\lvert X_n \rvert^p\big]
-		\overset{(ii)}{=} \left( \frac{p}{p-1} \right)^p \E\big[\lvert X_{\infty} \rvert^p\big]
+		\overset{\text{(ii)}}{=} \left( \frac{p}{p-1} \right)^p \E\big[\lvert X_{\infty} \rvert^p\big]
 	\end{align*}
 	\end{enumerate}
 \end{proof}
@@ -1320,9 +1320,9 @@ So far it is completely unclear why we are discussing uniformly integrable famil
 		\item
 			$(X_n)_{n\in\mathbb{N}_0}$ is uniformly integrable,
 		\item
-			$X_n \overset{L^1}{\to}X_{\infty}$ for $n \to \infty$,
+			$X_n \overset{L^1}{\longrightarrow}X_{\infty}$ for $n \to \infty$,
 		\item
-			$\lim_{n\to\infty}\E[\lvert X_n\rvert] = \E[\lvert X_{\infty}\rvert]$.
+			$\lim\limits_{n\to\infty}\E[\lvert X_n\rvert] = \E[\lvert X_{\infty}\rvert]$.
 	\end{enumerate}
 	In all cases it holds that $\lim_{n\to\infty}\E[ X_n] = \E[ X_{\infty}]$.
 \end{theorem}
