@@ -1541,7 +1541,7 @@ Keep in mind that all $L^p$-martingales are uniformly integrable, thus, the theo
 		\overset{\text{cond. exp.}}&= \sum_{k=0}^{\infty} \E \big[ \mathbf 1_{T=k} \lvert X_{\infty} \rvert + \mathbf 1_{T=\infty} \lvert X_{\infty} \rvert \big] \\
 		\overset{\text{MCT}}&{=} \E[\lvert X_{\infty}\rvert] < \infty
 	\end{align*}
-	To prove (i), as always, we check that $X_T$ satisfies the defining properties of the conditional expectation. The $\mathcal F_T$-measurability of $X_T$ was proved in Proposition \ref{ii}. Now let $A\in\cF_T$, i.e. $A\cap \{T=n\}\in\cF_n$ for all $n\in\N_0$. Then, using the same arguments as above,
+	To prove (i), as always, we check that $X_T$ satisfies the defining properties of the conditional expectation. The $\mathcal F_T$-measurability of $X_T$ was proven in Proposition \ref{ii}. Now let $A\in\cF_T$, i.e. $A\cap \{T=n\}\in\cF_n$ for all $n\in\N_0$. Then, using the same arguments as above,
 	\begin{align*}
 		\E \big[ \mathbf 1_A  X_T \big] \overset{\text{MCT}}&{=} \sum_{k=0}^{\infty} \E \big[ \mathbf 1_{A\cap\{T=k\}}\cdot X_k \big] + \E \big[ \mathbf 1_{A\cap\{T=\infty\}}  X_{\infty} \big] \\
 		&=\sum_{k=0}^{\infty} \E \big[ \mathbf 1_{A\cap\{T=k\}} \E[X_\infty|\mathcal F_n] \big] + \E \big[ \mathbf 1_{A\cap\{T=\infty\}}  X_{\infty} \big] \\
