@@ -174,29 +174,45 @@
 \newtheorem{kon}[satz]{Konsequenz}
 \newtheorem*{kon1}{Konsequenz}
 
+%%%% Lemma, Proposition, Theorem technischer Natur: Blau oder rot, wenn sehr wichtig
+\newtcolorbox{laussagewerkzeug}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
+\newtcolorbox{lAussageWerkzeug}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
 
-\newtcolorbox{lbeispiel}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable, enhanced, arc=0mm, colback=blue!2, colframe=blue!50!green, leftrule=10mm, overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/idea.png}}; }}
+%%%%%% Existenzsatz
+\newtcolorbox{lsuperwichtigersatzExistence}{breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/exist.png}}; }}
 
+%%%%%% Aufmerksamkeit erzeugen Gluehbirne, immer blau, gibt es nicht so oft
+\newtcolorbox{laufmerksamkeit}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable, enhanced, arc=0mm, colback=blue!2, colframe=blue!50!green, leftrule=10mm, overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/idea.png}}; }}
 
-\newtcolorbox{lbemerkung}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=blue!2,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/warning.png}}; }}
+%%%%%%% Trickkiste
+\newtcolorbox{ltrick}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=blue!1,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/hat_two.png}}; }}
 
-
-\newtcolorbox{ldefwichtig}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/open-book-2.png}}; }}
-\newtcolorbox{lsatzwichtig}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
-\newtcolorbox{ltippwichtig}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/idea.png}}; }}
-
-\newtcolorbox{lwarnhinweis}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/warning.png}}; }}
-
-
+%%%%% Aufgabe
 \newtcolorbox{luebung}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=blue!1,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/stretching.png}}; }}
-\newtcolorbox{ltipp}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/idea.png}}; }}
+
+%%%%% Erinnerung
+\newtcolorbox{lreminder}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable, enhanced, arc=0mm, colback=blue!2, colframe=blue!50!green, leftrule=10mm, overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/remember.png}}; }}
+
+
+
+%%%%%% Sehr wichtiger Satz
+\newtcolorbox{lSatzHerz}{breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/heart.png}}; }}
+
+%%%%%% Warnung, blau oder rot, wenn sehr wichtig
+\newtcolorbox{lwarnhinweis}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=blue!2,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/warning.png}}; }}
+\newtcolorbox{lWarnhinweis}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/warning.png}}; }}
+
+%%%%%% Definition immer in Blau mit Buch
 \newtcolorbox{ldef}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/open-book-2.png}}; }}
-\newtcolorbox{lsatz}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
-\newtcolorbox{llemma}{breakable,enhanced,arc=0mm,colback=blue!5,colframe=blue!50!green,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/wrench2}}; }}
+\newtcolorbox{lDef}{breakable,enhanced,arc=0mm,colback=red!5,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/open-book-2.png}}; }}
+
+%%%%%% Schritt im Beweis, blau
 \newtcolorbox{lstep}{bottomrule=-0.1mm, rightrule=-0.1mm,toprule=-0.1mm , breakable, enhanced, arc=0mm, colback=blue!2, colframe=blue!50!green, leftrule=10mm, overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/footprints.png}}; }}
 
-\newtcolorbox{lsuperwichtigersatzExistence}{breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/exists.png}}; }}
-\newtcolorbox{lsuperwichtigersatz}{breakable,enhanced,arc=0mm,colback=red!2,colframe=red!95!black,leftrule=10mm,overlay={\node[anchor=north west,outer sep=2pt] at (frame.north west) {\includegraphics[width=6mm]{macros/Bilder/heart.png}}; }}
+
+
+
+
 
 \newcommand{\bigexclaim}{\raisebox{-0.1em}{\BigTriangleUp}\hspace{-0.32em}\llap{\small\textbf{!}}\hspace{0.32em}}
 

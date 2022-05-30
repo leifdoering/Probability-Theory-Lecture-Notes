@@ -1,5 +1,5 @@
 % !TeX spellcheck = en_US
-\chapter{Convergence of Measures}
+\chapter{Convergence of Measures}\label{chapter:CV}
 	\marginpar{\textcolor{red}{Lecture 11}}
 In this chapter the technical tools for proving Donsker's famous invariance principle will be developed. This main result of Chapter \ref{sec:BM} will be to prove weak convergence of scaled random walks with second moment jumps towards the Brownian motion. But what does weak convergence of a sequence of stochastic processes mean? The convergence will be defined to be weak convergence of the processes interpreted as path-valued random variables. We already met the notion of weak convergence of real-valued random variables in Section \ref{sec:konvergenz}, in this chapter weak convergence will be generalised to much more general state spaces. To do so, a bit of Functional Analysis needs to be combined with measure theory and a bit of probability. Along the way we will also prove a couple of theorems on the characterisation of random variables through moments. 
 
@@ -125,7 +125,7 @@ The word Polish in the definition honours the school of Polish mathematicians fr
 \begin{align*}
 	(\R,|\cdot|),\quad (\R^d, |\cdot|),\quad (\C,|\cdot|),\quad\text{and}\quad (C([0,1]),||\cdot||_\infty),
 \end{align*}
-where $C([0,1])$ are the continuous real-valued functions on $[0,1]$. 
+where $C([0,1])$ are the continuous real-valued functions on $[0,1]$. In Chapter \ref{sec:BM} will look more closely into $C([0,\infty))$ which is not Polish for $||\cdot||_\infty$ but can be made Polish using a clever metric.
 \begin{ldef}
 \begin{deff}
 	Suppose $(E,d)$ is a metric space and $A \subseteq E$. 
@@ -153,21 +153,36 @@ Using the triangle inequality it is easy to see that totally bounded sets are al
 \begin{luebung}
 	Check that boundedness and totally boundedness are equivalent in $(\R^d,|\cdot|)$ but are not equivalent in all infinite sets with the discrete metric (i.e. $d(x,y)=\frac{1}{2}$ for all $x\neq y$).
 \end{luebung}
-We will see later that totally-bounded and bounded are not the same in $(C([0,1],||\cdot||_\infty)$.\footnote{nicht vergessen}\smallskip
+Another important example where boundedness and locally boundedness are not equivalent is $(C([0,1],||\cdot||_\infty)$. Before turning to a crucial characterization of compactness in complete metric spaces let us discuss the \textbf{diagonal sequence trick} that will occur a few times in these lectures notes in different forms:
+\begin{ltrick}
+	Suppose $(a^1_{n})_{n\in\N}$, $(a^2_{n})_{n\in\N}$, ... are sequences in a metric space. If for every $i$ and every subsequence the sequence $(a^i_{n_k})_{k\in\N}$ has a another converging subsequence, then there is a another joint sequence $(n_k)_{k\in\N}$ of natural numbers such that all sequences $(a^i_{n_k})_{k\in\N}$ converge.
+\end{ltrick}
+The diagonal sequence trick is proved by induction, what needs to be understood is the following diagram in which we visualize the indices of all appearing subsequences. The induction starts with the sequence $a^1$, for which we chose a converging subsequence $(a^1_{n_{1,k}})_{k\in\N}$. Next, consider the second sequence along the first subsequence, $(a^2_{n_{1,k}})_{k\in\N}$ which again has a converging subsequence $(a^2_{n_{2,k}})_{k\in\N}$. The successive subsequences are written down in the table below. For the induction suppose the diagram has been filled with successive subsequences of all sequences $a^1,..., a^n$, then choosing a converging subsequence of $(a^{n+1}_{n_{n,k}})$ yields the indices $(n_{n+1,k})_{k\in\N}$:
+\begin{align*}
+	 \begin{array}{rrrrr}
+		\mathbf{n_{1,1}} & n_{2,1} & n_{3,1}&n_{4,1}&\cdots\\ 
+		n_{1,2} & \mathbf{n_{2,2}} & n_{3,2}&n_{4,2}&\cdots \\
+		n_{1,3}  & n_{2,3}  & \mathbf{n_{3,3}}&n_{4,3}&\cdots\\ 
+		n_{1,4}  & n_{2,4}&n_{3,4}  &\mathbf{n_{4,4}}&\cdots\\
+		\vdots& \vdots &\vdots &\vdots &\ddots
+		\end{array}
+\end{align*}
+The diagonal trick then consists of choosing the diagonal indices $(n_{k,k})_{k\in\N}$ which is a subsequence of all subsequences $(n_{m,k})_{k\in\N}$. Hence, we found a single sequence of indices such that $(a^i_{n_{k,k}})_{k\in\N}$ converge for all $i$. The prime example to keep in mind (see the proof of Prohorov's Theorem \ref{Prohorov} below) is that of bounded real-valued sequences, as those have converging subsequences by the Bolzano-Weierstra\ss{} Theorem. 
 
-\begin{llemma}
+The idea of the diagonal sequence trick is used in many different fashions, here is an example to prove an important characterization of compactness:
+\begin{laussagewerkzeug}
 \begin{prop}
 	Suppose $(E,d)$ is a complete metric space and $A\subseteq E$, then
 	\begin{align*}
 		A\text{ is compact}\quad& \Longleftrightarrow \quad A\text{ is closed and totally bounded}.
 	\end{align*} 
 	\end{prop}
-\end{llemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	 %Let us first remind ourselves of a quick sketch of the complicated direction in $\R$. If a sequence lies in a bounded set $A$, let's say $A\subseteq [-N,N]$, then infinitely many elements must be (at least) in one of the two halfs of the interval. Take that half and divide it into two again, one of them must contain infinitely many elements of the sequence. Proceeding like that we can track down a converging subsequence. If $A$ is additionally closed, then the limit is in $A$. Hence, every sequence in a bounded and closed set $A$ has a converging subsequence, thus, $A$ is sequentially compact. Looking carefully at that argument we used that intervals in $\R$ are totally bounded, we covered $[-N,N]$ by finitely many intervals of shrinking size. It is instructive to keep the idea in mind to understand how one typically generalises proofs to Polish spaces.\smallskip
 "$\Rightarrow$": $A$ totally bounded follows from the compactness definition by covering $A$ with $\varepsilon$-balls around all elements, $A$ closed follows from sequential compactness since in metric spaces all subsequences converge to the same limit as their convergent sequences.\smallskip
 
-"$\Leftarrow$": Take a sequence $(x_n) \subseteq A$. For each $m\in\mathbb{N}$ take a finite covering $B_{\frac{1}{m}}(y_1^m),...$ of $A$. By the finiteness there must be a subsequence which lies eventually in one of the balls $B_1(y_k^1)$. Similarly, from this subsequence we extract a further subsequence which lies eventually in one of the $B_{\frac{1}{2}}(y_k^2)$. A diagonal argument gives a subsequence with $x_n \subseteq B_{\frac{1}{n}}(y_k^n)$. This is Cauchy and converges by completeness. Hence, $A$ is sequentially compact.
+"$\Leftarrow$": Take a sequence $(x_n) \subseteq A$. For each $m\in\mathbb{N}$ take a finite covering $B_{\frac{1}{m}}(y_1^m),...$ of $A$. By the finiteness there must be a subsequence which lies eventually in one of the balls $B_1(y_k^1)$. Similarly, from this subsequence we extract a further subsequence which lies eventually in one of the $B_{\frac{1}{2}}(y_k^2)$. The diagonal argument gives a subsequence with $x_n \subseteq B_{\frac{1}{n}}(y_k^n)$. This is Cauchy and converges by completeness. Hence, $A$ is sequentially compact.
 \end{proof}
 It is not too hard to come up with counter examples to the second equivalence in non-complete spaces. For instance, take the normed space $(\mathbb{Q},|\cdot| )$ and $A = (-\sqrt{2},\sqrt{2})\cap \mathbb{Q}$. Then $A$ is closed, totally bounded but not compact.\smallskip
 
@@ -196,10 +211,13 @@ and sequences
 \begin{align*}
 	x_n\to x, \,n\to\infty\quad \Longrightarrow\quad f(x_n)\to f(x), \, n\to\infty.
 \end{align*}
-We will always use the most convenient formulation. Here is a not so simple exercise:
-\begin{luebung}
+We will always use the most convenient formulation. Classes of continuous functions will play an important role in Chapter \ref{sec:BM} in the context of stochastic processes indexed by $[0,\infty)$ that have continuous paths. From basic analysis we know very well $C([a,b],||\cdot ||_\infty)$ which, as we will later see, is a Polish space. It is more complicated, however, to deal with functions on $[0,\infty)$ as the supremum-norm is not suitable anymore (continuous functions on $[0,\infty)$ are usually not bounded, e.g. all polynomials are unbounded). One way is to restrict to less functions, which is already interesting from an analytic point of view:
+\begin{laufmerksamkeit}
 	$(C_b([0,\infty)), ||\cdot||_\infty)$ is not separable but $(C_c([0,\infty)), ||\cdot||_\infty)$ is separable.
-\end{luebung}
+\end{laufmerksamkeit}
+Another way, and this is what we will do in Section \ref{sec:continuouspaths}, is to introduce a different norm that turns all continuous functions on $[0,\infty)$ into a Polish space.\smallskip
+
+
 Now we come to the fun part, extending the concepts from measure theory on the Borel-$\sigma$-algebra of $\R$ to general metric spaces. Recall that $\mathcal B(\R)$ was defined to be the smallest $\sigma$-algebra containing all open sets (or closed sets, or intervals, etc.), hence, it is quite clear how we should proceed for general metric spaces.
 \begin{ldef}
 \begin{deff}
@@ -215,6 +233,7 @@ Of course, since $\sigma$-algebras are closed under taking complements $\mathcal
 	If $(E,d)$ is separable, then $\mathcal B(E)=\sigma(\{B_\varepsilon (x):x\in E, \varepsilon >0\}).$
 \end{luebung}
 Measurable mappings between two metric spaces will always be with respect to the corresponding Borel-$\sigma$-algebras. Not surprisingly we will call such measurable mappings \textbf{Borel-measurable}. From the definition of continuity and Proposition \ref{S2} it is clear that all continuous functions between metric spaces are Borel-measurable.
+\footnote{sollen wir lieber nur $M_1$ machen?}
 \begin{ldef}
 \begin{deff}
 	Let $(E,d)$ be a metric space, then
@@ -223,17 +242,15 @@ Measurable mappings between two metric spaces will always be with respect to the
 			$\cM_f(E) \coloneqq \cM_f \coloneqq \{ \mu: \mu \text{ is a finite measures on}\: \cB(E) \}$
 		\item
 			$\cM_1(E) \coloneqq \cM_1 \coloneqq \{\mu:  \mu \text{ is a probability measures on}\: \cB(E) \}$
-		\item
-			$\cM_{\leq 1}(E) \coloneqq \cM_{\leq 1} \coloneqq \{ \mu:\mu\text{ is a sub-probability measures one}\: \cB(E) \}$
 	\end{itemize}
 \end{deff}
 \end{ldef}
 After all these definition let us prove a first proposition on measures on Polish spaces. Before checking the proof have a quick thought how you would prove the statement on $\mathcal B(\R)$ using continuity of measures with $(-n,n)$ and you will immediately appreciate a useful property of $\R$, namely, to be able to fill $\R$ from the inside by increasing intervals.
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{prop_4120}
 	Suppose $(E,d)$ is Polish and $\mu \in \cM_f$. Then, for all $\varepsilon > 0$, there is a compact set $K$ with $\mu(K^c)<\varepsilon$.
 \end{prop}
-\end{llemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	The trick is to replace the increasing intervals $[-n,n]$ in $\R$ by the right substitute and then try to argue with continuity of measures. Let $x_1,x_2,...$ the countable dense subset of $E$ and $n\in\mathbb{N}$. Then $E = \bigcup\limits_{k=1}^{\infty} B_{\frac{1}{n}}(x_k)$ for all $n\in\N$. Using continuity of measures (this needs $\mu\in \mathcal M_f$, compare Theorem \ref{S1}) fix $N_n \in \mathbb{N}$ with 
 	\begin{align*}
@@ -243,24 +260,23 @@ After all these definition let us prove a first proposition on measures on Polis
 	\begin{align*}
 		\mu (K^c) = \mu (E \text{\textbackslash} K ) 
 				\overset{\text{mon.}}{\leq} \mu (E \text{\textbackslash} A ) 
-				= \mu \bigg( \bigcup_{n=1}^{\infty} \bigcap_{k=1}^{N_n}B_{\frac{1}{n}}^c (x_k) \bigg).
+				= \mu \Big( \bigcup_{n=1}^{\infty} \bigcap_{k=1}^{N_n}B_{\frac{1}{n}}^c (x_k) \Big).
 	\end{align*}			
 	Using sub-additivity we can continue the chain of inequalities with
 	\begin{align*}
-				\sum\limits_{n=1}^{\infty} \mu \bigg( \bigcap\limits_{k=1}^{N_n} B_{\frac{1}{n}}^c (x_k) \bigg) 
-				= \sum\limits_{n=1}^{\infty} \mu \bigg( E \text{\textbackslash} \bigcup\limits_{k=1}^{N_n} B_{\frac{1}{n}}(x_k) \bigg)
+				\sum\limits_{n=1}^{\infty} \mu \Big( \bigcap\limits_{k=1}^{N_n} B_{\frac{1}{n}}^c (x_k) \Big) 
+				= \sum\limits_{n=1}^{\infty} \mu \Big( E \text{\textbackslash} \bigcup\limits_{k=1}^{N_n} B_{\frac{1}{n}}(x_k) \Big)
 				\leq \sum\limits_{n=1}^{\infty}\frac{\varepsilon}{2^n}
 				= \varepsilon
 	\end{align*}
 	which finishes the proof.
 \end{proof}
 We can now turn towards a crucial topic of this chapter. Is it possible to characterise measures using only integrals over certain functions?
-\footnote{brauchen wir wirklich $\cM_f$?}
 \begin{ldef}
 \begin{deff}
 	Let $(E,d)$ a metric space and $F \subseteq \cM_f(E)$ a family of measures. A family $C$ of measurable mappings $E \to \mathbb{R}$ is called \textbf{\smash{separating family} for $F$} if for all $\mu,\nu \in F$
 	\begin{align*}
-		\int_E f\dint \mu = \int_E f\dint \nu \:\:\: \forall f \in C \cap L^1(\mu)\cap L^1(\nu)\: \Rightarrow \: \mu = \nu
+		\int_E f\dint \mu = \int_E f\dint \nu \:\:\: \forall f \in C \cap L^1(\mu)\cap L^1(\nu)\quad \Rightarrow \quad \mu = \nu
 	\end{align*}
 \end{deff}
 \end{ldef}
@@ -294,11 +310,11 @@ If we reformulate, Theorem \ref{WT} states that exponential functions are separa
 \end{deff}
 \end{ldef}
 As promised the Lipschitz continuous functions are separating the finite measures on $E$. In fact, the same proof also shows that bounded and compactly supported continuous functions separate $\mathcal M_f(E)$. 
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 \begin{prop}\label{theorem_4124}
 	In metric spaces $\text{Lip}_1(E)$, $C_b(E)$, and $C_c(E)$ are separating for $\cM_f(E)$.
 \end{prop}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 \begin{proof}[Proof]
 	First of all, note that $f\in \text{Lip}_K(E)$ implies $\frac{1}{K} f \in \text{Lip}_1(E)$. Hence, if we assume $\int_E f\dint \mu=\int_E f\dint \nu$ for all $f\in \text{Lip}_1(E)$ we can also use 
 	\begin{align}\label{Lip}
@@ -380,24 +396,26 @@ In order to speak of convergence of processes we will thus have to define a noti
 \end{ldef}
 Before returning to probability theory let us discuss important properties that help us to link the general weak convergence theory (a field of Functional Analysis) to properties from Section \ref{sec:Lp} in the particular case $E=\R$. 	There are many other ways of defining convergence of measures through distances. They are usually stronger (less sequences converge) which is one of the reasons to speak of weak convergence.
 \begin{luebung}
-	Let $(\delta_{x_n})_{n\in\N}$ a sequence of Dirac-measures on $E$ such that $x_n\to x$ for $n\to\infty$. Show that $(\delta_{x_n})_{n\in\N}$ converges weakly in $\cM_1(E)$ to $\delta_x$.
+	Let $(\delta_{x_n})_{n\in\N}$ a sequence of Dirac-measures on $E$ such that $x_n\to x$ for $n\to\infty$. Show that $(\delta_{x_n})_{n\in\N}$ converges weakly in $\cM_f(E)$ to $\delta_x$.
 \end{luebung}
 If you are familiar with Functional Analysis a bit of care is needed as the wording does not match. In the standard terminology of Functional Analysis this is not weak convergence but weak-$*$-convergence on $\cM_f(E)$ using that $\cM_f(E)$ is the dual-space of $C_b(E)$.
-\begin{prop}
-			If $(E,d)$ is separable then weak convergence in $\cM_f(E)$ can be metrized: 
-			Defining the \textbf{\smash{Prohorov metric}} (here the definition for $\nu,\mu\in \cM_1(E)$)
+\begin{laussagewerkzeug}
+	\begin{prop}
+			If $(E,d)$ is separable then weak convergence in $\cM_f(E)$ can be metrized using the \textbf{Prohorov metric} $d_{P}(\mu,\nu):=\max\{d(\mu,\nu),d(\nu,\mu))\}$, where
 			\begin{align*}
-				d_p(\mu,\nu) \coloneqq \inf \big\{ \varepsilon >0 \colon \mu (B) \leq \nu (B_{\varepsilon}(0)) + \varepsilon \:\forall B\in \cB(E) \big\}
+				d(\mu,\nu) \coloneqq \inf \big\{ \varepsilon >0 \colon \mu (B) \leq \nu (B_{\varepsilon}(0)) + \varepsilon \:\forall B\in \cB(E) \big\}.
 			\end{align*}
-			one can show that $d_p$ is a metric on $\cM_f(E)$ and
+			More precisely, $d_P$ is a metric on $\cM_f(E)$ and
 			\begin{align*}
 				\mu_n \overset{\text{(w)}}{\longrightarrow}\mu, \: n \to \infty \quad\Leftrightarrow \quad d_p(\mu_n,\mu) \to 0, \: n\to \infty.
 			\end{align*}
-			This is important as all properties of convergence in  metric spaces (such as uniqueness of limits) hold for weak convergence. Taking $f \equiv 1$ shows that also the total masses must converge. In particular, the weak limit of a sequence of probability measures is a probability measure, no mass gets lost or appears. In other words of topology, $\cM_1(E)$ is a closed subset of $\cM_f(E)$ with respect to the Prohorov metric.
 \end{prop}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
-	to be written, not in the lecture
+	Not part of the lecture, perhaps next year.
 \end{proof}
+The proposition is important as all properties of convergence in  metric spaces (such as uniqueness of limits) hold for weak convergence of measures. Taking $f \equiv 1$ shows that also the total masses must converge. In particular, the weak limit of a sequence of probability measures is a probability measure, no mass gets lost or appears. In words of topology, $\cM_1(E)$ is a closed subset of $\cM_f(E)$.\smallskip
+
 %\begin{example}
 %	$\mu_n \coloneqq \delta_{\frac{1}{n}}$, $\mu \coloneqq \delta_0$ are measures in $\mathcal M_f(\mathbb{R})$. Since $$\int_{\mathbb{R}} f \dint \mu_n = f\bigg( \frac{1}{n} \bigg) \overset{n\to \infty}{\longrightarrow} f(0) = \int_{\mathbb{R}} f \dint \mu$$
 %	we have $\mu_n \overset{\text{(w)}}{\longrightarrow} \mu$, $n\to\infty$.	
@@ -406,8 +424,8 @@ If you are familiar with Functional Analysis a bit of care is needed as the word
 We approach weak convergence of measures in two steps. First, we will derive some equivalent conditions, usually referred to Portemantau theorem, via elementary (but tedious) manipulations with measures and integrals. In the next section we start to understand weak convergence from the point of view of convergence in the metric space $(\mathcal M_f,d_P)$ with tools from metric space theory. The metric space approach is necessary in order to derive handy criteria that depend strongly on the corresponding underlying space $(E,d)$.\smallskip
 
 Here is the basic Portemanteau theorem:
-\begin{lsatzwichtig}
-\begin{theorem}[Portemanteau theorem]
+\begin{lAussageWerkzeug}
+\begin{theorem}[Portemanteau theorem]\label{portemanteau}
 	Let $(E,d)$ a metric space and $\mu,\mu_1,\mu_2,...\in \cM_1(E)$, then the following are equivalent:
 	\begin{enumerate}[label=(\roman*)]
 		\item $\mu_n \overset{\text{(w)}}{\longrightarrow} \mu,\, n\to\infty$
@@ -417,7 +435,7 @@ Here is the basic Portemanteau theorem:
 		\item $\lim\limits_{n\to\infty}\mu_n(A) = \mu(A) \:\:\:\forall A$ with $\mu(\partial A)=0$
 	\end{enumerate}
 \end{theorem}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 To understand similarities it is instructive to recall the statment and the proof of Theorem \ref{459} for a sequence $\mu_n=\P_{X_n}$ of probability measures on $\mathcal B(\R)$. In that simpler setting property (v) holds with the closed sets
  $A=(-\infty,t]$ because $\P_X(\{t\})=0$ is equivalent to $t$ being a point of continuity of the distribution function $F_X$. In the next section we will derive a much more useful statement if $(E,d)$ is even a Polish metric space:
  \begin{lwarnhinweis}
@@ -486,15 +504,15 @@ More concrete criteria for special cases such as $E=[a,b], E=[0,\infty)$, $E=\R^
 	Since $k$ was arbitrary, we obtain $\limsup\limits_{n\to\infty} \int_E {f} \dint \mu_n \leq \int_E {f} \dint \mu$. The same reasoning for $-f$ gives $\liminf\limits_{n\to\infty} \int_E  f \dint \mu_n \geq \int_E f \dint \mu$. Both inequalities prove (i).
 \end{proof}
 For the next theorem recall from Section \ref{sec:push} the notion of the push-forward of a measure under a measurable map. If $g:\Omega \rightarrow \Omega'$ is $(\mathcal A, \mathcal A')$-measurable and $\mu$ is a measures on $\mathcal A$, then we defined $$\mu_g(A):=\mu(g^{-1}(A)),\quad A\in \mathcal A',$$ also written $\mu\circ g^{-1}$ (more useful if there is a further index), is a measure on $\mathcal A'$. The measure is called the push-forward of $\mu$ under $g$ or the image measure. If we think of converging sequences of measures it is natural to also ask for convergence of the sequence of push-forwards for a given mapping. If $g$ is continuous, this can be proved easily:
-\begin{lsatz}
-\begin{theorem}[continuous mapping theorem]
+\begin{laussagewerkzeug}
+\begin{theorem}[continuous mapping theorem]\label{thm:continuousmapping}
 	Let $(E_1,d_1)$, $(E_2,d_2)$ be metric spaces and $g\colon E_1 \to E_2$ continuous.
 	If $\mu,\mu_1,\mu_2,...$ are finite measures on $\mathcal B(E_1)$, then
 	\begin{align*}
 		 \mu_n \overset{\text{(w)}}{\rightarrow} \mu,\,\, n\to\infty\quad \Longrightarrow \quad   \mu_n\circ g^{-1} \overset{\text{(w)}}{\rightarrow} \mu\circ g^{-1},\,\, n\to\infty.
 	\end{align*}
 \end{theorem}
-\end{lsatz}
+\end{laussagewerkzeug}
 In fact, continuity is not really needed, the assumption $\mu\big( \{ x\in E_1 \,|\, g \:\text{not continuous in }x \}\big) = 0$ is enough for the theorem to hold, but the proof is a bit lengthy.
 \begin{proof}[Proof]
  Let $f\in C_b(E_2)$, then $f\circ g \in C_b(E_1)$. Using the transformation formula for integrals twice (see Theorem \ref{trafo}) then gives
@@ -568,7 +586,7 @@ In the case of real-valued random variables this is nothing else but the converg
 for all continuous $g$, a statement that is used a lot!\smallskip
 
 We will now turn towards the study of weak convergence of measures seen as metric convergence in $(\cM_f(E),d_P)$ which is based on the following characterisation of convergence:
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 \begin{prop}\label{propkonvergenz}
 	Let $(E,d)$ a metric space and $(x_n)_{n\in\N}$ a sequence in $E$. Then the following are equivalent:
 	\begin{itemize}
@@ -580,7 +598,7 @@ We will now turn towards the study of weak convergence of measures seen as metri
 		\end{enumerate}
 	\end{itemize}
 \end{prop}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 \begin{proof}[Proof]
 	"$\Rightarrow$": Any subsequences of converging sequences converge to the same limit, hence, the second limit follows trivially and also the relative sequential compactness follows.\smallskip
 	
@@ -638,14 +656,14 @@ To get a visual idea of tightness recall the interpretation of a measure that de
 The final example shows that a good understanding of compact sets of $E$ can be extremely useful to understand tightness. We will return to this observation once we discuss in more detail $E=C([0,1])$ in which for instance sets of bounded H\"older continuous functions are compact.\smallskip
 
 The importance of tightness becomes clear with Prohorov's famous theorem in combination with Proposition \ref{propkonvergenz}.
-\begin{lsatz}
+\begin{laussagewerkzeug}
 \begin{theorem}[Prohorov]\label{Prohorov}
 	Let $(E,d)$ be a Polish metric space and $\cF \subseteq \cM_1(E)$, then
 	\begin{align*}
 		 \cF \text{ is weakly relatively sequentially compact}\quad \Leftrightarrow \quad \cF \text{ is tight}.
 	\end{align*}
 \end{theorem}
-\end{lsatz}
+\end{laussagewerkzeug}
 The formulation of Prohorov's theorem is frightening on first sight, weakly relatively sequentially compact means that the subset $\cF$ of $\mathcal M_1(E)$ is relatively compact (the closure is compact) with respect to the topology induced by the Prohorov metric. Using properties of closures and the sequential compactness this means that every sequence $(\mu_n)$ in $\cF$ has a subsequence that converges to some limit in $\cM_f$ but the limit does not necessarily belong to $\cF$. The entire point is that Prohorov's theroem connects a measure property (tightness) with a topological property (compactness).
 \begin{proof}[Proof]
 	There is a relatively simple and a very hard direction. We start with the simpler one and discuss the hard direction only for $E=\R$. A sketch for the general case is given after the proof.\\
@@ -739,7 +757,7 @@ Here is a sketch on how the complicated "{}$\Rightarrow$"{} direction of Prohoro
 Hence, there is a weakly converging subsequence (not necessarily to a limit in $\mathcal F$) and this is precisely the relative compactness with respect to weak convergence.\smallskip
 
 A first simple consequence of Prohorov's characterisation is the following reformulation of Proposition \ref{propkonvergenz} for weak convergence of probability measures:
-\begin{lsatz}
+\begin{lAussageWerkzeug}
 \begin{prop}[A useful characterization of weak convergence]\label{most_useful_characterization_weak_convergence}
 	Let $(E,d)$ be a Polish metric space and $\mu,\mu_1$, $\mu_2$,$...\in \cM_1(E)$. Then weak convergence of $\mu_n$ to $\mu$ is equivalent to
 	\begin{enumerate}[label=(\roman*)]
@@ -747,7 +765,7 @@ A first simple consequence of Prohorov's characterisation is the following refor
 			\item $ \lim_{n\to\infty} \int_E f \dint \mu_n = \int_E f \dint \mu$ for \underline{some} separating family $C \subseteq C_b(E)$ of $\cM_1(E)$.
 		\end{enumerate}
 \end{prop}
-\end{lsatz}
+\end{lAussageWerkzeug}
 \begin{proof}[Proof]
 	"{}$\Rightarrow$": Converging sequences are relatively compact sets (in metric spaces all subsequences have the same limit), hence, tight by Prohorov's theorem. The convergence of the integrals holds by definition of weak convergence (even for all $f\in C_b(E)$).\smallskip	
 	
@@ -781,13 +799,13 @@ In order to prove weak convergence we will often refer to Proposition \ref{most_
 	\marginpar{\textcolor{red}{Lecture 14}}
 \section[Identification of probability laws on $\R$]{Identification of probability laws on $\R^d$}\label{sec:unique}
 The previous section showed how to reformulate relative sequential compactness in terms of tightness. In this section we will deal more closely with the second property from Proposition \ref{propkonvergenz}, the identification of limits of converging subsequences. We will give precise examples that help to apply Proposition \ref{most_useful_characterization_weak_convergence} for particularly simple $E$. As a side product we derive ways of determining the law of a random variable through "{}enough"{} expectations. Before doing so let us dive a bit into approximation theory.
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 \begin{theorem}[Weierstra\ss{} approximation theorem]\label{Weierstrass_approx}
 	Let $f \colon [0,1] \to \mathbb{R}$ be continuous, then there is a sequence $(f_n)_{n\in\mathbb{N}}$ of polynomials on $[0,1]$ with $\left\Vert f_n - f \right\Vert_{\infty} \to 0, \: n \to \infty$.\smallskip
 	
 	In words: The polynomials are dense in $( C([0,1]),||\cdot||_\infty)$.
 \end{theorem}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 The proof we give is beautiful, a probabilistic proof for an analytic theorem. The sequence of polynomials is actually given explicitly, the so-called Bernstein polynomials.
 \begin{proof}[Proof]
 	Let $X_1,...,X_n$ be iid Ber$(p)$-distributed random variables, hence, $S_n = \sum_{k=1}^n X_k$ is $\text{Bin}(n,p)$-distributed. Now recall the proof of the weak law of large numbers \eqref{schwaches} - Tschebycheff and Bienaymé:
@@ -829,7 +847,7 @@ Hence, Stone-Weierstra\ss{} combined with a diagonal argument shows that $( C([0
 \smallskip
 
 For later purposes we now turn towards complex-valued functions that sometimes can be more useful in function approximation than real-valued functions. For that sake let us recall some definitions and facts for the complex numbers:
-\begin{lstep}
+\begin{lreminder}
   As a set the complex numbers are identical to $\R^2$ with a different notation for the vectors: $$\mathbb{C}\coloneqq \{ z = u+iv \,|\, u,v\in\mathbb{R} \}.$$ The following properties will be used:
 	\begin{itemize}
 		\item $\lvert z \rvert = \sqrt{u^2 + v^2}$
@@ -837,7 +855,7 @@ For later purposes we now turn towards complex-valued functions that sometimes c
 		\item Seen as a metric space $( \mathbb{C}, |\cdot| )$ is a Polish metric space and identical to $(\R^2,|\cdot|)$. In particular $\mathcal B(\C)=\mathcal B(\R^2)$ and in terms of measure theory all results from Section \ref{sec:RV} apply. As an example, using Proposition \ref{zweiInterpr}, a $\C$-valued random variable $X\colon \Omega \to \mathbb{C}$ is measurable if and only if $\mathcal{R}e(X)$ and $\mathcal{I}m(X)$ are measurable.
 				\item Complex conjugation: $\bar{z} = u - i \cdot v$
 		\item Polar coordinates: $z = \lvert z \rvert \cdot e^{i \varphi}$ for an angle $\varphi\in [0,2\pi)$.
-		\item Multiplication $z_1\cdot z_2:= (u_1u_2+u_2v_2)+i(u_1v_2+v_2u_1)$ so that $i^2=-1$, or in polar coordinates: $z_1 \cdot z_2 = \lvert z_1 \rvert \, \lvert z_2 \rvert e^{i(\varphi_1 + \varphi_2)}$, which corresponds to rotation and expanding.
+		\item Multiplication $z_1\cdot z_2:= (u_1u_2-v_1v_2)+i(u_1v_2+v_1u_2)$ so that $i^2=-1$, or in polar coordinates: $z_1 \cdot z_2 = \lvert z_1 \rvert \, \lvert z_2 \rvert e^{i(\varphi_1 + \varphi_2)}$, which corresponds to rotation and expanding.
 		\item Addition: $z_1 + z_2 = (u_1+u_2)+i(v_1+v_2)$
 		\item Field with $+,\cdot$, $0=(0,0)$, $1=(1,0)$
 		\item $\mathcal{R}e(z) = \frac{z+ \bar{z}}{2},\: \mathcal{I}m(z) = \frac{z-\bar{z}}{2i}$
@@ -852,7 +870,7 @@ For later purposes we now turn towards complex-valued functions that sometimes c
 			that implies $|e^{iv}|=1$ for all $v\in\R$.
 		\item $\cos(u) = \frac{e^{iu}+ e^{-iu}}{2}$, $\sin(u) =  \frac{e^{iu} - e^{-iu}}{2i}$
 	\end{itemize}
-\end{lstep}
+\end{lreminder}
 	Complex integration of functions $f:\C\to\C$ is covered in complex analysis lectures with all magic tricks to compute such integrals. We will not touch upon this topic and only define the Lebesgue integral for measurable $f:\Omega\to \C$ by integrating separately real- and imaginary part:
 	\begin{align*}
 		\int_{\Omega} f \dint \mu := \int_{\Omega} \mathcal{R}e(f) \dint \mu + i  \int_{\Omega} \mathcal{I}m(f) \dint \mu\in \C
@@ -883,12 +901,12 @@ For later purposes we now turn towards complex-valued functions that sometimes c
 \end{deff}
 \end{ldef}
 There are many examples of algebras, for instance the set of polynomials or all exponential functions. We will discuss the examples in the upcoming sections but first deal with an important generalisation of the Weierstra\ss{} approximation theorem. The Stone-Weierstra\ss{} approximation theorem allows to generalise the $[0,1]$ to some compact metric space and the polynomials to any algebra of functions:
-\begin{lsatzwichtig}	
+\begin{lAussageWerkzeug}	
 \begin{theorem}[Stone-Weierstra\ss{} approximation theorem]\label{Stone_weierstrass}
 	Let $(E,d)$ a compact metric space, $K = \mathbb{R}$ or $K = \mathbb{C}$, and $C \subseteq C_b(E, K ) $ an algebra of functions that separates points.
 	Then $C$ is dense in $\big( C_b(E,K), ||\cdot||_\infty \big)$.
 \end{theorem}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 To see why the algebra should separate points take as an example the set of all constant functions. This forms an algebra, does not separate points and is clearly not large enough to approximate all bounded continuous functions.
 
 \begin{proof}[Proof]
@@ -955,11 +973,11 @@ What is the magic of Stone-Weierstra\ss? Proving that families of functions are 
 \marginpar{\textcolor{red}{Lecture 15}}
 
 The situation becomes even simpler if integrals are involved as linearity of integrals fits nicely to the properties of algebras.
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{corollary}\label{cor_514}
 	Let $(E,d)$ be a compact metric space and $C \subseteq C_b(E,K)$ a family that separates points, is closed under multiplication and contains $1$ (constant $1$ function). Then $C$ is separating for $\cM_1(E)$.
 \end{corollary}
-\end{llemma}
+\end{laussagewerkzeug}
 The examples that will appear in the sequal are typically polynomials or exponential functions on compact subsets of $\R$.
 \begin{proof}[Proof]
 	We start with a little trick on separating functions and algebras that relies on the linearity of integrals. Let $\mu,\: \nu \in \cM_1(E)$ with $\int_E g \dint \mu = \int_E g \dint \mu$ for all $g \in C$. Taking all linear combinations of functions in $C$ and calling them $C'$ then by linearity of integrals the equality also holds for all functions in $C'$ and $C'$ is an algebra of functions. Using the Stone-Weierstra\ss{} theorem, the equality of integrals holds for a dense subset of $C_b(E)$.
@@ -974,7 +992,7 @@ The examples that will appear in the sequal are typically polynomials or exponen
 	Since this works for all $\varepsilon > 0$ it follows that $$\int_E f \dint \mu = \int_E f \dint \nu,\quad \forall f\in C_b(E).$$ Recalling from Proposition \ref{theorem_4124} that $C_b(E)$ is separating for $\cM_1(E)$ we proved $\mu = \nu$. Hence, $C$ is separating for $\cM_1(E)$.
 \end{proof}
 
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 \begin{theorem}\label{coruniq}
 	\begin{enumerate}[label=(\roman*)]
 		\item Every measures $\mu\in \mathcal M_1([a,b])$ is uniquely determined by all integrals $$\int_{[a,b]} x^m \dint \mu(x),\quad m\in\N.$$
@@ -982,7 +1000,7 @@ The examples that will appear in the sequal are typically polynomials or exponen
 
 	\end{enumerate}
 \end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 \begin{proof}[Proof] All we need to do is to apply Corollary \ref{cor_514}.\smallskip
 
 First note that $([a,b],|\cdot|)$ is a compact metric space. Define $C$ to be the family of monomials on $[a,b]$, that is $C = \{ x^m \colon m \in \mathbb{N}_0 \}$. Then $C$ is closed under multiplication, separates points in $[a,b]$ and contains the constant $1$ function. Hence, $C$ is a separating family for $\cM_1([a,b])$. But then, recalling the definition of a separating family,
@@ -1021,14 +1039,14 @@ and combine with $\int_\R x^n\cdot f_X(x)\dint x=\E[X^n]=e^{\frac{1}{2}n^2}$. He
 That's it.\smallskip
 
 Log-normal distributions are not determined by all moments but they are determined by all negative exponential moments as the following theorem shows:
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 \begin{theorem}\label{cor_distributions_1}
 	\begin{enumerate}[label=(\roman*)]
 		\item Every measures $\mu \in \mathcal M_1([0,\infty)])$ is uniquely determined by all integrals $$\int_{[0,\infty)} e^{-\lambda x}\dint \mu(x),\quad \lambda>0.$$
 		\item The law of a \underline{\smash{non-negative}} random variable is determined by it's Laplace transformation $L_X(\lambda) \coloneqq \E \big[ e^{- \lambda X} \big]$, $\lambda \geq 0$, i.e. if $L_X=L_Y$ then $X\sim Y$.
 	\end{enumerate}
 \end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 Of course part (ii) of the theorem also holds for non-positive random variables replacing the Laplace transformation by the moment generating function $M_X(t)=\E[e^{tX}]$ for all $t>0$.
 \begin{proof}[Proof]
 As in the previous proof we would like to apply Corollary \ref{cor_514} to the family of exponential functions, but there is a problem as $[0,\infty)$ is not compact. We apply a trick from Functional Analysis and use $E = [0, \infty]$ instead (the so-called one-point compactification).
@@ -1087,7 +1105,7 @@ As always we can either define objects for probability measures or random variab
 			 The characteristic function plays exactly the same role as moment generating function $\mathcal M_X$, or the distribution function $F_X$. It is just a function with certain properties (see below) that can be used to study more complicated mathematical objects such as measures or random variables. The major advantage of the characteristic function is that $\varphi$ is always well-defined because $\varphi_X$ is always defined as $\lvert e^{ix} \rvert = 1$. The magic about the complex exponential $x\mapsto e^{ix}$ is that it is much more useful to work with (bounded) but carries as much information as the unbounded real exponential function $x\mapsto e^x$.\smallskip
 
 Here are some properties that indicate that characteristic functions are useful to work with:
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{lemma}\label{lemma_5111}
 	Let $X$ be a random vector and $\varphi_X \colon \mathbb{R}^d \to \mathbb{C}$ the characteristic function.
 	\begin{enumerate}[label=(\roman*)]
@@ -1097,7 +1115,7 @@ Here are some properties that indicate that characteristic functions are useful 
 		\item $\varphi_{X+Y} = \varphi_X \cdot \varphi_Y$ if $X$ and $Y$ are independent.
 	\end{enumerate}
 \end{lemma}
-\end{llemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	If you are not used to integrals for complex-valued functions the arguments are a bit more complicated than one might think.
 	\begin{luebung}
@@ -1199,13 +1217,13 @@ and that a binomial random variable is a sum of $n$ independent Bernoulli random
 		\end{example}
 	\end{luebung}
 Apart from being nice to compute with there must be a deeper reason to study characteristic functions. The fundamental theorem on characteristic functions states that the complex exponential functions are separating for $\cM_1(\R^d)$ or, formulated in the langueage of random variables, the law of a random variable is uniquely determined by the characteristic function. Indeed, this is the justification for the name, the law is characterised by the characteristic function.
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 \begin{theorem}\label{CF}
 	\begin{enumerate}[label=(\roman*)]
 		\item Every measures $\mu \in \mathcal M_1(\R^d)$ is uniquely determined by all integrals $$\int_{\R^d} e^{i \langle t,x\rangle}\dint \mu(x),\quad t\in\R^d.$$
 		\item The law of a random vector $X$ is determined by it's characteristic function, i.e. if $\varphi_X=\varphi_Y$ then $X\sim Y$.
 	\end{enumerate}\end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 Of course one might ask why one might be interested in computing moments (for bounded random variables) or Laplace transformations (for non-negative random variables) if there is one general theorem that states that characteristic functions uniquely determine all real random variables. This is because it is easier to compute moments or Laplace transformations these are the preferred tools in the special situations when they are sufficiently powerful.
 \begin{proof}[Proof]
 	Since $C_c(\R^d)$ is separating by Proposition \ref{theorem_4124} it suffices to prove that the complex exponentials are dense in $C_c(\R^d)$ Then we can proceed similarly (but with an extra trick) to the proof of Corollary \ref{cor_514}.\smallskip
@@ -1221,19 +1239,19 @@ Of course one might ask why one might be interested in computing moments (for bo
 		\begin{tikzpicture}
 
 		%AXIS Y
-		\draw[black!90,line width=0.4mm] (2,-1.5) -- ++(90:3cm);
+		\draw[black!90,line width=0.4mm] (2,-1) -- ++(90:2cm);
 		%AXIS X 
-		\draw[black!90,line width=0.4mm] (-0.5,0) --++(0:5cm);
+		\draw[black!90,line width=0.4mm] (0.8,0) --++(0:2.3cm);
 	
 		\node[rectangle,fill=red!30,fill opacity=0.3,draw=red!50,minimum width=1.5cm,minimum height = 1.5cm] (rec) at (2,0) {};
 		\node[red!30,scale=0.8,xshift=10mm] (int) at (rec.north east) {$[-k,k]^d$};
 		\draw[draw=darkgreen!90,line width=0mm,fill=darkgreen,fill opacity=1] (2,0) ellipse (0.5 and 0.2);
 			\end{tikzpicture}
-			\caption*{support of $f$}
+			\caption*{Support of $f$ (green) contained in a box}
 	\end{center}
 	\end{figure}
-	\footnote{Koordinatensystem etwas kuerzer}
-			 Next we define
+
+	Next we define
 	\begin{align*}
 		g_m \colon \mathbb{R}^d \to \mathbb{C},\quad g_m (x) = e^{ i \langle \frac{4\pi m}{3k}, x \rangle },\quad m, x\in \mathbb{Z}^d,
 	\end{align*}
@@ -1256,7 +1274,7 @@ Of course one might ask why one might be interested in computing moments (for bo
     \definecolor{darkgreen}{RGB}{52,125,63}
     \begin{scope}[xshift=-10mm]
         %AXIS Y
-        \draw[black!90,line width=0.4mm] (2,-1.5) -- ++(90:3cm);
+        \draw[black!90,line width=0.4mm] (2,-2) -- ++(90:4cm);
         %AXIS X 
         \draw[black!90,line width=0.4mm] (-0.5,0) --++(0:5cm);
         \draw[draw=darkgreen,line width=0mm,fill=darkgreen,fill opacity=1] (2,0) ellipse (0.5 and 0.2);
@@ -1281,10 +1299,9 @@ Of course one might ask why one might be interested in computing moments (for bo
         \draw[line width=0.2mm,orange!90,scale=1] (\x-0.4,\y-0.2) .. controls (\x-0.2,\y+0.2-0.2) and (\x,\y-0.2-0.2)  .. (\x+0.3,\y-0.2);
     }
     \end{tikzpicture}
-	\caption*{periodic function $g \in C^k$}
+	\caption*{Periodic function $g \in C^k$}
 \end{center}
 \end{figure}
-\footnote{Koordinatensystem zu kurz, gruen etwas groesser machen}
 		Using the periodicity allows us to bound $g$ on $\R^d$ by comparing with the values in $[-\frac{3k}{4},\frac{3k}{4}]^d$, this is one full periodic block, where $g$ is close to $f$:
 			\begin{align*}
 				\sup_{x\in\R^d}|g(x)|=\sup_{x\in [-\frac{3k}{4},\frac{3k}{4}]^d} \lvert g(x) \rvert &\leq \sup_{x\in [-\frac{3k}{4},\frac{3k}{4}]^d}\lvert g(x) - f(x) \rvert + \sup_{x\in [-\frac{3k}{4},\frac{3k}{4}]^d} \lvert f(x) \rvert 
@@ -1345,14 +1362,14 @@ In many examples the uniqueness theorem is applied as follows. In order to ident
 
 
 
-\section[Weak convergence on $\mathcal B(\R)$]{Weak convergence on $\mathcal B(\R^d)$}
+\section[Weak convergence on $\mathcal B(\R)$]{Weak convergence on $\mathcal B(\R^d)$}\label{sec:WC}
 We can finally return to the question of weak convergence. Recall from Propositon \ref{most_useful_characterization_weak_convergence} that a sequence of probability measures $(\mu_n)$ converges weakly to $\mu$ (equivalently a sequence of random variables $(X_n)$ converges in distribution to $X$) if and only if
 \begin{enumerate}[label=(\roman*)]
 	\item $\{\mu_n:n\in\N\}$ is tight,
 	\item $ \lim_{n\to\infty} \int_E f \dint \mu_n = \int_E f \dint \mu$ for \underline{some} separating family $C \subseteq C_b(E)$ of $\cM_1(E)$.
 \end{enumerate}
 We have identified separating families in the previous section. It now remains to identify situations in which the tightness trivially holds (bounded and non-negative) and give a handable criterion to check the tightness (convergence of characteristic functions). We keep the order of the previous section and first deal with the simple cases:
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 \begin{theorem}
 	\begin{enumerate}[label=(\roman*)]
 		\item Suppose that $\mu,\mu_1,...\in \mathcal M_1([a,b])$, then 
@@ -1365,7 +1382,7 @@ We have identified separating families in the previous section. It now remains t
 	\end{align*}
 \end{enumerate}
 \end{theorem}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 \begin{proof}[Proof]
 	(i) The necessity of convergerence of the integrals follows as $x^m$ is bounded and continuous on $[a,b]$. The sufficiency is also simple as $([a,b],|\cdot|)$ is compact. Hence, every sequence of measures is automatically tight (choose $K=[a,b]$ in the definition of tightness). According to Proposition \ref{most_useful_characterization_weak_convergence} only convergence of integrals needs to be checked for a separating family. Since the family of monomials $C=\{x^m:m\in\N_0\}$ is separating according to Theorem \ref{coruniq} the proof is complete.\smallskip
 
@@ -1373,7 +1390,7 @@ We have identified separating families in the previous section. It now remains t
 \end{proof}
 
 The situation is very similar for non-negative (or non-positive) sequences of random variables. In contrast to bounded sequences we now need convergence of the exponential moments (Laplace transformation):
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 	\begin{theorem}
 		\begin{enumerate}[label=(\roman*)]
 			\item Suppose that $\mu,\mu_1,...\in \mathcal M_1([0,\infty))$, then 
@@ -1386,7 +1403,7 @@ The situation is very similar for non-negative (or non-positive) sequences of ra
 		\end{align*}
 	\end{enumerate}
 	\end{theorem}
-	\end{lsatzwichtig}
+	\end{lAussageWerkzeug}
 	\begin{proof}[Proof]
 		(i) We argue as in the proof of Theorem \ref{cor_distributions_1}. The necessity is clear as the exponentials are bounded and continuous on $[0,\infty)$. For the sufficiency we argue with compactification. Compactifying $[0,\infty]$ and extending the measures trivially to measures $\bar \mu_n$ yields a sequence of measures in a compact space. As in the previous proof the sequence is automatically tight (choose $K=[0,\infty]$). 
 		According to Proposition \ref{most_useful_characterization_weak_convergence} the weak convergence is equivalent to convergence of all integrals against a separating family. Since the family of exponentials $C\coloneqq \{ f_{\lambda} \colon \lambda > 0 \}$ is separating according to Theorem \ref{cor_distributions_1} and 
@@ -1472,7 +1489,7 @@ The most general theorem is \textbf{L\'evy's continuity theorem}. Without any fu
 
 
 
-		\begin{lsuperwichtigersatz}
+		\begin{lSatzHerz}
 			\begin{theorem}\label{levy_special}
 				{}
 				\begin{enumerate}[label=(\roman*)]
@@ -1486,16 +1503,16 @@ The most general theorem is \textbf{L\'evy's continuity theorem}. Without any fu
 					\end{align*}				
 				\end{enumerate}
 			\end{theorem}
-		\end{lsuperwichtigersatz}
+		\end{lSatzHerz}
 \begin{proof}[Proof]
 As earlier we only prove (i) as (ii) follows directly using $\mu_n=\P_{X_n}$.\smallskip
 
 "$\Rightarrow$": Since $g = e^{i \langle t, \cdot \rangle}=\cos(\langle t,\cdot\rangle)+i\sin(\langle t,\cdot\rangle)$ and $\cos,\sin\in C_b(\mathbb{R}^d)$ the pointwise convergence follows from the definition of weak convergence.\smallskip
 
 "$\Leftarrow$": We will actually prove a stronger statement than claimed, the so-called \textbf{general continuity theorem}:
-\begin{lwarnhinweis}
+\begin{lWarnhinweis}
 	Suppose $\lim_{n\to\infty}\varphi_{\mu_n}(t)= f(t)$, for all $t\in\R^d$, where $f \colon \mathbb{R}^d \to \mathbb{C}$ is continuous at $0$. Then there is a probability measure $Q$ on $\cB(\R^d)$ with $f = \varphi_Q$ and $\mu_n \overset{\text{(w)}}{\longrightarrow} Q, \: n\to \infty$.
-\end{lwarnhinweis}
+\end{lWarnhinweis}
 Once we proved the general continuity theorem we immediately get the special continuity theorem by chosing $f=\varphi_\mu$ which is continuous at $0$ by dominated convergence $(|e^{i\langle t,X\rangle}|=1)$.\smallskip
 
 Comparing with the proofs of the previous two theorems the strategy is as follows:
@@ -1622,19 +1639,19 @@ In fact, just as CDFs are functions with a set of properties one can ask if also
 	\text{random variable }X\quad \Leftrightarrow \quad \text{ law }\P_X\quad \Leftrightarrow \quad \text{CDF }F_X\quad \Leftrightarrow\quad \text{characteristic function }\varphi_X
 \end{align*}
 Indeed, this is the case but unfortunately the appearing property of positive definitness is hard to check:
-\begin{lsatz}
-\begin{theorem}[Bochner]
+\begin{laussagewerkzeug}
+\begin{theorem}[Bochner]\label{Bochner}
 	A function $\varphi \colon \mathbb{R}^d \to \mathbb{C}$ is the characteristic function of a random vector (or a probability measure on $\mathcal B(\R^d)$) if and only if 
 	\begin{itemize}
 		\item $\varphi(0)=1$
 		\item $\varphi$ is continuous at $0$
-		\item $\varphi$ is \textbf{positive semidefinite}, i.e. 
+		\item $\varphi$ is \textbf{positive semidefinite} in the sense that
 		\begin{align*}
 			\sum_{k,l=1}^{n} y_k \bar{y}_l \varphi(t_k - t_l) \geq 0, \quad \forall n \in \mathbb{N}, \: t_i \in \mathbb{R}^d, \: y_i \in \mathbb{C}.
 		\end{align*}	
 	\end{itemize}
 \end{theorem}
-\end{lsatz}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	"$\Rightarrow$": Suppose $\varphi(t)=\E[e^{itX}]$ for some random variable $X$. Then $\varphi(0) = 1$ is clear, continuity at $0$ follows from dominated convergence, and
 		\begin{align*}
@@ -1644,9 +1661,16 @@ Indeed, this is the case but unfortunately the appearing property of positive de
 		\end{align*}
 	"$\Leftarrow$": Too hard
 \end{proof}
-There are many classes of characteristic functions that can be understood more directly using the general version of the continuity theorem. If for some reason we have a sequence of characteristic functions $\varphi_n$ that converges pointwise to a function $\varphi$ that is continuous at $0$, then $\varphi$ is a characteristic function. For all even continuous functions $\varphi \colon \mathbb{R} \to [0,1]$ with $\varphi(0)=1$ that are convex on $[0,\infty)$ this can be done (P\'olya's theorem). One can in fact construct simple explicit random variables which characteristic functions $\varphi_n$ that are  approximations of such such functions and converge pointwise to $\varphi$.
-
-\begin{figure}
+As a consequence it is merely a matter of taste if one prefers to use characteristic functions or characteristic functions to characterise random variables, most students are more used to work with  distribution functions. If one describes the interplay of independent random variables (compare the examples from Section \ref{sec:RV}) different situations lead to different advantages. The prime example are indendent random variables. For maxima one should use distribution functions
+\begin{align*}
+	F(t)=\P(\max\{X_1,...,,X_n\}\leq t)=\P(X_1\leq t, ..., X_n\leq t)=F_{X_1}(t)^n,\quad t\in\R,
+\end{align*}
+for sums one should always use characteristic functions
+\begin{align*}
+	\varphi (t)=\E\Big[e^{i \sum_{k=1}^n X_k}\Big]=\prod_{k=1}^n\E[e^{iX_1}]=\varphi_{X_1}(t)^n,\quad t\in\R.
+\end{align*}
+We could not provide a proof of Bochner's theorem, but at least we can prove a simpler theorem due to Polya. The main idea is as follows: If for some reason we have a sequence of characteristic functions $\varphi_n$ that converges pointwise to a function $\varphi$ that is continuous at $0$ with $\varphi(0)=1$, then $\varphi$ is a characteristic function by the general version of L\'evy's continuity theorem. For all even continuous functions $\varphi \colon \mathbb{R} \to [0,1]$ with $\varphi(0)=1$ that are convex on $[0,\infty)$ this can be done. One can write down simple explicit random variables which characteristic functions $\varphi_n$ that are approximations of such such functions and converge pointwise to $\varphi$. Here is a picture, the details will be discussed in the exercises.
+\begin{figure}[h]
 	\begin{center}
 	\begin{tikzpicture}
 			\tikzset{
@@ -1683,8 +1707,8 @@ There are many classes of characteristic functions that can be understood more d
 	\end{figure}
 
 The most prominent class of distributions that is defined using Polya's theorem are the stable laws:
-\begin{example}
-	For $\alpha\in (0,1]$ and $\lambda>0$ the function $\varphi_{\alpha}(t) = e^{- \lambda \lvert t \rvert^{\alpha}}$ is even and convex on $[0,\infty)$. By P\'olya's theorem this is a characteristic function of a random variable $X$. The random variable is called $\alpha$-stable. In fact, the assumption $\alpha\in (0,1]$ is only needed to apply P\'olya's theorem, actually $\varphi_\alpha$ is a characteristic function if and only if $\alpha\in [0,2]$. All such random variables are called $\alpha$-stable and generalise the Gaussian distribution which appears for $\alpha=2$.
+\begin{example}\label{example:stable}
+	For $\alpha\in (0,1]$ and $\lambda>0$ the function $\varphi_{\alpha}(t) = e^{- \lambda \lvert t \rvert^{\alpha}}$ is even and convex on $[0,\infty)$. By P\'olya's theorem this is a characteristic function of a random variable $X$. The random variable is called $\alpha$-stable. In fact, the assumption $\alpha\in (0,1]$ is only needed to apply P\'olya's theorem, $\varphi_\alpha$ is a characteristic function if and only if $\alpha\in [0,2]$. All such random variables are called $\alpha$-stable and generalise the Gaussian distribution which appears for $\alpha=2$.
 \end{example}
 The interesting point about the stable laws is the simple for of their characteristic functions whereas the densities (they exist!) are not simple at all.
 
@@ -1698,7 +1722,7 @@ Recall from Theorem \ref{erzeugende} the relation $\E[X^n]=\frac{\mathcal M_X^{(
 	\lim_{h\to 0}\frac{f(t+h)-f(t)}{h}=\lim_{h\to 0}\frac{\mathcal R ef(t+h)-\mathcal R ef(t)}{h}+i\lim_{h\to 0}\frac{\mathcal I m f(t+h)-\mathcal I mf(t)}{h}
 \end{align*}
 shows that both approaches give exactly the same. As always it is important to keep in mind that we can freely ignore the formal definition and just compute in $\C$ as we are used to in $\R$ with the convention $i^2=-1$. Most importantly, it holds that $\frac{d}{dt} e^{itx}=ix e^{itx}$. Higher order derivatives are definded recursively and denoted as usually by $f^{(n)}$. Now suppose, as for moment generating functions, the differentiation can be switched into the expectation, then we should get $\varphi_X^{(n)}(t) = \E \big[ i^n X^ne^{itX} \big]$ so that plugging-in $t=0$ gives again a moment formula $\E[X^n]=\frac{\varphi_X^{(n)}(0)}{i^n}$. Here again the magic of the complex exponential occurs. It is equally powerful in terms of what one can get from it but it is much more friendly because it is bounded. In essense the following theorem shows how to replace the real-exponential (moment generating function) by the complex-exponential (characteristic function) to obtain the same kind of results with minimal assumptions on the random variable.
-\begin{lsatz}
+\begin{laussagewerkzeug}
 \begin{theorem}[Moments of $X$ and differentiability of $\varphi_X$]\label{theorem_moments}
 	Let $X$ be a real-valued random variable with characteristic function $\varphi_X$.
 	\begin{enumerate}[label=(\roman*)]
@@ -1718,7 +1742,7 @@ shows that both approaches give exactly the same. As always it is important to k
 			\end{align*}
 	\end{enumerate}
 \end{theorem}
-\end{lsatz}
+\end{laussagewerkzeug}
 The power series representation of $\varphi_X$ is not surprsing at all. Writing the complex exponential as a power series and exchanging freely expectation and infinite sum this nothing but
 \begin{align*}
 	\varphi_X(t)=\E\Big[\sum_{k=0}^\infty \frac{i^kt^kX^k}{k!}\Big]=\sum_{k=0}^\infty \frac{i^k\E[X^k]}{k!}t^k.
@@ -1776,7 +1800,7 @@ Just as we used the moment generating functions to compute moments for random va
 	Compute the first few moments of $\mathcal N(0,1)$, $\text{Poi}(\lambda)$, and $\text{Exp}(\lambda)$.
 \end{luebung}
 As an application we prove what is sometimes called the \textbf{method of moments} and, as a special case, we can finally give a proof of Theorem \ref{WT}.
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{corollary}\label{cor:uniqu}
 	\begin{enumerate}[label=(\roman*)]
 		\item
@@ -1785,7 +1809,7 @@ As an application we prove what is sometimes called the \textbf{method of moment
 			In particular, if $\mathcal M_X(t) < \infty$ for $t \in (-\varepsilon,\varepsilon)$ for some $\varepsilon > 0$, then $\mathcal M_X$ uniquely determines the law of $X$.
 	\end{enumerate}
 \end{corollary}
-\end{llemma}
+\end{laussagewerkzeug}
 The corollary is a significant extension of Theorem \ref{coruniq}. If $|X|$ is bounded by some $C$, then $\E[|X^n|]$ is bounded by $C^n$ so that the assumption of the corollary is clearly satisfied. The corollary states that also for other (rather special) random variables which moments increase slowly enough the same statement holds.
 \begin{proof}[Proof]
 			(i) For $\lvert t \rvert < \frac{1}{3C}$, using the Sterling formula, we have
@@ -1803,14 +1827,14 @@ The corollary is a significant extension of Theorem \ref{coruniq}. If $|X|$ is b
 			Now we can use the proof of (i) to finish the proof.	
 \end{proof}
 To finish the chapter with a spectacular theorem we give a proof of the central limit theorem. The proof we have given in Section \ref{sec:ZGS} imposed the additional assumption $\E[|X_1|^3]<\infty$, hence, this is our first complete proof of the most important theorem of probability theory and statistics.
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 	\begin{theorem}[Central Limit Theorem]
 	Let $X_1,X_2,...$ be iid with $\mu \coloneqq \E[ X_1]$ and $\sigma^2 \coloneqq \mathbb{V}[X_1] < \infty$. Then
 	\begin{align*}
 		\frac{\sum_{k=1}^n X_k - n \mu}{\sqrt{\sigma^2 n}} \overset{\text{(d)}}{\longrightarrow} \cN(0,1), \quad n \to \infty.
 	\end{align*}
 \end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 
 \begin{proof}[Proof]
 	Without loss of generality we may assume $\mu=0$ and $\sigma^2=1$ as otherwise we can consider the standardised random variables $\tilde{X} \coloneqq \frac{X-\mu}{\sigma}$. Writing $S_n=\sum_{k=1}^n X_k$, L\'{e}vy's continuity theorem we only need to prove that
@@ -1842,16 +1866,24 @@ In many textbooks one can see the formulation
 	\begin{align*}
 		\lim_{n\to\infty}\mathbb{P} \bigg( \frac{\sum_{k=0}^n X_k - n \cdot \mu}{\sqrt{n \sigma^2}} \in [a,b] \bigg)= \frac{1}{\sqrt{2\pi}} \int_a^b e^{- \frac{x^2}{2}} \dint x, \quad \forall a<b,
 	\end{align*}
-	which holds due to Portemanteau because $\mathbb{P}_{\cN(0,1)}( \partial [a,b]) = 0$.\smallskip
+	which follows from Portemanteau because $\mathbb{P}_{\cN(0,1)}( \partial [a,b]) = 0$.\smallskip
 
-	There are plenty of generalisations of the central limit theorem. Here is a multi-dimensional version that will be used for the proof of the Donsker theorem in the next section.
+	There are plenty of generalisations of the central limit theorem. For the Donsker theorem of Chapter \ref{sec:BM} a multi-dimensional version will be crucial. 
+	\begin{luebung}
+		If $X_1,...$ is an iid sequence of random vectors with mean vector $\mu_k=\E[X_{1,k}]$ and covariance matrix $\Sigma_{i,j}=\Cov(X_{1,i},X_{1,j})$, then
+		\begin{align*}
+			\frac{1}{\sqrt{n}}\sum_{k=1}^n (X_k-\mu)\overset{\text{(d)}}{\longrightarrow} \mathcal N(\mu,\Sigma),\quad n\to\infty.
+		\end{align*}
+		All appearing differences, sums, and scalar multiplications must be interpreted in the vector sense.
+	\end{luebung}
+	The multivariate Gaussian distribution has probably crossed your way in lectures on statistics. If not, here is a summary of the most important facts needed for this course. 
 	\begin{ldef}
 		\begin{deff}
-			If $Y$ is a $d$-dimensional random vector consisting of independent $\mathcal N(0,1)$ random variables, $\mu\in \R^p$, and $B\in \R^{d\times p}$, then $X:=\mu+B Y$ is called a $p$-dimensional \textbf{Gaussian random vector}. In analogie to $\mathcal N(\mu,\sigma^2)$ we write $X\sim \mathcal N(\mu,\Sigma)$, where $\Sigma:=B B^T$ is the so-called covariance matrix.
+			If $Y$ is a $d$-dimensional random vector consisting of independent $\mathcal N(0,1)$ random variables, $\mu\in \R^p$, and $B\in \R^{d\times p}$, then $X:=\mu+B Y$ is called a $p$-dimensional \textbf{Gaussian random vector}. In analogie to $\mathcal N(\mu,\sigma^2)$ we write $X\sim \mathcal N(\mu,\Sigma)$ with $\Sigma:=B B^T$. We call $\mu$ the mean vector and $\Sigma$ the covariance matrix.
 		\end{deff}
 	\end{ldef}
-There are several equivalent definitions of Gaussian random vectors. Most prominently through the characteristic function involving a mean vector $m$ and a symmetric positive semidefinite matrix $\Sigma$ or by saying that all linear combinations of the entries are univariate Gaussian. All approaches lead to the same characteristic functions (see the next exercise) and therefore are equivalent.
-\begin{luebung}
+A good exercise is to compute moments, covariances, density (if it exists), and the characteristic function of Gaussian vectors. The exercise shows why $\mu$ is called mean vector, $\Sigma$ is called covariance matrix and, most importantly, that every Gaussian vector is uniquely determined by all expectations and covariances, a property that will be used in the discussion of the Brownian motion.
+	\begin{luebung}
 	If $X\sim \mathcal N(\mu, \Sigma)$, then 
 	\begin{align}\label{CFG}
 		\varphi_X(t)&=\exp\Big(i\langle t,\mu\rangle-\frac 1 2 \langle t,\Sigma t\rangle\Big),\quad t\in\R^d
@@ -1862,25 +1894,22 @@ There are several equivalent definitions of Gaussian random vectors. Most promin
 		\Cov(X_i,X_j)=\Sigma_{i,j}.
 	\end{align*}
 	If furthermore $\Sigma$ is invertible, then $X$ has the multivariate density 
-	\begin{align*}
+	\begin{align}\label{NormalDensity}
 		f(x)=\frac{1}{(2\pi)^{d/2} \det(\Sigma)} \exp\Big(-\frac{1}{2} \big\langle x-\mu,\Sigma^{-1}(x-\mu) \big\rangle\Big),\quad x\in\R^d.
-	\end{align*}
+	\end{align}
 \end{luebung}
-The exercise shows that the key quantities for Gaussian random vectors are the mean vector $\mu$ and the covariance matrix $\Sigma$. If a random vector is known to be Gaussian it is uniquely determined through the mean vector and all covariances of two-coordinates. In particular, coordinates of a Gaussian random vector are independent if and only if they are uncorrelated, a fact, which is wrong for non-Gaussian vectors.
-\begin{luebung}
-	Show the following multivariate version of the central limit theorem. If $X_1,...$ is an iid sequence of random vectors with mean vector $\mu_k=\E[X_{1,k}]$ and covariance matrix $\Sigma_{i,j}=\Cov(X_{1,i},X_{1,j})$, then
-	\begin{align*}
-		\frac{1}{\sqrt{n}}\sum_{k=1}^n (X_k-\mu)\overset{\text{(d)}}{\longrightarrow} \mathcal N(\mu,\Sigma),\quad n\to\infty.
-	\end{align*}
-	Note that differences, sums, and scalar multiplications are in the vector sense.
-\end{luebung}
-
-%
-%
-%Since all matrices $B B^T$ are automatically symmetric they are also self-adjoint so that QUATSCH, DAFUER MUSS B SYM SEIN $\langle B B^T x,x\rangle=\langle Bx, Bx\rangle=|Bx|^{1/2}\geq 0$ for all $x\in\R^d$. Hence, the covariance matrix $\Sigma$ is automatically positive definite. This motivates an alternative definition of a Gaussian random vector through the characteristic function \eqref{CFG} for some $\mu\in \R^d$ and some positive definite matrix $\Sigma$.
-%\begin{luebung}
-%	Use Bochner's theorem to prove that $\varphi_X$ from \eqref{CFG} is a characteristic function of some random vector $X$ if $\mu\in\R^d$ and $\Sigma\in \R^{d\times d}$ is a symmetric positive semi-definite matrix.
-%\end{luebung}
-
-
-	
+There are more equivalent definitions of Gaussian vectors. Here are the two most important once that will also be used in next chapter.
+\begin{itemize}
+	\item A random vector is called a Gaussian if \underline{all} linear combinations of its entries are one-dimensional Gaussian distributions.
+	\item A random vector is called a Gaussian vector if the characteristic function takes the form from \eqref{CFG} with some vector $\mu$ and some symmetric positive semidefinite matrix $\Sigma$.
+\end{itemize}
+The three approaches result in the same characteristic function of the form \eqref{CFG} with a vector $\mu_k=\E[X_k]$ and a positive definite matrix $\Sigma_{i,j}=\Cov(X_i,X_j)$, hence, they are equivalent. There is an interesting non-probabilistic question involved that leads straight into linear algebra. Given a vector $\mu$ and a positive semidefinite matrix $\Sigma$, why is \eqref{CFG} the characteristic function of a random vector? Of course, one could check Bochner's theorem, but a clever trick is needed to make this work. Bochner's theorem (which we did not prove) can be avoided if we allow ourselves to use a bit of linear algebra. Recall that a matrix $K$ is called positive semidefinite if 
+\begin{align}\label{pd}
+	\langle a, K a\rangle=\sum_{i,j=1}^n a_i\bar{a}_j K_{i,j}\geq 0,\quad \forall a\in \C^n.
+\end{align}
+If $K$ is additionally symmetric then $K$ is positive semidefinite if \eqref{pd} holds for all $a\in \R^d$ which is easier to check. The computation
+\begin{align*}
+	\sum_{i,j=1}^n a_ia_j \E\big[(X_{t_i}-\mu(t_i))(X_{t_j}-\mu(t_j))\big]
+	=\E\Big[\Big(\sum_{i=1}^n a_i(X_{t_i}-\mu(t_i))\Big)^2 \Big]\geq 0,
+\end{align*}
+shows that the covariance matrix of any random vector with finite second moments is automatically positive semidefinite (it is symmetric by definition), the more interesting problem is to show that every symmetric positive definite matrix is the covariance matrix of a random vector. An important result from linear algebra (the Cholesky decomposition) states that every positive definite matrix has a unique decomposition $K=BB^T$. Combined with the exercise above, for a given vector $\mu$ and a symmetric positive semidefinite matrix $\Sigma$ the random vector $X:=\mu+B Y$ has the characteristic function \eqref{CFG}, hence, the right-hand side of \eqref{CFG} is indeed a characteristic function. If $\Sigma$ is not positive semidefinite then \eqref{CFG} is not a characteristic function! In that case there is some $t\in \R^d$ such that $\langle t, \Sigma t\rangle<0$. But then the absolute value of the right hand side of \eqref{CFG} is larger than $1$, which is impossible for a characteristic function by Lemma \ref{lemma_5111}. We will come back to Gaussian vectors once we introduce Gaussian processes of which the Brownian motion is the most famous example.

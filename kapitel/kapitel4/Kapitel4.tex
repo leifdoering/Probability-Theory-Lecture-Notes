@@ -1,7 +1,7 @@
 In Analogie zum eindimensionalen Fall fragen wir nun, ob die Umkehrung auch gilt. Gibt es also f\"ur jede multivariate Verteilungsfunktion $F$ ein Wahrscheinlichkeitsma\ss{} $\mathbb P_F$ auf $(\R^d, \mathcal B(\R^d))$, dessen Verteilungsfunktion $F$ ist. In anderen Worten, gibt es eine bijektive Abbildung zwischen den multivariaten Verteilungsfunktionen und den Wahrscheinlichkeitsma\ss en auf $\mathcal B(\R^d)$?
 \begin{satz}
 \link{https://www.youtube.com/watch?v=T4qzzuYLcUc&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=20&t=4698s}
-\label{Satz}
+\label{Satz}\label{Car2}
 \textbf{[Analogie zu \ref{EindVert}]}
 	Für jede multivariate Verteilungsfunktion $F:\R^d\to \R$ gibt es genau ein Wahrscheinlichkeitsmaß $\mathbb P_F$ auf $\cB(\R^d)$ mit Verteilungsfunktion $F$, d. h.
 	\begin{equation}\label{schnittstabil}
@@ -887,7 +887,7 @@ Wir kommen nun zu bedingten Wahrscheinlichkeiten, die aus der Schule vielleicht 
 	\end{itemize}
 \end{proof}
 Wir kommen nun zu extrem wichtigen Rechenregeln, obwohl diese ganz einfach aus der Definition folgen:
-\begin{satz} \link{https://www.youtube.com/watch?v=lxTw3_a68yw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=24&t=2512s} \abs
+\begin{satz}\label{formelnp} \link{https://www.youtube.com/watch?v=lxTw3_a68yw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=24&t=2512s} \abs
 
 	\begin{enumerate}[label=(\roman*)]
 		\item \label{multipl} \textbf{Multiplikationsregel}: Für $A_1,...,A_n\in \mathcal A$ mit $\mathbb{P}(\bigcap_{k=1}^{n} A_k) > 0$ gilt
@@ -978,7 +978,7 @@ Kommen wir nun zu zwei klassischen Anwendungen. Hier ist allerdings etwas Vorsic
 	\end{enumerate}
 \end{beispiel}
 Weiter geht es jetzt mit einer mathematischen Definition von Unabh\"angigkeit von Ereignissen. Ihr habt sicherlich eine naive Vorstellung \glqq Hat nichts mit einander zu tun\grqq. Beispielsweise w\"aren die Ereignisse \enquote{Meine Kaffeemaschiene geht morgen kaputt} und \enquote{Es regnet morgen in Thailand} vermutlich unabh\"angig. Hier ist eine Definition:
-\begin{deff}
+\begin{deff}\label{def:unab}
 \link{https://www.youtube.com/watch?v=lxTw3_a68yw&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=24&t=4799s}
 	Sei $(\Omega, \cA, \mathbb{P})$ ein Wahrscheinlichkeitsraum und seien $A,B \in \cA$. Die Ereignisse $A$ und $B$ heißen \textbf{unabhängig}, falls $\mathbb{P}(A \cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$.
 \end{deff}
@@ -1127,9 +1127,9 @@ Um zu zeigen, dass es ein unendliches Produktma\ss{} auf $(\R^\infty, \mathcal B
 \end{deff}
 In den n\"achsten Kapitel schauen wir uns Konvergenzeigenschaften von u.i.v Folgen an, insbesondere das Gesetz der gro\ss en Zahlen und den zentralen Grenzwertsatz.
 
-\section{Konvergenz von Folgen von Zufallsvariablen}
+\section{Konvergenz von Folgen von Zufallsvariablen}\label{sec:konvergenz}
 Bevor wir zu den zentralen Konvergenzs\"atzen kommen, m\"ussen wir uns \"uberlegen, was Konvergenz von Folgen von Zufallsvariablen \"uberhaupt bedeutet. Das ist in der Tat gar nicht so klar, es gibt verschiedene Begriffe:
-\begin{deff}
+\begin{deff}\label{Konvergenzarten}
 \link{https://www.youtube.com/watch?v=tJ-TYBzCFV8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=25&t=2763s} \textbf{[Vier Konvergenzarten in der Stochastik]}
 	Für eine Zufallsvariable $X$ und eine Folge $X_1,X_2,...$ von Zufallsvariablen auf $(\Omega, \cA, \mathbb{P})$  definiert man
 	\begin{enumerate}[label=(\roman*)]
@@ -1332,7 +1332,7 @@ Im Prinzip sagt die Aussage, dass schwache Konvergenz (fast) das gleiche ist, wi
 \end{bem}
 Die Skorokhod-Kopplung ist besonders spektakul\"ar, wenn man mit dem n\"achsten Satz vergleicht, 
 in dem der Zusammenhang der Konvergenzarten beleuchtet wird:
-\begin{satz}
+\begin{satz}\label{Konvergenzsatz}
 \link{https://www.youtube.com/watch?v=e-i3vo2epBI&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=26&t=3165s} \textbf{[Zusammenhang Konvergenzarten]}
 \begin{figure}[H]
 \begin{center}

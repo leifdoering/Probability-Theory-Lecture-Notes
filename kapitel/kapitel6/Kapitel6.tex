@@ -12,9 +12,13 @@ Before turning to the special class of martingales we will fix some notation of 
 	Suppose $(\Omega,\cF,\mathbb{P})$ is a probability space, $( E,\mathcal E )$ is a measurable space, and $I$ is an index set. Then a  family of random variables $X=(X_t)_{t \in I}$ on $( \Omega,\cF,\mathbb{P} )$ with values in $(E,\mathcal E )$ is called a \textbf{stochastic process} with values in $E$, called the state-space.
 \end{deff}	
 \end{ldef}
-This is for the first time that we use the name random variable more freely. In Chapter \ref{sec:Stochastik} a random variable was defined to be a real-valued (or $\bar \R$-valued) measurable mapping, a vector-valued random variable was called random vector. From now on we will call  $E$-valued $(\mathcal F, \mathcal E)$-measurable mappings random variables in order to avoid the use of even more notation. Only for $E=\R^d$ we will typically speak of random vectors. Some authors prefer to use the wording random element if the state-space is different from $\R$.\smallskip
+This is for the first time that we use the name random variable more freely. In Chapter \ref{sec:Stochastik} a random variable was defined to be a real-valued (or $\bar \R$-valued) measurable mapping, a vector-valued random variable was called a random vector. 
+\begin{lWarnhinweis}
+	If $(\Omega, \mathcal \mathcal F,\P)$ is a probability space and $(E,\mathcal E)$ a measurable space then we will start to call $(\mathcal F, \mathcal E)$-measurable mappings $X:\Omega\to E$ random variables. Only for $E=\R^d$ we will typically speak of random vectors. 
+\end{lWarnhinweis}
+Some authors prefer to use the wording random element if the state-space is different from $\R$. Since there is no danger of confusion we prefer to keep the notation simpler.\smallskip
 
-	Depending on the index set $I$, stochastic processes are assigned different names. 
+Depending on the index set $I$, stochastic processes are assigned different names. 
 	\begin{itemize}
 		\item If $|I|=1$, for instance $I=\{1\}$, then a stochastic process indexed by $I$ is nothing but an $E$-valued random variable.
 		\item If $|I|=d$, for instance $I=\{1,...,d\}$, then a stochastic process indexed by $I$ is already known under the name random vector. 
@@ -62,7 +66,7 @@ The notion "{}path"{} of a process mostly makes sense if $I$ is an index set ref
 %	One can prove this fact by checking the measurability on a generator of $\mathcal E^I$, namely the $1$-cylinder sets. To see that the $1$-cylinder sets generate $%\mathcal E^I$ one only needs to note that all cylinder sets can be obtained by intersecting $1$-cylinder sets.\smallskip
 
 Here are some examples of stochastic processes:
-\begin{example}
+\begin{example}\label{ex:sp}
 	\begin{enumerate}[label=(\roman*)]
 		\item Every sequence of random variables (e.g. iid) $X_1, X_2,...$ defines a stochastic process indexed by $\N$.
 \begin{figure}[h]
@@ -265,7 +269,7 @@ Even though we could formulate everything with $\{\tau =n\}$ we prefer to use $\
 Here are the most important (and most simplistic) examples:
 \begin{example}\label{ex_ch2_3}
 %	Let $X$ be $(\cF_t)$-adapted.
-\begin{lbeispiel}
+\begin{laufmerksamkeit}
 	\begin{enumerate}[label=(\roman*)]
 			\item 
 			Every constant $\tau = N$ is a stopping time as $\{N \leq n\}\in \{\emptyset, \Omega\}\in \mathcal F_n$.
@@ -284,7 +288,7 @@ Here are the most important (and most simplistic) examples:
 %					If $X$ is right-continuous, then $\tau_{\cO} = \inf \lbrace t \geq 0 \colon X_t \in \cO \rbrace$ is an $(\cF_{t+})$-stopping time
 %			\end{itemize}			
 	\end{enumerate}
-\end{lbeispiel}
+\end{laufmerksamkeit}
 
 \end{example}
 Intuitively it is clear that the minimum of two stopping times ("{}one of the two events happened"{}) is a stopping time again. Please prove this as a short exercise:
@@ -322,7 +326,7 @@ As mentioned above we interpret the natural filtration as information of the pro
 \end{deff}
 \end{ldef}
 It will need a bit of time to get used to $\mathcal F_\tau$. As always it is most instructive to have some examples in mind. Fix the first stopping time $\tau_B$ of a set $B$ and check by hands that for some other set $A$ the event "{}$A$ was hit before $B$"{} is in $\mathcal F_{\tau_{B}}$. This should intuitively be clear as only the process until first hitting $B$ is needed to decide if $A$ was already hit. 
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{ii}
 	Suppose $\tau$ is an $(\mathcal F_n)$-stopping time. 
 	\begin{enumerate}[label=(\roman*)]
@@ -330,7 +334,7 @@ It will need a bit of time to get used to $\mathcal F_\tau$. As always it is mos
 		\item	 	$\tau$ is $\cF_{\tau}$-measurable.
 	\end{enumerate}
 \end{prop}
-\end{llemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 \begin{enumerate}[label=(\roman*)]
 \item Let us check the defining properties of a $\sigma$-algebra:
@@ -351,7 +355,7 @@ It will need a bit of time to get used to $\mathcal F_\tau$. As always it is mos
 \end{proof}
 
 Stopping times are useful as many properties of deterministic times also hold for stopping times.
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{pS}
 	Suppose $S, T$ are $(\cF_n)$-stopping times.
 	\begin{enumerate}[label=(\roman*)]
@@ -365,7 +369,7 @@ Stopping times are useful as many properties of deterministic times also hold fo
 %			$S+T$ is an $(\cF_n)$-stopping time
 	\end{enumerate}
 \end{prop}
-\end{llemma}
+\end{laussagewerkzeug}
 Before checking the proofs have a quick thought why those statements should intuitively be true with the interpretation of stopping times and the information given by a stopping time.
 \begin{proof}[Proof]
 	\begin{enumerate}[label=(\roman*)]
@@ -386,11 +390,11 @@ Before checking the proofs have a quick thought why those statements should intu
 	\end{enumerate}
 \end{proof}
 The definitions of stopping times and adapted processes work nicely together, here is an example:
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{cha2_prop_X_tau_adapted}
 	If $X$ is adapted to the filtration $(\cF_n)$ and $\tau$ is a finite $(\mathcal F_n)$-stopping time, then $X_{\tau}$ is $\cF_{\tau}$-measurable.
 \end{prop}
-\end{llemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	The finiteness of $\tau$ was only assumed to make $X_\tau$ well-defined as we did not define $X_\infty$. Let $A \in \mathcal{E}$, we show $\lbrace X_{\tau} \in A \rbrace \in \cF_{\tau}$. Let $n\in I$, then
 	\begin{align*}
@@ -496,13 +500,13 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
   \vspace{-4mm}
   \caption*{A trajectory of the simple random walk}
 \end{figure}
-	\begin{lbeispiel}		
+	\begin{laufmerksamkeit}		
 	Let $Y_1,Y_2,Y_3,..$ be iid real-valued integrable random variable on some probability space $(\Omega, \mathcal A, \P)$. The \textbf{random walk with jump sizes $Y_k$} is defined by $X_0:=x\in\R$ and 
 			\begin{align*}
 			 	X_n = x + \sum\limits_{k=1}^{n}Y_k, \quad n \in \mathbb{N}.
 			\end{align*}
 					If $\P(Y_1=1)=p$ and $\P(Y_1=-1)=1-p$ the random walk is called \textbf{simple random walk}, for $p=\frac 1 2$ symmetric simple random walk.
-		\end{lbeispiel}
+		\end{laufmerksamkeit}
 				\vspace{-2mm}
 
 		
@@ -526,55 +530,54 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
 \end{example}
 \begin{example}\label{GW}		
  Another famous class of discrete time stochastic processes are so-called branching processes ("{}Verzweigungsprozesse"{}). 
-\begin{lbeispiel}
+\begin{laufmerksamkeit}
 	Let $\xi_i^n,\: i,n\in \mathbb{N}$, be integrable, non-negative discrete iid random variables with $\mathbb{P}(\xi_1^n=k) = p_k$, $k\in\mathbb{N}_0$. 
 	The classical \textbf{branching process} (or \textbf{Galton-Watson process}) with offspring distribution $\xi$ is defined by
 	\begin{align*}
 		X_0 &\coloneqq m,\quad	X_{n+1} \coloneqq \sum_{k=1}^{X_n}\xi_k^n,\quad n\in\N.
 	\end{align*}
 	We will call $X_n$ the number of individuals of a population at time $n$.
-\end{lbeispiel}
-
+\end{laufmerksamkeit}
 \begin{figure}[h]
 	\begin{center}
 	\raisebox{-1cm}{\begin{tikzpicture}[scale=0.8,transform shape]
 	%TREE 1 LEVEL 1
 	\node [circle,inner sep=1.3pt,fill=red] (L11) at (0,0) {};
 	  %LEVEL 2
-	  \draw[line width=0.5mm] (L11) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L21)  {};
-	  \draw[line width=0.5mm] (L11) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L22)  {};
+	  \draw[line width=0.3mm] (L11) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L21)  {};
+	  \draw[line width=0.3mm] (L11) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L22)  {};
 	  %LEVEL 3 
-		\draw[line width=0.5mm] (L22) -- ++(-0:10mm) node [circle,inner sep=1.3pt,fill=red] (L31)  {};
-		\draw[line width=0.5mm] (L22) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L32)  {};
+		\draw[line width=0.3mm] (L22) -- ++(-0:10mm) node [circle,inner sep=1.3pt,fill=red] (L31)  {};
+		\draw[line width=0.3mm] (L22) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L32)  {};
 		%LEVEL 4 
-		  \draw[line width=0.5mm] (L31) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L41)  {};
+		  \draw[line width=0.3mm] (L31) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L41)  {};
   
-		\draw[line width=0.5mm] (L21) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L33)  {};
+		\draw[line width=0.3mm] (L21) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L33)  {};
   
 	%TREE 2 LEVEL 1
 	\node [circle,inner sep=1.3pt,fill=red] (L11) at (0,-1.5) {};
 	  %LEVEL 2
-	  \draw[line width=0.5mm] (L11) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L21)  {};
+	  \draw[line width=0.3mm] (L11) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L21)  {};
 	  %LEVEL 3 
-		\draw[line width=0.5mm] (L21) -- ++(-30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L31)  {};
-		\draw[line width=0.5mm] (L21) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L32)  {};
+		\draw[line width=0.3mm] (L21) -- ++(-30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L31)  {};
+		\draw[line width=0.3mm] (L21) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L32)  {};
   
   
 	%TREE 3 LEVEL 1
 	\node [circle,inner sep=1.3pt,fill=red] (L11) at (0,-3.5) {};
 	  %LEVEL 2
-	  \draw[line width=0.5mm] (L11) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L21)  {};
-	  \draw[line width=0.5mm] (L11) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L22)  {};
-	  \draw[line width=0.5mm] (L11) -- ++(-30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L23)  {};
+	  \draw[line width=0.3mm] (L11) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L21)  {};
+	  \draw[line width=0.3mm] (L11) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L22)  {};
+	  \draw[line width=0.3mm] (L11) -- ++(-30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L23)  {};
 	  %LEVEL 3 
-		\draw[line width=0.5mm] (L21) -- ++(-0:10mm) node [circle,inner sep=1.3pt,fill=red] (L31)  {};
-		\draw[line width=0.5mm] (L21) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L32)  {};
-		\draw[line width=0.5mm] (L21) -- ++(-30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L33)  {};
+		\draw[line width=0.3mm] (L21) -- ++(-0:10mm) node [circle,inner sep=1.3pt,fill=red] (L31)  {};
+		\draw[line width=0.3mm] (L21) -- ++(30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L32)  {};
+		\draw[line width=0.3mm] (L21) -- ++(-30:11.5mm) node [circle,inner sep=1.3pt,fill=red] (L33)  {};
 		%LEVEL 4 
-		  \draw[line width=0.5mm] (L32) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L41)  {};
-		  \draw[line width=0.5mm] (L31) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L42)  {};
+		  \draw[line width=0.3mm] (L32) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L41)  {};
+		  \draw[line width=0.3mm] (L31) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L42)  {};
 		  %LEVEL 5
-			\draw[line width=0.5mm] (L41) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L51)  {};       
+			\draw[line width=0.3mm] (L41) -- ++(0:10mm) node [circle,inner sep=1.3pt,fill=red] (L51)  {};       
 	\end{tikzpicture}}
 	\hspace{1cm}
 	\begin{tikzpicture}
@@ -585,9 +588,9 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
 	  }
 	}
 	%AXIS Y
-	\draw[line width=0.4mm] (0,-0.5) -- ++(90:2.2cm);
+	\draw[line width=0.3mm] (0,-0.5) -- ++(90:2.2cm);
 	%AXIS X 
-	\draw[line width=0.4mm] (0,0) --++(0:7cm); 
+	\draw[line width=0.3mm] (0,0) --++(0:7cm); 
 	%YTICKS 
 	\foreach \y in {0.1,0.3,...,1.7}{
 	  \draw[] (0,\y) pic[rotate=90] {tick={1mm}};
@@ -607,8 +610,7 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
 	  %raisebox adjusts text height  
 	 \raisebox{-1cm}{\hspace{10mm} Branching process with m=3 and extinction time 5}
 \end{center}
-  \end{figure}\footnote{y-achse stimmt nicht ganz}
-
+  \end{figure}
 	The interpretation goes as follows. At time zero there are $m$ individuals, plants for examples. At every time-unit, once a year for plants, every existing individual gets a random number of offspring. The number is independent from all offspring of other individuals in the same generation but also independent of the past. The genealogical picture is typically represented by a graph, $X_n$ counts the number of individuals at time $n$. We say the branching process gets extinct if $X_n=0$, after the first extinction time the process stays extinct forever. We always assume $p_0,p_1\neq 1$ as otherwise the branching process either dies out immediately ($p_0=1$ forces all initial individuals to have zero offspring) or stays constant ($p_1=1$ forces all individuals to have exactly one offspring so that $X_n=m$ for all $n\in\N$). Typical questions concern the probability of extinction or the rate of growth (exponential, subexponential). A critical feature is the mean number of offspring $\mu =\E[\xi_1^n] = \sum_{k=0}^{\infty}k\cdot p_k$ which is the main driver for the longtime behavior.\smallskip
 	
 	 If we define $\cF_0 = \lbrace \emptyset,\Omega \rbrace$ and $\cF_n = \sigma(\xi_i^k: i\in \N,k\leq n)$ then the branching process $X$ is an
@@ -659,7 +661,7 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
 %	\end{enumerate}
 
 	\end{example}
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{prop314}
 	Let $\varphi \colon \mathbb{R} \rightarrow \mathbb{R}$ be a convex function, and $(X_n)_{n\in\mathbb{N}}$ a stochastic process with $\E[\left| \varphi(X_n)\right|] < \infty$.
 	\begin{enumerate}[label=(\roman*)]
@@ -670,8 +672,8 @@ Even though the (super)(sub)martingale properties seems artificial many stochast
 			If $(X_n)_{n\in\mathbb{N}}$ is an $(\cF_n)$-submartingale and $\varphi$ is increasing, then $\big(\varphi(X_n)\big)_{n\in\mathbb{N}}$ is an $(\cF_n)$-submartingale.
 	\end{enumerate}
 \end{prop}
-\end{llemma}
-\begin{proof}
+\end{laussagewerkzeug}
+\begin{proof}[Proof]
 	We use Jensen's inequality for conditional expectation:
 	\begin{enumerate}[label=(\roman*)]
 		\item
@@ -758,7 +760,7 @@ We come to the first theorem on martingales where we relate martingales and stop
 It might be instructive to realise that stopping at deterministic times $T=N$ shows how to relate infinite time-horizon martingales to finite time-horizon martingales on $\{0,...,N\}$.\smallskip
 
 The optional stopping theorem states that a martingale stopped at a stopping time (i.e. without future information) remains a martingale. We can derive as an application the so-called optional sampling theorem. The theorem formalises the idea of a fair game that without future information it is impossible to reach a gain in expectation by stopping. While we will see after the theorem an example that this statement is a bit too optimistic it does hold for bounded stopping times:
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 \begin{theorem}[Optional Stopping/Optional Sampling Theorem]\label{optional_stopping}
 	Suppose $(X_n)_{n\in\mathbb{N}}$ is an $(\cF_n)$-martingale and $T$ is an $(\cF_n)$-stopping time.
 	\begin{enumerate}[label=(\roman*)]
@@ -767,17 +769,19 @@ The optional stopping theorem states that a martingale stopped at a stopping tim
 			If $T$ is a \textbf{bounded} $(\cF_n)$-stopping time, i.e. $\mathbb{P}(T \leq K ) = 1$ for some $K\in \mathbb{N}$, then $X_T$ is an integrable random variable with $\E[X_T] = \E[X_1]$.
 	\end{enumerate}
 \end{theorem}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 The optional sampling theorem in particular applies to martingales on finite time-horizon $\{0,...,N\}$ when the optional sampling theorem is applied to the stopped martingale $X^N$.
 
 
 
 \begin{proof}[Proof]
 	We mainly prove the optional stopping theorem, optional sampling is a direct consequence.\smallskip
-	
-	\textbf{Optional Stopping Theorem:} 
-			We check the three defining properties (adapted, integrable, martingale property):
-			\begin{itemize}\label{(i)}
+
+	\begin{lstep}
+		Optional Stopping Theorem
+	\end{lstep}
+	We check the three properties adapted, integrable, martingale:
+				\begin{itemize}\label{(i)}
 				\item 
 					First note that $n\wedge T$ is a stopping time (minimum of two stopping times), hence, $X_{n\wedge T}$ is $\cF_{n \wedge T}$-measurable by Proposition \ref{cha2_prop_X_tau_adapted}. Since $\cF_{n\wedge T} \subseteq \cF_n$ by Proposition \ref{pS}, $X^T$ is $(\cF_n)$-adapted.
 				\item The integrability of $X^T$ follows by splitting on the possible values of $T$:
@@ -788,9 +792,9 @@ The optional sampling theorem in particular applies to martingales on finite tim
 						&\leq \sum\limits_{k=1}^{n} \E [| X_{k} | ]+\E [\left| X_{n} \right| ]<\infty.
 				\end{align*}					
 				\item To show the martingale property we use a trick that will return frequently. To show the martingale property it is enough to show that the differences are so-called martingale differences:
-				\begin{ltippwichtig}
-					Trick: $(X_n)_{n\in\mathbb{N}}$ is an $(\cF_n)$-martingale iff $\E[X_{n+1}-X_n\,|\,\cF_n]=0$ a.s. for all $n\in\N$. 
-				\end{ltippwichtig}
+				\begin{ltrick}
+					$(X_n)_{n\in\mathbb{N}}$ is an $(\cF_n)$-martingale iff $\E[X_{n+1}-X_n\,|\,\cF_n]=0$ a.s. for all $n\in\N$. 
+				\end{ltrick}
 				To justify the martingale difference trick one only needs to use the linearity of conditional expectation and that $X$ is adapted.\smallskip
 				
 				Let's check that the differences of $X^T$ are martingale differences:
@@ -810,16 +814,17 @@ The optional sampling theorem in particular applies to martingales on finite tim
 							$\mathbf 1_{T>n}$ is measurable as $\lbrace T>n \rbrace = \lbrace T\leq n\rbrace^C \in \cF_n$ by the stopping time property.
 					\end{itemize}
 			\end{itemize}
-			
-			\textbf{Optional Sampling Theorem:} 
+			\begin{lstep}
+				Optional Sampling Theorem
+			\end{lstep}
 			Using that the stopped martingale is again a martingale and that martingales have constant expectations we obtain the theorem:
 			\begin{align*}
 				\E[X_T] \overset{T\leq K}{=} \E[X_{K\wedge T}] =\E[X_{K}^T]=\E[X_1^T] = \E[X_{T \wedge 1}] = \E[X_1].
 			\end{align*}				
 \end{proof}
-\begin{lwarnhinweis}
+\begin{lWarnhinweis}
 	The boundedness of $T$ can be weakend but not generally be removed! Always keep in mind the random walk example below as a counter example!
-\end{lwarnhinweis}
+\end{lWarnhinweis}
 
 \begin{remark}
 	\begin{enumerate}[label=(\roman*)]
@@ -862,7 +867,7 @@ Previsibility is actually quite a natural concept. If for instance $H_n$ could b
 The interpretation of $H\cdot X$ in mathematical finance is the wealth obtained by trading the asset $X$ using the trading strategy $H$. Here is bad news: If your favorit asset is a martingale and you only have a bounded amount of money to invest, there is no way of making money by clever stopping (in your life time) your investment. Unfortunately, $H\cdot X$ will always be a martingale so that the expectation will be constant at all bounded stopping times by the optional sampling theorem.
 	\marginpar{\textcolor{red}{Lecture 6}}
 
-\begin{lsatz}
+\begin{laussagewerkzeug}
 \begin{theorem}[Sorry, but you really cannot beat the system.]\label{you_cannot_beat_the_system}
 	Suppose $(H_n)$ is predictable and bounded (i.e. $\lvert H_n\rvert \leq K$ a.s. for all $n\in \N$).
 	\begin{enumerate}[label=(\roman*)]	
@@ -874,8 +879,8 @@ The interpretation of $H\cdot X$ in mathematical finance is the wealth obtained 
 			If $X$ is a submartingale and $H \geq 0$, then $H\cdot X$ is a submartingale.	
 	\end{enumerate}
 \end{theorem}
-\end{lsatz}
-\begin{proof}
+\end{laussagewerkzeug}
+\begin{proof}[Proof]
 	\begin{enumerate}[label=(\roman*)]	
 		\item We need to check the three defining properties of a martingale.
 			\begin{itemize}
@@ -917,24 +922,24 @@ For the convergence theorems we will need a first element and an open end in the
 
 \subsection{Almost sure martingale convergence theorem}
 We start with the most prominent martingale convergence theorem, the almost sure convergence theorem:
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 \begin{theorem}[Almost sure martingale convergence theorem]\label{as}
 	If $(X_n)_{n\in\mathbb{N}_0}$ is a (sub)martingale with $\sup_{n\in\mathbb{N}_0}\E[X_n^+]<\infty$, then almost surely $$X_{\infty} \coloneqq \lim_{n\to \infty}X_n $$ exists, is $\mathcal F_\infty$ measurable and almost surely finite with $\E[\lvert X_{\infty}\rvert]<\infty$.
 \end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 The most useful application is towards non-negative martingales as they always satisfy the assumption of the almost sure martingale convergence theorem:
-\begin{lsatz}
+\begin{laussagewerkzeug}
 \begin{corollary}\label{MMM}
 	If $(X_n)_{n\in\mathbb{N}_0}$ is a \underline{non-ne\smash{g}ative} martingale, i.e. $X_n\geq 0$ a.s. for all $n\in\N_0$, then almost surely $X_n$ converges to a limit $X_{\infty}$ with $0\leq \E[X_{\infty}] \leq \E[X_0]$.
 \end{corollary}
-\end{lsatz}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
  The martingale property yields $ 0\leq \E[X_n^+] = \E[X_n] = \E[X_0] < \infty$ for all $n\in\N_0$ so that the almost sure martingale convergence theorem applies. Using Fatou's lemma then gives $$\E[X_{\infty}] = \E\big[ \lim_{n\to\infty}X_n \big] \leq  \liminf_{n\to \infty} \E[X_n] = \E[X_0].$$
 \end{proof}
 Here is the idea of the proof. 
-\begin{lstep}
+\begin{laufmerksamkeit}
 In order to have convergence of a real-valued sequence $(a_n)$ to a real number or infinity it is enough to prove that all intervals $[a,b]$ with rational endpoints are crossed only finitely many times.
-\end{lstep}
+\end{laufmerksamkeit}
 The case of convergence towards infinity is clear, for a finite limit the claim is best seen by its contraposition. If a sequence does not converge, there are $a,b\in\mathbb Q$ such that $\liminf_n a_n< a<b<\limsup_n a_n$. Hence, the sequence $(a_n)$ takes infinitely many values larger than $b$ and smaller than $a$. But then the interval is crossed infinitely often. The martingale convergence theorem is proved by showing that the expected number of crosses through arbitrary intervals is finite, hence, the crossing number is almost surely finite. In fact, to prove that there are finitely many crossings it is enough to show that there are only finitely many upcrossings from below $a$ to above $b$.
 %\begin{figure}[H]
 %	\graphicspath{ {./kapitel/Kapitel6//} }
@@ -948,11 +953,11 @@ More formally, we define the crossing times by
 	T_{k+1} &\coloneqq \min\lbrace n > S_k: X_n \geq b \rbrace
 \end{align*}
 and set $$U_n[a,b]\coloneqq \sum\limits_{k=1}^{\infty}\mathbf 1_{T_k \leq n},$$ which is the number of finished upcrosings up to time $n$. The main ingredient towards the convergence theorem is the following estimate for the number of upcrossings:
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{lemma}[Doob's upcrossing inequality]\label{upcrossing_inequality}
 	If $(X_n)_{n\in\mathbb{N}_0}$ is a (sub)martingale and $a<b$, then $$ \E\big[ U_n[a,b]\big] \leq \frac{\E\big[ (X_n-a)^+ - (X_0-a)^+ \big]}{b-a}.$$
 \end{lemma}
-\end{llemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	%		\begin{figure}[H]
 	%			\includegraphics[scale=0.4]{mart2.jpeg}
@@ -1379,7 +1384,7 @@ and set $$U_n[a,b]\coloneqq \sum\limits_{k=1}^{\infty}\mathbf 1_{T_k \leq n},$$ 
 	\begin{align*}
 		(H\cdot Y)_n \geq (b-a)U_n[a,b],\quad n\in\N_0.
 	\end{align*}
-	We are now close to finishing the proof using a submartingale argument. First note that $Y$ is a submartingale by Proposition \ref{prop314} as $x\mapsto (x-a)^++a$ is a convex function. Next, $H_n$ is previsible as $\mathbf 1_{\{S_k<n\leq T_k\}} = \mathbf 1_{\{S_k<n\}}\cdot \mathbf 1_{\{T_k<n\}^C}$ and sums and limits of measurable functions are measurable (compare \ref{hilf} and \ref{mlimits}). Hence, also $1-H_n$ is previsible so that  the discrete integral $(1-H)\cdot X$ is a submartingale by Theorem \ref{you_cannot_beat_the_system} because $1-H_n$ is bounded by $1$ and non-negative. But then, using that submartingales have increasing expectation, we obtain the desired bound:
+	We are now close to finishing the proof using a submartingale argument. First note that $Y$ is a submartingale by Proposition \ref{prop314} as $x\mapsto (x-a)^++a$ is a convex function. Next, $H_n$ is previsible as $\mathbf 1_{\{S_k<n\leq T_k\}} = \mathbf 1_{\{S_k<n\}}\cdot \mathbf 1_{\{T_k<n\}^C}$ and sums and limits of measurable functions are measurable (compare \ref{hilf} and \ref{prop:limits}). Hence, also $1-H_n$ is previsible so that  the discrete integral $(1-H)\cdot X$ is a submartingale by Theorem \ref{you_cannot_beat_the_system} because $1-H_n$ is bounded by $1$ and non-negative. But then, using that submartingales have increasing expectation, we obtain the desired bound:
 	\begin{align*}
 		\E[Y_n - Y_0] \overset{\text{telescope}}&{=} \E[(1\cdot Y)_n]\\
 		 &= \E[(H\cdot Y)_n] + \E[((1-H)\cdot Y)_n]\\ 
@@ -1479,7 +1484,7 @@ In this section we will show that martingales that are bounded in $L^p$ automati
 %Recall that convergence in $L^p$ means $\lim_{n\to\infty}\E[|X_n-X_\infty|^p]=0$. But since convergence in normed spaces implies convergence of the norms (norms are continuous) we would obtain $\lim_{n\to\infty}\E[|X_n|^p]=\E[|X_\infty|^p]$. So the very least one should assume to hold is boundedness of the $p$th moments as otherwise convergence is impossible. One of the magic features of martingales is that this condition is also enough. \smallskip
 
 The estimates we develop are almost more important than the theorem itself, most importantly, Doob's inequalities for the so-called running supremum $X^*:=\max_{k\leq n} X_k$ appears in many places of probability theory. We start with a continuation of the optional sampling theorem:
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{lemma}\label{lemma331}
 	Let $(X_n)_{n\in\mathbb{N}_0}$ be an $(\cF_n)$-(sup)martingale and $S$, $T$ bounded $(\cF_n)$-stopping times with $S \leq T$ almost surely. Then
 	\begin{enumerate}[label=(\roman*)]	
@@ -1489,8 +1494,8 @@ The estimates we develop are almost more important than the theorem itself, most
 			$\E[X_T\,|\,\cF_s] \geq X_s$, i.e. the (sup)martingale property also holds at bounded stopping times.
 	\end{enumerate}
 \end{lemma}
-\end{llemma}
-\begin{proof}
+\end{laussagewerkzeug}
+\begin{proof}[Proof]
 	\begin{enumerate}[label=(\roman*)]	
 		\item The first claim is left as an exercise:
 		\begin{luebung}
@@ -1513,14 +1518,14 @@ The estimates we develop are almost more important than the theorem itself, most
 	\end{enumerate}
 \end{proof}
 We can use the lemma to prove an important theorem on martingales (or submartingales). Tail probabilities of the running maximum $X^*=\max_{k\leq n}X_n$ can be estimated with last element $X_n$ of the maximum. The inequality is not only important to prove limit theorems but appears at many places in probability theory or mathematical finance. 
-\begin{lsatz}
+\begin{laussagewerkzeug}
 \begin{theorem}[Doobs's maximal inequality]\label{Doobs_inequality}
 	Let $(X_n)_{n\in\mathbb{N}_0}$ be an $(\cF_n)$-(sub)martingale and $\lambda > 0$. If $X_n^* \coloneqq \max_{k \leq n} X_k$ denotes the running maximum process, then the following inequalities hold:
 	\begin{align*}
 		\lambda \cdot \mathbb{P}(X_n^* \geq \lambda ) \leq \E[ X_n \mathbf 1_{\{X_n^* \geq \lambda\}}] \leq \E[X_n^+]
 	\end{align*}
 \end{theorem}
-\end{lsatz}
+\end{laussagewerkzeug}
 To understand better the formula it might be useful to compare with the Markov inequality. Using the Markov inequality with $h(x)=x^+$ would yield $\E[(X^*_n)^+]$ on the right hand side which is potentially much bigger than the expectation of only the last random variable.
 
 \begin{proof}[Proof]
@@ -1534,21 +1539,21 @@ To understand better the formula it might be useful to compare with the Markov i
 	The second inequality follows immediately from the first: $$ \E[X_n \mathbf 1_{X_n^*\geq \lambda}] \leq \E[X_n^+\mathbf 1_{X_n^*\geq \lambda}] \leq \E[X_n^+]$$
 \end{proof}
 We now turn the tail estimates into moment estimates by writing the moments as integrals over the tail probabilities.
-\begin{lsatz}
+\begin{lAussageWerkzeug}
 \begin{theorem}[Doob's $L^p$-maximum inequality]\label{max_inequality}
 	Suppose $p$ is a constant that is \underline{strictly} larger than $1$.
 	\begin{enumerate}[label=(\roman*)]
 		\item
-			If $(X_n)_{n\in\mathbb{N}_0}$ is a non-negative $(\cF_n)$-(sub)martingale, then $$ \E\big[ \max\limits_{k \leq n} X_n^p\big] \leq \bigg(\frac{p}{p-1}\bigg)^p \E[X_n^p], \quad n\in \mathbb{N}_0.$$
+			If $(X_n)_{n\in\mathbb{N}_0}$ is a non-negative $(\cF_n)$-(sub)martingale, then $$ \E\big[ \max\limits_{k \leq n} X_n^p\big] \leq \Big(\frac{p}{p-1}\Big)^p \E[X_n^p], \quad n\in \mathbb{N}_0.$$
 		\item
-			If $(Y_n)_{n\in{\mathbb N}_0}$ is an $(\cF_n)$-martingale, then $$ \E\big[ \max\limits_{k \leq n} \lvert Y_n\rvert^p \big] \leq \bigg(\frac{p}{p-1}\bigg)^p \E[\lvert Y_n\rvert^p],\quad n\in \mathbb{N}_0.$$
+			If $(Y_n)_{n\in{\mathbb N}_0}$ is an $(\cF_n)$-martingale, then $$ \E\big[ \max\limits_{k \leq n} \lvert Y_n\rvert^p \big] \leq \Big(\frac{p}{p-1}\Big)^p \E[\lvert Y_n\rvert^p],\quad n\in \mathbb{N}_0.$$
 	\end{enumerate}
 \end{theorem}
-\end{lsatz}
+\end{lAussageWerkzeug}
 Keep your eyes open to see why the proof cannot be modified in any way for $p=1$. The corresponding theorem for $p=1$ will be proved in the next section and is much harder.
-\begin{proof}
+\begin{proof}[Proof]
 	\begin{enumerate}[label=(\roman*)]
-		\item The proof is just a clever computation keeping in mind that expectations can always be written as integrals over tail probabilities (Fubini, compare also proof of Theorem \ref{zusatz} or the exercises of Stochastik 1):
+		\item The proof is just a clever computation keeping in mind that expectations can always be written as integrals over tail probabilities (Fubini, compare also the exercises of Stochastik 1):
 			\begin{align*}
 				\frac{1}{p}\E\big[(X_n^*)^p\big] &= \E \Big[ \int_0^{X_n^*} \lambda^{p-1}\dint\lambda \Big] \\
 												\overset{\text{Fubini}}&{=} \int_0^{\infty} \lambda^{p-2}\cdot \lambda \cdot\mathbb{P}(X_n^* \geq \lambda)\dint \lambda \\
@@ -1572,7 +1577,7 @@ As announced at the beginning of this section we will need to impose a stronger 
 It is very important to keep in mind that the definition does not require finiteness of all $p$th moments but uniform boundedness of $p$th moments. Modulo zero sets this means the random variables of the martingale form a bounded set in the normed space $(L^p,||\cdot||_p)$. Since $(|X_n|^p)_{n\in\N_0}$ is a submartingale we know that $n\mapsto \E[X_n^p]$ is increasing, possibly towards $+\infty$. For $L^p$-martingales the sequence of $p$th moments does not grow to $+\infty$ but has a finite limit.\smallskip
 
 We can now prove that $L^p$-boundedness is not only a necessary but also a sufficient condition for the $L^p$-convergence of martingales. The equivalence is not true for other sequences of random variables, we heavily use the martingale property.
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 \begin{theorem}[$L^p$-martingale convergence theorem]
 Suppose $p$ is a constant that is \underline{strictly} larger than $1$ and $(X_n)_{n\in\mathbb{N}_0}$ is an $L^p$-martingale. 
 	\begin{enumerate}[label=(\roman*)]
@@ -1585,17 +1590,16 @@ Suppose $p$ is a constant that is \underline{strictly} larger than $1$ and $(X_n
 			\item $\E\big[\sup\limits_{n\in\mathbb{N}_0}\lvert X_n \rvert^p\big] \leq \big(\frac{p}{p-1}\big)^p \cdot \E\big[\lvert X_{\infty}\rvert^p\big] < \infty$
 	\end{enumerate}	
 \end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 \begin{proof}[Proof]
-\begin{enumerate}[label=(\roman*)]
-	\item The first step is simple, using the simple estimate
+(i) The first step is simple, using the simple estimate
 	\begin{align*}
 		x^+ \leq \lvert x \rvert^p + 1,\quad x\in\R.
 	\end{align*}		
 	Hence, every $L^p$-martingale satisfies the condition $\sup_{n\in\mathbb{N}_0} \E[X_n^+]<\infty$ of the martingale convergence theorem. Then there is a (finite) almost sure limit $X_{\infty}$. It remains to show that $X_\infty \in \mathcal L^p$ and the $L^p$-convergence. There is a simple thought to keep in mind, which also helps to appreciate Doob's inequalities:
-	\begin{lstep}
+	\begin{ltrick}
 		If $\sup_{k\in\N_0}|X_k|^p$ is integrable, than this is the perfect upper bound for dominated convergence. 
-	\end{lstep}
+	\end{ltrick}
 	To check the integrability of the upper bound we use Theorem \ref{max_inequality}
 	\begin{align*}
 		\E\big[\lvert X_k^* \rvert^p\big] &\leq \left(\frac{p}{p-1}\right)^p \E\big[\lvert X_k\rvert^p\big] 
@@ -1614,20 +1618,19 @@ Suppose $p$ is a constant that is \underline{strictly} larger than $1$ and $(X_n
 	\begin{align*}
 		\lim_{n\to \infty} \E\big[\lvert X_n - X_{\infty}\rvert^p\big] = \E\big[\lim_{n\to\infty}\lvert X_n - X_{\infty}\rvert^p\big] = \E[0] = 0.
 	\end{align*}
-	\item The first equality follows from basic functional analysis as convergence in a normed space implies convergence of norms: $\lim_{n\to\infty} ||X_n-X||= 0$ $\Rightarrow$ $\lim_{n\to\infty} ||X_n||=||X||$ because norms are continuous functions. Keeping in mind that $L^p$ is a normed space (modulo zero sets) we immediately find 
+	(ii) The first equality follows from basic functional analysis as convergence in a normed space implies convergence of norms: $\lim_{n\to\infty} ||X_n-X||= 0$ $\Rightarrow$ $\lim_{n\to\infty} ||X_n||=||X||$ because norms are continuous functions. Keeping in mind that $L^p$ is a normed space (modulo zero sets) we immediately find 
 	\begin{align*}
 		\E\big[\lvert X_{\infty}\rvert^p\big] = \lim_{n\to\infty} \E\big[\lvert X_n \rvert^p\big].
 	\end{align*}
-	The second equality follows from the monotonicity of $n\mapsto \E[|X_n|^p]$ as $(|X_n|^p)_{n\in \N_0}$ is a submartingale.
-	\item
-	The inequality follows from monotone convergence and Doob's $L^p$-maximal inequality:
+	The second equality follows from the monotonicity of $n\mapsto \E[|X_n|^p]$ as $(|X_n|^p)_{n\in \N_0}$ is a submartingale.\smallskip
+
+	(iii) The inequality follows from monotone convergence and Doob's $L^p$-maximal inequality:
 	\begin{align*}
 		\E\Big[ \sup\limits_{n\in\mathbb{N}_0} \lvert X_n \rvert^p \Big]
 		&= \lim_{n\to\infty} \E \Big[ \sup\limits_{k\leq n} \lvert X_k \rvert^p \Big] 
 		\leq \lim_{n\to\infty} \left( \frac{p}{p-1} \right)^p \E\big[\lvert X_n \rvert^p\big]
 		\overset{(ii)}{=} \left( \frac{p}{p-1} \right)^p \E\big[\lvert X_{\infty} \rvert^p\big]
 	\end{align*}
-	\end{enumerate}
 \end{proof}
 
 	We come back to the branching processes as prime example for the convergence of martingales. The almost sure convergence of $M$ towards a finite limit $M_\infty$ was already checked. In the supercritical case we left open if $M_\infty$ is trivial, i.e. almost surely equal to $0$, or not. We can solve this question under the additional assumption that the offspring number has finite second moment.
@@ -1713,7 +1716,7 @@ We could ask ourselves how close uniform integrability is to $L^1$-boundedness, 
 				\sup\limits_{\alpha\in I} ||X_{\alpha}||_1 \leq \sup\limits_{\alpha\in I}\E\left[\lvert X_{\alpha}\rvert \mathbf 1_{\lvert X_{\alpha}\rvert \leq M}\right] + \sup\limits_{\alpha\in I}\E\left[\lvert X_{\alpha}\rvert \mathbf 1_{\lvert X_{\alpha}\rvert > M}\right] \leq M + 1
 			\end{align}
 			for some $M$ large enough. The next proposition gives a criterion which bounded subsets of $L^1$ are actually the uniformly integrable sets.
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{ui_alternative}
 	Suppose the family $(X_{\alpha})_{\alpha\in I}$ is bounded as a subset of $L^1$, i.e. $\sup_{\alpha\in I} \E[\lvert X_{\alpha}\rvert] < \infty$. Then the following are equivalent:
 	\begin{enumerate}[label=(\roman*)]
@@ -1723,7 +1726,7 @@ We could ask ourselves how close uniform integrability is to $L^1$-boundedness, 
 			$\forall \varepsilon > 0\: \exists \delta > 0 \colon \sup\limits_{\alpha\in I} \E[\lvert X_{\alpha}\lvert \mathbf 1_A] < \varepsilon$ $\forall A \in \cF$ with $\mathbb{P}(A)< \delta$
 	\end{enumerate}
 \end{prop}
-\end{llemma}
+\end{laussagewerkzeug}
 Without any doubt the criterion does not look useful at all but it will be applicable for the most important example to follow, families that remind us of Doob martingales. The advantage is that the sets $A$ do not depend on $\alpha$ compared to the sets $\{|X_\alpha|>M\}$ that appear in the definition of uniform integrability.
 \begin{proof}[Proof]
 	(i) $\Rightarrow$ (ii): Fix $\varepsilon>0$ and choose $M$ large enough so that $\sup_{\alpha\in I} \E[\lvert X_{\alpha}\rvert \mathbf 1_{\lvert X_{\alpha} \rvert \geq M}] < \frac{\varepsilon}{2}$. Such an $M$ exists by the definition of uniform integrability. Now we set $\delta:= \frac{\varepsilon}{2M}$ and check the inequality for all $A\in \mathcal F$ with $\P(A)<\delta$:
@@ -1735,8 +1738,9 @@ Without any doubt the criterion does not look useful at all but it will be appli
 	
 	(ii) $\Rightarrow$ (i): Exercise! 
 \end{proof}
-\begin{llemma}
-\begin{example}\label{lemma_345}
+The next lemma contains the most important uniformly integrable family that we encounter in martingale theory.
+\begin{laussagewerkzeug}
+\begin{lemma}\label{lemma_345}
 	Suppose $Z \in \cL^1(\Omega,\cF,\mathbb{P})$.
 	\begin{enumerate}[label=(\roman*)]
 	\item The family
@@ -1746,8 +1750,8 @@ Without any doubt the criterion does not look useful at all but it will be appli
 	 is uniformly integrable family of random variables.
 	 \item If $(\mathcal F_n)_{n\in \N_0}$ is a filtration, then $X_n:=\E[X|\mathcal F_n]$ is a uniformly integrable martingale.
 	\end{enumerate}
-\end{example}
-\end{llemma}
+\end{lemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	(ii) follows immediately from (i),  the claimed martingale property was proved in Example \ref{doobmartingale}.\smallskip
 	
@@ -1775,7 +1779,7 @@ Without any doubt the criterion does not look useful at all but it will be appli
 %	\end{itemize}
 \end{proof}
 So far it is completely unclear why we are discussing uniformly integrable families of random variables. So far you only learnt sufficient conditions under which limits and expectation can be exchanged for almost surely converging sequences of random variables. But how about necessary and sufficient conditions?
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 \begin{theorem}[DCT - the real deal]\label{generalized_DCT}
 	Suppose $(X_n)_{n\in\mathbb{N}_0}$ is a sequence of integrable random variables and there is a random variable $X_\infty$ such that $X_n \overset{\text{a.s.}}{\to} X_{\infty}$ for $n\to\infty$.\smallskip
 	
@@ -1790,7 +1794,7 @@ So far it is completely unclear why we are discussing uniformly integrable famil
 	\end{enumerate}
 	In all cases it holds that $\lim_{n\to\infty}\E[ X_n] = \E[ X_{\infty}]$.
 \end{theorem}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 \begin{proof}[Proof]
 	The equivalence of (ii) and (iii) is called Scheff\'e's lemma and will be covered in the exercises. 	\smallskip
 
@@ -1835,7 +1839,7 @@ So far it is completely unclear why we are discussing uniformly integrable famil
 \end{proof}
 By the way, can you prove the claim used in the proof?
 	\begin{luebung}
-		If $X_n\overset{P}{\to}X$ and $X_n\overset{P}{\to}Y$, then $X=Y$ almost surely.  	The easiest way to check the exercise is to carefully look at Theorem \ref{konvergenzsatz} and use that limits are unique in normed spaces.
+		If $X_n\overset{P}{\to}X$ and $X_n\overset{P}{\to}Y$, then $X=Y$ almost surely. The easiest way to check the exercise is to carefully look at Theorem \ref{Konvergenzsatz} and use that limits are unique in normed spaces.
 	\end{luebung}
 	
 Before turning our attention towards the $L^1$-martingale convergence theorem let us check how the previous theorem relates to dominated convergence for non-negative sequences. Sequences dominated by an integrable random variable are uniformly integrable, hence, the previous theorem implies the dominated convergence theorem.\smallskip
@@ -1843,7 +1847,7 @@ Before turning our attention towards the $L^1$-martingale convergence theorem le
 	\marginpar{\textcolor{red}{Lecture 9}}
 
 Now towards the main theorem of this section:
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 \begin{theorem}[$L^1$-martingale convergence theorem]\label{L1_convergence}
 	Suppose $(X_n)_{n\in\mathbb{N}_0}$ is a martingale on $(\Omega, \mathcal F, \P)$. Then the following statements are equivalent:
 	\begin{enumerate}[label=(\roman*)]
@@ -1856,7 +1860,7 @@ Now towards the main theorem of this section:
 	\end{enumerate}
 	In all cases $(X_n)_{n\in \bar\N_0}$ satisfies the martingale property on $\bar \N_0=\N_0\cup \{\infty\}$ with terminal element $X_\infty$ and $\E[X_\infty]=\lim_{n\to\infty}\E[X_n]$.
 \end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 Recall from Example \ref{doobmartingale} the notion of a closed martingale (or Doob martingale). There is an integrable random variable $Z$ such that $X_n=\E[Z|\mathcal F_n]$ almost surely for all $n\in \N_0$.
 
 \begin{proof}[Proof]
@@ -1880,20 +1884,6 @@ Recall from Example \ref{doobmartingale} the notion of a closed martingale (or D
 	The additional statement follows from the proof of (ii) $\Rightarrow$ (iii) and Theorem \ref{generalized_DCT}.
 \end{proof}
 
-%As for the almost sure martingale convergence theorem there is a particularly useful version for non-negative martingales:
-%\begin{llemma}
-%\begin{corollary}
-%	If $(X_n)_{n\in\mathbb{N}}$ is a uniformly integrable \underline{non-negative} martingale. Then there is a limit $X_{\infty}$ with $\E[X_{\infty}] = \E[X_0]$.
-%\end{corollary}
-%\end{llemma}
-%\begin{proof}[Proof]
-%	This follows from \ref{generalized_DCT} and the almost sure martingale convergence theorem with
-%	\begin{align*}
-%		\E[X_0] = \E[X_n] = \E[\lvert X_n \rvert] \overset{n\to \infty}{\to} \E[\lvert X_{\infty}\rvert] = \E[X_{\infty}].
-%	\end{align*}
-%	To check the condition of the almost sure martingale convergence theorem we use again $\sup_{n\in\N_0}\E[X_n^+]\leq \sup_{n\in\N_0}\E[|X_n|]$ and that uniform integrability implies $L^1$-boundedness.
-%\end{proof}
-
 
 There is an interesting detail concerning Doob martingales. Suppose $Z$ is not $\mathcal F_\infty$-measurable and $X_n=\E[Z|\mathcal F_n]$ is the corresponding closed martingale to which we apply the theorem. Then it does not hold that $X_n\to Z$ almost surely, as otherwise $Z$ would be $\mathcal F_\infty$-measurable. On the other hand, in the proof (ii) $\Rightarrow$ (iii) the random variable that closes the martingale was constructed as the almost sure limit $X_\infty$. What looks like a contradiction only reflects the fact that a martingale can be closed by different random variables. Define $\bar Z:=\E[Z|\mathcal F_\infty]$, then
 \begin{align*}
@@ -1902,15 +1892,15 @@ There is an interesting detail concerning Doob martingales. Suppose $Z$ is not $
 so that $Z$ and $\bar Z$ are different but induce the same Doop martingale. Here is a question: Can we still identify the limit $X_\infty$ of a Doob martingale? Yes, the limit is $\E[Z|\mathcal F_\infty]$, which equals $Z$ if $Z$ is $\mathcal F_\infty$-measurable.
 
 
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{lemma361}
 	Let $Z\in\cL^1(\Omega,\cF,\mathbb{P})$ and $(\cF_n)_{n\in\N_0}$ an increasing family of $\sigma$-algebras, then
 	\begin{align*}
 		\E[Z|\cF_n] \overset{\text{a.s}/L^1}{\to} \E[Z|\cF_{\infty}], \quad n\to\infty.
 	\end{align*}
 \end{prop}
-\end{llemma}
-\begin{proof}
+\end{laussagewerkzeug}
+\begin{proof}[Proof]
 	Let us first assume $Z\geq 0$. If we define $X_n := \E[Z|\cF_n]$, then $X$ is a uniformly integrable martingale so there is a limit $X_{\infty}$ (a.s. and in $L^1$) satisfying $X_n = \E[X_{\infty}|\cF_n]$ a.s. Now take $A\in\cF_n \subseteq \cF_{\infty}$. Then
 	\begin{align*}
 		V_{X_{\infty}}(A)\coloneqq \E[X_{\infty}\cdot \mathbf 1_A] \overset{A\in\cF_n}{=} \E[X_n\cdot \mathbf 1_A] = \E[\E[Z|\mathcal F_n] \cdot \mathbf  1_A]\overset{A\in \mathcal F_n}=\E[Z\cdot \mathbf  1_A] =: V_Z(A)
@@ -1976,7 +1966,7 @@ If $Z\in \mathcal L^p$, then $\E[|\E[Z|\mathcal F_n]|^p]\leq \E[\E[|Z^p|\,|\, \m
 
 
 A further application of the $L^1$-martingale convergence theorem gives us another version of optional sampling of martingales. Recall from Theorem \ref{optional_stopping} that stopping at bounded stopping times does not change the expectation of a martingale while in general this must not be the case as we have seen for the simple random walks. Uniformly integrable martingales can be seen as similar to finite time-horizon and as such allow for optional sampling with arbitrary stopping times:
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{theorem}[optional sampling revisited]\label{optimal_smapling_ui}
 	Suppose $(X_n)_{n\in\mathbb{N}_0}$ is a uniformly integrable $(\cF_n)$-martingale with limit $X_{\infty}$ and let $S$, $T$ be $(\cF_n)$-stopping times with $S\leq T$ almost surely. Then
 	\begin{enumerate}[label=(\roman*)]
@@ -1988,9 +1978,9 @@ A further application of the $L^1$-martingale convergence theorem gives us anoth
 			$X_S = \E[X_T\,|\,\cF_S]$ a.s.
 	\end{enumerate}
 \end{theorem}
-\end{llemma}
+\end{laussagewerkzeug}
 Keep in mind that all $L^p$-martingales are uniformly integrable, thus, the theorem can for instance be applied to the supercritical branching process with finite second moment offspring numbers from Example \ref{br2}.
-\begin{proof}
+\begin{proof}[Proof]
 	Let us first check that $X_T$ is integrable using that $(X_n)_{n\in\N_0}$ can be extended to a martingale indexed by $\N_0\cup \{\infty\}$ (i.e. is closed by $X_\infty$):
 	\begin{align*}
 		\E[\lvert X_T \rvert] 
@@ -2076,22 +2066,22 @@ So far we discussed forwards in time martingales with time indexed by $I =\mathb
 \end{deff}
 \end{ldef}
 There is a huge difference between (forward) martingales and backwards martingales. Those are not symmetric concepts as backwards process do not run in the negative time direction. The filtration grows forwards in time and the martingale property also holds forwards in time. In the light of the previous section we get a particularly useful property for backwards martingales, there is always a last element $X_0$ which closes the entire backwards martingale as $X_{n} = \E[X_0\,|\,\cF_{n}]$ for all $n\in -\N_0$. Of course, this should remind us of Doob martingales and, in fact, backwards martingales are as useful as Doob martingales are.
-\begin{ldef}
+\begin{laussagewerkzeug}
 \begin{prop}\label{B1}
 	Every backward martingale is uniformly integrable.
 \end{prop}
-\end{ldef}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 	Since $X_{n} = \E[X_0\,|\,\cF_{n}]$ for all $n\in -\N_0$ and $\E[|X|]<\infty$, this follows from Lemma \ref{lemma_345}.
 \end{proof}
 
 Since uniform integrability automatically holds, almost sure and $L^1$ convergence to some $X_{-\infty}$ should always hold! 
 	\marginpar{\textcolor{red}{Lecture 10}}
-\begin{ldef}
+\begin{lAussageWerkzeug}
 \begin{theorem}[Backwards martingale convergence theorem]\label{backwards_martingale_theorem}
 	Let $(X_n)_{n\in -\mathbb{N}_0}$ be an $(\cF_n)_{n\in -\mathbb{N}_0}$-backwards martingale and let $\cF_{-\infty} \coloneqq \bigcap_{n=0}^{\infty} \cF_{-n}$. Then there is a finite $\cF_{-\infty}$-measurable integrable random variable $X_{-\infty}$ with $X_{-\infty} = \E[X_0|\cF_{-\infty}]$ and $$X_n \overset{\text{a.s.}/L^1}{\rightarrow} X_{-\infty},\quad n\to -\infty .$$
 \end{theorem}
-\end{ldef}
+\end{lAussageWerkzeug}
 Before we give the proof please recall that such a theorem does not come for free for forwards martingales. For forwards martingales we must additionally assume the martingale is uniformly integrable which is a strong assumption!
 \begin{proof}[Proof]
 	The proof follows the same upcrossing idea that we know from the almost sure (forwards) martingale convergence theorem. Since all backwards martingales the $L^1$-convergences follows for free from Proposition \ref{B1} and Theorem \ref{generalized_DCT}.\smallskip
@@ -2172,11 +2162,11 @@ Before we give the proof please recall that such a theorem does not come for fre
 	\end{itemize}
 \end{proof}
 As an application we can derive a complement to Proposition \ref{lemma361} but now for decreasing $\sigma$-algebras.
-\begin{llemma}
+\begin{laussagewerkzeug}
 \begin{prop}\label{corollary_354}
 	Suppose $Z$ is an integrable random variable and $(\cG_n)_{n\in\mathbb{N}_0}$ a decreasing family of $\sigma$-algebras, then $$\E[Z\,|\,\cG_n] \overset{\text{a.s}/L^1}{\to} \E[Z\,|\,\cG_{\infty}], \quad n\to \infty,$$ where $\cG_{\infty} = \bigcap_{n=0}^{\infty}\cG_n$.
 \end{prop}
-\end{llemma}
+\end{laussagewerkzeug}
 \begin{proof}[Proof]
 For $n\in\N_0$ define $X_{-n}= \E[Z\,|\,\cG_n]$ and $\cF_{-n} = \cG_n$. Then $(X_{n})_{n\in-\mathbb{N}_0}$ is an $(\cF_n)$-backwards martingale:
 	\begin{itemize}
@@ -2207,11 +2197,11 @@ We want to finish the chapter on martingales with a typical application. But wha
 		A := \{ Y_n \geq \lambda \:\:\text{infinitely often}\} = \bigcap\limits_{n=1}^{\infty}\bigcup\limits_{k=n}^{\infty}\{Y_k \geq \lambda \}=\bigcap\limits_{n=N}^{\infty}\underbrace{\bigcup\limits_{k=n}^{\infty}\{Y_k \geq \lambda \}}_{\in\tau_n\subseteq \tau_N}\in \tau_N
 	\end{align*}
 	by monotonicity of the inner union in $n$. But then $A$ is in the tail-$\sigma$-algebra $\tau$.
-\begin{lsatzwichtig}
+\begin{lAussageWerkzeug}
 \begin{theorem}[Kolmogorov $0$-$1$ law]\label{kolmogorov_0_1_law}
 	Let $Y_1,Y_2,...$ be independent random variables. Then $\tau$ is trivial, i.e. $$\mathbb{P}(A)\in\{0,1\} \quad\text{ for all }  A\in \tau .$$
 \end{theorem}
-\end{lsatzwichtig}
+\end{lAussageWerkzeug}
 \begin{proof}[Proof]
 	Take $A\in\tau$ and let $\cF_n = \sigma(Y_1,...,Y_n)$. By the independence assumption $\cF_n$ is independent of $\tau_{n+1}$ for all $n\in\N_0$, and hence also independent of the sub-$\sigma$-algebra $\tau$ (recall the definition \ref{Ka} of independence of $\sigma$-algebras). Using the (forwards) martingale convergence theorem (more precisely Proposition \ref{lemma361}) then yields
 	\begin{align*}
@@ -2220,14 +2210,14 @@ We want to finish the chapter on martingales with a typical application. But wha
 	This shows $\mathbb{P}(A) = \mathbf 1_A$ almost surely. The left hand side is a constant and the right hand only takes values $0$ and $1$, that's it.
 	\end{proof}
 If $X_1,...$ is an iid sequence, then $$A:=\Big\{\omega\in \Omega:\lim_{n\to\infty} \frac{1}{n}\sum\limits_{k=1}^{n}X_k(\omega) \:\text{exists}\Big\}$$ is in the tail-$\sigma$-algebra as changing the values of finitely many summands does not influence the convergence. Using the Kolmogorov $0$-$1$ law we find that convergence in the strong law of large numbers must happen with probability $0$ or $1$. Hence, in order to prove the strong law of large numbers it is enough to prove the probability of convergence cannot be zero and identify the limit.
-\begin{lsuperwichtigersatz}
+\begin{lSatzHerz}
 \begin{theorem}[Strong law of large numbers]\label{SLLN}
 	Let $X_1,X_2,...$ be an iid sequcence with $\E[\lvert X_1 \rvert ]< \infty$, then
 	\begin{align*}
 		\frac{1}{n}\sum\limits_{k=1}^{n}X_k \overset{\text{a.s.}}{\longrightarrow} \E[X_1], \:\:\: n\to \infty.
 	\end{align*}
 \end{theorem}
-\end{lsuperwichtigersatz}
+\end{lSatzHerz}
 \begin{proof}[Proof]
 		Here is the main trick that relates the strong law to martingales. Let $S_n \coloneqq \sum\limits_{k=1}^{n}X_k$, then the normalised sum can be written as a backwards martingale:
 			\begin{align*}

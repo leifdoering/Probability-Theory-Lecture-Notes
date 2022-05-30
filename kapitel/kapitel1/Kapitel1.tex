@@ -14,7 +14,7 @@ Im Prinzip sind die kommenden f\"unf Vorlesungen total elementar, wir brauchen n
 Im Folgenden sei $\Omega \neq \emptyset $ immer eine beliebige Grundmenge. Für $A \subseteq \Omega$ bezeichnet $A^C$ immer das Komplement von A in $\Omega$, d. h. $A^C = \{ w \in \Omega \: | \: w \notin A \}$. $\mathcal{P}(\Omega)$ bezeichnet die Potenzmenge von $\Omega$ (inklusive $\emptyset$ und $\Omega$), eine Teilmenge von $\mathcal{P}(\Omega)$ ist also eine Menge von Mengen (man sagt auch Mengensystem).
 
 
-
+\begin{lDef}
 \begin{deff} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=3&t=458s}
 	$\mathcal{A} \subseteq \mathcal{P}(\Omega)$ heißt $\sigma\text{-Algebra}$, falls
 	\begin{enumerate}[label=(\roman*)]
@@ -24,6 +24,7 @@ Im Folgenden sei $\Omega \neq \emptyset $ immer eine beliebige Grundmenge. Für 
 	\end{enumerate}
 	Elemente von $\mathcal{A}$ heißen \textbf{messbare Mengen}. Ist $\mathcal{A} \subseteq \mathcal{B}$ und $\mathcal{A}, \mathcal{B}$ sind $\sigma\text{-Algebren}$, so nennt man $\mathcal{A}$ $\text{Unter-}\sigma\text{-Algebra}$ von $\mathcal{B}$.
 \end{deff}
+\end{lDef}
 Die Stabilit\"at f\"ur Vereinigungen gilt auch, wenn man nur endlich viele messbare Mengen vereinigen will. Dazu nutzt man einfach folgenden Trick: Wenn man messbare Mengen $A_1,...,A_N$ vereinigen m\"ochte, so setzt man $A_{N+1}=A_{N+2}=... =\emptyset$ und beachtet, dass damit wegen der $\sigma$-Additivit\"at $\cup_{k=1}^N A_k=\cup_{k=1}^\infty A_k\in \mathcal A$ gilt. Merkt euch solche kleinen Tricks, der selbe Trick taucht gleich nochmal auf.
 \begin{example}
 \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=945s}
@@ -41,6 +42,7 @@ Da $\mathcal A_1,...,\mathcal A_4$ Teilmengen der Potenzmenge sind, muss man jew
 \end{align*}
 das Komplement der Vereinigung nach Analysis 1 abz\"ahlbar. Also ist die Vereinigung in $\mathcal A_4$ und damit $\mathcal A_4$ abgeschlossen bez\"uglich Vereinigungen.
 \end{example}
+\begin{laussagewerkzeug}
 \begin{lemma}\label{gd}\link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=1555s}
 Für jede $\sigma\text{-Algebra}$ $\mathcal{A}$ gelten
 \begin{enumerate}[label=(\roman*)]
@@ -48,6 +50,8 @@ Für jede $\sigma\text{-Algebra}$ $\mathcal{A}$ gelten
 	\item $A_{1}, A_{2},... \in \mathcal{A} \Rightarrow \bigcap\limits_{k=1}^{\infty} A_{k} \in \mathcal{A}$
 	\item Aus $A, B \in \mathcal{A}$ folgt A $\backslash B := A \cap B^C \in A$ sowie $A \Delta B := (A\cap B^C) \cup (B \cap A^C) \in  \mathcal A$.
 \end{enumerate}
+\end{lemma}
+\end{laussagewerkzeug}
 \begin{proof}
 	Die Strategie ist immer gleich: Man versucht die Behauptung aus den drei Regeln einer $\sigma$-Algebra herzuleiten. Da $\emptyset =\Omega^C$ gilt, gilt wegen den Eigenschaften (i) und (ii) einer $\sigma$-Algebra auch $\emptyset \in \mathcal A$. Mit de Morgan und den Eigenschaften (ii), (iii) der $\sigma$-Algebra gilt
 	\begin{align*}
@@ -55,13 +59,12 @@ Für jede $\sigma\text{-Algebra}$ $\mathcal{A}$ gelten
 	\end{align*}
 	Probiert die dritte Behauptung mal selber aus, eigentlich steht alles schon da.
 \end{proof}
-\end{lemma}
 Genau wie bei Vereinigungen, gilt die Abgeschlossenheit auch f\"ur endliche Schnitte. Probiert das mal selber aus, bei dem Trick nutzt ihr aber $\Omega$ statt $\emptyset$.
 
 
-
-\begin{bem1}\link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=1920s}
-Wie in Analysis 1 nutzen wir die \textbf{erweiterte Zahlengerade} $$\overline{\mathbb{R}} = [-\infty, +\infty] := \mathbb{R} \cup \{ -\infty, +\infty \}.$$ Wir definieren
+\begin{lreminder}
+\link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=1920s}
+Wie in Analysis 1 nutzen wir die \textbf{erweiterte Zahlengerade} $$\overline{\mathbb{R}} = [-\infty, +\infty] := \mathbb{R} \cup \{ -\infty, +\infty \}$$ und definieren
 \begin{itemize}
 	\item $-\infty < a < +\infty$ f\"ur alle $a\in \mathbb R$,
 		\item $+\infty + a = +\infty$ und $-\infty + a = -\infty$ f\"ur alle $ a \in \mathbb{R}$,
@@ -70,10 +73,10 @@ Wie in Analysis 1 nutzen wir die \textbf{erweiterte Zahlengerade} $$\overline{\m
 	\item $+\infty+(+\infty)=+\infty$ und $-\infty+(-\infty)=-\infty$,
 	\item $-\infty+(+\infty)$ wird \underline{nicht} definiert.
 \end{itemize}	
-	 Im Gegensatz zu $\R$ k\"onnen wir aus $\overline{\mathbb{R}}$ keine sinnvolle algebraische Struktur formen, das soll uns aber nicht weiter st\"oren. Sehr oft schreibt man $\infty$ statt $+\infty$. Wenn wir in dieser Vorlesung von den nat\"urlichen Zahlen sprechen, meinen wir $\N=\{0,1,...\}$, die $0$ soll also zu $\N$ geh\"oren.
-\end{bem1}
-
-
+Sehr oft schreibt man $\infty$ statt $+\infty$.
+\end{lreminder}
+Im Gegensatz zu $\R$ k\"onnen wir aus $\overline{\mathbb{R}}$ keine sinnvolle algebraische Struktur formen, das soll uns aber nicht weiter st\"oren. Wenn wir in dieser Vorlesung von den nat\"urlichen Zahlen sprechen, meinen wir $\N=\{0,1,...\}$, die $0$ soll also zu $\N$ geh\"oren.
+\begin{lDef}
 \begin{deff}\link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=2200s}
 Für eine $\sigma\text{-Algebra } \mathcal{A}$ heißt eine Abbildung $\mu \! : \mathcal{A} \to [0, \infty]$ ein \textbf{Maß auf $\mathcal{A}$}, falls folgende Eigenschaften gelten:
 \begin{enumerate}[label=(\roman*)]
@@ -83,15 +86,18 @@ Für eine $\sigma\text{-Algebra } \mathcal{A}$ heißt eine Abbildung $\mu \! : \
 
 Ein Ma\ss{} $\mu$ heißt \textbf{endlich}, falls $\mu (\Omega) < \infty$. $\mu$ heißt \textbf{Wahrscheinlichkeitsmaß}, falls $\mu (\Omega) = 1$.
 \end{deff}
+\end{lDef}
 Nat\"urlich impliziert die $\sigma$-Additivit\"at auch die endliche Additivit\"at $\mu\Big(\bigcupdot\limits_{k=1}^{N}A_{k}\Big)=\sum\limits_{k=1}^{N}\mu (A_{k}).$ Dazu wird, wie unter der Definition der $\sigma$-Algebra, $A_{N+1}=A_{N+2}=...=\emptyset$ gew\"ahlt. Der Begriff \glqq Ma\ss \grqq{} hat durchaus einen Sinn, der an Beispielen sp\"ater viel klarer wird. Man misst in einem abstrakten Sinn die Gr\"o\ss e der messbaren Mengen. Deswegen sind die zwei definierenden Eigenschaften auch klar. Malt euch einfach mal zwei Mengen in $\R^2$ hin und \"uberlegt, warum die \glqq Gr\"o\ss e\grqq{} nur f\"ur disjunge Mengen die Summe der \glqq Gr\"o\ss en\grqq{} der einzelnen Mengen sein sollte.
 
-
+\begin{lwarnhinweis}
 \begin{bem} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=2706s}
 Oft werden Wahrscheinlichkeitsmaße mit $\mathbb P$ anstelle von $\mu$ geschrieben und \textbf{Verteilungen} oder \textbf{Wahrscheinlichkeitsverteilung} genannt.
-
 \end{bem}
+\end{lwarnhinweis}
 Folgende Begrifflichkeiten werden wir st\"andig nutzen, um m\"oglichst effizient formulieren zu k\"onnen: 
-\begin{deff} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=3102s}\abs
+\begin{ldef}
+\begin{deff} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=3102s}
+	Es sei $\Omega$ eine Menge und $\mathcal A$ eine $\sigma$-Algebra auf $\Omega$.
 	\begin{itemize}
 		\item $(\Omega, \mathcal{A})$ heißt \textbf{messbarer Raum}
 		\item $(\Omega, \mathcal{A}, \mu)$ heißt \textbf{Maßraum}
@@ -101,26 +107,31 @@ Folgende Begrifflichkeiten werden wir st\"andig nutzen, um m\"oglichst effizient
 	\end{itemize}
 
 \end{deff}
-
+\end{ldef}
+\begin{lwarnhinweis}
 \begin{bem} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=3235s}
 	Bei einem Wahrscheinlichkeitsraum spricht man von \textbf{Ereignissen} $A$ statt messbaren Mengen. $\mathbb P(A)$ heißt \textbf{Wahrscheinlichkeit} von $A$. Einelementige messbare Mengen $A = \{a\}$ heißen in Wahrscheinlichkeitsräumen \textbf{Elementarereignisse}.
 \end{bem}
+\end{lwarnhinweis}
 
 Um langsam in die Denkweise der Stochastik einzusteigen, werden wir wieder und wieder diskutieren, warum unsere formellen Modelle f\"ur die Modellierung echter zuf\"alliger Experimente gut geeignet sind. 
 
 \begin{disc} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=3346s}\label{N1} \textbf{[Stochastische Modellierung, Nr. 1]}
 	Warum machen die Definitionen von Wahrscheinlichkeitsräumen $(\Omega, \mathcal A, \mathbb P)$ für die Modellierung von zufälligen Experimenten Sinn? Wir interpretieren dazu
+	\begin{laufmerksamkeit}
 	\begin{itemize}
 		\item $\Omega$ $=$ \glqq Das kann bei dem Experiment passieren\grqq, wir k\"onnen aber vielleicht das Eintreten der Elementarereignisse nicht beobachten.
 		\item $\mathcal A$ $=$ \glqq Ereignisse, deren Eintreten (oder Nichteintreten) beobachtet werden kann.\grqq{} Die $\sigma$-Algebra besteht also aus den Ereignissen des Experiments, die wir beobachten k\"onnen.
+	\end{itemize}
+\end{laufmerksamkeit}
+Die auf einer $\sigma$-Algebra definierten Operationen k\"onnen jetzt sehr einfach interpretiert werden:
+	\begin{itemize}
 		\item $A^C$ = \glqq Gegenereignis\grqq, also \glqq Ereigniss $A$ trifft nicht ein\grqq.
 		\item $A \in \cA \Rightarrow A^{C} \in \cA$ bedeutet \glqq Wenn man das Eintreten von Ereignis $A$ beobachten kann, dann kann man auch beobachten, dass $A$ nicht eintritt.\grqq		
 		\item $A, B\in \cA \Rightarrow A\cup B\in \cA$ bedeutet \glqq Wenn man das Eintreten  sowohl von Ereignis $A$ als auch von Ereignis $B$ beobachten kann, dann kann auch beobachten, ob eines von beiden auftritt.\grqq{} Die Interpretation der Abgeschlossenheit bez\"uglich endlicher Vereinigungen ist analog (\glqq Man kann beobachten, ob eines der Ereignisse eingetreten ist\grqq). Wir lassen hier offen, warum man f\"ur die Mathematik auch abz\"ahlbare Vereinigungen erlauben muss. Hier bleibt f\"ur den Moment nur zu sagen: Es w\"urde nicht funktionieren.
 				\item $\mathbb P(A)$ = \glqq Wahrscheinlichkeit des Eintretens des Ereignisses A.\grqq
 		\item $\mathbb P(A^C) = 1-\mathbb P(A)$ bedeutet \glqq Gegenereignis hat Gegenwahrscheinlichkeit.\grqq{} Die Gleichheit gilt, da wegen $A\cupdot A^C=\Omega$ auch $\mathbb P(A)+\mathbb P(A^C)=\mathbb P(\Omega)=1$ gilt.
 	\end{itemize}
-Damit haben wir den Sinn der Definitionen einer $\sigma$-Algebra und eines Ma\ss es hoffentlich gro\ss teils motiviert.\smallskip
-
 	Als Beispiel modellieren wir den Wurf eines W\"urfels gem\"a\ss{} obiger Interpretation. Wir w\"ahlen $\Omega = \{1,...,6\}$ weil das zuf\"allige Experiment (W\"urfel werfen) sechs M\"oglichkeiten hat. Die Zahlen spielen hier keine Rolle, es geht nur darum, dass es sechs Elementarereignisse des Experiments gibt. Wir k\"onnten die Elementarereignisse zum Beispiel auch $\Omega=\{\omega_1,...,\omega_6\}$ nennen. Als $\sigma$-Algebra der beobachtbaren Ereignisse nehmen wir $\cA=\mathcal P(\Omega)$ weil wir alle Ereignisse des W\"urfelwurfs beobachten k\"onnen. Ein Ereigniss $A\in \mathcal A$ bedeutet \glqq Eine der Zahlen in $A$ ist gew\"urfelt worden\grqq.  Weil unser W\"urfel fair sein soll, legen wir $\mathbb P(\{1\})=...=\mathbb P(\{6\})= \frac{1}{6}$ fest. Die Wahrscheinlichkeiten aller weiteren Ereignisse sind automatisch festgelegt, indem das Ereigniss in die disjunkten Elementarereignisse zerlegt wird, z. B. die Wahrscheinlichkeit eine gerade Zahl zu w\"urfeln:
 	\begin{align*}	
 		%\flushleft	
@@ -130,6 +141,7 @@ Damit haben wir den Sinn der Definitionen einer $\sigma$-Algebra und eines Ma\ss
 Nicht jedes zuf\"allige Experiment ist so einfach wie das W\"urfeln (endlich viele M\"oglichkeiten), f\"ur kompliziertere zuf\"allige Experimente (z. B. die Temperatur morgen in Mannheim) brauchen wir leider viel kompliziertere Modelle. Gehen wir also zur\"uck zu allgemeinen Ma\ss r\"aumen.\smallskip
 
 Zun\"achst eine kleine Folgerung der Definition des Ma\ss es, die im Sinne von \glqq $\mu(A)=$Gr\"o\ss e von $A$\grqq{} von Mengen total Sinn macht.
+\begin{laussagewerkzeug}
 \begin{lemma} \label{monsub} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=4222s} \textbf{[Monotonie und Subadditivit\"at]}
 Es sei $\mu$ ein Ma\ss{} auf einer  $\sigma$-Algebra $\mathcal A$, dann gelten:
 \begin{itemize}
@@ -137,6 +149,7 @@ Es sei $\mu$ ein Ma\ss{} auf einer  $\sigma$-Algebra $\mathcal A$, dann gelten:
 \item[(ii)] Sind $A_1,A_2,... \in \mathcal A$, so gilt: $\mu(\cup_{k=1}^\infty A_k)\leq \sum_{k=1}^\infty \mu(A_k)$.
 \end{itemize}
 \end{lemma}
+\end{laussagewerkzeug}
 
 \begin{proof}
 (i) Mit den definierenden Eigenschaften des Ma\ss es gilt:	
@@ -149,10 +162,10 @@ wobei wir beide definierenden Eigenschaften des Ma\ss es genutzt haben.\smallski
 \end{proof}
 Zu beachten ist, dass bei der Subadditivit\"at nicht gefordert wird, dass die Mengen disjunkt sind (sonst w\"urde schlie\ss lich Gleichheit gelten!). Die Ungleichheit entsteht dadurch, dass bei nicht-disjunkten Mengen der Schnitt mehrfach gez\"ahlt wird.\smallskip
 
-Um ein wenig mit der Definition des Ma\ss es zu experimentieren, rechnet mal die folgende Bemerkung nach:
-\begin{bem1}
-	Sind $\mu_1,\mu_2$ Ma\ss e auf $\mathcal A$ und $a,b\geq 0$, so ist auch die Summe $$a\mu_1+b\mu_2: A\mapsto a\mu_1(A)+b\mu_2(A)$$ ein Ma\ss{} auf $\mathcal A$. Summen von Ma\ss en nennt man auch \textbf{Mischung}. Sind $\mathbb P_1$ und $\mathbb P_2$ Wahrscheinlichkeitsma\ss e und zus\"atzlich $a+b=1$, so ist die Mischung $\mathbb P= a \mathbb P_1+b\mathbb P_2$ wieder ein Wahrscheinlichkeitsma\ss. 
-\end{bem1}
+Hier ist ein gutes Beispiel, um mit der Definition von Ma\ss en zu spielen:
+\begin{luebung}
+		Sind $\mu_1,\mu_2$ Ma\ss e auf $\mathcal A$ und $a,b\geq 0$, so ist auch die Summe $$a\mu_1+b\mu_2: A\mapsto a\mu_1(A)+b\mu_2(A)$$ ein Ma\ss{} auf $\mathcal A$. Summen von Ma\ss en nennt man auch \textbf{Mischung}. Sind $\mathbb P_1$ und $\mathbb P_2$ Wahrscheinlichkeitsma\ss e und zus\"atzlich $a+b=1$, so ist die Mischung $\mathbb P= a \mathbb P_1+b\mathbb P_2$ wieder ein Wahrscheinlichkeitsma\ss. 
+\end{luebung}
 
 
 
@@ -170,8 +183,8 @@ Kommen wir nun zu ein paar Beispielen:
 	Die $p_k$ werden auch Gewichte, oder Wahrscheinlichkeitsgewichte, genannt.
 \end{beispiel}
 
-\begin{beispiel}\label{Poi1} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=5020s} \textbf{[Poissonverteilung auf $\mathbb N$]}
-	Hier ist ein konkretes Beispiel zu der vorherigen Klasse von Beispielen, die Poissonverteilung. F\"ur ein $\lambda >0$ ($\lambda$ nennt man Parameter der Verteilung) sei
+\begin{beispiel}\label{Poi1} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=5020s}
+	Hier ist ein konkretes Beispiel zu der vorherigen Klasse von Beispielen, die \textbf{Poissonverteilung auf $\N$}. F\"ur ein $\lambda >0$ ($\lambda$ nennt man Parameter der Verteilung) sei
 	$p_k = e^{-\lambda} \frac{\lambda^k}{k!}$ f\"ur $k\in\N$. Es gelten dann
 	\begin{itemize}
 		\item $p_k \geq 0$ f\"ur alle $k\in\N$,
@@ -179,7 +192,7 @@ Kommen wir nun zu ein paar Beispielen:
 	\end{itemize}
 	Also definiert $\mathbb P(A)=e^{-\lambda} \sum_{k\in A} \frac{\lambda^k}{k!}$ ein Wahrscheinlichkeitsma\ss{} auf $(\N, \mathcal P(\N))$. Man nennt $\mathbb P$ auch \textbf{Poissonverteilung mit Parameter $\lambda$}.
 \end{beispiel}
-\begin{beispiel} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=5273s} \textbf{[Diracmaß]}
+\begin{beispiel} \link{https://www.youtube.com/watch?v=x7rMsOaujL8&t=5273s}
 	Sei $\cA$ eine $\sigma$-Algebra auf $\Omega$ und $x \in \Omega$, so heißt $$\delta_x(A):=\begin{cases}
 	1,&x \in A\\
 	0,&x \notin A
@@ -206,6 +219,7 @@ Um uns mit den definierenden Eigenschaften weiter vertraut zu machen, beweisen w
 
 \marginpar{\textcolor{red}{Vorlesung 2}}
 
+\begin{lAussageWerkzeug}
 \begin{satz}\label{S1} \link{https://www.youtube.com/watch?v=S6DazSJqA50&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=3&t=43s} \textbf{[Stetigkeit von Maßen]}
 	Sei $(\Omega, \cA, \mu)$ ein Maßraum und $(A_n)_{n\in \N}$ eine Folge messbarer Mengen, so gelten:
 	\begin{enumerate}[label=(\roman*)]
@@ -213,6 +227,7 @@ Um uns mit den definierenden Eigenschaften weiter vertraut zu machen, beweisen w
 		\item Aus $\mu$ endlich und $A_n \downarrow A$ (d. h. $A_1 \supseteq A_2 \supseteq ...$, $\bigcap\limits_{n=1}^{\infty}A_n=A$) folgt $\lim\limits_{n \to \infty}\mu (A_n)=\mu(A)$.
 	\end{enumerate}
 \end{satz}
+\end{lAussageWerkzeug}
 
 \begin{proof}\abs
 	\begin{enumerate}[label=(\roman*)]
@@ -241,7 +256,7 @@ Um uns mit den definierenden Eigenschaften weiter vertraut zu machen, beweisen w
 		\lim\limits_{n \to \infty} \mu(A_{n}) = \lim\limits_{n \to \infty} \left( \mu(\Omega) - \mu(A_n^{C})\right) = \mu(\Omega) - \lim\limits_{n \to \infty} \mu(A_n^C) = \mu(\Omega) - \mu (A^C) = \mu (A). \]		
 	\end{enumerate}
 \end{proof}
-F\"ur den Moment ist noch nicht so klar, wie wichtig die Stetigkeit von Ma\ss en ist. Es wird aber kaum eine Vorlesung in der Stochastik 1 geben, in der die Stetigkeit von Ma\ss en nicht auftaucht.
+F\"ur den Moment ist noch nicht so klar, wie wichtig die Stetigkeit von Ma\ss en ist. Es wird aber kaum eine Vorlesung in der Stochastik geben, in der die Stetigkeit von Ma\ss en nicht auftaucht.
 
 \begin{beispiel} \link{https://www.youtube.com/watch?v=S6DazSJqA50&list=PLy5qRKPWp6SBwfc1kn-b66cWc84cOgvqZ&index=3&t=933s} \textbf{[Gegenbeispiel zu \ref{Gegenbsp} mit $\mu(\Omega) = \infty$] } In dem Beweis haben wir die Endlichkeit des Ma\ss es deutlich benutzt, sonst st\"ande auf beiden Seiten ein unendlicher Summand. Folgendes Beispiel zeigt, dass die Aussage bei unendlichen Ma\ss en tats\"achlich schief gehen kann. 
 	Sei dazu $\Omega = \N, \cA = \cP(\N)$ und $\mu$ das Z\"ahlma\ss{} aus Beispiel \ref{zahl}, also
